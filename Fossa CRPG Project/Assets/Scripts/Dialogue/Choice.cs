@@ -11,7 +11,7 @@ public struct Option
     public Conversation continueDialogue;
 }
 
-[CreateAssetMenu(fileName = "New Choice", menuName = "Choice")]
+[CreateAssetMenu(fileName = "New Choice", menuName = "Dialogue/Choice")]
 public class Choice : ScriptableObject
 {
     public Option[] options;

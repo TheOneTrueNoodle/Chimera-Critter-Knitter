@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Battle", menuName = "Battle")]
+[CreateAssetMenu(fileName = "New Battle", menuName = "Dialogue/Battle")]
 public class Battle : ScriptableObject
 {
     public string enemyName; //display name

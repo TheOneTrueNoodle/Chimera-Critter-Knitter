@@ -12,7 +12,7 @@ public struct Line
     public string text;
 }
 
-[CreateAssetMenu(fileName = "New Conversation", menuName = "Conversation")]
+[CreateAssetMenu(fileName = "New Conversation", menuName = "Dialogue/Conversation")]
 public class Conversation : ScriptableObject
 {
     public Line[] lines;
