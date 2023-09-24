@@ -9,11 +9,14 @@ namespace Combat
     {
         public OverlayTile GetSingleFocusedOnTile(Vector3 pos3d)
         {
-            RaycastHit[] hits = Physics.RaycastAll(pos3d, Vector3.down, 6);
+            int layer_mask = LayerMask.GetMask("OverlayTiles");
+            Ray ray = new Ray(pos3d, Vector3.down);
+            RaycastHit hit;
 
-            if (hits.Length > 0)
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask))
             {
-                OverlayTile hitTile = hits.OrderByDescending(i => i.collider.transform.position.z).First().collider.gameObject.GetComponent<OverlayTile>();
+                Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow);
+                OverlayTile hitTile = hit.collider.gameObject.GetComponent<OverlayTile>();
 
                 if (hitTile.isBlocked != true)
                 {
@@ -50,6 +53,8 @@ namespace Combat
                     }
                 }
             }
+
+            Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow);
             Debug.Log("They arent finding the tiles anymore...");
             return null;
         }

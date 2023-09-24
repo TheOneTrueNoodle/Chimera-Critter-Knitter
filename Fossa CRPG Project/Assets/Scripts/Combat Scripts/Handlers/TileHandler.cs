@@ -71,7 +71,6 @@ public class TileHandler
         }*/
 
         entity.transform.position = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - 0.0001f, tile.gameObject.transform.position.z);
-        entity.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = tile.GetComponentInChildren<Canvas>().sortingOrder;
         entity.activeTile = tile;
         entity.activeTile.isBlocked = true;
         entity.activeTile.activeCharacter = entity;

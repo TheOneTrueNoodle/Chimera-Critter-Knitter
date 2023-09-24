@@ -44,7 +44,6 @@ public class CursorController : MonoBehaviour
     private void LateUpdate()
     {
         var focusedTileHit = GetFocusedOnTile();
-        Debug.Log(focusedTileHit.HasValue);
         OverlayTile overlayTile = null;
         if (focusedTileHit.HasValue)
         {
@@ -304,10 +303,11 @@ public class CursorController : MonoBehaviour
 
     public RaycastHit? GetFocusedOnTile()
     {
+        int layer_mask = LayerMask.GetMask("OverlayTiles");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 10))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask))
         {
             return hit;
         }

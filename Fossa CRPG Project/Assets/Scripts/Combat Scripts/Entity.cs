@@ -35,7 +35,6 @@ public class Entity : MonoBehaviour
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
-        CharacterData.SetDictionaryStats();
         healthbar = GetComponentInChildren<Slider>();
     }
 
@@ -68,6 +67,7 @@ public class Entity : MonoBehaviour
     #region initialization
     public void Initialize()
     {
+        CharacterData.SetDictionaryStats();
         if (CharacterData.Weapon != null)
         {
             AttackDamageType = CharacterData.Weapon.damageType;

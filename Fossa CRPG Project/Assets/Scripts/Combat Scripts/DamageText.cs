@@ -12,11 +12,6 @@ public class DamageText : MonoBehaviour
     [SerializeField] private List<Sprite> damageTypeSymbols;
     [SerializeField] private List<Color> damageTypeColors;
 
-    private void Update()
-    {
-        if (Camera.main is { }) transform.LookAt(-Camera.main.transform.position, Vector3.up);
-    }
-
     public void Setup(string Damage, DamageTypes damageType)
     {
         damageText.text = Damage;
