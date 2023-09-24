@@ -9,7 +9,7 @@ public class ActionHandler
     {
         bool AttackCrits = CalculateCrit(attacker);
         bool AttackHits = CalculateHitChance(attacker, target);
-        int DamageDealt = CalculateDamage(attacker, AttackCrits);
+        int DamageDealt = CalculateDamage(attacker, target, AttackCrits);
 
         if (AttackCrits)
         {
@@ -27,7 +27,7 @@ public class ActionHandler
 
     public int Ability(Entity attacker, Entity target, AbilityData ability)
     {
-        return CalculateMagicDamage(attacker, ability);
+        return CalculateMagicDamage(attacker, target, ability);
     }
 
     #region Attack Calculations
@@ -51,7 +51,7 @@ public class ActionHandler
 
         return false;
     }
-    private int CalculateDamage(Entity attacker, bool crits)
+    private int CalculateDamage(Entity attacker, Entity target, bool crits)
     {
         int rawDamage = (int)attacker.activeStatsDir["Attack"].statValue;
         if (attacker.CharacterData.Weapon != null) { rawDamage += attacker.CharacterData.Weapon.weaponDamage; }
@@ -61,7 +61,23 @@ public class ActionHandler
             rawDamage *= 2;
         }
 
-        return rawDamage;
+        int takenDamage;
+        if ((int)attacker.AttackDamageType < 3)
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["Defence"].statValue));
+        }
+        else
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["MagicDefence"].statValue));
+        }
+
+        takenDamage = (int)(takenDamage * (target.isDefending == true ? 0.5 : 1));
+        if (target.Resistances.Contains(attacker.AttackDamageType)) { takenDamage /= 2; }
+        if (target.Weaknesses.Contains(attacker.AttackDamageType)) { takenDamage *= 2; }
+
+        if (takenDamage < 0) { takenDamage = 0; }
+
+        return takenDamage;
     }
     #endregion
     #region Ability Calculations
@@ -91,11 +107,27 @@ public class ActionHandler
         return abilityTargets;
     }
 
-    public int CalculateMagicDamage(Entity attacker, AbilityData ability)
+    public int CalculateMagicDamage(Entity attacker, Entity target, AbilityData ability)
     {
         int rawDamage = (int)(ability.value * (100 + attacker.activeStatsDir["MagicAttack"].statValue) / 100);
 
-        return rawDamage;
+        int takenDamage;
+        if ((int)attacker.AttackDamageType < 3)
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["Defence"].statValue));
+        }
+        else
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["MagicDefence"].statValue));
+        }
+
+        takenDamage = (int)(takenDamage * (target.isDefending == true ? 0.5 : 1));
+        if (target.Resistances.Contains(attacker.AttackDamageType)) { takenDamage /= 2; }
+        if (target.Weaknesses.Contains(attacker.AttackDamageType)) { takenDamage *= 2; }
+
+        if (takenDamage < 0) { takenDamage = 0; }
+
+        return takenDamage;
     }
     #endregion
 }

@@ -373,8 +373,7 @@ public class CombatAIController : Entity
             activeTile.isBlocked = false;
             activeTile.activeCharacter = this;
         }
-        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y - 0.0001f, tile.transform.position.z);
-        gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = tile.GetComponentInChildren<Canvas>().sortingOrder;
+        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y - 0.0001f, tile.transform.position.z);    
         activeTile = tile;
         activeTile.isBlocked = true;
         activeTile.activeCharacter = this;

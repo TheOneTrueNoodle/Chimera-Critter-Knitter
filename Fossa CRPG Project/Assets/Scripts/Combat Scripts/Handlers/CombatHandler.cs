@@ -63,7 +63,7 @@ public class CombatHandler : MonoBehaviour
         int damage = actionHandler.Attack(attacker, target);
         if (damage > 0)
         {
-            unitHandler.UnitSufferDamage(target, damage, attacker.AttackDamageType);
+            unitHandler.UnitSufferDamage(target, damage);
         }
 
         DisplayDamageText(damage, target, attacker.AttackDamageType);
@@ -94,7 +94,7 @@ public class CombatHandler : MonoBehaviour
 
             if (physicalDamage > 0)
             {
-                unitHandler.UnitSufferDamage(target, physicalDamage, target.AttackDamageType);
+                unitHandler.UnitSufferDamage(target, physicalDamage);
                 DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
             }
 
@@ -116,7 +116,7 @@ public class CombatHandler : MonoBehaviour
         string dmgText = damage.ToString();
         if (damage <= 0) { dmgText = "MISS"; }
         GameObject dmgDisp = Instantiate(damageTextPrefab);
-        dmgDisp.transform.position = target.transform.position;
+        dmgDisp.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 2.5f, target.transform.position.z);
 
         dmgDisp.GetComponent<DamageText>().Setup(dmgText, damageType);
     }

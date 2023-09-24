@@ -7,7 +7,7 @@ public class UnitHandler
 {
     public void UnitSufferAbility(Entity target, AbilityData ability, int damage)
     {
-        if (ability.damageType != DamageTypes.Healing) { UnitSufferDamage(target, damage, ability.damageType); }
+        if (ability.damageType != DamageTypes.Healing) { UnitSufferDamage(target, damage); }
         else if (damage > 0 && ability.damageType == DamageTypes.Healing) { UnitHeals(target, damage); }
     }
 
@@ -28,25 +28,9 @@ public class UnitHandler
         }
     }
 
-    public void UnitSufferDamage(Entity target, int rawDamage, DamageTypes damageType)
+    public void UnitSufferDamage(Entity target, int damage)
     {
-        int takenDamage;
-        if ((int)damageType < 3)
-        {
-            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["Defence"].statValue));
-        }
-        else
-        {
-            takenDamage = (int)(rawDamage * 100 / (100 + target.activeStatsDir["MagicDefence"].statValue));
-        }
-
-        takenDamage = (int)(takenDamage * (target.isDefending == true ? 0.5 : 1));
-        if (target.Resistances.Contains(damageType)) { takenDamage /= 2; }
-        if (target.Weaknesses.Contains(damageType)) { takenDamage *= 2; }
-
-        if (takenDamage < 0) { takenDamage = 0; }
-
-        target.activeStatsDir["MaxHP"].statValue -= takenDamage;
+        target.activeStatsDir["MaxHP"].statValue -= damage;
 
         target.updateHealthBar();
 
@@ -84,7 +68,7 @@ public class UnitHandler
             }
         }*/
 
-        target.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        //target.GetComponentInChildren<SpriteRenderer>().enabled = false;
         target.isDead = true;
     }
 }
