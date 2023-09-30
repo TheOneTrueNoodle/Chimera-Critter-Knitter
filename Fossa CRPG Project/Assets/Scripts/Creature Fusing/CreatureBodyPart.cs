@@ -11,6 +11,6 @@ public class CreatureBodyPart : ScriptableObject
     public List<EquipmentStatChanges> statMutations;
     public List<AbilityData> abilities;
 
-    public Mesh mesh;
+    public Mesh[] mesh;
     public Material[] materials;
 }
