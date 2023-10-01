@@ -22,7 +22,6 @@ public class UnitData : ScriptableObject
 
     [Header("Ability Information")]
     public List<AbilityData> Abilities;
-    public List<AbilityData> equippedAbilities;
 
     [Header("Equipment Information")]
     public List<WeaponType> equipableWeapons;
@@ -54,28 +53,22 @@ public class UnitData : ScriptableObject
         }
     }
 
-    public List<AbilityData> SetAbilities()
+    public List<AbilityData> SetAbilities(List<AbilityData> additionalAbilities)
     {
         List<AbilityData> currentAbilities = new List<AbilityData>();
-
-        if (equippedAbilities == null)
-            equippedAbilities = new List<AbilityData>();
-        foreach (var item in equippedAbilities)
+        if(additionalAbilities != null)
         {
-            if (item.requiredLevel <= level && currentAbilities.Contains(item) != true)
-                currentAbilities.Add(item);
-
-            if (currentAbilities.Count >= 3)
-                break;
+            foreach (AbilityData ability in additionalAbilities)
+            {
+                currentAbilities.Add(ability);
+            }
         }
-
-        foreach (var item in Abilities)
+        if(Abilities != null)
         {
-            if (item.requiredLevel <= level && currentAbilities.Contains(item) != true)
-                currentAbilities.Add(item);
-
-            if (currentAbilities.Count >= 3)
-                break;
+            foreach (AbilityData ability in Abilities)
+            {
+                currentAbilities.Add(ability);
+            }
         }
 
         return currentAbilities;

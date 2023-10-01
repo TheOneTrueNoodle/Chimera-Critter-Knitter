@@ -153,4 +153,13 @@ public class CombatEvents : MonoBehaviour
             onUnitStartingEffects(entity, equipmentStatChanges, additionalEffects);
         }
     }
+
+    public event Action<Entity, List<AbilityData>> onUnitStartingAbilities;
+    public void UnitStartingAbilities(Entity entity, List<AbilityData> abilities)
+    {
+        if (onUnitStartingEffects != null)
+        {
+            onUnitStartingAbilities(entity, abilities);
+        }
+    }
 }

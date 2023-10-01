@@ -22,6 +22,7 @@ public class CombatHandler : MonoBehaviour
     {
         CombatEvents.current.onUnitDeath += UnitDeath;
         CombatEvents.current.onUnitStartingEffects += UnitStartingEffects;
+        CombatEvents.current.onUnitStartingAbilities += UnitStartingAbilities;
         CombatEvents.current.onMoveAttempt += MoveAttempt;
         CombatEvents.current.onAttackAttempt += AttackAttempt;
         CombatEvents.current.onAbilityAttempt += AbilityAttempt;
@@ -200,6 +201,11 @@ public class CombatHandler : MonoBehaviour
                 unitHandler.UnitSufferEffect(entity, effect);
             }
         }
+    }
+
+    public void UnitStartingAbilities(Entity entity, List<AbilityData> abilities)
+    {
+        entity.activeAbilities = entity.CharacterData.SetAbilities(abilities);
     }
     #endregion
 }

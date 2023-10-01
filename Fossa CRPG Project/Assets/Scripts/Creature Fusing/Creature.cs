@@ -54,6 +54,7 @@ public class Creature : MonoBehaviour
             }
         }
 
+        CombatEvents.current.UnitStartingAbilities(thisEntity, abilities);
         CombatEvents.current.UnitStartingEffects(thisEntity, statChanges, effects);
         //ADD ABILITY SETUP
     }

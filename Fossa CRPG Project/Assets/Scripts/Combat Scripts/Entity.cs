@@ -87,7 +87,7 @@ public class Entity : MonoBehaviour
             }
         }
         CharacterData.SetEquipment();
-        activeAbilities = CharacterData.SetAbilities();
+        activeAbilities = CharacterData.SetAbilities(null);
         Resistances = CharacterData.SetResistances();
         Weaknesses = CharacterData.SetWeaknesses();
 
