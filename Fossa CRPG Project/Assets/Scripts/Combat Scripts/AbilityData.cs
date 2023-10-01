@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Combat;
 
-[CreateAssetMenu(fileName = "Ability", menuName = "ScriptableObjects/Ability", order = 2)]
+[CreateAssetMenu(fileName = "Ability", menuName = "Combat/Ability", order = 2)]
 public class AbilityData : ScriptableObject
 {
     [Header("General Information")]

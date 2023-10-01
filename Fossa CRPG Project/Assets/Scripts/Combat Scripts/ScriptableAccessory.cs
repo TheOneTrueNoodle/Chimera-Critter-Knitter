@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Combat;
 
-[CreateAssetMenu(fileName = "New Weapon", menuName = "ScriptableObjects/Equipment/Accessory", order = 3)]
+[CreateAssetMenu(fileName = "New Weapon", menuName = "Combat/Equipment/Accessory", order = 3)]
 public class ScriptableAccessory : ScriptableObject
 {
     public string accessoryName;
