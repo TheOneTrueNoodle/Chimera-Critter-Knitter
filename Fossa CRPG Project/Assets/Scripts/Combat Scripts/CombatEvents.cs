@@ -20,6 +20,15 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
+    public event Action onEndCombat;
+    public void EndCombat()
+    {
+        if (onEndCombat != null)
+        {
+            onEndCombat();
+        }
+    }
+
     public event Action<Entity> onNewTurn;
     public void NewTurn(Entity activeChar)
     {
@@ -157,7 +166,7 @@ public class CombatEvents : MonoBehaviour
     public event Action<Entity, List<AbilityData>> onUnitStartingAbilities;
     public void UnitStartingAbilities(Entity entity, List<AbilityData> abilities)
     {
-        if (onUnitStartingEffects != null)
+        if (onUnitStartingAbilities != null)
         {
             onUnitStartingAbilities(entity, abilities);
         }

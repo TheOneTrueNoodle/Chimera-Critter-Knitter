@@ -18,6 +18,10 @@ public class CombatHandler : MonoBehaviour
     public List<Entity> enemyTeam;
     public List<Entity> otherTeam;
 
+    //Dropped Loot after combat
+    //List of dropped items
+    public int totalDroppedExp;
+
     private void Start()
     {
         CombatEvents.current.onUnitDeath += UnitDeath;
@@ -44,6 +48,17 @@ public class CombatHandler : MonoBehaviour
         tileHandler = new TileHandler();
 
         turnHandler.StartCombat(FindAllUnits());
+
+        totalDroppedExp = 0;
+    }
+
+    public void EndCombat()
+    {
+        totalDroppedExp /= playerTeam.Count;
+        foreach(Entity entity in playerTeam)
+        {
+            entity.IncreaseEXP(totalDroppedExp);
+        }
     }
 
     public void TurnEnd()
@@ -110,6 +125,14 @@ public class CombatHandler : MonoBehaviour
     {
         unitHandler.UnitDeath(target);
         turnHandler.UnitDeath(target);
+
+        //Find dropped items
+        totalDroppedExp += Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
+        enemyTeam.Remove(target);
+        if(enemyTeam.Count <= 0)
+        {
+            EndCombat();
+        }
     }
 
     public void DisplayDamageText(int damage, Entity target, DamageTypes damageType)

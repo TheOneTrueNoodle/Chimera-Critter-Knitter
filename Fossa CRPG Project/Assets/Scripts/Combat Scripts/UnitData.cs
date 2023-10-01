@@ -11,9 +11,8 @@ public class UnitData : ScriptableObject
     public string Name;
     public Sprite portrait;
 
-    [Header("Level Information")]
-    public int level;
-    public int exp;
+    [Header("Leveling Information")]
+    public LevelConfig levelConfig;
     public float level_modifier;
 
     [Header("Stat Information")]
@@ -24,14 +23,19 @@ public class UnitData : ScriptableObject
     public List<AbilityData> Abilities;
 
     [Header("Equipment Information")]
-    public List<WeaponType> equipableWeapons;
+    public List<WeaponType> equippableWeapons;
 
     public ScriptableWeapon Weapon;
     public ScriptableArmour Armour;
     public ScriptableAccessory Accessory1;
     public ScriptableAccessory Accessory2;
 
-    public void SetDictionaryStats()
+    [Header("Loot Tables")]
+    //A LIST OF DROPPABLE ITEMS WITH WEIGHTS FOR DROP CHANCE
+    public int maxExpDrop;
+    public int minExpDrop;
+
+    public void SetDictionaryStats(int level)
     {
         if (statsDir == null)
             statsDir = new Dictionary<string, Stat>();
@@ -78,7 +82,7 @@ public class UnitData : ScriptableObject
     {
         if (Weapon != null)
         {
-            if (!equipableWeapons.Contains(Weapon.weaponType))
+            if (!equippableWeapons.Contains(Weapon.weaponType))
             {
                 Weapon = null;
             }

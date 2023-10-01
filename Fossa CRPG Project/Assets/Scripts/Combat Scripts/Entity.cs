@@ -32,6 +32,11 @@ public class Entity : MonoBehaviour
     [HideInInspector] public DamageTypes AttackDamageType;
     [HideInInspector] public int WeaponRange;
 
+    [Header("Level Information")]
+    public int level = 1;
+    public int exp;
+    private int requiredExp;
+
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
@@ -40,7 +45,7 @@ public class Entity : MonoBehaviour
 
     public void UpdateStats()
     {
-        CharacterData.SetDictionaryStats();
+        CharacterData.SetDictionaryStats(level);
     }
 
     #region Combat Functions
@@ -67,7 +72,8 @@ public class Entity : MonoBehaviour
     #region initialization
     public void Initialize()
     {
-        CharacterData.SetDictionaryStats();
+        if(level < 1) { level = 1; }
+        CharacterData.SetDictionaryStats(level);
         if (CharacterData.Weapon != null)
         {
             AttackDamageType = CharacterData.Weapon.damageType;
@@ -129,6 +135,30 @@ public class Entity : MonoBehaviour
             var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(gameObject.transform.position);
             CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         //}
+    }
+    #endregion
+
+    #region EXP AND LEVELING
+    public void IncreaseEXP(int xp)
+    {
+        if(exp >= requiredExp && level < CharacterData.levelConfig.MaxLevel)
+        {
+            exp += xp;
+            while (exp >= requiredExp)
+            {
+                exp -= requiredExp;
+                LevelUp();
+            }
+        }
+    }
+    public void LevelUp()
+    {
+        level++;
+        CalculateRequiredEXP();
+    }
+    public void CalculateRequiredEXP()
+    {
+        requiredExp = CharacterData.levelConfig.GetRequiredExp(level);
     }
     #endregion
     #region extra functions
