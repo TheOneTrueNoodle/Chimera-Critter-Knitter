@@ -6,6 +6,8 @@ using Combat;
 
 public class CursorController : MonoBehaviour
 {
+    public bool inCombat;
+
     public float unitSpeed;
     public Entity activeCharacter;
 
@@ -30,10 +32,14 @@ public class CursorController : MonoBehaviour
 
     private void Start()
     {
+        CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
+
         CombatEvents.current.onNewTurn += NewTurn;
         CombatEvents.current.onSetCursorMode += SetCursorMode;
         CombatEvents.current.onTileClicked += TileClicked;
         CombatEvents.current.onActionComplete += FinishedMovement;
+
         tileFunctions = new TileFunctions();
         pathFinder = new PathFinder();
         rangeFinder = new RangeFinder();
@@ -43,6 +49,7 @@ public class CursorController : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!inCombat) { return; }
         var focusedTileHit = GetFocusedOnTile();
         OverlayTile overlayTile = null;
         if (focusedTileHit.HasValue)
@@ -81,6 +88,7 @@ public class CursorController : MonoBehaviour
 
     public void TileClicked(OverlayTile overlayTile)
     {
+        if (!inCombat) { return; }
         //Handle Cursor Click Function
         switch (cursorMode)
         {
@@ -378,6 +386,15 @@ public class CursorController : MonoBehaviour
                 //Enemy Turn
                 break;
         }
+    }
+
+    public void StartCombat()
+    {
+        inCombat = true;
+    }
+    public void EndCombat()
+    {
+        inCombat = false;
     }
     #endregion
 }

@@ -40,6 +40,7 @@ public class Entity : MonoBehaviour
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
         healthbar = GetComponentInChildren<Slider>();
     }
 
@@ -135,6 +136,13 @@ public class Entity : MonoBehaviour
             var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(gameObject.transform.position);
             CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         //}
+    }
+
+    private void EndCombat()
+    {
+        healthbar.gameObject.SetActive(false);
+        activeTile = null;
+        UpdateStats();
     }
     #endregion
 

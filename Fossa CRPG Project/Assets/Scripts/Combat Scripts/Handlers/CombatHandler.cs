@@ -41,11 +41,11 @@ public class CombatHandler : MonoBehaviour
 
     public void StartCombat()
     {
-        turnHandler = new TurnHandler();
-        moveHandler = new MoveHandler();
-        actionHandler = new ActionHandler();
-        unitHandler = new UnitHandler();
-        tileHandler = new TileHandler();
+        if (turnHandler == null) { turnHandler = new TurnHandler(); }
+        if (moveHandler == null) { moveHandler = new MoveHandler(); }
+        if (actionHandler == null){ actionHandler = new ActionHandler(); }
+        if (unitHandler == null) { unitHandler = new UnitHandler(); }
+        if (tileHandler == null) { tileHandler = new TileHandler(); }
 
         turnHandler.StartCombat(FindAllUnits());
 
@@ -59,6 +59,13 @@ public class CombatHandler : MonoBehaviour
         {
             entity.IncreaseEXP(totalDroppedExp);
         }
+
+        playerTeam.Clear();
+        enemyTeam.Clear();
+        otherTeam.Clear();
+
+        turnHandler.EndCombat();
+        CombatEvents.current.EndCombat();
     }
 
     public void TurnEnd()
@@ -229,6 +236,29 @@ public class CombatHandler : MonoBehaviour
     public void UnitStartingAbilities(Entity entity, List<AbilityData> abilities)
     {
         entity.activeAbilities = entity.CharacterData.SetAbilities(abilities);
+    }
+
+    public void AddUnitToCombat(Entity entity)
+    {
+        turnHandler.AddUnitToTurnOrder(entity);
+
+        if(entity.GetComponent<CombatAIController>())
+        {
+            entity.GetComponent<CombatAIController>().InitializeCombat(playerTeam);
+        }
+        entity.Initialize(); 
+        if (entity.TeamID == 0)
+        {
+            playerTeam.Add(entity);
+        }
+        else if (entity.TeamID == 1)
+        {
+            enemyTeam.Add(entity);
+        }
+        else
+        {
+            otherTeam.Add(entity);
+        }
     }
     #endregion
 }

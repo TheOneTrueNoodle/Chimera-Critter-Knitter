@@ -16,6 +16,11 @@ public class TurnHandler
         CombatEvents.current.NewTurn(turnOrder.First());
     }
 
+    public void EndCombat()
+    {
+        turnOrder.Clear();
+    }
+
     public void nextTurn()
     {
         var lastTurn = turnOrder.First();
@@ -23,6 +28,11 @@ public class TurnHandler
         turnOrder.Add(lastTurn);
 
         CombatEvents.current.NewTurn(turnOrder.First());
+    }
+
+    public void AddUnitToTurnOrder(Entity entity)
+    {
+        turnOrder.Add(entity);
     }
 
     public IEnumerator DelayedTurnEnd()

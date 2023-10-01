@@ -171,4 +171,13 @@ public class CombatEvents : MonoBehaviour
             onUnitStartingAbilities(entity, abilities);
         }
     }
+
+    public event Action<Entity> onAddUnitToCombat;
+    public void AddUnitToCombat(Entity entity)
+    {
+        if(onAddUnitToCombat != null)
+        {
+            onAddUnitToCombat(entity);
+        }
+    }
 }
