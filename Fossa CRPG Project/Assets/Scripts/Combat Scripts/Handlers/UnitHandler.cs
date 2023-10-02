@@ -56,19 +56,24 @@ public class UnitHandler
 
     public void UnitDeath(Entity target)
     {
-        target.activeTile.isBlocked = false;
-        target.activeTile.activeCharacter = null;
-        /*
-        if (target.subTileSpaces != null)
+        if (target.activeTile != null)
         {
-            foreach (EntitySubTile SubTile in target.subTileSpaces)
-            {
-                SubTile.subTile.isBlocked = false;
-                SubTile.subTile.blockingChar = null;
-            }
-        }*/
 
-        //target.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
+            target.activeTile.isBlocked = false;
+            target.activeTile.activeCharacter = null;
+            /*
+            if (target.subTileSpaces != null)
+            {
+                foreach (EntitySubTile SubTile in target.subTileSpaces)
+                {
+                    SubTile.subTile.isBlocked = false;
+                    SubTile.subTile.blockingChar = null;
+                }
+            }*/
+
+            //target.GetComponentInChildren<SpriteRenderer>().enabled = false;
+        }
         target.isDead = true;
     }
 }
