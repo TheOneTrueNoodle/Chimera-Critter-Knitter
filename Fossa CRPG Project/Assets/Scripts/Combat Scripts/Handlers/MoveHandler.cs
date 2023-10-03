@@ -8,7 +8,6 @@ public class MoveHandler
 
     public IEnumerator MoveAlongPath(Entity entity, List<OverlayTile> path)
     {
-        OverlayTile finalTile = new OverlayTile();
         while (path.Count != 0)
         {
             var step = unitSpeed * Time.deltaTime;

@@ -54,10 +54,13 @@ public class CombatHandler : MonoBehaviour
 
     public void EndCombat()
     {
-        totalDroppedExp /= playerTeam.Count;
-        foreach(Entity entity in playerTeam)
+        if (totalDroppedExp > 0)
         {
-            entity.IncreaseEXP(totalDroppedExp);
+            totalDroppedExp /= playerTeam.Count;
+            foreach (Entity entity in playerTeam)
+            {
+                entity.IncreaseEXP(totalDroppedExp);
+            }
         }
 
         playerTeam.Clear();
@@ -135,10 +138,13 @@ public class CombatHandler : MonoBehaviour
 
         //Find dropped items
         totalDroppedExp += Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
-        enemyTeam.Remove(target);
-        if(enemyTeam.Count <= 0)
+        if (target.TeamID == 1)
         {
-            EndCombat();
+            enemyTeam.Remove(target);
+            if (enemyTeam.Count <= 0)
+            {
+                EndCombat();
+            }
         }
     }
 
@@ -182,12 +188,6 @@ public class CombatHandler : MonoBehaviour
         enemyTeam = new List<Entity>();
         otherTeam = new List<Entity>();
 
-        List<CombatAIController> ai = new List<CombatAIController>(FindObjectsOfType<CombatAIController>());
-        foreach (CombatAIController enemy in ai)
-        {
-            enemy.InitializeCombat(playerTeam);
-        }
-
         foreach (var item in UnitsUnsorted)
         {
             item.Initialize();
@@ -205,6 +205,12 @@ public class CombatHandler : MonoBehaviour
             {
                 otherTeam.Add(item);
             }
+        }
+
+        List<CombatAIController> ai = new List<CombatAIController>(FindObjectsOfType<CombatAIController>());
+        foreach (CombatAIController enemy in ai)
+        {
+            enemy.InitializeCombat(playerTeam);
         }
 
         return ReturnUnits;

@@ -133,7 +133,7 @@ public class Entity : MonoBehaviour
         else
         {
         */
-            var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(gameObject.transform.position);
+            var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z));
             CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         //}
     }
