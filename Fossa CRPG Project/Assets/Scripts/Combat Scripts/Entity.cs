@@ -39,7 +39,6 @@ public class Entity : MonoBehaviour
 
     private void Start()
     {
-        CombatEvents.current.onStartCombat += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
         healthbar = GetComponentInChildren<Slider>();
     }
@@ -102,40 +101,9 @@ public class Entity : MonoBehaviour
         List<ScriptableEffect> equipmentEffects = CharacterData.SetStartingEffects();
 
         CombatEvents.current.UnitStartingEffects(this, equipmentStatChanges, equipmentEffects);
-    }
-
-    private void StartCombat()
-    {
+        var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z));
+        CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         updateHealthBar();
-        /*
-        subTileSpaces = new List<EntitySubTile>();
-        subTileSpaces = GetComponentsInChildren<EntitySubTile>().ToList();
-        if (subTileSpaces.Count > 0)
-        {
-            List<Vector2> subTilePositions = new List<Vector2>();
-
-            foreach (EntitySubTile subTile in subTileSpaces)
-            {
-                subTilePositions.Add(subTile.gameObject.transform.localPosition);
-            }
-
-            var focusedTileHit = tileFunctions.GetMultipleFocusedOnTile(gameObject.transform.position, subTilePositions);
-            if (focusedTileHit.HasValue)
-            {
-                CombatEvents.current.TilePositionEntity(this, focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>());
-            }
-
-            foreach (EntitySubTile subTile in subTileSpaces)
-            {
-                subTile.assignSubTile();
-            }
-        }
-        else
-        {
-        */
-            var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z));
-            CombatEvents.current.TilePositionEntity(this, focusedTileHit);
-        //}
     }
 
     private void EndCombat()

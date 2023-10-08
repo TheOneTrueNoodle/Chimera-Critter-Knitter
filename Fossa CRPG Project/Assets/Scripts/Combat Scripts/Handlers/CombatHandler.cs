@@ -24,6 +24,8 @@ public class CombatHandler : MonoBehaviour
 
     private void Start()
     {
+        CombatEvents.current.onStartCombat += StartCombat;
+
         CombatEvents.current.onUnitDeath += UnitDeath;
         CombatEvents.current.onUnitStartingEffects += UnitStartingEffects;
         CombatEvents.current.onUnitStartingAbilities += UnitStartingAbilities;

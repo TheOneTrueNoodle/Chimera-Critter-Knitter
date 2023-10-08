@@ -14,7 +14,6 @@ public class TurnHandler
         turnOrder = AllUnits;
         turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
 
-        CombatEvents.current.StartCombat();
         CombatEvents.current.NewTurn(turnOrder.First());
     }
 
