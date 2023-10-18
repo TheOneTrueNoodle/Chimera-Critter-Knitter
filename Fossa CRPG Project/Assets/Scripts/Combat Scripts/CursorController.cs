@@ -30,6 +30,9 @@ public class CursorController : MonoBehaviour
     private AbilityData currentAbility;
     private List<OverlayTile> abilityArea = new List<OverlayTile>();
 
+    private float moveCursorDelay = 0.4f;
+    private float moveCursorDelayTimer;
+
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
@@ -50,6 +53,9 @@ public class CursorController : MonoBehaviour
     private void LateUpdate()
     {
         if (!inCombat) { return; }
+
+        //ControllerInput();
+
         var focusedTileHit = GetFocusedOnTile();
         OverlayTile overlayTile = null;
         if (focusedTileHit.HasValue)
@@ -58,7 +64,6 @@ public class CursorController : MonoBehaviour
             transform.position = overlayTile.gameObject.transform.position;
             gameObject.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
         }
-        
 
         //Handle Cursor Function
         switch (cursorMode)
@@ -325,6 +330,19 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    private void ControllerInput()
+    {
+        if (moveCursorDelayTimer > 0) { return; }
+        Vector3 _input;
+        _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z));
+        if (focusedTileHit != null)
+        {
+            transform.position = focusedTileHit.gameObject.transform.position;
+            gameObject.GetComponentInChildren<Canvas>().sortingOrder = focusedTileHit.GetComponentInChildren<Canvas>().sortingOrder + 1;
+        }
+        moveCursorDelayTimer = moveCursorDelay;
+    }
     #endregion
     #region Event Calls
     private void NewTurn(Entity activeChar)
