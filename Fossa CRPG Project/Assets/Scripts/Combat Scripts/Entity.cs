@@ -101,7 +101,7 @@ public class Entity : MonoBehaviour
         List<ScriptableEffect> equipmentEffects = CharacterData.SetStartingEffects();
 
         CombatEvents.current.UnitStartingEffects(this, equipmentStatChanges, equipmentEffects);
-        var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z));
+        var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z), true);
         CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         updateHealthBar();
     }

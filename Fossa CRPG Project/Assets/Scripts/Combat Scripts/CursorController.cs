@@ -30,7 +30,7 @@ public class CursorController : MonoBehaviour
     private AbilityData currentAbility;
     private List<OverlayTile> abilityArea = new List<OverlayTile>();
 
-    private float moveCursorDelay = 0.4f;
+    private float moveCursorDelay = 0.08f;
     private float moveCursorDelayTimer;
 
     private void Start()
@@ -54,13 +54,9 @@ public class CursorController : MonoBehaviour
     {
         if (!inCombat) { return; }
 
-        //ControllerInput();
-
-        var focusedTileHit = GetFocusedOnTile();
-        OverlayTile overlayTile = null;
-        if (focusedTileHit.HasValue)
+        OverlayTile overlayTile = GetInput();
+        if (overlayTile != null)
         {
-            overlayTile = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
             transform.position = overlayTile.gameObject.transform.position;
             gameObject.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
         }
@@ -73,14 +69,14 @@ public class CursorController : MonoBehaviour
                 break;
             case 4:
                 //Ability Mode
-                if (focusedTileHit != null) { Ability(overlayTile); }
+                if (overlayTile != null) { Ability(overlayTile); }
                 break;
             case 3:
                 //Attack Mode
                 break;
             case 2:
                 //Move Mode
-                if (focusedTileHit != null) { Movement(overlayTile); }
+                if (overlayTile != null) { Movement(overlayTile); }
                 break;
             case 1:
                 //Default Mode
@@ -330,18 +326,42 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    private void ControllerInput()
+    private OverlayTile GetInput()
     {
-        if (moveCursorDelayTimer > 0) { return; }
-        Vector3 _input;
-        _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z));
-        if (focusedTileHit != null)
+        bool usingMouse = false;
+        moveCursorDelayTimer -= Time.deltaTime;
+
+        //Get ControlMode
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-            transform.position = focusedTileHit.gameObject.transform.position;
-            gameObject.GetComponentInChildren<Canvas>().sortingOrder = focusedTileHit.GetComponentInChildren<Canvas>().sortingOrder + 1;
+            usingMouse = true;
         }
-        moveCursorDelayTimer = moveCursorDelay;
+
+        switch (usingMouse)
+        {
+            case true:
+                var focusedTileHit = GetFocusedOnTile();
+                if (focusedTileHit.HasValue)
+                {
+                    return focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+                }
+                break;
+            case false:
+                if (moveCursorDelayTimer > 0) { return null; }
+                Vector3 _input;
+                _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+                Debug.Log(_input);
+
+                var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z), false);
+                if (overlayTile != null)
+                {
+                    moveCursorDelayTimer = moveCursorDelay;
+                    return overlayTile;
+                }
+                break;
+        }
+
+        return null;
     }
     #endregion
     #region Event Calls

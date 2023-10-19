@@ -7,7 +7,7 @@ namespace Combat
 {
     public class TileFunctions
     {
-        public OverlayTile GetSingleFocusedOnTile(Vector3 pos3d)
+        public OverlayTile GetSingleFocusedOnTile(Vector3 pos3d, bool hideBlockedTiles)
         {
             int layer_mask = LayerMask.GetMask("OverlayTiles");
             Ray ray = new Ray(pos3d, Vector3.down);
@@ -18,7 +18,7 @@ namespace Combat
                 Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow);
                 OverlayTile hitTile = hit.collider.gameObject.GetComponent<OverlayTile>();
 
-                if (hitTile.isBlocked != true)
+                if (hitTile.isBlocked != true || hideBlockedTiles == false)
                 {
                     return hitTile;
                 }
