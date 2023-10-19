@@ -54,7 +54,8 @@ public class CursorController : MonoBehaviour
     {
         if (!inCombat) { return; }
 
-        OverlayTile overlayTile = GetInput();
+        OverlayTile overlayTile = GetMovementInput();
+        GetActionInput();
         if (overlayTile != null)
         {
             transform.position = overlayTile.gameObject.transform.position;
@@ -326,7 +327,7 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    private OverlayTile GetInput()
+    private OverlayTile GetMovementInput()
     {
         bool usingMouse = false;
         moveCursorDelayTimer -= Time.deltaTime;
