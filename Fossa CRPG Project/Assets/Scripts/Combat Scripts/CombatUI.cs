@@ -31,6 +31,8 @@ public class CombatUI : MonoBehaviour
     private void Update()
     {
         UpdateUI();
+
+        GetActionInput();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (abilityUI.activeInHierarchy)
@@ -64,6 +66,11 @@ public class CombatUI : MonoBehaviour
             abilityUI.SetActive(false);
             endTurnButton.SetActive(true);
         }
+    }
+
+    private void GetActionInput()
+    {
+
     }
 
     private void StartCombat()

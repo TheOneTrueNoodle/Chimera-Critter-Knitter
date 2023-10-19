@@ -55,7 +55,6 @@ public class CursorController : MonoBehaviour
         if (!inCombat) { return; }
 
         OverlayTile overlayTile = GetMovementInput();
-        GetActionInput();
         if (overlayTile != null)
         {
             transform.position = overlayTile.gameObject.transform.position;
@@ -70,14 +69,20 @@ public class CursorController : MonoBehaviour
                 break;
             case 4:
                 //Ability Mode
-                if (overlayTile != null) { Ability(overlayTile); }
+                if (overlayTile != null) 
+                { 
+                    Ability(overlayTile);
+                }
                 break;
             case 3:
                 //Attack Mode
                 break;
             case 2:
                 //Move Mode
-                if (overlayTile != null) { Movement(overlayTile); }
+                if (overlayTile != null) 
+                { 
+                    Movement(overlayTile);
+                }
                 break;
             case 1:
                 //Default Mode
@@ -86,6 +91,8 @@ public class CursorController : MonoBehaviour
                 //Enemy Turn
                 break;
         }
+
+        if (Input.GetButtonDown("Submit") && overlayTile != null) { TileClicked(overlayTile); }
     }
 
     public void TileClicked(OverlayTile overlayTile)
