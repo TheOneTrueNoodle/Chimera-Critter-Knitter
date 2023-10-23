@@ -52,7 +52,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * speed * Time.deltaTime);
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 RelativeVerticalInput = _input.z * forward;
+        Vector3 RelativeHorizontalInput = _input.x * right;
+
+        Vector3 cameraRelativeMovement = RelativeVerticalInput + RelativeHorizontalInput;
+        cameraRelativeMovement.Normalize();
+
+        rb.MovePosition(transform.position + (transform.forward * cameraRelativeMovement.magnitude) * speed * Time.deltaTime);
     }
 
     private void StartCombat()
