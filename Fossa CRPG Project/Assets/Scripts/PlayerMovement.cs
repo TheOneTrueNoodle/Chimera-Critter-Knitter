@@ -39,11 +39,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input != Vector3.zero)
         {
-            var matrix = Matrix4x4.Rotate(Quaternion.Euler(0, 45, 0));
 
-            var skewedInput = matrix.MultiplyPoint3x4(_input);
+            Vector3 forward = Camera.main.transform.forward;
+            Vector3 right = Camera.main.transform.right;
 
-            var relative = (transform.position + skewedInput) - transform.position;
+            forward.y = 0;
+            right.y = 0;
+            forward.Normalize();
+            right.Normalize();
+
+            Vector3 RelativeVerticalInput = _input.z * forward;
+            Vector3 RelativeHorizontalInput = _input.x * right;
+
+            Vector3 cameraRelativeInput = RelativeVerticalInput + RelativeHorizontalInput;
+            cameraRelativeInput.Normalize();
+
+            var relative = (transform.position + cameraRelativeInput) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
@@ -52,21 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        Vector3 forward = Camera.main.transform.forward;
-        Vector3 right = Camera.main.transform.right;
-
-        forward.y = 0;
-        right.y = 0;
-        forward.Normalize();
-        right.Normalize();
-
-        Vector3 RelativeVerticalInput = _input.z * forward;
-        Vector3 RelativeHorizontalInput = _input.x * right;
-
-        Vector3 cameraRelativeMovement = RelativeVerticalInput + RelativeHorizontalInput;
-        cameraRelativeMovement.Normalize();
-
-        rb.MovePosition(transform.position + (transform.forward * cameraRelativeMovement.magnitude) * speed * Time.deltaTime);
+        rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * speed * Time.deltaTime);
     }
 
     private void StartCombat()
