@@ -109,20 +109,16 @@ public class CombatUI : MonoBehaviour
 
     public void ChangeCursorMode(int mode)
     {
-        if (mode != 1)
+        if (mode == 1)
         {
             mainUI.SetActive(false);
+            UIOpen = false;
         }
-
-        if (mode != 4)
+        else if (mode != 4)
         {
             mainUI.SetActive(true);
         }
 
-        if (mode == 5)
-        {
-            mainUI.SetActive(true);
-        }
         CombatEvents.current.SetCursorMode(mode, null);
     }
 

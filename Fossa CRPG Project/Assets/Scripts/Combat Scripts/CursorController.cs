@@ -19,7 +19,7 @@ public class CursorController : MonoBehaviour
     private List<OverlayTile> path = new List<OverlayTile>();
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
-    //Default = 1, Movement = 2, Attack = 3, Ability = 4, UI = 5
+    //EnemyTurn = 0, Default = 1, Movement = 2, Attack = 3, Ability = 4, UI = 5
     [HideInInspector] public int cursorMode;
     public bool isMoving = false;
 
