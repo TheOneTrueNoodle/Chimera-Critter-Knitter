@@ -5,6 +5,7 @@ using TMPro;
 
 public class CombatUI : MonoBehaviour
 {
+    [Header("Unit Information Display")]
     public Image portrait;
     public TMP_Text Name;
     public Slider HPBar;
@@ -15,11 +16,13 @@ public class CombatUI : MonoBehaviour
     private Entity Char;
     private bool started;
 
+    [Header("Functionality")]
     [SerializeField] private GameObject mainUI;
-    [SerializeField] private GameObject backButton;
     [SerializeField] private GameObject abilityUI;
     [SerializeField] private GameObject endTurnButton;
     [SerializeField] private List<AbilityButton> abilityButton;
+
+    private bool UIOpen;
 
     private void Start()
     {
@@ -30,9 +33,11 @@ public class CombatUI : MonoBehaviour
 
     private void Update()
     {
+        if (!started) { return; }
         UpdateUI();
-
         GetActionInput();
+
+        /*
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (abilityUI.activeInHierarchy)
@@ -45,6 +50,7 @@ public class CombatUI : MonoBehaviour
                 ChangeCursorMode(1);
             }
         }
+        */
     }
 
     private void SetupCombatUI(Entity entity)
@@ -54,15 +60,13 @@ public class CombatUI : MonoBehaviour
         if (Char.TeamID != 0)
         {
             //ENEMY
-            backButton.SetActive(false);
             mainUI.SetActive(false);
             abilityUI.SetActive(false);
             endTurnButton.SetActive(false);
         }
         else
         {
-            backButton.SetActive(false);
-            mainUI.SetActive(true);
+            mainUI.SetActive(false);
             abilityUI.SetActive(false);
             endTurnButton.SetActive(true);
         }
@@ -70,7 +74,19 @@ public class CombatUI : MonoBehaviour
 
     private void GetActionInput()
     {
-
+        if(!UIOpen)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                //Open UI and take away player cursor control...
+                UIOpen = true;
+                ChangeCursorMode(5);
+            }
+        }
+        else
+        {
+            
+        }
     }
 
     private void StartCombat()
@@ -95,20 +111,17 @@ public class CombatUI : MonoBehaviour
     {
         if (mode != 1)
         {
-            backButton.SetActive(true);
             mainUI.SetActive(false);
         }
 
         if (mode != 4)
         {
             mainUI.SetActive(true);
-            backButton.SetActive(false);
         }
 
         if (mode == 5)
         {
-            mainUI.SetActive(false);
-            backButton.SetActive(false);
+            mainUI.SetActive(true);
         }
         CombatEvents.current.SetCursorMode(mode, null);
     }
@@ -151,7 +164,6 @@ public class CombatUI : MonoBehaviour
     private void ActionComplete()
     {
         mainUI.SetActive(true);
-        backButton.SetActive(false);
         CombatEvents.current.SetCursorMode(0, null);
     }
 }

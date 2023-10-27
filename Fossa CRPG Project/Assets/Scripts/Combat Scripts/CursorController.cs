@@ -19,7 +19,7 @@ public class CursorController : MonoBehaviour
     private List<OverlayTile> path = new List<OverlayTile>();
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
-    //Default = 1, Movement = 2, Attack = 3, Ability = 4, Defend = 5
+    //Default = 1, Movement = 2, Attack = 3, Ability = 4, UI = 5
     [HideInInspector] public int cursorMode;
     public bool isMoving = false;
 
@@ -54,21 +54,17 @@ public class CursorController : MonoBehaviour
     {
         if (!inCombat) { return; }
 
-        OverlayTile overlayTile = GetMovementInput();
-        if (overlayTile != null)
-        {
-            transform.position = overlayTile.gameObject.transform.position;
-            gameObject.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
-        }
+        OverlayTile overlayTile = null;
 
         //Handle Cursor Function
         switch (cursorMode)
         {
             case 5:
-                //Defend Mode
+                //UI Mode
                 break;
             case 4:
                 //Ability Mode
+                overlayTile = GetCursorPosition();
                 if (overlayTile != null) 
                 { 
                     Ability(overlayTile);
@@ -76,9 +72,11 @@ public class CursorController : MonoBehaviour
                 break;
             case 3:
                 //Attack Mode
+                overlayTile = GetCursorPosition();
                 break;
             case 2:
                 //Move Mode
+                overlayTile = GetCursorPosition();
                 if (overlayTile != null) 
                 { 
                     Movement(overlayTile);
@@ -86,9 +84,10 @@ public class CursorController : MonoBehaviour
                 break;
             case 1:
                 //Default Mode
+                overlayTile = GetCursorPosition();
                 break;
             default:
-                //Enemy Turn
+                //Enemy Turn 
                 break;
         }
 
@@ -102,7 +101,7 @@ public class CursorController : MonoBehaviour
         switch (cursorMode)
         {
             case 5:
-                //Defend Mode
+                //UI Mode
                 break;
             case 4:
                 //Ability Mode
@@ -283,6 +282,18 @@ public class CursorController : MonoBehaviour
 
     #endregion
     #region functions
+    private OverlayTile GetCursorPosition()
+    {
+        OverlayTile overlayTile = GetMovementInput();
+        if (overlayTile != null)
+        {
+            transform.position = overlayTile.gameObject.transform.position;
+            gameObject.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
+        }
+
+        return overlayTile;
+    }
+
     private void GetInRangeTiles(int range, bool hideOccupiedTiles, bool includeOrigin)
     {
         if (cursorMode == 2)
@@ -358,8 +369,7 @@ public class CursorController : MonoBehaviour
                 if (moveCursorDelayTimer > 0) { return null; }
                 Vector3 _input;
                 _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-                Debug.Log(_input);
-
+                if(_input == Vector3.zero) { return null; }
                 var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z), false);
                 if (overlayTile != null)
                 {
@@ -388,6 +398,7 @@ public class CursorController : MonoBehaviour
 
     private void SetCursorMode(int mode, AbilityData abilityData)
     {
+        Debug.Log("Changed Cursor Mode to " + mode);
         ClearRangeTiles();
         if (abilityArea.Count > 0)
         {
@@ -402,8 +413,7 @@ public class CursorController : MonoBehaviour
         switch (cursorMode)
         {
             case 5:
-                //Defend Startup
-                Defend();
+                //UI Startup
                 break;
             case 4:
                 //Ability Startup
