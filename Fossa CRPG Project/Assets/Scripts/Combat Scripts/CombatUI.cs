@@ -20,12 +20,17 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private GameObject ActionUI;
     [SerializeField] private GameObject ExamineUI;
     [SerializeField] private GameObject NeutralUI;
+    [SerializeField] private GameObject cancelDisp;
 
     [SerializeField] private GameObject abilityUI;
     [SerializeField] private List<AbilityButton> abilityButton;
 
     private bool UIOpen;
+    private bool actionActive;
     private OverlayTile selectedTile;
+
+    private float currentDelay = 0;
+    private static float delay = 0.2f;
 
     private void Start()
     {
@@ -39,6 +44,11 @@ public class CombatUI : MonoBehaviour
     private void Update()
     {
         if (!started) { return; }
+        if(currentDelay > 0)
+        {
+            currentDelay -= Time.deltaTime;
+            return;
+        }
         UpdateUI();
         GetActionInput();
     }
@@ -60,9 +70,16 @@ public class CombatUI : MonoBehaviour
                 {
                     CloseAbilityUI();
                 }
+                else if(actionActive)
+                {
+                    displayUI(selectedTile);
+                    ChangeCursorMode(5);
+                    actionActive = false;
+                }
                 else
                 {
                     ChangeCursorMode(1);
+                    UIOpen = false;
                     CloseUI();
                 }
             }
@@ -99,7 +116,6 @@ public class CombatUI : MonoBehaviour
     }
     public void CloseUI()
     {
-        UIOpen = false;
         ActionUI.SetActive(false);
         ExamineUI.SetActive(false);
         NeutralUI.SetActive(false);
@@ -141,8 +157,11 @@ public class CombatUI : MonoBehaviour
     {
         Char = entity;
 
+        currentDelay = 0;
         UIOpen = false;
+        actionActive = false;
 
+        cancelDisp.SetActive(false);
         ActionUI.SetActive(false);
         ExamineUI.SetActive(false);
         NeutralUI.SetActive(false);
@@ -170,6 +189,19 @@ public class CombatUI : MonoBehaviour
     }
     public void ChangeCursorMode(int mode)
     {
+        if (mode == 2 || mode == 3 || mode == 4)
+        {
+            actionActive = true;
+            cancelDisp.SetActive(true);
+            CloseUI();
+        }
+        else if(mode == 1)
+        {
+            currentDelay = delay;
+            UIOpen = false;
+            cancelDisp.SetActive(false);
+        }
+        else { cancelDisp.SetActive(false); }
         CombatEvents.current.SetCursorMode(mode, null);
     }
 }

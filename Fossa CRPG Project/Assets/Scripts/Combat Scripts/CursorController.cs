@@ -35,6 +35,9 @@ public class CursorController : MonoBehaviour
     private float moveCursorDelay = 0.08f;
     private float moveCursorDelayTimer;
 
+    private bool UIMode;
+    private OverlayTile UISelectedTile;
+
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
@@ -124,7 +127,6 @@ public class CursorController : MonoBehaviour
                 //Enemy Turn
                 break;
         }
-
     }
 
     #region CombatModes
@@ -421,7 +423,17 @@ public class CursorController : MonoBehaviour
         {
             case 5:
                 //UI Startup
-                if(currentTile != null) { CombatEvents.current.GetSelectedTile(currentTile); }
+                if(currentTile != null && !UIMode)
+                {
+                    UISelectedTile = currentTile;
+                    CombatEvents.current.GetSelectedTile(currentTile);
+                    UIMode = true;
+                }
+                else if(UISelectedTile != null)
+                {
+                    transform.position = UISelectedTile.gameObject.transform.position;
+                    gameObject.GetComponentInChildren<Canvas>().sortingOrder = UISelectedTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
+                }
                 break;
             case 4:
                 //Ability Startup
@@ -445,9 +457,11 @@ public class CursorController : MonoBehaviour
                 break;
             case 1:
                 //Default Startup
+                UIMode = false;
                 break;
             default:
                 //Enemy Turn
+                UIMode = false;
                 break;
         }
     }
