@@ -17,18 +17,23 @@ public class CombatUI : MonoBehaviour
     private bool started;
 
     [Header("Functionality")]
-    [SerializeField] private GameObject mainUI;
+    [SerializeField] private GameObject ActionUI;
+    [SerializeField] private GameObject ExamineUI;
+    [SerializeField] private GameObject NeutralUI;
+
     [SerializeField] private GameObject abilityUI;
-    [SerializeField] private GameObject endTurnButton;
     [SerializeField] private List<AbilityButton> abilityButton;
 
     private bool UIOpen;
+    private OverlayTile selectedTile;
 
     private void Start()
     {
         CombatEvents.current.onNewTurn += SetupCombatUI;
         CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
+        CombatEvents.current.onGetSelectedTile += displayUI;
     }
 
     private void Update()
@@ -36,40 +41,6 @@ public class CombatUI : MonoBehaviour
         if (!started) { return; }
         UpdateUI();
         GetActionInput();
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (abilityUI.activeInHierarchy)
-            {
-                CloseAbilityUI();
-                ChangeCursorMode(1);
-            }
-            else
-            {
-                ChangeCursorMode(1);
-            }
-        }
-        */
-    }
-
-    private void SetupCombatUI(Entity entity)
-    {
-        Char = entity;
-
-        if (Char.TeamID != 0)
-        {
-            //ENEMY
-            mainUI.SetActive(false);
-            abilityUI.SetActive(false);
-            endTurnButton.SetActive(false);
-        }
-        else
-        {
-            mainUI.SetActive(false);
-            abilityUI.SetActive(false);
-            endTurnButton.SetActive(true);
-        }
     }
 
     private void GetActionInput()
@@ -78,54 +49,65 @@ public class CombatUI : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                //Open UI and take away player cursor control...
-                UIOpen = true;
-                ChangeCursorMode(5);
+                OpenUI();
             }
         }
         else
         {
-            
+            if (Input.GetButtonDown("Cancel"))
+            {
+                if (abilityUI.activeInHierarchy)
+                {
+                    CloseAbilityUI();
+                }
+                else
+                {
+                    ChangeCursorMode(1);
+                    CloseUI();
+                }
+            }
         }
     }
 
-    private void StartCombat()
+    public void displayUI(OverlayTile tile)
     {
-        started = true;
-    }
-
-    public void UpdateUI()
-    {
-        if (!started) { return; }
-        portrait.sprite = Char.CharacterData.portrait;
-        Name.text = Char.CharacterData.Name;
-        HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
-        HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
-        HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
-        SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
-        SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
-        SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
-    }
-
-    public void ChangeCursorMode(int mode)
-    {
-        if (mode == 1)
+        selectedTile = tile;
+        if (selectedTile.isBlocked != true)
         {
-            mainUI.SetActive(false);
-            UIOpen = false;
+            //Open empty tile UI
+            NeutralUI.SetActive(true);
+            NeutralUI.GetComponentInChildren<Button>().Select();
         }
-        else if (mode != 4)
+        else if(selectedTile.activeCharacter == Char)
         {
-            mainUI.SetActive(true);
+            //Display Action UI
+            ActionUI.SetActive(true);
+            ActionUI.GetComponentInChildren<Button>().Select();
         }
-
-        CombatEvents.current.SetCursorMode(mode, null);
+        else
+        {
+            //Display Examine UI
+            ExamineUI.SetActive(true);
+            ExamineUI.GetComponentInChildren<Button>().Select();
+        }
     }
-
+    public void OpenUI()
+    {
+        Debug.Log("Opening UI");
+        UIOpen = true;
+        ChangeCursorMode(5);
+    }
+    public void CloseUI()
+    {
+        UIOpen = false;
+        ActionUI.SetActive(false);
+        ExamineUI.SetActive(false);
+        NeutralUI.SetActive(false);
+    }
     public void OpenAbilityUI()
     {
         abilityUI.SetActive(true);
-        mainUI.SetActive(false);
+        ActionUI.SetActive(false);
 
         foreach (var button in abilityButton)
         {
@@ -143,7 +125,7 @@ public class CombatUI : MonoBehaviour
     {
         foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
         abilityUI.SetActive(false);
-        mainUI.SetActive(true);
+        ActionUI.SetActive(true);
     }
 
     public void CallAbility(int ID)
@@ -151,15 +133,43 @@ public class CombatUI : MonoBehaviour
         foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
         CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID]);
     }
-
-    public void endTurn()
-    {
-        CombatEvents.current.TurnEnd();
-    }
-
     private void ActionComplete()
     {
-        mainUI.SetActive(true);
-        CombatEvents.current.SetCursorMode(0, null);
+        CombatEvents.current.SetCursorMode(1, null);
+    }
+    private void SetupCombatUI(Entity entity)
+    {
+        Char = entity;
+
+        UIOpen = false;
+
+        ActionUI.SetActive(false);
+        ExamineUI.SetActive(false);
+        NeutralUI.SetActive(false);
+        abilityUI.SetActive(false);
+    }
+    public void UpdateUI()
+    {
+        if (!started) { return; }
+        portrait.sprite = Char.CharacterData.portrait;
+        Name.text = Char.CharacterData.Name;
+        HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
+        HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
+        HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
+        SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
+        SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
+        SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+    }
+    private void StartCombat()
+    {
+        started = true;
+    }
+    private void EndCombat()
+    {
+        started = false;
+    }
+    public void ChangeCursorMode(int mode)
+    {
+        CombatEvents.current.SetCursorMode(mode, null);
     }
 }

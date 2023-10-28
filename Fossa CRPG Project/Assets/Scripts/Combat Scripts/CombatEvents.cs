@@ -180,4 +180,13 @@ public class CombatEvents : MonoBehaviour
             onAddUnitToCombat(entity);
         }
     }
+
+    public event Action<OverlayTile> onGetSelectedTile;
+    public void GetSelectedTile(OverlayTile overlayTile)
+    {
+        if (onGetSelectedTile != null)
+        {
+            onGetSelectedTile(overlayTile);
+        }
+    }
 }

@@ -23,6 +23,8 @@ public class CursorController : MonoBehaviour
     [HideInInspector] public int cursorMode;
     public bool isMoving = false;
 
+    [HideInInspector] public OverlayTile currentTile;
+
     //Booleans for turn actions
     private bool hasMoved;
     private bool hasAttacked;
@@ -362,17 +364,22 @@ public class CursorController : MonoBehaviour
                 var focusedTileHit = GetFocusedOnTile();
                 if (focusedTileHit.HasValue)
                 {
+                    currentTile = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                     return focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
                 }
                 break;
             case false:
                 if (moveCursorDelayTimer > 0) { return null; }
+
                 Vector3 _input;
                 _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-                if(_input == Vector3.zero) { return null; }
+
+                if(_input == Vector3.zero && currentTile != null) { return currentTile; }
+
                 var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z), false);
                 if (overlayTile != null)
                 {
+                    currentTile = overlayTile;
                     moveCursorDelayTimer = moveCursorDelay;
                     return overlayTile;
                 }
@@ -414,6 +421,7 @@ public class CursorController : MonoBehaviour
         {
             case 5:
                 //UI Startup
+                if(currentTile != null) { CombatEvents.current.GetSelectedTile(currentTile); }
                 break;
             case 4:
                 //Ability Startup
