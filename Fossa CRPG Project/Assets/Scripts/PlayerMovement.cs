@@ -6,15 +6,27 @@ public class PlayerMovement : MonoBehaviour
 {
     private bool inCombat;
 
-    [SerializeField] private float speed;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float walkSpeed;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float turnSpeed = 360;
+    [SerializeField] private float walkTurnSpeed = 210;
+    [SerializeField] private float runTurnSpeed = 180;
     private Vector3 _input;
+
+    [SerializeField] private float animSmoothingSpeed = 2f;
+    private float animSpeed;
+    private float animRotation;
+
+    private Animator anim;
+    private Vector3 oldForward;
 
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
+        anim = GetComponentInChildren<Animator>();
+
+        oldForward = transform.forward;
     }
 
     private void Update()
@@ -57,13 +69,51 @@ public class PlayerMovement : MonoBehaviour
             var relative = (transform.position + cameraRelativeInput) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            var turnSpeed = Input.GetButton("Run") ? runTurnSpeed : walkTurnSpeed;
+            rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+
+            float angle = Quaternion.Angle(transform.rotation, rot);
+            float rotationDirection = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(transform.forward, relative.normalized)));
+
+            if(angle < 1.0f) { rotationDirection = 0f; }
+            if(rotationDirection > 0f) { rotationDirection = 1f; }
+            else if (rotationDirection < 0f) { rotationDirection = -1f; }
+            Animate(rotationDirection);
         }
+        else { Animate(0f); }
     }
 
     private void Move()
     {
-        rb.MovePosition(transform.position + (transform.forward * _input.magnitude) * speed * Time.deltaTime);
+        var speed = Input.GetButton("Run") ? runSpeed : walkSpeed;
+        rb.MovePosition(transform.position + (transform.forward * _input.normalized.magnitude) * speed * Time.deltaTime);
+    }
+
+    private void Animate(float rotationDirection)
+    {
+        var moveSpeed = Input.GetButton("Run") ? 0.7f : 0.4f;
+        var targetSpeed = _input.normalized.magnitude * moveSpeed;
+        var targetRot = 0f;
+
+        if (rotationDirection > 0) { targetRot = 0.4f; } else if (rotationDirection < 0) { targetRot = -0.4f; }
+
+        Debug.Log(rotationDirection) ;
+
+        if(Mathf.Abs(animSpeed - targetSpeed) < 0.1f) { animSpeed = targetSpeed; }
+        if (Mathf.Abs(animRotation - targetRot) < 0.1f) { animRotation = targetRot; }
+
+        if (animSpeed < targetSpeed)
+            animSpeed += Time.deltaTime * animSmoothingSpeed;
+        else if(animSpeed > targetSpeed)
+            animSpeed -= Time.deltaTime * animSmoothingSpeed;
+
+        if (animRotation < targetRot)
+            animRotation += Time.deltaTime * animSmoothingSpeed;
+        else if (animRotation > targetRot)
+            animRotation -= Time.deltaTime * animSmoothingSpeed;
+
+        anim.SetFloat("Speed", animSpeed);
+        anim.SetFloat("Rotation", animRotation);
     }
 
     private void StartCombat()
