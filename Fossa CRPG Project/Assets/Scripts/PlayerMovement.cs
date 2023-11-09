@@ -78,9 +78,9 @@ public class PlayerMovement : MonoBehaviour
             if(angle < 1.0f) { rotationDirection = 0f; }
             if(rotationDirection > 0f) { rotationDirection = 1f; }
             else if (rotationDirection < 0f) { rotationDirection = -1f; }
-            Animate(rotationDirection);
+            Animate(rotationDirection, angle);
         }
-        else { Animate(0f); }
+        else { Animate(0f, 0f); }
     }
 
     private void Move()
@@ -89,15 +89,20 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(transform.position + (transform.forward * _input.normalized.magnitude) * speed * Time.deltaTime);
     }
 
-    private void Animate(float rotationDirection)
+    private void Animate(float rotationDirection, float angle)
     {
         var moveSpeed = Input.GetButton("Run") ? 0.7f : 0.4f;
         var targetSpeed = _input.normalized.magnitude * moveSpeed;
         var targetRot = 0f;
 
-        if (rotationDirection > 0) { targetRot = 0.4f; } else if (rotationDirection < 0) { targetRot = -0.4f; }
-
-        Debug.Log(rotationDirection) ;
+        if(angle > 40)
+        {
+            targetRot = 0.4f * rotationDirection;
+        }
+        else
+        {
+            targetRot = (0.01f * angle) * rotationDirection;
+        }
 
         if(Mathf.Abs(animSpeed - targetSpeed) < 0.1f) { animSpeed = targetSpeed; }
         if (Mathf.Abs(animRotation - targetRot) < 0.1f) { animRotation = targetRot; }
