@@ -17,9 +17,9 @@ public class CombatUI : MonoBehaviour
     private bool started;
 
     [Header("Functionality")]
-    [SerializeField] private GameObject ActionUI;
-    [SerializeField] private GameObject ExamineUI;
-    [SerializeField] private GameObject NeutralUI;
+    [SerializeField] private RectTransform ActionUI;
+    [SerializeField] private RectTransform ExamineUI;
+    [SerializeField] private RectTransform NeutralUI;
     [SerializeField] private GameObject cancelDisp;
 
     [SerializeField] private GameObject abilityUI;
@@ -57,7 +57,7 @@ public class CombatUI : MonoBehaviour
     {
         if(!UIOpen)
         {
-            if (Input.GetButtonDown("Interact"))
+            if (Input.GetButtonDown("Interact") || Input.GetMouseButtonDown(0))
             {
                 OpenUI();
             }
@@ -92,19 +92,19 @@ public class CombatUI : MonoBehaviour
         if (selectedTile.isBlocked != true)
         {
             //Open empty tile UI
-            NeutralUI.SetActive(true);
+            NeutralUI.gameObject.SetActive(true);
             NeutralUI.GetComponentInChildren<Button>().Select();
         }
         else if(selectedTile.activeCharacter == Char)
         {
             //Display Action UI
-            ActionUI.SetActive(true);
+            ActionUI.gameObject.SetActive(true);
             ActionUI.GetComponentInChildren<Button>().Select();
         }
         else
         {
             //Display Examine UI
-            ExamineUI.SetActive(true);
+            ExamineUI.gameObject.SetActive(true);
             ExamineUI.GetComponentInChildren<Button>().Select();
         }
     }
@@ -116,14 +116,14 @@ public class CombatUI : MonoBehaviour
     }
     public void CloseUI()
     {
-        ActionUI.SetActive(false);
-        ExamineUI.SetActive(false);
-        NeutralUI.SetActive(false);
+        ActionUI.gameObject.SetActive(false);
+        ExamineUI.gameObject.SetActive(false);
+        NeutralUI.gameObject.SetActive(false);
     }
     public void OpenAbilityUI()
     {
         abilityUI.SetActive(true);
-        ActionUI.SetActive(false);
+        ActionUI.gameObject.SetActive(false);
 
         foreach (var button in abilityButton)
         {
@@ -141,7 +141,7 @@ public class CombatUI : MonoBehaviour
     {
         foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
         abilityUI.SetActive(false);
-        ActionUI.SetActive(true);
+        ActionUI.gameObject.SetActive(true);
     }
 
     public void CallAbility(int ID)
@@ -151,8 +151,11 @@ public class CombatUI : MonoBehaviour
     }
     private void ActionComplete()
     {
-        CombatEvents.current.SetCursorMode(1, null);
+        displayUI(selectedTile);
+        ChangeCursorMode(5);
+        actionActive = false;
     }
+
     private void SetupCombatUI(Entity entity)
     {
         Char = entity;
@@ -162,10 +165,17 @@ public class CombatUI : MonoBehaviour
         actionActive = false;
 
         cancelDisp.SetActive(false);
-        ActionUI.SetActive(false);
-        ExamineUI.SetActive(false);
-        NeutralUI.SetActive(false);
-        abilityUI.SetActive(false);
+        ActionUI.gameObject.SetActive(false);
+        ExamineUI.gameObject.SetActive(false);
+        NeutralUI.gameObject.SetActive(false);
+        abilityUI.gameObject.SetActive(false);
+        ChangeCursorMode(1);
+    }
+    public void PositionUI(RectTransform rectTransform)
+    {
+        var mousePos = Input.mousePosition;
+        rectTransform.gameObject.SetActive(true);
+        rectTransform.transform.position = new Vector2(mousePos.x + rectTransform.sizeDelta.x, mousePos.y);
     }
     public void UpdateUI()
     {
