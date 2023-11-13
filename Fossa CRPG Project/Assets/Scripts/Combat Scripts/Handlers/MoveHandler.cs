@@ -5,10 +5,12 @@ using UnityEngine;
 public class MoveHandler
 {
     private static int unitSpeed = 3;
-    private static int unitTurnSpeed = 320;
+    private static int unitTurnSpeed = 360;
     static private float animSmoothingSpeed = 2f;
     private float animSpeed;
     private float animRotation;
+
+    private OverlayTile finalTile;
 
     public IEnumerator MoveAlongPath(Entity entity, List<OverlayTile> path)
     {
@@ -16,12 +18,14 @@ public class MoveHandler
         {
             var step = unitSpeed * Time.deltaTime;
             var zIndex = path[0].transform.position.z;
-            Look(entity, path[0].transform.position);
+            Look(entity, path[0].transform.position, false);
             Move(entity);
 
-            if (Vector2.Distance(entity.transform.position, path[0].transform.position) < 0.5f)
+            var targetPos = new Vector3(path[0].transform.position.x, entity.transform.position.y, path[0].transform.position.z);
+
+            if (Vector3.Distance(entity.transform.position, targetPos) < 0.1f)
             {
-                if (path.Count == 1) { CombatEvents.current.TilePositionEntity(entity, path[0]); }
+                if (path.Count == 1) { finalTile = path[0]; }
                 path.RemoveAt(0);
             }
 
@@ -30,7 +34,31 @@ public class MoveHandler
 
         if (path.Count == 0)
         {
-            if (entity.GetComponentInChildren<Animator>() != null) { Animate(entity.GetComponentInChildren<Animator>(), 0, 0); }
+            var anim = entity.GetComponentInChildren<Animator>();
+
+            while (animSpeed != 0 || animRotation != 0)
+            {
+                if (entity.GetComponentInChildren<Animator>() != null) { Look(entity, entity.transform.forward, true); }
+                else
+                {
+                    animSpeed = 0;
+                    animRotation = 0;
+                }
+
+                if (animSpeed > -0.1 && animSpeed < 0.1)
+                {
+                    animSpeed = 0;
+                    anim.SetFloat("Speed", animSpeed);
+                }
+
+                if (animRotation > -0.1 && animRotation < 0.1)
+                {
+                    animRotation = 0;
+                    anim.SetFloat("Rotation", animRotation);
+                }
+            }
+
+            CombatEvents.current.TilePositionEntity(entity, finalTile);
             CombatEvents.current.ActionComplete(); 
         }
     }
@@ -40,11 +68,12 @@ public class MoveHandler
         rb.MovePosition(entity.transform.position + entity.transform.forward * unitSpeed * Time.deltaTime);
     }
 
-    private void Look(Entity entity, Vector3 target)
+    private void Look(Entity entity, Vector3 target, bool lastTile)
     {
         Rigidbody rb = entity.gameObject.GetComponent<Rigidbody>();
 
         var relativePos = target - entity.transform.position;
+        relativePos.y = 0;
         var rot = Quaternion.LookRotation(relativePos, Vector3.up);
 
         rb.rotation = Quaternion.RotateTowards(entity.transform.rotation, rot, unitTurnSpeed * Time.deltaTime);
@@ -55,12 +84,12 @@ public class MoveHandler
         if (angle < 1.0f) { rotationDirection = 0f; }
         if (rotationDirection > 0f) { rotationDirection = 1f; }
         else if (rotationDirection < 0f) { rotationDirection = -1f; }
-        if (entity.GetComponentInChildren<Animator>() != null) { Animate(entity.GetComponentInChildren<Animator>(), rotationDirection, angle); }
+        if (entity.GetComponentInChildren<Animator>() != null) { Animate(entity.GetComponentInChildren<Animator>(), rotationDirection, angle, lastTile); }
     }
 
-    private void Animate(Animator anim, float rotationDirection, float angle)
+    private void Animate(Animator anim, float rotationDirection, float angle, bool lastTile)
     {
-        var targetSpeed = unitSpeed;
+        var targetSpeed = lastTile ? 0f : 0.7f;
         var targetRot = 0f;
 
         if (angle > 40)
