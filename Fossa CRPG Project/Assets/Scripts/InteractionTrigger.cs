@@ -6,6 +6,8 @@ using System;
 
 public class InteractionTrigger : MonoBehaviour
 {
+    private bool inCombat;
+
     public GameObject inputUI;
 
     private bool used = false;
@@ -15,8 +17,15 @@ public class InteractionTrigger : MonoBehaviour
     public Interaction enableInteraction;
     public Interaction disableInteraction;
 
+    private void Start()
+    {
+        CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
+    }
+
     private void OnTriggerStay(Collider other)
     {
+        if (inCombat) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
             if(oneTimeInteraction != null)
@@ -56,6 +65,14 @@ public class InteractionTrigger : MonoBehaviour
             //HIDE UI
             inputUI.SetActive(false);
         }
+    }
+    private void StartCombat()
+    {
+        inCombat = true;
+    }
+    private void EndCombat()
+    {
+        inCombat = false;
     }
 }
 
