@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
         barks.RemoveAt(0);
         barks.Add(bark);
 
+        anim.Play("Bark");
         barkSource.Play();
     }
 
