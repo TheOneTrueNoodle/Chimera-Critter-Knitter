@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
                 {
-                    transitionToBattle(currentConvo.battle);
+                    transitionToBattle();
                 }
                 else //otherwise if there's no choice and no fight exit dialogue
                 {
@@ -139,6 +139,8 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
         dialogueUI.SetActive(false);
         index = 0;
+        CombatEvents.current.EndDialogue();
+
     }
 
     void showChoice()
@@ -162,13 +164,17 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueActive = true;
         dialogueUI.SetActive(true);
+        CombatEvents.current.StartDialogue();
     }
 
-    private void transitionToBattle(Battle whatFight)
+    private void transitionToBattle()
     {
-        gd.currentGameStatus.nextFight = whatFight;
-        gm.SaveFromSceneToManager();
-        SceneManager.LoadScene(1);
+        //gd.currentGameStatus.nextFight = whatFight;
+        //gm.SaveFromSceneToManager();
+        //SceneManager.LoadScene(1);
+
+        CombatEvents.current.StartCombat();
 
     }
+
 }

@@ -14,7 +14,7 @@ public class DialogueZoneTrigger : MonoBehaviour
         dm = GameObject.Find("DialogueManagement").GetComponent<DialogueManager>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
