@@ -60,6 +60,7 @@ public class DialogueManager : MonoBehaviour
                 else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
                 {
                     transitionToBattle();
+                    exitText(true);
                 }
                 else //otherwise if there's no choice and no fight exit dialogue
                 {
@@ -177,6 +178,7 @@ public class DialogueManager : MonoBehaviour
         //gm.SaveFromSceneToManager();
         //SceneManager.LoadScene(1);
 
+        Debug.Log("Beginning Combat");
         CombatEvents.current.StartCombat();
 
     }

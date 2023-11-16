@@ -7,6 +7,7 @@ using Combat;
 public class CursorController : MonoBehaviour
 {
     public bool inCombat;
+    public GameObject GFX;
 
     public float unitSpeed;
     public Entity activeCharacter;
@@ -97,7 +98,7 @@ public class CursorController : MonoBehaviour
                 break;
         }
 
-        if (Input.GetButtonDown("Submit") && overlayTile != null && actionActive)
+        if ((Input.GetButtonDown("Submit") || Input.GetMouseButtonDown(0)) && overlayTile != null && actionActive)
         {
             TileClicked(overlayTile);
             Debug.Log("Tile alternate click");
@@ -478,10 +479,12 @@ public class CursorController : MonoBehaviour
     public void StartCombat()
     {
         inCombat = true;
+        GFX.SetActive(true);
     }
     public void EndCombat()
     {
         inCombat = false;
+        GFX.SetActive(false);
     }
     #endregion
 }
