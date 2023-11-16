@@ -71,6 +71,8 @@ public class CombatUI : MonoBehaviour
                 if (abilityUI.activeInHierarchy && actionActive != true)
                 {
                     CloseAbilityUI();
+                    displayUI(selectedTile);
+                    ChangeCursorMode(5);
                 }
                 else if(actionActive)
                 {
@@ -143,6 +145,11 @@ public class CombatUI : MonoBehaviour
             abilityButton[i].gameObject.SetActive(true);
             abilityButton[i].SetupButton(Char.activeAbilities[i]);
         }
+
+        if (Char.activeAbilities.Count > 0)
+        {
+            abilityButton[0].GetComponent<Button>().Select();
+        }
     }
 
     public void CloseAbilityUI()
@@ -154,9 +161,10 @@ public class CombatUI : MonoBehaviour
 
     public void CallAbility(int ID)
     {
+        actionActive = true;
+        cancelDisp.SetActive(true);
         foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
         CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID]);
-        actionActive = true;
     }
     private void ActionComplete()
     {

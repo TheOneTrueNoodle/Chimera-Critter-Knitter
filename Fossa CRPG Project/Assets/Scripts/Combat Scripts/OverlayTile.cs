@@ -50,6 +50,7 @@ public class OverlayTile : MonoBehaviour
 
     public void Clicked()
     {
+        Debug.Log("Tile Clicked");
         CombatEvents.current.TileClicked(this);
     }
 }

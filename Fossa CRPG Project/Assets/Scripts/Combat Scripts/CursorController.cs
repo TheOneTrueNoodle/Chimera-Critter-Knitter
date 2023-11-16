@@ -26,6 +26,7 @@ public class CursorController : MonoBehaviour
     [HideInInspector] public OverlayTile currentTile;
 
     //Booleans for turn actions
+    private bool actionActive;
     private bool hasMoved;
     private bool hasAttacked;
     private bool hasCastAbility;
@@ -96,7 +97,12 @@ public class CursorController : MonoBehaviour
                 break;
         }
 
-        if (Input.GetButtonDown("Submit") && overlayTile != null) { TileClicked(overlayTile); }
+        if (Input.GetButtonDown("Submit") && overlayTile != null && actionActive)
+        {
+            TileClicked(overlayTile);
+            Debug.Log("Tile alternate click");
+        }
+        if(cursorMode == 2 || cursorMode == 3 || cursorMode == 4) { actionActive = true; }
     }
 
     public void TileClicked(OverlayTile overlayTile)
@@ -423,7 +429,8 @@ public class CursorController : MonoBehaviour
         {
             case 5:
                 //UI Startup
-                if(currentTile != null && !UIMode)
+                actionActive = false;
+                if (currentTile != null && !UIMode)
                 {
                     UISelectedTile = currentTile;
                     CombatEvents.current.GetSelectedTile(currentTile);
@@ -457,10 +464,12 @@ public class CursorController : MonoBehaviour
                 break;
             case 1:
                 //Default Startup
+                actionActive = false;
                 UIMode = false;
                 break;
             default:
                 //Enemy Turn
+                actionActive = false;
                 UIMode = false;
                 break;
         }
