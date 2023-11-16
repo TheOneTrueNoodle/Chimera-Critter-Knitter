@@ -17,6 +17,7 @@ public class CombatUI : MonoBehaviour
     private bool started;
 
     [Header("Functionality")]
+    [SerializeField] private GameObject UIParent;
     [SerializeField] private RectTransform ActionUI;
     [SerializeField] private Button MoveButton;
     [SerializeField] private RectTransform ExamineUI;
@@ -212,10 +213,12 @@ public class CombatUI : MonoBehaviour
     private void StartCombat()
     {
         started = true;
+        UIParent.SetActive(true);
     }
     private void EndCombat()
     {
         started = false;
+        UIParent.SetActive(false);
     }
     public void ChangeCursorMode(int mode)
     {
