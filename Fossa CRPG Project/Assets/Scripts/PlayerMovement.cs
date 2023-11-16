@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private StudioEventEmitter barkSFX;
 
+    private bool doingBigTurn;
+
     private void Start()
     {
         if (CombatEvents.current != null)
@@ -86,13 +88,37 @@ public class PlayerMovement : MonoBehaviour
             var relative = (transform.position + cameraRelativeInput) - transform.position;
             var rot = Quaternion.LookRotation(relative, Vector3.up);
 
-            var turnSpeed = Input.GetButton("Run") ? runTurnSpeed : walkTurnSpeed;
-            rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            bool running = Input.GetButton("Run");
+
+            var turnSpeed = running ? runTurnSpeed : walkTurnSpeed;
 
             float angle = Quaternion.Angle(transform.rotation, rot);
             float rotationDirection = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(transform.forward, relative.normalized)));
 
-            if(angle < 1.0f) { rotationDirection = 0f; }
+            Debug.Log(angle);
+
+            if(angle > 140 && !running)
+            {
+                //Trigger a "180" turn
+                //rb.MoveRotation(rot);
+
+                doingBigTurn = true;
+                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
+                float newAngle = Quaternion.Angle(transform.rotation, rot);
+                if (newAngle < 15) { doingBigTurn = false; }
+            }
+            else if(doingBigTurn)
+            {
+                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
+                float newAngle = Quaternion.Angle(transform.rotation, rot);
+                if (newAngle < 15) { doingBigTurn = false; }
+            }
+            else
+            {
+                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
+            }
+
+            if (angle < 1.0f) { rotationDirection = 0f; }
             if(rotationDirection > 0f) { rotationDirection = 1f; }
             else if (rotationDirection < 0f) { rotationDirection = -1f; }
             Animate(rotationDirection, angle);
