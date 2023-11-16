@@ -44531,7 +44531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 5092241500026718029}
 --- !u!1001 &1549100247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61574,6 +61574,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oscar (Player)
       objectReference: {fileID: 0}
+    - target: {fileID: 4837792867932378996, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1488647691
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837792867932378996, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1093187803
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837792867932378996, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -2110865744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4837792867932378996, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 544056417
+      objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.575
@@ -61627,6 +61643,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+--- !u!1 &5092241500026718029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2832980219465188229, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+  m_PrefabInstance: {fileID: 5092241500026718028}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5365555646951790837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4585344726457252534, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
@@ -61783,7 +61804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2842962126169037391, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.309814
+      value: -14.309799
       objectReference: {fileID: 0}
     - target: {fileID: 3555202790239582676, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
       propertyPath: m_AnchorMax.x
@@ -61847,7 +61868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8470858554854631362, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -13.083252
+      value: -13.083237
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

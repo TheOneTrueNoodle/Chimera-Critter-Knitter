@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,16 +21,14 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Vector3 oldForward;
 
-    [SerializeField] private List<AudioClip> barks;
-    private AudioSource barkSource;
-    private int RandomiseBark;
+    private StudioEventEmitter barkSFX;
 
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
         anim = GetComponentInChildren<Animator>();
-        barkSource = GetComponent<AudioSource>();
+        barkSFX = GetComponent<StudioEventEmitter>();
 
         oldForward = transform.forward;
     }
@@ -57,29 +55,9 @@ public class PlayerMovement : MonoBehaviour
     private void Bark()
     {
         //Do bark code
-        if (barkSource.isPlaying) { return; }
-
-        if (RandomiseBark <= 0)
-        {
-            for(int i = 0; i < barks.Count - 1; i++)
-            {
-                var temp = barks[i];
-                int rand = Random.Range(i, barks.Count);
-                barks[i] = barks[rand];
-                barks[rand] = temp;
-            }
-            RandomiseBark = barks.Count;
-        }
-        else { RandomiseBark--; }
-
-        barkSource.clip = barks.First();
-
-        var bark = barks.First();
-        barks.RemoveAt(0);
-        barks.Add(bark);
-
+        if (barkSFX.IsPlaying()) { return; }
         anim.Play("Bark");
-        barkSource.Play();
+        barkSFX.Play();
     }
 
     private void Look()
