@@ -11,7 +11,7 @@ public class ScareFrog : MonoBehaviour
         {
             anim.Play("Jump");
             var rb = GetComponent<Rigidbody>();
-            rb.AddForce((Vector3.forward + Vector3.up) * 10, ForceMode.Impulse);
+            rb.AddForce((transform.forward + Vector3.up) * 10, ForceMode.Impulse);
         }
     }
 }
