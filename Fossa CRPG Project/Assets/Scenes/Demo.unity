@@ -1556,10 +1556,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 182b0dfd9eceae7479a548e4f188bf76, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 828002666}
+      addedObject: {fileID: 828002665}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 182b0dfd9eceae7479a548e4f188bf76, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 828002665}
+      addedObject: {fileID: 828002669}
   m_SourcePrefab: {fileID: 100100000, guid: 182b0dfd9eceae7479a548e4f188bf76, type: 3}
 --- !u!4 &250218744 stripped
 Transform:
@@ -1731,6 +1731,7 @@ MonoBehaviour:
   showDebuggingText: 0
   currentConvo: {fileID: 11400000, guid: 45de03d0b95b98041a3716439fab0e31, type: 2}
   index: 0
+  nodialogue: 1
 --- !u!1001 &359801706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4213,8 +4214,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &828002666
-MeshCollider:
+--- !u!135 &828002669
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4231,10 +4232,9 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6935877506589290101, guid: 182b0dfd9eceae7479a548e4f188bf76, type: 3}
+  serializedVersion: 3
+  m_Radius: 0.18284695
+  m_Center: {x: -0.0000000010029366, y: 0, z: 0.031750795}
 --- !u!1 &829663951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e692c224460e1d4780ac2c4fce84ae8, type: 3}
