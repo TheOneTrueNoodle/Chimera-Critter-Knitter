@@ -6,6 +6,7 @@ using FMODUnity;
 public class PlayerMovement : MonoBehaviour
 {
     private bool inCombat;
+    private bool inDialogue;
 
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         {
             CombatEvents.current.onStartCombat += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
+            CombatEvents.current.onStartDialogue += StartDialogue;
+            CombatEvents.current.onEndDialogue += EndDialogue;
         }
         anim = GetComponentInChildren<Animator>();
         Debug.Log(anim);
@@ -41,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (inCombat) { return; }
+        if (inCombat || inDialogue) { return; }
         GatherInput();
         Look();
     }
 
     private void FixedUpdate()
     {
-        if (inCombat) { return; }
+        if (inCombat || inDialogue) { return; }
         Move();
     }
 
@@ -171,5 +174,13 @@ public class PlayerMovement : MonoBehaviour
     private void EndCombat()
     {
         inCombat = false;
+    }
+    private void StartDialogue()
+    {
+        inDialogue = true;
+    }
+    private void EndDialogue()
+    {
+        inDialogue = false;
     }
 }

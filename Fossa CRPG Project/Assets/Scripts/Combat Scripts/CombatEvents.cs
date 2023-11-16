@@ -189,4 +189,22 @@ public class CombatEvents : MonoBehaviour
             onGetSelectedTile(overlayTile);
         }
     }
+
+    public event Action onStartDialogue;
+    public void StartDialogue()
+    {
+        if (onStartDialogue != null)
+        {
+            onStartDialogue();
+        }
+    }
+
+    public event Action onEndDialogue;
+    public void EndDialogue()
+    {
+        if (onEndDialogue != null)
+        {
+            onEndDialogue();
+        }
+    }
 }
