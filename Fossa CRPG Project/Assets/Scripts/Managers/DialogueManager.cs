@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
     public bool showDebuggingText;
     public Conversation currentConvo; //conversation with lines
     public int index = 0; //current line 
+    public bool nodialogue = true;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,7 @@ public class DialogueManager : MonoBehaviour
         gm = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         gd = GameObject.Find("GameData").GetComponent<GameData>();
 
+
         dialogueUI.SetActive(false);
     }
 
@@ -46,7 +48,7 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || index == 0) //on button press (space) or on 0 lines printed
+        if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
         {
             if (index == currentConvo.lines.Length && dialogueActive) //check if we've ran out of lines
             {
@@ -162,8 +164,10 @@ public class DialogueManager : MonoBehaviour
 
     public void beginDialogue()
     {
+        nodialogue = false;
         dialogueActive = true;
         dialogueUI.SetActive(true);
+
         CombatEvents.current.StartDialogue();
     }
 
