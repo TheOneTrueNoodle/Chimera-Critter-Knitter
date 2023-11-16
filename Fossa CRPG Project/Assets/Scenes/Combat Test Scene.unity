@@ -14639,7 +14639,7 @@ Transform:
   m_GameObject: {fileID: 479612633}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355955, y: 0.35354722, z: -0.14643173, w: 0.85355604}
-  m_LocalPosition: {x: -7.575, y: 7, z: -5.853}
+  m_LocalPosition: {x: -7.575, y: 6.723, z: -5.853}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -19101,6 +19101,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3828628643989766096, guid: 99e0cbb78efdfb24790a3bc547cd8f6d, type: 3}
   m_PrefabInstance: {fileID: 608657661}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &612918463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3395069883431573284, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+  m_PrefabInstance: {fileID: 744811841}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d926a5a0f70b3a64292caaecd9dc0aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &615119256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22562,6 +22573,66 @@ PrefabInstance:
     - target: {fileID: 5895896287976874769, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
       propertyPath: m_Name
       value: FROG
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: oneTimeInteraction.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 612918463}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 612918463}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Call
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Call
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScareFrog, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ScareFrog, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: enableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6155799864826623316, guid: 0d4419f314656c74fa8dc7935a8bfbd0, type: 3}
+      propertyPath: disableInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -44557,7 +44628,7 @@ Transform:
   m_GameObject: {fileID: 1545147364}
   serializedVersion: 2
   m_LocalRotation: {x: 0.35355955, y: 0.35354722, z: -0.14643173, w: 0.85355604}
-  m_LocalPosition: {x: -7.575, y: 7, z: -5.853}
+  m_LocalPosition: {x: -7.575, y: 6.723, z: -5.853}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61649,7 +61720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.723
       objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_LocalPosition.z
