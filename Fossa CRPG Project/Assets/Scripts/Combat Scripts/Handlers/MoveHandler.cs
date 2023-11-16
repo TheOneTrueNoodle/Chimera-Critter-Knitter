@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveHandler
 {
     private static int unitSpeed = 3;
-    private static int unitTurnSpeed = 360;
+    private static int unitTurnSpeed = 480;
     static private float animSmoothingSpeed = 2f;
     private float animSpeed;
     private float animRotation;

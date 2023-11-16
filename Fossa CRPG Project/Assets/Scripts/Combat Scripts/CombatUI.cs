@@ -18,6 +18,7 @@ public class CombatUI : MonoBehaviour
 
     [Header("Functionality")]
     [SerializeField] private RectTransform ActionUI;
+    [SerializeField] private Button MoveButton;
     [SerializeField] private RectTransform ExamineUI;
     [SerializeField] private RectTransform NeutralUI;
     [SerializeField] private GameObject cancelDisp;
@@ -27,6 +28,7 @@ public class CombatUI : MonoBehaviour
 
     private bool UIOpen;
     private bool actionActive;
+    private bool hasMoved;
     private OverlayTile selectedTile;
 
     private float currentDelay = 0;
@@ -66,12 +68,13 @@ public class CombatUI : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                if (abilityUI.activeInHierarchy)
+                if (abilityUI.activeInHierarchy && actionActive != true)
                 {
                     CloseAbilityUI();
                 }
                 else if(actionActive)
                 {
+                    CloseAbilityUI();
                     displayUI(selectedTile);
                     ChangeCursorMode(5);
                     actionActive = false;
@@ -99,7 +102,12 @@ public class CombatUI : MonoBehaviour
         {
             //Display Action UI
             ActionUI.gameObject.SetActive(true);
-            ActionUI.GetComponentInChildren<Button>().Select();
+            if (hasMoved)
+            {
+                MoveButton.interactable = false;
+                ActionUI.GetComponentsInChildren<Button>()[1].Select();
+            }
+            else { ActionUI.GetComponentInChildren<Button>().Select(); }
         }
         else
         {
@@ -110,9 +118,9 @@ public class CombatUI : MonoBehaviour
     }
     public void OpenUI()
     {
-        Debug.Log("Opening UI");
         UIOpen = true;
         ChangeCursorMode(5);
+
     }
     public void CloseUI()
     {
@@ -148,17 +156,21 @@ public class CombatUI : MonoBehaviour
     {
         foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
         CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID]);
+        actionActive = true;
     }
     private void ActionComplete()
     {
-        displayUI(selectedTile);
-        ChangeCursorMode(5);
+        hasMoved = true;
         actionActive = false;
+        displayUI(Char.activeTile);
+        ChangeCursorMode(5);
     }
 
     private void SetupCombatUI(Entity entity)
     {
         Char = entity;
+        hasMoved = false;
+        MoveButton.interactable = true;
 
         currentDelay = 0;
         UIOpen = false;

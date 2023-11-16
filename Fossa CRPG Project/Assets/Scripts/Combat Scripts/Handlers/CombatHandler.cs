@@ -56,6 +56,7 @@ public class CombatHandler : MonoBehaviour
 
     public void EndCombat()
     {
+        Debug.Log("Combat over");
         if (totalDroppedExp > 0)
         {
             totalDroppedExp /= playerTeam.Count;
