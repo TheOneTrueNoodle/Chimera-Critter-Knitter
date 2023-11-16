@@ -25,9 +25,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        CombatEvents.current.onStartCombat += StartCombat;
-        CombatEvents.current.onEndCombat += EndCombat;
+        if (CombatEvents.current != null)
+        {
+            CombatEvents.current.onStartCombat += StartCombat;
+            CombatEvents.current.onEndCombat += EndCombat;
+        }
         anim = GetComponentInChildren<Animator>();
+        Debug.Log(anim);
         barkSFX = GetComponent<StudioEventEmitter>();
 
         oldForward = transform.forward;

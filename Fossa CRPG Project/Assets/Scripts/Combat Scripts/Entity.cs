@@ -39,7 +39,10 @@ public class Entity : MonoBehaviour
 
     private void Start()
     {
-        CombatEvents.current.onEndCombat += EndCombat;
+        if (CombatEvents.current != null)
+        {
+            CombatEvents.current.onEndCombat += EndCombat;
+        }
         healthbar = GetComponentInChildren<Slider>();
     }
 
