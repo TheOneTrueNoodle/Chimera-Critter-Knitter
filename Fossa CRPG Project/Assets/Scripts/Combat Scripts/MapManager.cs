@@ -65,10 +65,7 @@ public class MapManager : MonoBehaviour
                 }
                 else
                 {
-                    var old = map[tileKey];
-                    map.Remove(tileKey);
-                    map.Add(tileKey, overlayTile);
-                    Destroy(old.gameObject);
+                    Destroy(overlayTile.gameObject);
                     Destroy(child.gameObject);
                 }
             }
