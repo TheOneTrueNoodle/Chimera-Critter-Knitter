@@ -38,9 +38,6 @@ public class CursorController : MonoBehaviour
     private AbilityData currentAbility;
     private List<OverlayTile> abilityArea = new List<OverlayTile>();
 
-    private float moveCursorDelay = 0.08f;
-    private float moveCursorDelayTimer;
-
     private bool UIMode;
     private OverlayTile UISelectedTile;
 
@@ -363,8 +360,6 @@ public class CursorController : MonoBehaviour
 
     private OverlayTile GetMovementInput()
     {
-        moveCursorDelayTimer -= Time.deltaTime;
-
         //Get ControlMode
         if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
@@ -394,8 +389,6 @@ public class CursorController : MonoBehaviour
                     pointer.transform.position = tileOutline.transform.position;
                 }
 
-                if (moveCursorDelayTimer > 0) { return null; }
-
                 Vector3 _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
                 if (_input != Vector3.zero)
                 {
@@ -417,10 +410,10 @@ public class CursorController : MonoBehaviour
                     var relative = (transform.position + cameraRelativeInput) - transform.position;
 
                     pointer.MovePosition(pointer.transform.position + (relative * _input.normalized.magnitude) * pointerSpeed * Time.deltaTime);
+                   
                     var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(pointer.transform.position.x, pointer.transform.position.y + 10f, pointer.transform.position.z), false);
                     if (overlayTile != null)
                     {
-                        moveCursorDelayTimer = moveCursorDelay;
                         return overlayTile;
                     }
                 }
@@ -437,7 +430,7 @@ public class CursorController : MonoBehaviour
         activeChar.StartTurn();
 
         transform.position = activeChar.activeTile.transform.position;
-        pointer.transform.position = Vector3.zero;
+        pointer.MovePosition(transform.position);
         tileOutline.transform.position = activeChar.activeTile.gameObject.transform.position;
         tileOutline.GetComponentInChildren<Canvas>().sortingOrder = activeChar.activeTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
 
