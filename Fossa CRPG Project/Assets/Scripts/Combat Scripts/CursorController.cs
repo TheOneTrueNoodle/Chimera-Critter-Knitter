@@ -8,6 +8,10 @@ public class CursorController : MonoBehaviour
 {
     public bool inCombat;
     public GameObject GFX;
+    public GameObject tileOutline;
+    public Rigidbody pointer;
+    public float pointerSpeed;
+    private bool usingMouse = false;
 
     public float unitSpeed;
     public Entity activeCharacter;
@@ -293,17 +297,6 @@ public class CursorController : MonoBehaviour
 
     #endregion
     #region functions
-    private OverlayTile GetCursorPosition()
-    {
-        OverlayTile overlayTile = GetMovementInput();
-        if (overlayTile != null)
-        {
-            transform.position = overlayTile.gameObject.transform.position;
-            gameObject.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
-        }
-
-        return overlayTile;
-    }
 
     private void GetInRangeTiles(int range, bool hideOccupiedTiles, bool includeOrigin)
     {
@@ -355,10 +348,21 @@ public class CursorController : MonoBehaviour
             return null;
         }
     }
+    private OverlayTile GetCursorPosition()
+    {
+        OverlayTile overlayTile = GetMovementInput();
+        if (overlayTile != null)
+        {
+            currentTile = overlayTile;
+            tileOutline.transform.position = overlayTile.gameObject.transform.position;
+            tileOutline.GetComponentInChildren<Canvas>().sortingOrder = overlayTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
+        }
+
+        return overlayTile;
+    }
 
     private OverlayTile GetMovementInput()
     {
-        bool usingMouse = false;
         moveCursorDelayTimer -= Time.deltaTime;
 
         //Get ControlMode
@@ -366,35 +370,62 @@ public class CursorController : MonoBehaviour
         {
             usingMouse = true;
         }
+        else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            usingMouse = false;
+        }
 
         switch (usingMouse)
         {
             case true:
                 var focusedTileHit = GetFocusedOnTile();
-                if (focusedTileHit.HasValue)
+                if (pointer.gameObject.activeInHierarchy) { pointer.gameObject.SetActive(false); }
+                if (focusedTileHit != null)
                 {
-                    currentTile = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
-                    return focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+                    var tileHit = focusedTileHit.Value.collider.gameObject.GetComponent<OverlayTile>();
+                    return tileHit;
                 }
                 break;
             case false:
+
+                if (!pointer.gameObject.activeInHierarchy)
+                {
+                    pointer.gameObject.SetActive(true);
+                    pointer.transform.position = tileOutline.transform.position;
+                }
+
                 if (moveCursorDelayTimer > 0) { return null; }
 
-                Vector3 _input;
-                _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-                if(_input == Vector3.zero && currentTile != null) { return currentTile; }
-
-                var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x + _input.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z + _input.z), false);
-                if (overlayTile != null)
+                Vector3 _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+                if (_input != Vector3.zero)
                 {
-                    currentTile = overlayTile;
-                    moveCursorDelayTimer = moveCursorDelay;
-                    return overlayTile;
+
+                    Vector3 forward = Camera.main.transform.forward;
+                    Vector3 right = Camera.main.transform.right;
+
+                    forward.y = 0;
+                    right.y = 0;
+                    forward.Normalize();
+                    right.Normalize();
+
+                    Vector3 RelativeVerticalInput = _input.z * forward;
+                    Vector3 RelativeHorizontalInput = _input.x * right;
+
+                    Vector3 cameraRelativeInput = RelativeVerticalInput + RelativeHorizontalInput;
+                    cameraRelativeInput.Normalize();
+
+                    var relative = (transform.position + cameraRelativeInput) - transform.position;
+
+                    pointer.MovePosition(pointer.transform.position + (relative * _input.normalized.magnitude) * pointerSpeed * Time.deltaTime);
+                    var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(pointer.transform.position.x, pointer.transform.position.y + 10f, pointer.transform.position.z), false);
+                    if (overlayTile != null)
+                    {
+                        moveCursorDelayTimer = moveCursorDelay;
+                        return overlayTile;
+                    }
                 }
                 break;
         }
-
         return null;
     }
     #endregion
@@ -404,6 +435,11 @@ public class CursorController : MonoBehaviour
         cursorMode = 1;
         activeCharacter = activeChar;
         activeChar.StartTurn();
+
+        transform.position = activeChar.activeTile.transform.position;
+        pointer.transform.position = Vector3.zero;
+        tileOutline.transform.position = activeChar.activeTile.gameObject.transform.position;
+        tileOutline.GetComponentInChildren<Canvas>().sortingOrder = activeChar.activeTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
 
         ClearRangeTiles();
 

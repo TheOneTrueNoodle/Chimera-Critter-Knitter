@@ -54,7 +54,6 @@ namespace Combat
                 }
             }
 
-            Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow);
             Debug.Log("They arent finding the tiles anymore...");
             return null;
         }
