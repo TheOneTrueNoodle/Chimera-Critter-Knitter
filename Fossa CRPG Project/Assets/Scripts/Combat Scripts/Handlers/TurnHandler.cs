@@ -6,7 +6,9 @@ using UnityEngine;
 public class TurnHandler
 {
     [SerializeField] private List<Entity> turnOrder;
+    [SerializeField] private List<Entity> activeTurnOrder;
     bool inCombat;
+    public int roundNumber;
 
     public void StartCombat(List<Entity> AllUnits)
     {
@@ -14,38 +16,52 @@ public class TurnHandler
         turnOrder = AllUnits;
         turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
 
-        CombatEvents.current.NewTurn(turnOrder.First());
+        activeTurnOrder = turnOrder;
+        CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 
     public void EndCombat()
     {
         inCombat = false;
         turnOrder.Clear();
+        activeTurnOrder.Clear();
     }
 
     public void nextTurn()
     {
         if (!inCombat) { return; }
-        var lastTurn = turnOrder.First();
-        turnOrder.RemoveAt(0);
-        turnOrder.Add(lastTurn);
+        var lastTurn = activeTurnOrder.First();
+        activeTurnOrder.RemoveAt(0);
 
-        CombatEvents.current.NewTurn(turnOrder.First());
+        if(activeTurnOrder.Count == 0)
+        {
+            //NEW ROUND
+            NewRound();
+        }
+
+        CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 
     public void AddUnitToTurnOrder(Entity entity)
     {
         turnOrder.Add(entity);
+        turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
     }
 
     public IEnumerator DelayedTurnEnd()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         nextTurn();
     }
 
     public void UnitDeath(Entity target)
     {
         turnOrder.Remove(target);
+    }
+
+    public void NewRound()
+    {
+        roundNumber++;
+        activeTurnOrder = turnOrder;
     }
 }

@@ -8,7 +8,14 @@ public class CombatEvents : MonoBehaviour
 
     private void Awake()
     {
-        current = this;
+        if(current != null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public event Action onStartCombat;
@@ -187,24 +194,6 @@ public class CombatEvents : MonoBehaviour
         if (onGetSelectedTile != null)
         {
             onGetSelectedTile(overlayTile);
-        }
-    }
-
-    public event Action onStartDialogue;
-    public void StartDialogue()
-    {
-        if (onStartDialogue != null)
-        {
-            onStartDialogue();
-        }
-    }
-
-    public event Action onEndDialogue;
-    public void EndDialogue()
-    {
-        if (onEndDialogue != null)
-        {
-            onEndDialogue();
         }
     }
 }

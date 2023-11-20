@@ -142,7 +142,7 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
         dialogueUI.SetActive(false);
         index = 0;
-        CombatEvents.current.EndDialogue();
+        DialogueEvents.current.EndDialogue();
 
     }
 
@@ -169,7 +169,7 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = true;
         dialogueUI.SetActive(true);
 
-        CombatEvents.current.StartDialogue();
+        DialogueEvents.current.StartDialogue();
     }
 
     private void transitionToBattle()
