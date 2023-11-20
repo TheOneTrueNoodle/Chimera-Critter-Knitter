@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CombatEvents.current != null)
         {
-            CombatEvents.current.onStartCombat += StartCombat;
+            CombatEvents.current.onStartCombatSetup += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
             DialogueEvents.current.onStartDialogue += StartDialogue;
             DialogueEvents.current.onEndDialogue += EndDialogue;

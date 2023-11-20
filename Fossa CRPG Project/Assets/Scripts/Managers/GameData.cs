@@ -103,6 +103,5 @@ public class GameData : MonoBehaviour
 
         SaveGameStatus();
         Debug.Log("Set to default game status");
-
     }
 }

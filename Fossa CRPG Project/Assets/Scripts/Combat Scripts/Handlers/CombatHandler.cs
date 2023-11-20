@@ -15,8 +15,8 @@ public class CombatHandler : MonoBehaviour
 
     //Unit Teams
     public List<Entity> playerTeam;
-    public List<Entity> enemyTeam;
-    public List<Entity> otherTeam;
+    public List<CombatAIController> enemyTeam;
+    public List<CombatAIController> otherTeam;
 
     //Dropped Loot after combat
     //List of dropped items
@@ -41,7 +41,7 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
-    public void StartCombat()
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others)
     {
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
@@ -49,7 +49,7 @@ public class CombatHandler : MonoBehaviour
         if (unitHandler == null) { unitHandler = new UnitHandler(); }
         if (tileHandler == null) { tileHandler = new TileHandler(); }
 
-        turnHandler.StartCombat(FindAllUnits());
+        turnHandler.StartCombat(FindAllActiveUnits(enemies, others));
 
         totalDroppedExp = 0;
     }
@@ -143,7 +143,7 @@ public class CombatHandler : MonoBehaviour
         totalDroppedExp += Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
         if (target.TeamID == 1)
         {
-            enemyTeam.Remove(target);
+            enemyTeam.Remove(target.GetComponent<CombatAIController>());
             if (enemyTeam.Count <= 0)
             {
                 EndCombat();
@@ -182,36 +182,26 @@ public class CombatHandler : MonoBehaviour
     #endregion
 
     #region Initialization
-    private List<Entity> FindAllUnits()
+    private List<Entity> FindAllActiveUnits(List<CombatAIController> enemies, List<CombatAIController> others)
     {
         var ReturnUnits = new List<Entity>();
 
         var UnitsUnsorted = FindObjectsOfType<Entity>();
         playerTeam = new List<Entity>();
-        enemyTeam = new List<Entity>();
-        otherTeam = new List<Entity>();
+        enemyTeam = enemies;
+        otherTeam = others;
 
         foreach (var item in UnitsUnsorted)
         {
-            item.Initialize();
-            ReturnUnits.Add(item);
-
             if (item.TeamID == 0)
             {
+                item.Initialize();
+                ReturnUnits.Add(item);
                 playerTeam.Add(item);
-            }
-            else if (item.TeamID == 1)
-            {
-                enemyTeam.Add(item);
-            }
-            else
-            {
-                otherTeam.Add(item);
             }
         }
 
-        List<CombatAIController> ai = new List<CombatAIController>(FindObjectsOfType<CombatAIController>());
-        foreach (CombatAIController enemy in ai)
+        foreach (CombatAIController enemy in enemyTeam)
         {
             enemy.InitializeCombat(playerTeam);
         }
@@ -262,11 +252,12 @@ public class CombatHandler : MonoBehaviour
         }
         else if (entity.TeamID == 1)
         {
-            enemyTeam.Add(entity);
+            
+            enemyTeam.Add(entity.GetComponent<CombatAIController>());
         }
         else
         {
-            otherTeam.Add(entity);
+            otherTeam.Add(entity.GetComponent<CombatAIController>());
         }
     }
     #endregion

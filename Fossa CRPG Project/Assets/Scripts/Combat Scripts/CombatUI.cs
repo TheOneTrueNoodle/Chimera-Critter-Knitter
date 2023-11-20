@@ -38,7 +38,7 @@ public class CombatUI : MonoBehaviour
     private void Start()
     {
         CombatEvents.current.onNewTurn += SetupCombatUI;
-        CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
         CombatEvents.current.onGetSelectedTile += displayUI;

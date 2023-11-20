@@ -19,7 +19,7 @@ public class InteractionTrigger : MonoBehaviour
 
     private void Start()
     {
-        CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
     }
 

@@ -179,8 +179,7 @@ public class DialogueManager : MonoBehaviour
         //SceneManager.LoadScene(1);
 
         Debug.Log("Beginning Combat");
-        CombatEvents.current.StartCombat();
-
+        //CombatEvents.current.StartCombat();
     }
 
 }

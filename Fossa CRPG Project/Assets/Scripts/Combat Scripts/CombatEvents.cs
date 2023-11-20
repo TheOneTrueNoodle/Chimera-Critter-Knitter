@@ -14,16 +14,25 @@ public class CombatEvents : MonoBehaviour
         }
         else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
-    public event Action onStartCombat;
-    public void StartCombat()
+    public event Action<List<CombatAIController>, List<CombatAIController>> onStartCombat;
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others)
     {
         if (onStartCombat != null)
         {
-            onStartCombat();
+            onStartCombat(enemies, others);
+        }
+    }
+
+    public event Action onStartCombatSetup;
+    public void StartCombatSetup()
+    {
+        if(onStartCombatSetup != null)
+        {
+            onStartCombatSetup();
         }
     }
 
