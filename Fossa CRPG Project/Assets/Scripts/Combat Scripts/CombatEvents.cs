@@ -8,22 +8,15 @@ public class CombatEvents : MonoBehaviour
 
     private void Awake()
     {
-        if(current != null)
-        {
-            current = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        current = this;
     }
 
-    public event Action<List<CombatAIController>, List<CombatAIController>> onStartCombat;
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others)
+    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>> onStartCombat;
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
     {
         if (onStartCombat != null)
         {
-            onStartCombat(enemies, others);
+            onStartCombat(enemies, others, RoundEvents);
         }
     }
 

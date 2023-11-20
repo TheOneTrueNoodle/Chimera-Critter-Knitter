@@ -7,6 +7,7 @@ using System;
 public class InteractionTrigger : MonoBehaviour
 {
     private bool inCombat;
+    public bool oneTimeUse;
 
     public GameObject inputUI;
 
@@ -25,10 +26,10 @@ public class InteractionTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (inCombat) { return; }
+        if (inCombat || !other.gameObject.CompareTag("Player")) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
-            if(oneTimeInteraction != null)
+            if(oneTimeUse == true)
             {
                 oneTimeInteraction.Invoke();
                 used = true;

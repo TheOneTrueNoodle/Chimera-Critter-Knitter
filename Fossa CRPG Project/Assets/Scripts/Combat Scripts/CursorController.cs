@@ -99,6 +99,7 @@ public class CursorController : MonoBehaviour
                 break;
         }
 
+        Debug.Log("Action Active: " + actionActive + " | Overlay Tile: " + overlayTile.grid2DLocation);
         if ((Input.GetButtonDown("Submit") || Input.GetMouseButtonDown(0)) && overlayTile != null && actionActive)
         {
             TileClicked(overlayTile);
@@ -410,13 +411,13 @@ public class CursorController : MonoBehaviour
                     var relative = (transform.position + cameraRelativeInput) - transform.position;
 
                     pointer.MovePosition(pointer.transform.position + (relative * _input.normalized.magnitude) * pointerSpeed * Time.deltaTime);
-                   
-                    var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(pointer.transform.position.x, pointer.transform.position.y + 10f, pointer.transform.position.z), false);
-                    if (overlayTile != null)
-                    {
-                        return overlayTile;
-                    }
                 }
+                var overlayTile = tileFunctions.GetSingleFocusedOnTile(new Vector3(pointer.transform.position.x, pointer.transform.position.y + 10f, pointer.transform.position.z), false);
+                if (overlayTile != null)
+                {
+                    return overlayTile;
+                }
+
                 break;
         }
         return null;

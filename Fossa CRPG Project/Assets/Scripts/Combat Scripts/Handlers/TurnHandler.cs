@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class TurnHandler
 {
+    public int roundNumber;
+
     [SerializeField] private List<Entity> turnOrder;
     [SerializeField] private List<Entity> activeTurnOrder;
+    private List<CombatRoundEventData> roundEvents;
+
     bool inCombat;
-    public int roundNumber;
 
     public void StartCombat(List<Entity> AllUnits)
     {
@@ -16,7 +19,21 @@ public class TurnHandler
         turnOrder = AllUnits;
         turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
 
-        activeTurnOrder = turnOrder;
+        activeTurnOrder = new List<Entity>();
+        foreach(Entity entity in turnOrder) { activeTurnOrder.Add(entity); }
+        roundNumber = 0;
+
+        if(roundEvents != null)
+        {
+            foreach (CombatRoundEventData Event in roundEvents)
+            {
+                if (Event.RoundTrigger == roundNumber)
+                {
+                    //Trigger Event
+                }
+            }
+        }
+
         CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 
@@ -38,8 +55,7 @@ public class TurnHandler
             //NEW ROUND
             NewRound();
         }
-
-        CombatEvents.current.NewTurn(activeTurnOrder.First());
+        else { CombatEvents.current.NewTurn(activeTurnOrder.First()); }
     }
 
     public void AddUnitToTurnOrder(Entity entity)
@@ -62,6 +78,20 @@ public class TurnHandler
     public void NewRound()
     {
         roundNumber++;
-        activeTurnOrder = turnOrder;
+        activeTurnOrder.Clear();
+        foreach (Entity entity in turnOrder) { activeTurnOrder.Add(entity); }
+
+        if (roundEvents != null)
+        {
+            foreach (CombatRoundEventData Event in roundEvents)
+            {
+                if (Event.RoundTrigger == roundNumber)
+                {
+                    //Trigger Event
+                }
+            }
+        }
+
+        CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 }

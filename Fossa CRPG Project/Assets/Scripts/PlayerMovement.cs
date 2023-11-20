@@ -32,8 +32,11 @@ public class PlayerMovement : MonoBehaviour
         {
             CombatEvents.current.onStartCombatSetup += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
-            DialogueEvents.current.onStartDialogue += StartDialogue;
-            DialogueEvents.current.onEndDialogue += EndDialogue;
+            if(DialogueEvents.current != null)
+            {
+                DialogueEvents.current.onStartDialogue += StartDialogue;
+                DialogueEvents.current.onEndDialogue += EndDialogue;
+            }
         }
         anim = GetComponentInChildren<Animator>();
         Debug.Log(anim);

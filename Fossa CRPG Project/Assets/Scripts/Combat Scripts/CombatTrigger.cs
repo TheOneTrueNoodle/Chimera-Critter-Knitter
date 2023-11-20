@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class CombatTrigger : MonoBehaviour
 {
+    public string CombatName;
     public List<CombatAIController> EnemiesInThisCombat;
     public List<CombatAIController> OtherEntitiesInThisCombat;
-    //A list of the combat round events that will trigger
+    public List<CombatRoundEventData> RoundEvents;
 
     public void Call()
     {
-        CombatEvents.current.StartCombat(EnemiesInThisCombat, OtherEntitiesInThisCombat);
+        CombatEvents.current.StartCombat(EnemiesInThisCombat, OtherEntitiesInThisCombat, RoundEvents);
+        CombatEvents.current.StartCombatSetup();
     }
 }

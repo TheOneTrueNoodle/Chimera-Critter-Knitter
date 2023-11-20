@@ -41,7 +41,7 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others)
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
     {
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
@@ -203,9 +203,19 @@ public class CombatHandler : MonoBehaviour
 
         foreach (CombatAIController enemy in enemyTeam)
         {
+            enemy.Initialize();
             enemy.InitializeCombat(playerTeam);
+            ReturnUnits.Add(enemy);
         }
 
+        /*
+        foreach (CombatAIController other in otherTeam)
+        {
+            other.InitializeCombat(playerTeam);
+            ReturnUnits.Add(other);
+        }*/
+
+        Debug.Log(ReturnUnits.Count);
         return ReturnUnits;
     }
 
