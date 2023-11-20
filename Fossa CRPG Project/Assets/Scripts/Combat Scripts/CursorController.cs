@@ -99,7 +99,6 @@ public class CursorController : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Action Active: " + actionActive + " | Overlay Tile: " + overlayTile.grid2DLocation);
         if ((Input.GetButtonDown("Submit") || Input.GetMouseButtonDown(0)) && overlayTile != null && actionActive)
         {
             TileClicked(overlayTile);
