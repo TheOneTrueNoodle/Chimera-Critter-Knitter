@@ -90,7 +90,7 @@ public class CombatAIController : Entity
         else
         {
             //we're moving
-            StartCoroutine(Move(path));
+            CombatEvents.current.MoveAttempt(this, path);
         }
     }
 
@@ -379,34 +379,14 @@ public class CombatAIController : Entity
         activeTile.activeCharacter = this;
     }
     public void CharacterMoved()
-    {//Once a character has finished moving, check if a attack/ability is available and do it. Otherwise, end turn
+    {
+        //Once a character has finished moving, check if a attack/ability is available and do it. Otherwise, end turn
         if (bestScenario != null && (bestScenario.targetTile != null || bestScenario.targetAbility != null))
             Attack();
         else
             CombatEvents.current.TurnEnd();
     }
     #endregion
-    private IEnumerator Move(List<OverlayTile> path)
-    {
-        yield return new WaitForSeconds(0.25f);
-        while (path.Count != 0)
-        {
-            var step = 5 * Time.deltaTime;
-            var zIndex = path[0].transform.position.z;
-            transform.position = Vector2.MoveTowards(transform.position, path[0].transform.position, step);
-            transform.position = new Vector3(transform.position.x, transform.position.y, zIndex);
-
-            if (Vector2.Distance(transform.position, path[0].transform.position) < 0.0001f)
-            {
-                PositionCharacterOnTile(path[0]);
-                path.RemoveAt(0);
-            }
-
-            yield return new WaitForSeconds(Time.deltaTime);
-        }
-
-        CharacterMoved();
-    }
     private void Attack()
     {
         //If we can attack, we attack, if we have an ability, cast the ability

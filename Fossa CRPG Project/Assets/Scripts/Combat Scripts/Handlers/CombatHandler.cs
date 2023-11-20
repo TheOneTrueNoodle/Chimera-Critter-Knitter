@@ -57,6 +57,8 @@ public class CombatHandler : MonoBehaviour
     public void EndCombat()
     {
         Debug.Log("Combat over");
+        Debug.Log("Player Number: " + playerTeam.Count);
+        Debug.Log("EXP: " + totalDroppedExp);
         if (totalDroppedExp > 0)
         {
             totalDroppedExp /= playerTeam.Count;
@@ -74,10 +76,16 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.EndCombat();
     }
 
+    public IEnumerator DelayedTurnEnd()
+    {
+        yield return new WaitForSeconds(0.5f);
+        CombatEvents.current.TurnEnd();
+    }
+
     public void TurnEnd()
     {
         tileHandler.ClearTiles();
-        StartCoroutine(turnHandler.DelayedTurnEnd());
+        turnHandler.nextTurn();
     }
 
     #region Combat Interactions
@@ -90,22 +98,23 @@ public class CombatHandler : MonoBehaviour
     public void AttackAttempt(Entity attacker, Entity target)
     {
         int damage = actionHandler.Attack(attacker, target);
-        if (damage > 0)
+        if (damage > 0 && !target.isDead)
         {
             unitHandler.UnitSufferDamage(target, damage);
         }
 
         DisplayDamageText(damage, target, attacker.AttackDamageType);
-        CombatEvents.current.TurnEnd();
+        StartCoroutine(DelayedTurnEnd());
     }
 
     public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability)
     {
         List<Entity> affectedTargets = actionHandler.CalculateAbilityTargets(attacker, ability.abilityType, targets);
+        Debug.Log(affectedTargets.Count);
 
         foreach (Entity target in affectedTargets)
         {
-            int damage = actionHandler.Ability(attacker, target, ability);
+            int abilityDamage = actionHandler.Ability(attacker, target, ability);
             int physicalDamage = 0;
 
             if (ability.addMeleeAttack)
@@ -121,22 +130,25 @@ public class CombatHandler : MonoBehaviour
                     unitHandler.UnitSufferEffect(target, effect);
             }
 
-            if (physicalDamage > 0)
+            if (physicalDamage > 0 && !target.isDead)
             {
                 unitHandler.UnitSufferDamage(target, physicalDamage);
                 DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
+                Debug.Log("Displayed Phys Damage: " + physicalDamage);
             }
-
-            unitHandler.UnitSufferAbility(target, ability, damage);
-            DisplayDamageText(damage, target, ability.damageType);
+            if(abilityDamage > 0 && !target.isDead)
+            {
+                unitHandler.UnitSufferAbility(target, ability, abilityDamage);
+                DisplayDamageText(abilityDamage, target, ability.damageType);
+                Debug.Log("Displayed Abil Damage: " + abilityDamage);
+            }
         }
 
-        CombatEvents.current.TurnEnd();
+        StartCoroutine(DelayedTurnEnd());
     }
 
     public void UnitDeath(Entity target)
     {
-        unitHandler.UnitDeath(target);
         turnHandler.UnitDeath(target);
 
         //Find dropped items
@@ -144,10 +156,11 @@ public class CombatHandler : MonoBehaviour
         if (target.TeamID == 1)
         {
             enemyTeam.Remove(target.GetComponent<CombatAIController>());
-            if (enemyTeam.Count <= 0)
-            {
-                EndCombat();
-            }
+        }
+
+        if (enemyTeam.Count <= 0)
+        {
+            EndCombat();
         }
     }
 
@@ -215,7 +228,6 @@ public class CombatHandler : MonoBehaviour
             ReturnUnits.Add(other);
         }*/
 
-        Debug.Log(ReturnUnits.Count);
         return ReturnUnits;
     }
 

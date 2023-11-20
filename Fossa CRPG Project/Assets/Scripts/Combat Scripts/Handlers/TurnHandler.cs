@@ -64,15 +64,10 @@ public class TurnHandler
         turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
     }
 
-    public IEnumerator DelayedTurnEnd()
-    {
-        yield return new WaitForSeconds(0.5f);
-        nextTurn();
-    }
-
     public void UnitDeath(Entity target)
     {
         turnOrder.Remove(target);
+        activeTurnOrder.Remove(target);
     }
 
     public void NewRound()

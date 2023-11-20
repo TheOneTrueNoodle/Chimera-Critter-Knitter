@@ -443,7 +443,6 @@ public class CursorController : MonoBehaviour
 
     private void SetCursorMode(int mode, AbilityData abilityData)
     {
-        Debug.Log("Changed Cursor Mode to " + mode);
         ClearRangeTiles();
         if (abilityArea.Count > 0)
         {

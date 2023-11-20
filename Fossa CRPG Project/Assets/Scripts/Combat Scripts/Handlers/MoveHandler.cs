@@ -16,8 +16,6 @@ public class MoveHandler
     {
         while (path.Count != 0)
         {
-            var step = unitSpeed * Time.deltaTime;
-            var zIndex = path[0].transform.position.z;
             Look(entity, path[0].transform.position, false);
             Move(entity);
 
@@ -32,36 +30,41 @@ public class MoveHandler
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        if (path.Count == 0)
+        var anim = entity.GetComponentInChildren<Animator>();
+
+        while (animSpeed != 0 || animRotation != 0)
         {
-            var anim = entity.GetComponentInChildren<Animator>();
-
-            while (animSpeed != 0 || animRotation != 0)
+            if (entity.GetComponentInChildren<Animator>() != null) { Look(entity, entity.transform.forward, true); }
+            else
             {
-                if (entity.GetComponentInChildren<Animator>() != null) { Look(entity, entity.transform.forward, true); }
-                else
-                {
-                    animSpeed = 0;
-                    animRotation = 0;
-                }
-
-                if (animSpeed > -0.1 && animSpeed < 0.1)
-                {
-                    animSpeed = 0;
-                    anim.SetFloat("Speed", animSpeed);
-                }
-
-                if (animRotation > -0.1 && animRotation < 0.1)
-                {
-                    animRotation = 0;
-                    anim.SetFloat("Rotation", animRotation);
-                }
+                animSpeed = 0;
+                animRotation = 0;
             }
 
-            CombatEvents.current.TilePositionEntity(entity, finalTile);
-            CombatEvents.current.ActionComplete(); 
+            if (animSpeed > -0.1 && animSpeed < 0.1)
+            {
+                animSpeed = 0;
+                anim.SetFloat("Speed", animSpeed);
+            }
+
+            if (animRotation > -0.1 && animRotation < 0.1)
+            {
+                animRotation = 0;
+                anim.SetFloat("Rotation", animRotation);
+            }
+        }
+
+        CombatEvents.current.TilePositionEntity(entity, finalTile);
+        if(entity.TeamID == 0)
+        {
+            CombatEvents.current.ActionComplete();
+        }
+        else
+        {
+            entity.GetComponent<CombatAIController>().CharacterMoved();
         }
     }
+
     private void Move(Entity entity)
     {
         Rigidbody rb = entity.gameObject.GetComponent<Rigidbody>();

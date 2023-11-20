@@ -51,24 +51,12 @@ public class TileHandler
 
     public void PositionCharacterOnTile(Entity entity, OverlayTile tile)
     {
-        if (entity.activeTile != null && entity.activeTile != tile)
+        Debug.Log(entity.activeTile);
+        if (entity.activeTile != null)
         {
             entity.activeTile.isBlocked = false;
             entity.activeTile.activeCharacter = null;
         }
-        /*
-        if (entity.subTileSpaces != null)
-        {
-            foreach (EntitySubTile SubTile in entity.subTileSpaces)
-            {
-                if (SubTile.subTile != null)
-                {
-                    SubTile.subTile.isBlocked = false;
-                    SubTile.subTile.blockingChar = null;
-                    SubTile.assignSubTile();
-                }
-            }
-        }*/
 
         entity.transform.position = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - 0.0001f, tile.gameObject.transform.position.z);
         entity.activeTile = tile;
