@@ -17,6 +17,7 @@ public class CombatHandler : MonoBehaviour
     public List<Entity> playerTeam;
     public List<CombatAIController> enemyTeam;
     public List<CombatAIController> otherTeam;
+    public List<CombatObstacle> obstacles;
 
     //Dropped Loot after combat
     //List of dropped items
@@ -100,10 +101,21 @@ public class CombatHandler : MonoBehaviour
         int damage = actionHandler.Attack(attacker, target);
         if (damage > 0 && !target.isDead)
         {
-            unitHandler.UnitSufferDamage(target, damage);
+            if(target.TryGetComponent(out CombatObstacle obstacle))
+            {
+                if (obstacle.Destructable)
+                {
+                    unitHandler.UnitSufferDamage(target, damage);
+                    DisplayDamageText(damage, target, attacker.AttackDamageType);
+                }
+            }
+            else
+            {
+                unitHandler.UnitSufferDamage(target, damage);
+                DisplayDamageText(damage, target, attacker.AttackDamageType);
+            }
         }
 
-        DisplayDamageText(damage, target, attacker.AttackDamageType);
         StartCoroutine(DelayedTurnEnd());
     }
 
@@ -211,6 +223,11 @@ public class CombatHandler : MonoBehaviour
                 item.Initialize();
                 ReturnUnits.Add(item);
                 playerTeam.Add(item);
+            }
+            else if (item.TeamID == -1)
+            {
+                item.Initialize();
+                obstacles.Add(item.GetComponent<CombatObstacle>());
             }
         }
 

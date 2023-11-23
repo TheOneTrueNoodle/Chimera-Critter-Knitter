@@ -2946,7 +2946,7 @@ Transform:
   m_GameObject: {fileID: 82987785}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.443, y: 0.2, z: -0.861}
+  m_LocalPosition: {x: 4.08, y: 0.2, z: -0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49663,6 +49663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1578608817}
+  - component: {fileID: 1578608818}
   - component: {fileID: 1578608815}
   - component: {fileID: 1578608814}
   m_Layer: 0
@@ -49728,6 +49729,32 @@ Transform:
   - {fileID: 1076488383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1578608818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578608813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9967a6f27f2cbd74582858aa22ff2557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTile: {fileID: 0}
+  CharacterData: {fileID: 11400000, guid: d30b83cd877672847881e44a7678e860, type: 2}
+  myTurn: 0
+  isDead: 0
+  TeamID: -1
+  isDefending: 0
+  activeAbilities: []
+  Resistances: 
+  Weaknesses: 
+  AttackDamageType: 0
+  WeaponRange: 0
+  level: 1
+  exp: 0
+  Destructable: 1
 --- !u!1001 &1582601476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66986,6 +67013,10 @@ PrefabInstance:
     - target: {fileID: 564090088704682113, guid: 82d01c2aec746ac419a312ed6a9d9def, type: 3}
       propertyPath: Interaction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 660270156841249823, guid: 82d01c2aec746ac419a312ed6a9d9def, type: 3}
+      propertyPath: m_Radius
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1068252482469436220, guid: 82d01c2aec746ac419a312ed6a9d9def, type: 3}
       propertyPath: m_Name
