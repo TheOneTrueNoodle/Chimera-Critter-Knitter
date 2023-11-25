@@ -6,12 +6,8 @@ using TMPro;
 public class CombatUI : MonoBehaviour
 {
     [Header("Unit Information Display")]
-    public Image portrait;
-    public TMP_Text Name;
-    public Slider HPBar;
-    public TMP_Text HPText;
-    public Slider SPBar;
-    public TMP_Text SPText;
+    public UnitInfoUI currentUnitUI;
+    public UnitInfoUI selectedUnitUI;
 
     private Entity Char;
     private bool started;
@@ -35,6 +31,8 @@ public class CombatUI : MonoBehaviour
     private float currentDelay = 0;
     private static float delay = 0.2f;
 
+    private CursorController cursor;
+
     private void Start()
     {
         CombatEvents.current.onNewTurn += SetupCombatUI;
@@ -42,6 +40,8 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
         CombatEvents.current.onGetSelectedTile += displayUI;
+
+        cursor = FindObjectOfType<CursorController>();
     }
 
     private void Update()
@@ -52,7 +52,7 @@ public class CombatUI : MonoBehaviour
             currentDelay -= Time.deltaTime;
             return;
         }
-        UpdateUI();
+        UpdateInformationUI();
         GetActionInput();
     }
 
@@ -198,17 +198,33 @@ public class CombatUI : MonoBehaviour
         rectTransform.gameObject.SetActive(true);
         rectTransform.transform.position = new Vector2(mousePos.x + rectTransform.sizeDelta.x, mousePos.y);
     }
-    public void UpdateUI()
+    public void UpdateInformationUI()
     {
         if (!started) { return; }
-        portrait.sprite = Char.CharacterData.portrait;
-        Name.text = Char.CharacterData.Name;
-        HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
-        HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
-        HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
-        SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
-        SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
-        SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+        var selectedTile = cursor.currentTile;
+
+        currentUnitUI.UpdateUI(Char);
+
+        if (selectedTile != null)
+        {
+            if(selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
+            {
+                //Display ui of selected character
+                selectedUnitUI.UpdateUI(selectedTile.activeCharacter);
+                if (!selectedUnitUI.gameObject.activeInHierarchy)
+                {
+                    selectedUnitUI.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                //Hide unit UI
+                if (selectedUnitUI.gameObject.activeInHierarchy)
+                {
+                    selectedUnitUI.gameObject.SetActive(false);
+                }
+            }
+        }
     }
     private void StartCombat()
     {

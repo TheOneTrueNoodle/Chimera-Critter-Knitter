@@ -107,6 +107,7 @@ public class Entity : MonoBehaviour
         var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z), true);
         CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         updateHealthBar();
+        gameObject.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     private void EndCombat()
@@ -114,6 +115,7 @@ public class Entity : MonoBehaviour
         healthbar.gameObject.SetActive(false);
         activeTile = null;
         UpdateStats();
+        gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
     #endregion
 
