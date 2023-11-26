@@ -18,5 +18,5 @@ public class Conversation : ScriptableObject
     public Line[] lines;
     public Choice choice;
     public bool fightBegin;
-    public CombatTrigger battle;
+    public string combatName;
 }

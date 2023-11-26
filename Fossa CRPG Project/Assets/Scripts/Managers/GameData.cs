@@ -11,7 +11,7 @@ public struct GameStatus
     //all data to be stored
     public bool clickedButton;
     public Vector3 playerPosition;
-    public Battle nextFight;
+    public string nextFight;
 
     public int health;
     public int stress;
@@ -98,8 +98,6 @@ public class GameData : MonoBehaviour
         currentGameStatus.stress = 30;
         currentGameStatus.maxHealth = 10;
         currentGameStatus.maxStress = 30;
-
-        Battle nextFight = null;
 
         SaveGameStatus();
         Debug.Log("Set to default game status");

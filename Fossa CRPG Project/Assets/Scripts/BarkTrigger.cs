@@ -5,6 +5,7 @@ using UnityEngine;
 public class BarkTrigger : MonoBehaviour
 {
     private bool inCombat;
+    private bool inDialogue;
 
     private bool used = false;
     public Interaction oneTimeInteraction;
@@ -17,11 +18,13 @@ public class BarkTrigger : MonoBehaviour
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
+        DialogueEvents.current.onStartDialogue += StartDialogue;
+        DialogueEvents.current.onEndDialogue += EndDialogue;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (inCombat) { return; }
+        if (inCombat || inDialogue) { return; }
         if (Input.GetButton("Bark") && !used)
         {
             if (oneTimeInteraction != null)
@@ -51,5 +54,13 @@ public class BarkTrigger : MonoBehaviour
     private void EndCombat()
     {
         inCombat = false;
+    }
+    private void StartDialogue()
+    {
+        inDialogue = true;
+    }
+    private void EndDialogue()
+    {
+        inDialogue = false;
     }
 }

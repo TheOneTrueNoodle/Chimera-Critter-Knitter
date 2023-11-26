@@ -7,6 +7,7 @@ using System;
 public class InteractionTrigger : MonoBehaviour
 {
     private bool inCombat;
+    private bool inDialogue;
     public bool oneTimeUse;
 
     public GameObject inputUI;
@@ -22,11 +23,13 @@ public class InteractionTrigger : MonoBehaviour
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
+        DialogueEvents.current.onStartDialogue += StartDialogue;
+        DialogueEvents.current.onEndDialogue += EndDialogue;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (inCombat || !other.gameObject.CompareTag("Player")) { return; }
+        if (inCombat|| inDialogue || !other.gameObject.CompareTag("Player")) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
             if(oneTimeUse == true)
@@ -52,7 +55,7 @@ public class InteractionTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (inCombat || inDialogue || other.gameObject.CompareTag("Player"))
         {
             //SHOW UI
             inputUI.SetActive(true);
@@ -61,7 +64,7 @@ public class InteractionTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (inCombat || inDialogue || other.gameObject.CompareTag("Player"))
         {
             //HIDE UI
             inputUI.SetActive(false);
@@ -74,6 +77,14 @@ public class InteractionTrigger : MonoBehaviour
     private void EndCombat()
     {
         inCombat = false;
+    }
+    private void StartDialogue()
+    {
+        inDialogue = true;
+    }
+    private void EndDialogue()
+    {
+        inDialogue = false;
     }
 }
 

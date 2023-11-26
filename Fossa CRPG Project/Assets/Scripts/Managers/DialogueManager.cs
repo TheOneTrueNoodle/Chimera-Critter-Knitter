@@ -15,10 +15,11 @@ public class DialogueManager : MonoBehaviour
     public GameObject textBoxTarget; //target parent
     public GameObject previousLine; //previous textbox
 
-    private GameObject contentHolder; //Content
-    private GameObject dialogueUI;
-    private GameObject spriteHolder;
-    private ScrollRect dialogueScroll;
+    [Header("UI Variables")]
+    [SerializeField] private GameObject contentHolder; //Content
+    [SerializeField] private GameObject dialogueUI;
+    [SerializeField] private GameObject spriteHolder;
+    [SerializeField] private ScrollRect dialogueScroll;
 
     [Header("OPTIONS")]
     public bool dialogueActive;
@@ -32,14 +33,8 @@ public class DialogueManager : MonoBehaviour
     {
         Canvas.ForceUpdateCanvases();
 
-        dialogueUI = GameObject.Find("Dialogue");
-        contentHolder = GameObject.Find("Content");
-        spriteHolder = GameObject.Find("SpeakerImage");
-        dialogueScroll = GameObject.Find("DialogueHolder").GetComponent<ScrollRect>();
-
         gm = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         gd = GameObject.Find("GameData").GetComponent<GameData>();
-
 
         dialogueUI.SetActive(false);
     }
@@ -59,7 +54,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
                 {
-                    transitionToBattle();
+                    transitionToBattle(currentConvo.combatName);
                     exitText(true);
                 }
                 else //otherwise if there's no choice and no fight exit dialogue
@@ -172,14 +167,23 @@ public class DialogueManager : MonoBehaviour
         DialogueEvents.current.StartDialogue();
     }
 
-    private void transitionToBattle()
+    private void transitionToBattle(string combatName)
     {
         //gd.currentGameStatus.nextFight = whatFight;
         //gm.SaveFromSceneToManager();
         //SceneManager.LoadScene(1);
 
-        Debug.Log("Beginning Combat");
-        //CombatEvents.current.StartCombat();
+        CombatTrigger[] combats = FindObjectsOfType<CombatTrigger>();
+        
+
+        foreach (CombatTrigger combat in combats)
+        {
+            if (combat.CombatName == combatName)
+            {
+                combat.Call();
+                break;
+            }
+        }
     }
 
 }

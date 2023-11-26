@@ -8,14 +8,7 @@ public class DialogueEvents : MonoBehaviour
 
     private void Awake()
     {
-        if (current != null)
-        {
-            current = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        current = this;
     }
 
     public event Action onStartDialogue;

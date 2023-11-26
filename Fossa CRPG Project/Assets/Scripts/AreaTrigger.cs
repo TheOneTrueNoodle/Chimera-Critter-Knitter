@@ -5,6 +5,7 @@ using UnityEngine;
 public class AreaTrigger : MonoBehaviour
 {
     private bool inCombat;
+    private bool inDialogue;
     public bool oneTimeUse; 
     
     private bool used = false;
@@ -14,11 +15,13 @@ public class AreaTrigger : MonoBehaviour
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
+        DialogueEvents.current.onStartDialogue += StartDialogue;
+        DialogueEvents.current.onEndDialogue += EndDialogue;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (inCombat) { return; }
+        if (inCombat || inDialogue) { return; }
         if (!used && other.gameObject.CompareTag("Player"))
         {
             if (oneTimeUse == true)
@@ -39,5 +42,13 @@ public class AreaTrigger : MonoBehaviour
     private void EndCombat()
     {
         inCombat = false;
+    }
+    private void StartDialogue()
+    {
+        inDialogue = true;
+    }
+    private void EndDialogue()
+    {
+        inDialogue = false;
     }
 }

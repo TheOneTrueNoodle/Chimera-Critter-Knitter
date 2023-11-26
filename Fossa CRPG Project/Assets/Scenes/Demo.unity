@@ -1830,6 +1830,7 @@ Transform:
   - {fileID: 1707656936}
   - {fileID: 1408157161}
   - {fileID: 880453782}
+  - {fileID: 1720062807}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &245359825
@@ -2321,8 +2322,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1787729508}
+  m_Children: []
   m_Father: {fileID: 1445341821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &337944276
@@ -2335,6 +2335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 337944277}
   - component: {fileID: 337944278}
+  - component: {fileID: 337944279}
   m_Layer: 0
   m_Name: DialogueManagement
   m_TagString: Untagged
@@ -2354,7 +2355,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1787729508}
   m_Father: {fileID: 1445341821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &337944278
@@ -2374,11 +2376,27 @@ MonoBehaviour:
   choicePrefab: {fileID: 2556345064952237853, guid: 46c889ecf56869c44b8de1da08e9efe7, type: 3}
   textBoxTarget: {fileID: 1177619982}
   previousLine: {fileID: 0}
+  contentHolder: {fileID: 1177619982}
+  dialogueUI: {fileID: 1787729507}
+  spriteHolder: {fileID: 254834670}
+  dialogueScroll: {fileID: 757081509}
   dialogueActive: 1
   showDebuggingText: 0
   currentConvo: {fileID: 11400000, guid: 45de03d0b95b98041a3716439fab0e31, type: 2}
   index: 0
   nodialogue: 1
+--- !u!114 &337944279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337944276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd13d03360ec23844983955dfaf57d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &359801706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6058,7 +6076,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880453781}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.085, y: -7.3, z: -0.3164}
   m_LocalScale: {x: 0.13616575, y: -48.16974, z: 0.12686515}
   m_ConstrainProportionsScale: 0
@@ -6066,7 +6084,7 @@ Transform:
   - {fileID: 1111108816}
   - {fileID: 628472103}
   m_Father: {fileID: 225588725}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &880453783
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -63977,19 +63995,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071074
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -63997,7 +64015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5548464265194573376, guid: 3f645a46e5e517e4bb05dc0fed734877, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -64659,6 +64677,55 @@ MonoBehaviour:
   teleporttTo: {fileID: 182685041}
   teleporte: {fileID: 3837770}
   playerr: {fileID: 876572037}
+--- !u!1 &1720062806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720062807}
+  - component: {fileID: 1720062808}
+  m_Layer: 0
+  m_Name: Demo Combat Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1720062807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720062806}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 225588725}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1720062808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720062806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f536128f5645f44b974e7d240a92da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CombatName: Demo_Combat
+  EnemiesInThisCombat:
+  - {fileID: 880453785}
+  OtherEntitiesInThisCombat: []
+  RoundEvents: []
 --- !u!1001 &1727216857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65312,7 +65379,7 @@ RectTransform:
   m_Children:
   - {fileID: 614248771}
   - {fileID: 1705400061}
-  m_Father: {fileID: 329639549}
+  m_Father: {fileID: 337944277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -66543,7 +66610,7 @@ MonoBehaviour:
   currentGameStatus:
     clickedButton: 0
     playerPosition: {x: 0, y: 0, z: 0}
-    nextFight: {fileID: 0}
+    nextFight: 
     health: 0
     stress: 0
     maxHealth: 0
