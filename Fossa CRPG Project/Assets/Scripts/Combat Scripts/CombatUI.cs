@@ -16,8 +16,6 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private GameObject UIParent;
     [SerializeField] private RectTransform ActionUI;
     [SerializeField] private Button MoveButton;
-    [SerializeField] private RectTransform ExamineUI;
-    [SerializeField] private RectTransform NeutralUI;
     [SerializeField] private GameObject cancelDisp;
 
     [SerializeField] private GameObject abilityUI;
@@ -28,9 +26,6 @@ public class CombatUI : MonoBehaviour
     private bool hasMoved;
     private OverlayTile selectedTile;
 
-    private float currentDelay = 0;
-    private static float delay = 0.2f;
-
     private CursorController cursor;
 
     private void Start()
@@ -39,7 +34,7 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
-        CombatEvents.current.onGetSelectedTile += displayUI;
+        //CombatEvents.current.onGetSelectedTile += displayUI;
 
         cursor = FindObjectOfType<CursorController>();
     }
@@ -47,22 +42,19 @@ public class CombatUI : MonoBehaviour
     private void Update()
     {
         if (!started) { return; }
-        if(currentDelay > 0)
-        {
-            currentDelay -= Time.deltaTime;
-            return;
-        }
         UpdateInformationUI();
         GetActionInput();
     }
 
     private void GetActionInput()
     {
+        if(Char.TeamID != 0) { return; }
         if(!UIOpen)
         {
-            if (Input.GetButtonDown("Interact") || Input.GetMouseButtonDown(0))
+            if (Input.GetButtonDown("Cancel"))
             {
                 OpenUI();
+                DisplayTurnUI();
             }
         }
         else
@@ -72,64 +64,39 @@ public class CombatUI : MonoBehaviour
                 if (abilityUI.activeInHierarchy && actionActive != true)
                 {
                     CloseAbilityUI();
-                    displayUI(selectedTile);
+                    DisplayTurnUI();
                     ChangeCursorMode(5);
                 }
                 else if(actionActive)
                 {
                     CloseAbilityUI();
-                    displayUI(selectedTile);
+                    //displayUI(selectedTile);
                     ChangeCursorMode(5);
                     actionActive = false;
-                }
-                else
-                {
-                    ChangeCursorMode(1);
-                    UIOpen = false;
-                    CloseUI();
                 }
             }
         }
     }
 
-    public void displayUI(OverlayTile tile)
+    public void DisplayTurnUI()
     {
-        selectedTile = tile;
-        if (selectedTile.isBlocked != true)
+        //Display Action UI
+        ActionUI.gameObject.SetActive(true);
+        if (hasMoved)
         {
-            //Open empty tile UI
-            NeutralUI.gameObject.SetActive(true);
-            NeutralUI.GetComponentInChildren<Button>().Select();
+            MoveButton.interactable = false;
+            ActionUI.GetComponentsInChildren<Button>()[1].Select();
         }
-        else if(selectedTile.activeCharacter == Char)
-        {
-            //Display Action UI
-            ActionUI.gameObject.SetActive(true);
-            if (hasMoved)
-            {
-                MoveButton.interactable = false;
-                ActionUI.GetComponentsInChildren<Button>()[1].Select();
-            }
-            else { ActionUI.GetComponentInChildren<Button>().Select(); }
-        }
-        else
-        {
-            //Display Examine UI
-            ExamineUI.gameObject.SetActive(true);
-            ExamineUI.GetComponentInChildren<Button>().Select();
-        }
+        else { ActionUI.GetComponentInChildren<Button>().Select(); }
     }
     public void OpenUI()
     {
         UIOpen = true;
         ChangeCursorMode(5);
-
     }
     public void CloseUI()
     {
         ActionUI.gameObject.SetActive(false);
-        ExamineUI.gameObject.SetActive(false);
-        NeutralUI.gameObject.SetActive(false);
     }
     public void OpenAbilityUI()
     {
@@ -169,28 +136,36 @@ public class CombatUI : MonoBehaviour
     }
     private void ActionComplete()
     {
+        if(Char.TeamID != 0) { return; }
         hasMoved = true;
         actionActive = false;
-        displayUI(Char.activeTile);
+        DisplayTurnUI();
         ChangeCursorMode(5);
     }
 
     private void SetupCombatUI(Entity entity)
     {
+        int cursorMode = 0;
         Char = entity;
         hasMoved = false;
         MoveButton.interactable = true;
 
-        currentDelay = 0;
         UIOpen = false;
         actionActive = false;
 
         cancelDisp.SetActive(false);
-        ActionUI.gameObject.SetActive(false);
-        ExamineUI.gameObject.SetActive(false);
-        NeutralUI.gameObject.SetActive(false);
-        abilityUI.gameObject.SetActive(false);
-        ChangeCursorMode(1);
+        CloseAbilityUI();
+        CloseUI();
+
+        Debug.Log(entity);
+        if (entity.TeamID == 0)
+        {
+            cursorMode = 5;
+            OpenUI();
+            DisplayTurnUI();
+        }
+
+        ChangeCursorMode(cursorMode);
     }
     public void PositionUI(RectTransform rectTransform)
     {
@@ -246,9 +221,9 @@ public class CombatUI : MonoBehaviour
         }
         else if(mode == 1)
         {
-            currentDelay = delay;
+            //MAP MODE
             UIOpen = false;
-            cancelDisp.SetActive(false);
+            cancelDisp.SetActive(true);
         }
         else { cancelDisp.SetActive(false); }
         CombatEvents.current.SetCursorMode(mode, null);

@@ -445,7 +445,6 @@ public class CursorController : MonoBehaviour
     #region Event Calls
     private void NewTurn(Entity activeChar)
     {
-        cursorMode = 1;
         activeCharacter = activeChar;
         activeChar.StartTurn();
 
