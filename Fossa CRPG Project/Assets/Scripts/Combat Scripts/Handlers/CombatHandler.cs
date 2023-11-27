@@ -220,6 +220,7 @@ public class CombatHandler : MonoBehaviour
         {
             if (item.TeamID == 0)
             {
+                Debug.Log("Found player");
                 item.Initialize();
                 ReturnUnits.Add(item);
                 playerTeam.Add(item);

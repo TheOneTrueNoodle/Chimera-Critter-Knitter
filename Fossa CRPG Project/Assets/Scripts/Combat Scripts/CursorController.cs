@@ -29,6 +29,7 @@ public class CursorController : MonoBehaviour
     public bool isMoving = false;
 
     [HideInInspector] public OverlayTile currentTile;
+    private OverlayTile previousTile;
 
     //Booleans for turn actions
     private bool actionActive;
@@ -91,13 +92,32 @@ public class CursorController : MonoBehaviour
                 }
                 break;
             case 1:
-                //Default Mode
+                //View Map Mode
                 overlayTile = GetCursorPosition();
+                if (overlayTile != null)
+                {
+                    if (overlayTile.isBlocked)
+                    {
+                        if (inRangeTiles.Count == 0 || previousTile != overlayTile)
+                        {
+                            ClearRangeTiles();
+                            GetInRangeTiles(overlayTile.activeCharacter, overlayTile.activeCharacter.CharacterData.characterClass.MovementSpeed, true, false);
+                        }
+                        Color tileColor = new Color(1, 0, 0, 0.3f);
+                        if(overlayTile.activeCharacter == activeCharacter) { tileColor = new Color(1, 1, 1, 0.3f); }
+                        CombatEvents.current.TileColor(overlayTile.activeCharacter, tileColor, inRangeTiles, false);
+                    }
+                    else
+                    {
+                        ClearRangeTiles();
+                    }
+                }
                 break;
             default:
                 //Enemy Turn 
                 break;
         }
+        previousTile = overlayTile;
 
         if ((Input.GetButtonDown("Submit") || Input.GetMouseButtonDown(0)) && overlayTile != null && actionActive)
         {
@@ -129,7 +149,7 @@ public class CursorController : MonoBehaviour
                 if (overlayTile != null) { MovementClick(overlayTile); }
                 break;
             case 1:
-                //Default Mode
+                //View Map Mode
                 break;
             default:
                 //Enemy Turn
@@ -295,16 +315,16 @@ public class CursorController : MonoBehaviour
     #endregion
     #region functions
 
-    private void GetInRangeTiles(int range, bool hideOccupiedTiles, bool includeOrigin)
+    private void GetInRangeTiles(Entity Char, int range, bool hideOccupiedTiles, bool includeOrigin)
     {
         if (cursorMode == 2)
         {
-            inRangeTiles = rangeFinder.GetMovementTilesInRange(activeCharacter, range, hideOccupiedTiles, includeOrigin);
+            inRangeTiles = rangeFinder.GetMovementTilesInRange(Char, range, hideOccupiedTiles, includeOrigin);
         }
         else
         {
             List<OverlayTile> startTiles = new List<OverlayTile>();
-            startTiles.Add(activeCharacter.activeTile);
+            startTiles.Add(Char.activeTile);
             /*
             foreach (EntitySubTile subTile in activeCharacter.subTileSpaces)
             {
@@ -319,7 +339,7 @@ public class CursorController : MonoBehaviour
         {
             item.ShowTile();
         }
-        activeCharacter.activeTile.HideTile();
+        Char.activeTile.HideTile();
     }
 
     private void ClearRangeTiles()
@@ -476,23 +496,23 @@ public class CursorController : MonoBehaviour
                 if (abilityData != null)
                 {
                     currentAbility = abilityData;
-                    GetInRangeTiles(currentAbility.range, false, currentAbility.includeCenter);
+                    GetInRangeTiles(activeCharacter, currentAbility.range, false, currentAbility.includeCenter);
                     CombatEvents.current.TileColor(activeCharacter, Color.white, inRangeTiles, false);
                 }
                 break;
             case 3:
                 //Attack Startup
-                GetInRangeTiles(activeCharacter.WeaponRange, false, false);
+                GetInRangeTiles(activeCharacter, activeCharacter.WeaponRange, false, false);
                 CombatEvents.current.TileColor(activeCharacter, Color.red, inRangeTiles, false);
                 break;
             case 2:
                 //Move Startup
                 if (hasMoved) { return; }
-                GetInRangeTiles(activeCharacter.CharacterData.characterClass.MovementSpeed, true, false);
+                GetInRangeTiles(activeCharacter, activeCharacter.CharacterData.characterClass.MovementSpeed, true, false);
                 CombatEvents.current.TileColor(activeCharacter, Color.white, inRangeTiles, false);
                 break;
             case 1:
-                //Default Startup
+                //View Map Startup
                 actionActive = false;
                 UIMode = false;
                 break;

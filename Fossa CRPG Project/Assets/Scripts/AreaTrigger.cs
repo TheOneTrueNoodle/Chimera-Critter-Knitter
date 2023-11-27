@@ -15,8 +15,8 @@ public class AreaTrigger : MonoBehaviour
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
-        DialogueEvents.current.onStartDialogue += StartDialogue;
-        DialogueEvents.current.onEndDialogue += EndDialogue;
+        if (DialogueEvents.current != null) { DialogueEvents.current.onStartDialogue += StartDialogue; }
+        if (DialogueEvents.current != null) { DialogueEvents.current.onEndDialogue += EndDialogue; }
     }
 
     private void OnTriggerEnter(Collider other)

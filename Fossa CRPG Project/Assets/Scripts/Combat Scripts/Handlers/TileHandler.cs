@@ -58,6 +58,7 @@ public class TileHandler
             entity.activeTile.activeCharacter = null;
         }
 
+        Debug.Log(entity + " | " + tile);
         entity.transform.position = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - 0.0001f, tile.gameObject.transform.position.z);
         entity.activeTile = tile;
         entity.activeTile.isBlocked = true;
