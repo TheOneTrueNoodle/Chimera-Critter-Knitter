@@ -18,8 +18,12 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private Button MoveButton;
     [SerializeField] private GameObject cancelDisp;
 
-    [SerializeField] private GameObject abilityUI;
-    [SerializeField] private List<AbilityButton> abilityButton;
+    [Header("Ability UI")]
+    [SerializeField] private RectTransform abilityUI;
+    [SerializeField] private GameObject abilityButtonPrefab;
+    [SerializeField] private RectTransform abilityButtonParent;
+    [SerializeField] private float abilityButtonOffset = 10f;
+    private List<AbilityButton> abilityButton = new List<AbilityButton>();
 
     [Header("End Turn UI")]
     [SerializeField] private Button EndTurnButton;
@@ -66,7 +70,7 @@ public class CombatUI : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                if (abilityUI.activeInHierarchy && actionActive != true)
+                if (abilityUI.gameObject.activeInHierarchy && actionActive != true)
                 {
                     CloseAbilityUI();
                     OpenUI();
@@ -130,18 +134,22 @@ public class CombatUI : MonoBehaviour
     }
     public void OpenAbilityUI()
     {
-        abilityUI.SetActive(true);
+        abilityUI.gameObject.SetActive(true);
         ActionUI.gameObject.SetActive(false);
+        abilityUI.transform.position = new Vector2(ActionUI.transform.position.x + abilityUI.sizeDelta.x, ActionUI.transform.position.y);
 
         foreach (var button in abilityButton)
         {
-            button.gameObject.SetActive(false);
+            Destroy(button);
         }
+
+        abilityButton.Clear();
 
         for (int i = 0; i < Char.activeAbilities.Count; i++)
         {
-            abilityButton[i].gameObject.SetActive(true);
-            abilityButton[i].SetupButton(Char.activeAbilities[i]);
+            AbilityButton newAbilityButton = Instantiate(abilityButtonPrefab, abilityButtonParent).GetComponent<AbilityButton>();
+            newAbilityButton.SetupButton(Char.activeAbilities[i]);
+            abilityButton.Add(newAbilityButton);
         }
 
         if (Char.activeAbilities.Count > 0)
@@ -152,8 +160,9 @@ public class CombatUI : MonoBehaviour
 
     public void CloseAbilityUI()
     {
-        foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
-        abilityUI.SetActive(false);
+        foreach (var item in abilityButton) { Destroy(item.gameObject); }
+        abilityButton.Clear();
+        abilityUI.gameObject.SetActive(false);
         ActionUI.gameObject.SetActive(true);
     }
 
@@ -194,7 +203,7 @@ public class CombatUI : MonoBehaviour
         else
         {
             foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
-            abilityUI.SetActive(false);
+            abilityUI.gameObject.SetActive(false);
             ActionUI.gameObject.SetActive(false);
         }
 
