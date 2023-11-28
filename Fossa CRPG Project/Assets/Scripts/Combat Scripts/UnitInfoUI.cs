@@ -12,6 +12,7 @@ public class UnitInfoUI : MonoBehaviour
     public TMP_Text HPText;
     public Slider SPBar;
     public TMP_Text SPText;
+    public Slider GrayscaleEffect; 
 
     public void UpdateUI(Entity Char)
     {
@@ -30,6 +31,9 @@ public class UnitInfoUI : MonoBehaviour
             SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
             SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
             SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+
+            var percentageHealthMissing = (Char.activeStatsDir["MaxHP"].baseStatValue - Char.activeStatsDir["MaxHP"].statValue) / Char.activeStatsDir["MaxHP"].baseStatValue;
+            GrayscaleEffect.value = percentageHealthMissing;
         }
         else
         {
