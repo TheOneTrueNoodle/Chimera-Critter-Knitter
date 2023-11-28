@@ -7,6 +7,7 @@ public class AbilityButton : MonoBehaviour
 {
     private TMP_Text buttonText;
 
+    public int abilityID;
     public AbilityData ability;
     private HoverTip hoverTip;
 
@@ -16,14 +17,22 @@ public class AbilityButton : MonoBehaviour
         hoverTip = GetComponent<HoverTip>();
     }
 
-    public void SetupButton(AbilityData abil)
+    public void SetupButton(AbilityData abil, int ID)
     {
         ability = abil;
+        abilityID = ID;
 
         buttonText = GetComponentInChildren<TMP_Text>();
         hoverTip = GetComponent<HoverTip>();
 
         buttonText.text = abil.Name;
         hoverTip.tipToShow = abil.Desc;
+    }
+    public void Clicked()
+    {
+        CombatUI combatUI = GetComponentInParent<CombatUI>();
+
+        combatUI.CallAbility(abilityID);
+        combatUI.GetComponent<HoverTipManager>().HideTip();
     }
 }
