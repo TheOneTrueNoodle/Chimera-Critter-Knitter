@@ -21,6 +21,12 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private GameObject abilityUI;
     [SerializeField] private List<AbilityButton> abilityButton;
 
+    [Header("End Turn UI")]
+    [SerializeField] private Button EndTurnButton;
+    [SerializeField] private Image RingFill;
+
+    private float EndTurnFill;
+
     private bool UIOpen;
     private bool actionActive;
     private bool hasMoved;
@@ -74,6 +80,25 @@ public class CombatUI : MonoBehaviour
                     actionActive = false;
                 }
             }
+        }
+
+        //End Turn Input
+        if (Input.GetButton("End Turn"))
+        {
+            EndTurnFill += Time.deltaTime * 2f;
+            RingFill.fillAmount = EndTurnFill;
+            if (EndTurnFill >= 1)
+            {
+                EndTurnFill = 0;
+                RingFill.fillAmount = EndTurnFill;
+                EndTurnFill += Time.deltaTime * 2f;
+            }
+        }
+        else if (EndTurnFill > 0)
+        {
+            EndTurnFill -= Time.deltaTime * 2f;
+            if(EndTurnFill < 0) { EndTurnFill = 0; }
+            RingFill.fillAmount = EndTurnFill;
         }
     }
     public void OpenUI()
