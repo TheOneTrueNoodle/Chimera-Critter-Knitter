@@ -912,6 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipText: {fileID: 3570450171174161739}
   tipWindow: {fileID: 9192475369050598161}
+  tipOffset: 5
 --- !u!1 &1093335807305824810
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,9 +4445,9 @@ RectTransform:
   - {fileID: 8960202769554916202}
   m_Father: {fileID: 11142612830650153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 50, y: 0}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6358210544036842155
