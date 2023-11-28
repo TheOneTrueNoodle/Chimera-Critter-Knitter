@@ -54,7 +54,6 @@ public class CombatUI : MonoBehaviour
             if (Input.GetButtonDown("Cancel"))
             {
                 OpenUI();
-                DisplayTurnUI();
             }
         }
         else
@@ -64,39 +63,45 @@ public class CombatUI : MonoBehaviour
                 if (abilityUI.activeInHierarchy && actionActive != true)
                 {
                     CloseAbilityUI();
-                    DisplayTurnUI();
+                    OpenUI();
                     ChangeCursorMode(5);
                 }
                 else if(actionActive)
                 {
                     CloseAbilityUI();
                     //displayUI(selectedTile);
-                    ChangeCursorMode(5);
+                    OpenUI();
                     actionActive = false;
                 }
             }
         }
     }
-
-    public void DisplayTurnUI()
+    public void OpenUI()
     {
+        UIOpen = true;
         //Display Action UI
         ActionUI.gameObject.SetActive(true);
+        PositionUI(ActionUI, Char.gameObject.transform.position);
+        if (ActionUI.TryGetComponent(out Animator anim))
+        {
+            anim.Play("Open");
+        }
+
         if (hasMoved)
         {
             MoveButton.interactable = false;
             ActionUI.GetComponentsInChildren<Button>()[1].Select();
         }
         else { ActionUI.GetComponentInChildren<Button>().Select(); }
-    }
-    public void OpenUI()
-    {
-        UIOpen = true;
         ChangeCursorMode(5);
     }
     public void CloseUI()
     {
-        ActionUI.gameObject.SetActive(false);
+        if (ActionUI.TryGetComponent(out Animator anim))
+        {
+            anim.Play("Close");
+        }
+        else { ActionUI.gameObject.SetActive(false); }
     }
     public void OpenAbilityUI()
     {
@@ -139,7 +144,7 @@ public class CombatUI : MonoBehaviour
         if(Char.TeamID != 0) { return; }
         hasMoved = true;
         actionActive = false;
-        DisplayTurnUI();
+        OpenUI();
         ChangeCursorMode(5);
     }
 
@@ -154,24 +159,27 @@ public class CombatUI : MonoBehaviour
         actionActive = false;
 
         cancelDisp.SetActive(false);
-        CloseAbilityUI();
-        CloseUI();
 
         Debug.Log(entity);
         if (entity.TeamID == 0)
         {
             cursorMode = 5;
             OpenUI();
-            DisplayTurnUI();
+        }
+        else
+        {
+            foreach (var item in abilityButton) { item.gameObject.SetActive(false); }
+            abilityUI.SetActive(false);
+            ActionUI.gameObject.SetActive(false);
         }
 
         ChangeCursorMode(cursorMode);
     }
-    public void PositionUI(RectTransform rectTransform)
+    public void PositionUI(RectTransform rectTransform, Vector3 worldPos)
     {
-        var mousePos = Input.mousePosition;
-        rectTransform.gameObject.SetActive(true);
-        rectTransform.transform.position = new Vector2(mousePos.x + rectTransform.sizeDelta.x, mousePos.y);
+        //Needs rework
+        var screenPos = Camera.main.WorldToScreenPoint(worldPos);
+        rectTransform.transform.position = new Vector2(screenPos.x, screenPos.y);
     }
     public void UpdateInformationUI()
     {
@@ -201,16 +209,6 @@ public class CombatUI : MonoBehaviour
             }
         }
     }
-    private void StartCombat()
-    {
-        started = true;
-        UIParent.SetActive(true);
-    }
-    private void EndCombat()
-    {
-        started = false;
-        UIParent.SetActive(false);
-    }
     public void ChangeCursorMode(int mode)
     {
         if (mode == 2 || mode == 3 || mode == 4)
@@ -227,5 +225,15 @@ public class CombatUI : MonoBehaviour
         }
         else { cancelDisp.SetActive(false); }
         CombatEvents.current.SetCursorMode(mode, null);
+    }
+    private void StartCombat()
+    {
+        started = true;
+        UIParent.SetActive(true);
+    }
+    private void EndCombat()
+    {
+        started = false;
+        UIParent.SetActive(false);
     }
 }

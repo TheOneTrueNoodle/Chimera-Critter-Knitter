@@ -101,7 +101,10 @@ public class PlayerMovement : MonoBehaviour
             float angle = Quaternion.Angle(transform.rotation, rot);
             float rotationDirection = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(transform.forward, relative.normalized)));
 
-            if(angle > 140 && !running)
+            rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
+
+            /*
+            if (angle > 140 && !running)
             {
                 //Trigger a "180" turn
                 //rb.MoveRotation(rot);
@@ -120,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
-            }
+            }*/
 
             if (angle < 1.0f) { rotationDirection = 0f; }
             if(rotationDirection > 0f) { rotationDirection = 1f; }
