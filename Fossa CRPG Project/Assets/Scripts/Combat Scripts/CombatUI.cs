@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -28,8 +29,12 @@ public class CombatUI : MonoBehaviour
     [Header("End Turn UI")]
     [SerializeField] private Button EndTurnButton;
     [SerializeField] private Image RingFill;
-
     private float EndTurnFill;
+
+    [Header("Turn Order Display")]
+    [SerializeField] private GameObject turnIconPrefab;
+    [SerializeField] private Transform turnIconParent;
+    private List<TurnOrderIcon> activeTurnIcons;
 
     private bool UIOpen;
     private bool actionActive;
@@ -42,6 +47,7 @@ public class CombatUI : MonoBehaviour
     {
         CombatEvents.current.onNewTurn += SetupCombatUI;
         CombatEvents.current.onStartCombatSetup += StartCombat;
+        CombatEvents.current.onTurnOrderDisplay += NewRoundTurnOrder;
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
         //CombatEvents.current.onGetSelectedTile += displayUI;
@@ -186,6 +192,13 @@ public class CombatUI : MonoBehaviour
 
     private void SetupCombatUI(Entity entity)
     {
+        if (Char != null)
+        {
+            var previousTurnIcon = activeTurnIcons.First();
+            activeTurnIcons.RemoveAt(0);
+            Destroy(previousTurnIcon.gameObject);
+        }
+
         int cursorMode = 0;
         Char = entity;
         hasMoved = false;
@@ -261,6 +274,23 @@ public class CombatUI : MonoBehaviour
         }
         else { cancelDisp.SetActive(false); }
         CombatEvents.current.SetCursorMode(mode, null);
+    }
+    private void NewRoundTurnOrder(List<Entity> allUnits)
+    {
+        if(activeTurnIcons == null) { activeTurnIcons = new List<TurnOrderIcon>(); }
+        
+        foreach (TurnOrderIcon turnIcon in activeTurnIcons)
+        {
+            Destroy(turnIcon.gameObject);
+        }
+        activeTurnIcons.Clear();
+
+        foreach (Entity unit in allUnits)
+        {
+            TurnOrderIcon newTurnOrderIcon = Instantiate(turnIconPrefab, turnIconParent).GetComponent<TurnOrderIcon>();
+            activeTurnIcons.Add(newTurnOrderIcon);
+            newTurnOrderIcon.Setup(unit);
+        }
     }
     private void StartCombat()
     {

@@ -29,6 +29,15 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
+    public event Action<List<Entity>> onTurnOrderDisplay;
+    public void TurnOrderDisplay(List<Entity> allUnits)
+    {
+        if (onTurnOrderDisplay != null)
+        {
+            onTurnOrderDisplay(allUnits);
+        }
+    }
+
     public event Action onEndCombat;
     public void EndCombat()
     {

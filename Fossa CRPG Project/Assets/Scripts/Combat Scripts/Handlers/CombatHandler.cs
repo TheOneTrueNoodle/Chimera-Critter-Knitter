@@ -50,7 +50,8 @@ public class CombatHandler : MonoBehaviour
         if (unitHandler == null) { unitHandler = new UnitHandler(); }
         if (tileHandler == null) { tileHandler = new TileHandler(); }
 
-        turnHandler.StartCombat(FindAllActiveUnits(enemies, others));
+        var activeUnits = FindAllActiveUnits(enemies, others);
+        turnHandler.StartCombat(activeUnits, RoundEvents);
 
         totalDroppedExp = 0;
     }

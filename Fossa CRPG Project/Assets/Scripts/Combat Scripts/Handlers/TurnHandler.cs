@@ -13,15 +13,21 @@ public class TurnHandler
 
     bool inCombat;
 
-    public void StartCombat(List<Entity> AllUnits)
+    public void StartCombat(List<Entity> AllUnits, List<CombatRoundEventData> RoundEvents)
     {
         inCombat = true;
         turnOrder = AllUnits;
         turnOrder = turnOrder.OrderByDescending(i => i.activeStatsDir["Speed"].statValue).ToList();
 
         activeTurnOrder = new List<Entity>();
-        foreach(Entity entity in turnOrder) { activeTurnOrder.Add(entity); }
+        foreach(Entity entity in turnOrder) 
+        { 
+            activeTurnOrder.Add(entity); 
+        }
         roundNumber = 0;
+
+        roundEvents = new List<CombatRoundEventData>();
+        roundEvents = RoundEvents;
 
         if(roundEvents != null)
         {
@@ -35,6 +41,7 @@ public class TurnHandler
         }
 
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+        CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
     }
 
     public void EndCombat()
@@ -88,5 +95,6 @@ public class TurnHandler
         }
 
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+        CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
     }
 }
