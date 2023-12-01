@@ -18,6 +18,7 @@ public class Entity : MonoBehaviour
     //[HideInInspector] public List<EntitySubTile> subTileSpaces;
 
     private Slider healthbar;
+    private Animator anim;
 
     [HideInInspector] public bool isDefending;
 
@@ -43,6 +44,7 @@ public class Entity : MonoBehaviour
         {
             CombatEvents.current.onEndCombat += EndCombat;
         }
+        if(GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
         healthbar = GetComponentInChildren<Slider>();
     }
 
@@ -108,6 +110,11 @@ public class Entity : MonoBehaviour
         CombatEvents.current.TilePositionEntity(this, focusedTileHit);
         updateHealthBar();
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
+        if (anim != null)
+        {
+            anim.Play("Combat Idle");
+        }
     }
 
     private void EndCombat()
