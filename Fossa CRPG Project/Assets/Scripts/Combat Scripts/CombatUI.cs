@@ -76,19 +76,7 @@ public class CombatUI : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                if (abilityUI.gameObject.activeInHierarchy && actionActive != true)
-                {
-                    CloseAbilityUI();
-                    OpenUI();
-                    ChangeCursorMode(5);
-                }
-                else if(actionActive)
-                {
-                    CloseAbilityUI();
-                    //displayUI(selectedTile);
-                    OpenUI();
-                    actionActive = false;
-                }
+                CancelInput();
             }
         }
 
@@ -109,6 +97,22 @@ public class CombatUI : MonoBehaviour
             EndTurnFill -= Time.deltaTime * 2f;
             if(EndTurnFill < 0) { EndTurnFill = 0; }
             RingFill.fillAmount = EndTurnFill;
+        }
+    }
+    public void CancelInput()
+    {
+        if (abilityUI.gameObject.activeInHierarchy && actionActive != true)
+        {
+            CloseAbilityUI();
+            OpenUI();
+            ChangeCursorMode(5);
+        }
+        else if (actionActive)
+        {
+            CloseAbilityUI();
+            //displayUI(selectedTile);
+            OpenUI();
+            actionActive = false;
         }
     }
     public void OpenUI()

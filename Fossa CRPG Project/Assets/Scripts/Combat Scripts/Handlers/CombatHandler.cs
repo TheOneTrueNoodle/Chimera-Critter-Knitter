@@ -99,22 +99,58 @@ public class CombatHandler : MonoBehaviour
 
     public void AttackAttempt(Entity attacker, Entity target)
     {
+        StartCoroutine(Attack(attacker, target));
+    }
+
+    public IEnumerator Attack(Entity attacker, Entity target)
+    {
         int damage = actionHandler.Attack(attacker, target);
+
+        //Animate Attack
+        Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
+        var rot = Quaternion.LookRotation((target.transform.position - attacker.transform.position), Vector3.up);
+        float angle = Quaternion.Angle(rb.rotation, rot);
+
+        while (angle > 0.1f)
+        {
+            rb.rotation = Quaternion.RotateTowards(attacker.transform.rotation, rot, 720f * Time.deltaTime);
+            angle = Quaternion.Angle(rb.rotation, rot);
+            yield return null;
+        }
+
+        if (attacker.GetComponentInChildren<Animator>() != null)
+        {
+            Animator anim = attacker.GetComponentInChildren<Animator>();
+            anim.Play("Attack");
+            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+        }
+
+        bool tookDamage = false;
         if (damage > 0 && !target.isDead)
         {
-            if(target.TryGetComponent(out CombatObstacle obstacle))
+            if (target.TryGetComponent(out CombatObstacle obstacle))
             {
                 if (obstacle.Destructable)
                 {
                     unitHandler.UnitSufferDamage(target, damage);
                     DisplayDamageText(damage, target, attacker.AttackDamageType);
+                    tookDamage = true;
                 }
             }
             else
             {
                 unitHandler.UnitSufferDamage(target, damage);
                 DisplayDamageText(damage, target, attacker.AttackDamageType);
+                tookDamage = true;
             }
+        }
+
+        //Animate Taking Damage
+        if (target.GetComponentInChildren<Animator>() != null && tookDamage)
+        {
+            Animator anim = target.GetComponentInChildren<Animator>();
+            anim.Play("Take Damage");
+            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
         StartCoroutine(DelayedTurnEnd());
