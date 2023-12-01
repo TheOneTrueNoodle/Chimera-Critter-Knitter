@@ -33,8 +33,6 @@ public class UnitHandler
         Debug.Log("Taken " + damage + " damage");
         target.activeStatsDir["MaxHP"].statValue -= damage;
 
-        target.updateHealthBar();
-
         if (target.activeStatsDir["MaxHP"].statValue <= 0)
         {
             Debug.Log("Die loser");
@@ -44,14 +42,11 @@ public class UnitHandler
 
     public void UnitHeals(Entity target, int value)
     {
-
         target.activeStatsDir["MaxHP"].statValue += value;
         if (target.activeStatsDir["MaxHP"].statValue > (int)target.activeStatsDir["MaxHP"].baseStatValue)
         {
             target.activeStatsDir["MaxHP"].statValue = (int)target.activeStatsDir["MaxHP"].baseStatValue;
         }
-
-        target.updateHealthBar();
     }
 
 

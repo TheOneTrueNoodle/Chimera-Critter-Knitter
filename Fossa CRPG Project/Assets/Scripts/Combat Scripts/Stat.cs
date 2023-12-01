@@ -71,7 +71,6 @@ public class Stat
                     CombatEvents.current.DamageDealt(((int)statMod.changeValue), entity, statMod.damageType);
                 }
 
-                entity.updateHealthBar();
                 if (statValue <= 0)
                 {
                     CombatEvents.current.UnitDeath(entity);
@@ -118,7 +117,6 @@ public class Stat
                     CombatEvents.current.DamageDealt(((int)statMod.changeValue), entity, statMod.damageType);
                 }
 
-                entity.updateHealthBar();
                 if (statValue <= 0)
                 {
                     CombatEvents.current.UnitDeath(entity);

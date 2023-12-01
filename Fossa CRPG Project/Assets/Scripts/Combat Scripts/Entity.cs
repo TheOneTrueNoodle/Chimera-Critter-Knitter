@@ -15,9 +15,6 @@ public class Entity : MonoBehaviour
     [HideInInspector] public bool isDead = false;
     public int TeamID; //0 = player ID, 1 = Enemies, 2 = Allies
 
-    //[HideInInspector] public List<EntitySubTile> subTileSpaces;
-
-    private Slider healthbar;
     private Animator anim;
 
     [HideInInspector] public bool isDefending;
@@ -44,8 +41,7 @@ public class Entity : MonoBehaviour
         {
             CombatEvents.current.onEndCombat += EndCombat;
         }
-        if(GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
-        healthbar = GetComponentInChildren<Slider>();
+        if (GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
     }
 
     public void UpdateStats()
@@ -62,7 +58,6 @@ public class Entity : MonoBehaviour
             if (activeStatsDir[item].isModified)
             {
                 activeStatsDir[item].UpdateStatMods(this);
-                updateHealthBar();
                 if (activeStatsDir[item].isModified)
                 {
                     Debug.Log(item + " isModified = " + activeStatsDir[item].isModified);
@@ -70,8 +65,6 @@ public class Entity : MonoBehaviour
                 }
             }
         }
-
-        updateHealthBar();
     }
     #endregion
     #region initialization
@@ -108,7 +101,6 @@ public class Entity : MonoBehaviour
         CombatEvents.current.UnitStartingEffects(this, equipmentStatChanges, equipmentEffects);
         var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z), true);
         CombatEvents.current.TilePositionEntity(this, focusedTileHit);
-        updateHealthBar();
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
         if (anim != null)
@@ -119,7 +111,6 @@ public class Entity : MonoBehaviour
 
     private void EndCombat()
     {
-        healthbar.gameObject.SetActive(false);
         activeTile = null;
         UpdateStats();
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -147,18 +138,6 @@ public class Entity : MonoBehaviour
     public void CalculateRequiredEXP()
     {
         requiredExp = CharacterData.levelConfig.GetRequiredExp(level);
-    }
-    #endregion
-    #region extra functions
-    public void updateHealthBar()
-    {
-        if (healthbar != null)
-        {
-            healthbar.maxValue = activeStatsDir["MaxHP"].baseStatValue;
-            healthbar.value = activeStatsDir["MaxHP"].statValue;
-            if (activeStatsDir["MaxHP"].statValue >= healthbar.maxValue || activeStatsDir["MaxHP"].statValue <= 0) { healthbar.gameObject.SetActive(false); }
-            else { healthbar.gameObject.SetActive(true); }
-        }
     }
     #endregion
 }

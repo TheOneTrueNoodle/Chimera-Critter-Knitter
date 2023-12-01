@@ -11,6 +11,8 @@ public class CombatHandler : MonoBehaviour
     [HideInInspector] public UnitHandler unitHandler;
     [HideInInspector] public TileHandler tileHandler;
 
+    [Header("Damage Text")]
+    public Transform damageTextParent;
     public GameObject damageTextPrefab;
 
     //Unit Teams
@@ -207,13 +209,11 @@ public class CombatHandler : MonoBehaviour
             {
                 unitHandler.UnitSufferDamage(target, physicalDamage);
                 DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
-                Debug.Log("Displayed Phys Damage: " + physicalDamage);
             }
             if (abilityDamage > 0 && !target.isDead)
             {
                 unitHandler.UnitSufferAbility(target, ability, abilityDamage);
                 DisplayDamageText(abilityDamage, target, ability.damageType);
-                Debug.Log("Displayed Abil Damage: " + abilityDamage);
             }
         }
 
@@ -241,8 +241,10 @@ public class CombatHandler : MonoBehaviour
     {
         string dmgText = damage.ToString();
         if (damage <= 0) { dmgText = "MISS"; }
-        GameObject dmgDisp = Instantiate(damageTextPrefab);
-        dmgDisp.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 2.5f, target.transform.position.z);
+        GameObject dmgDisp = Instantiate(damageTextPrefab, damageTextParent);
+
+        var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+        dmgDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
 
         dmgDisp.GetComponent<DamageText>().Setup(dmgText, damageType);
     }

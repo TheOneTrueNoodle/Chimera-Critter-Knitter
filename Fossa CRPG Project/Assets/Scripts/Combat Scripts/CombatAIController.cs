@@ -34,7 +34,6 @@ public class CombatAIController : Entity
             if (activeStatsDir[item].isModified)
             {
                 activeStatsDir[item].UpdateStatMods(this);
-                updateHealthBar();
                 if (activeStatsDir[item].isModified)
                 {
                     Debug.Log(item + " isModified = " + activeStatsDir[item].isModified);
@@ -42,8 +41,6 @@ public class CombatAIController : Entity
                 }
             }
         }
-
-        updateHealthBar();
     }
 
     private IEnumerator CalculateBestSenario()
@@ -438,7 +435,6 @@ public class CombatAIController : Entity
             {
                 Debug.Log("Casting " + bestScenario.targetAbility.Name);
                 activeStatsDir["MaxHP"].statValue -= bestScenario.targetAbility.abilityCost;
-                updateHealthBar();
             }
             else if (bestScenario.targetAbility.costType == AbilityData.CostTypes.SP && bestScenario.targetAbility.abilityCost <= (int)activeStatsDir["MaxSP"].statValue)
             {

@@ -122,7 +122,6 @@ public class CursorController : MonoBehaviour
         if ((Input.GetButtonDown("Submit") || Input.GetMouseButtonDown(0)) && overlayTile != null && actionActive)
         {
             TileClicked(overlayTile);
-            Debug.Log("Tile alternate click");
         }
         if(cursorMode == 2 || cursorMode == 3 || cursorMode == 4) { actionActive = true; }
     }
@@ -238,7 +237,6 @@ public class CursorController : MonoBehaviour
                 Debug.Log("Casting " + currentAbility.Name);
                 hasCastAbility = true;
                 activeCharacter.activeStatsDir["MaxHP"].statValue -= currentAbility.abilityCost;
-                activeCharacter.updateHealthBar();
             }
             else if (currentAbility.costType == AbilityData.CostTypes.SP && currentAbility.abilityCost <= (int)activeCharacter.activeStatsDir["MaxSP"].statValue)
             {
