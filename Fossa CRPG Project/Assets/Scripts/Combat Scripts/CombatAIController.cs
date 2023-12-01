@@ -445,7 +445,7 @@ public class CombatAIController : Entity
                 Debug.Log("Casting " + bestScenario.targetAbility.Name);
                 activeStatsDir["MaxSP"].statValue -= bestScenario.targetAbility.abilityCost;
             }
-            CombatEvents.current.AbilityAttempt(this, inRangeCharacters, bestScenario.targetAbility);
+            CombatEvents.current.AbilityAttempt(this, inRangeCharacters, bestScenario.targetAbility, bestScenario.targetTile.transform.position);
         }
     }
 }

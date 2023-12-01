@@ -118,12 +118,12 @@ public class CombatEvents : MonoBehaviour
             onAttackAttempt(attacker, target);
         }
     }
-    public event Action<Entity, List<Entity>, AbilityData> onAbilityAttempt;
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability)
+    public event Action<Entity, List<Entity>, AbilityData, Vector3> onAbilityAttempt;
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 AbilityCenter)
     {
         if (onAbilityAttempt != null)
         {
-            onAbilityAttempt(attacker, targets, ability);
+            onAbilityAttempt(attacker, targets, ability, AbilityCenter);
         }
     }
     public event Action<Entity, List<OverlayTile>> onMoveAttempt;

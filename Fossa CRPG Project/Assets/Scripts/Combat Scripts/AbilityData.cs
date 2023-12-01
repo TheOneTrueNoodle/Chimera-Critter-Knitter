@@ -11,6 +11,8 @@ public class AbilityData : ScriptableObject
 
     public string Desc;
 
+    public string AnimationName;
+
     public Sprite symbol;
 
     [Header("Ability Information")]

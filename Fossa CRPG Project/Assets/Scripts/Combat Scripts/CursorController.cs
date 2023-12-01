@@ -212,11 +212,11 @@ public class CursorController : MonoBehaviour
 
         if (inRangeTiles.Contains(overlayTile))
         {
-            CastAbility(abilityArea);
+            CastAbility(abilityArea, overlayTile);
         }
     }
 
-    private void CastAbility(List<OverlayTile> abilityArea)
+    private void CastAbility(List<OverlayTile> abilityArea, OverlayTile AbilityCenter)
     {
         var inRangeCharacters = new List<Entity>();
 
@@ -249,7 +249,7 @@ public class CursorController : MonoBehaviour
 
             if (hasCastAbility)
             {
-                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility);
+                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility, AbilityCenter.transform.position);
             }
         }
     }

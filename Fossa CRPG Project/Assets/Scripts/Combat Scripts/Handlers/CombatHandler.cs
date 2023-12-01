@@ -156,10 +156,34 @@ public class CombatHandler : MonoBehaviour
         StartCoroutine(DelayedTurnEnd());
     }
 
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability)
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter)
+    {
+        StartCoroutine(Ability(attacker, targets, ability, abilityCenter));
+    }
+
+    public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter)
     {
         List<Entity> affectedTargets = actionHandler.CalculateAbilityTargets(attacker, ability.abilityType, targets);
         Debug.Log(affectedTargets.Count);
+
+        //Animate Ability
+        Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
+        var rot = Quaternion.LookRotation((abilityCenter - attacker.transform.position), Vector3.up);
+        float angle = Quaternion.Angle(rb.rotation, rot);
+
+        while (angle > 0.1f)
+        {
+            rb.rotation = Quaternion.RotateTowards(attacker.transform.rotation, rot, 720f * Time.deltaTime);
+            angle = Quaternion.Angle(rb.rotation, rot);
+            yield return null;
+        }
+
+        if (attacker.GetComponentInChildren<Animator>() != null)
+        {
+            Animator anim = attacker.GetComponentInChildren<Animator>();
+            anim.Play(ability.AnimationName);
+            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+        }
 
         foreach (Entity target in affectedTargets)
         {
@@ -185,7 +209,7 @@ public class CombatHandler : MonoBehaviour
                 DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
                 Debug.Log("Displayed Phys Damage: " + physicalDamage);
             }
-            if(abilityDamage > 0 && !target.isDead)
+            if (abilityDamage > 0 && !target.isDead)
             {
                 unitHandler.UnitSufferAbility(target, ability, abilityDamage);
                 DisplayDamageText(abilityDamage, target, ability.damageType);
