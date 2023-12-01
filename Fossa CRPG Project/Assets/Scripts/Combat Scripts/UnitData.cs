@@ -22,6 +22,11 @@ public class UnitData : ScriptableObject
     [Header("Ability Information")]
     public List<AbilityData> Abilities;
 
+    [Header("DamageTypes")]
+    public DamageTypes defaultAttack = DamageTypes.Smashing;
+    public List<DamageTypes> Resistances;
+    public List<DamageTypes> Weaknesses;
+
     [Header("Equipment Information")]
     public List<WeaponType> equippableWeapons;
 
@@ -181,6 +186,11 @@ public class UnitData : ScriptableObject
     public List<DamageTypes> SetResistances()
     {
         List<DamageTypes> resistances = new List<DamageTypes>();
+        if (Resistances != null && Resistances.Count > 0)
+        {
+            foreach(DamageTypes damageType in Resistances) { resistances.Add(damageType); }
+        }
+
         if (Armour != null)
         {
             foreach (DamageTypes damageType in Armour.Resistances)
@@ -208,6 +218,11 @@ public class UnitData : ScriptableObject
     public List<DamageTypes> SetWeaknesses()
     {
         List<DamageTypes> weaknesses = new List<DamageTypes>();
+        if (Weaknesses != null && Weaknesses.Count > 0)
+        {
+            foreach (DamageTypes damageType in Weaknesses) { weaknesses.Add(damageType); }
+        }
+
         if (Armour != null)
         {
             foreach (DamageTypes damageType in Armour.Weaknesses)

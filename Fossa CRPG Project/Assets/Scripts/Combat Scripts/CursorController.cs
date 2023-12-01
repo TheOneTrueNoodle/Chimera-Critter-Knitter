@@ -68,6 +68,9 @@ public class CursorController : MonoBehaviour
         //Handle Cursor Function
         switch (cursorMode)
         {
+            case 6:
+                //Examine Mode
+                break;
             case 5:
                 //UI Mode
                 break;
@@ -123,7 +126,7 @@ public class CursorController : MonoBehaviour
         {
             TileClicked(overlayTile);
         }
-        if(cursorMode == 2 || cursorMode == 3 || cursorMode == 4) { actionActive = true; }
+        if(cursorMode == 1 || cursorMode == 2 || cursorMode == 3 || cursorMode == 4) { actionActive = true; }
     }
 
     public void TileClicked(OverlayTile overlayTile)
@@ -132,6 +135,9 @@ public class CursorController : MonoBehaviour
         //Handle Cursor Click Function
         switch (cursorMode)
         {
+            case 6:
+                //Examine Mode
+                break;
             case 5:
                 //UI Mode
                 break;
@@ -149,6 +155,7 @@ public class CursorController : MonoBehaviour
                 break;
             case 1:
                 //View Map Mode
+                if (overlayTile != null && overlayTile.isBlocked) { CombatEvents.current.GetSelectedTile(currentTile); }
                 break;
             default:
                 //Enemy Turn
@@ -473,13 +480,16 @@ public class CursorController : MonoBehaviour
         //Mode Startup
         switch (cursorMode)
         {
+            case 6:
+                //Examine Mode
+                actionActive = true;
+                break;
             case 5:
                 //UI Startup
                 actionActive = false;
                 if (currentTile != null && !UIMode)
                 {
                     UISelectedTile = currentTile;
-                    CombatEvents.current.GetSelectedTile(currentTile);
                     UIMode = true;
                 }
                 else if(UISelectedTile != null)

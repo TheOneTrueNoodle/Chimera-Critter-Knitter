@@ -9,6 +9,7 @@ public class CombatUI : MonoBehaviour
     [Header("Unit Information Display")]
     public UnitInfoUI currentUnitUI;
     public UnitInfoUI selectedUnitUI;
+    public ExamineUnitUI ExamineUI;
 
     private Entity Char;
     private bool started;
@@ -50,7 +51,7 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onTurnOrderDisplay += NewRoundTurnOrder;
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
-        //CombatEvents.current.onGetSelectedTile += displayUI;
+        CombatEvents.current.onGetSelectedTile += SetupExamineUI;
 
         cursor = FindObjectOfType<CursorController>();
     }
@@ -110,10 +111,12 @@ public class CombatUI : MonoBehaviour
         else if (actionActive)
         {
             CloseAbilityUI();
-            //displayUI(selectedTile);
+            ExamineUI.gameObject.SetActive(false);
             OpenUI();
             actionActive = false;
         }
+
+        ExamineUI.gameObject.SetActive(false);
     }
     public void OpenUI()
     {
@@ -264,7 +267,7 @@ public class CombatUI : MonoBehaviour
     }
     public void ChangeCursorMode(int mode)
     {
-        if (mode == 2 || mode == 3 || mode == 4)
+        if (mode == 2 || mode == 3 || mode == 4 || mode == 6)
         {
             actionActive = true;
             cancelDisp.SetActive(true);
@@ -295,6 +298,13 @@ public class CombatUI : MonoBehaviour
             activeTurnIcons.Add(newTurnOrderIcon);
             newTurnOrderIcon.Setup(unit);
         }
+    }
+    private void SetupExamineUI(OverlayTile overlayTile)
+    {
+        UIOpen = true;
+        ExamineUI.gameObject.SetActive(true);
+        ExamineUI.AssignEntity(overlayTile);
+        ChangeCursorMode(6);
     }
     private void StartCombat()
     {

@@ -79,7 +79,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            AttackDamageType = DamageTypes.Smashing;
+            AttackDamageType = CharacterData.defaultAttack;
             WeaponRange = 1;
         }
         if (activeStatsDir == null)
