@@ -14,6 +14,8 @@ public class MoveHandler
 
     public IEnumerator MoveAlongPath(Entity entity, List<OverlayTile> path)
     {
+        if(entity.anim != null) { entity.anim.Play("Movement Blend"); }
+
         while (path.Count != 0)
         {
             Look(entity, path[0].transform.position, false);
@@ -30,11 +32,9 @@ public class MoveHandler
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
-        var anim = entity.GetComponentInChildren<Animator>();
-
         while (animSpeed != 0 || animRotation != 0)
         {
-            if (entity.GetComponentInChildren<Animator>() != null) { Look(entity, entity.transform.forward, true); }
+            if (entity.anim != null) { Look(entity, entity.transform.forward, true); }
             else
             {
                 animSpeed = 0;
@@ -44,13 +44,13 @@ public class MoveHandler
             if (animSpeed > -0.1 && animSpeed < 0.1)
             {
                 animSpeed = 0;
-                anim.SetFloat("Speed", animSpeed);
+                entity.anim.SetFloat("Speed", animSpeed);
             }
 
             if (animRotation > -0.1 && animRotation < 0.1)
             {
                 animRotation = 0;
-                anim.SetFloat("Rotation", animRotation);
+                entity.anim.SetFloat("Rotation", animRotation);
             }
         }
 
@@ -87,7 +87,7 @@ public class MoveHandler
         if (angle < 1.0f) { rotationDirection = 0f; }
         if (rotationDirection > 0f) { rotationDirection = 1f; }
         else if (rotationDirection < 0f) { rotationDirection = -1f; }
-        if (entity.GetComponentInChildren<Animator>() != null) { Animate(entity.GetComponentInChildren<Animator>(), rotationDirection, angle, lastTile); }
+        if (entity.anim != null) { Animate(entity.anim, rotationDirection, angle, lastTile); }
     }
 
     private void Animate(Animator anim, float rotationDirection, float angle, bool lastTile)

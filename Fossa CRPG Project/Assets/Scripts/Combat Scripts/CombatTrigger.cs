@@ -12,6 +12,5 @@ public class CombatTrigger : MonoBehaviour
     public void Call()
     {
         CombatEvents.current.StartCombat(EnemiesInThisCombat, OtherEntitiesInThisCombat, RoundEvents);
-        CombatEvents.current.StartCombatSetup();
     }
 }

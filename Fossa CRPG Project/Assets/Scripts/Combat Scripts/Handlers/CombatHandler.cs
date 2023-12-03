@@ -16,11 +16,14 @@ public class CombatHandler : MonoBehaviour
     public GameObject damageTextPrefab;
 
     //Unit Teams
+    [Header("Unit Teams")]
     public List<Entity> playerTeam;
     public List<CombatAIController> enemyTeam;
     public List<CombatAIController> otherTeam;
     public List<CombatObstacle> obstacles;
 
+    [Header("Start Combat Animation")]
+    public Animator startCombatAnim;
     //Dropped Loot after combat
     //List of dropped items
     public int totalDroppedExp;
@@ -56,6 +59,9 @@ public class CombatHandler : MonoBehaviour
         turnHandler.StartCombat(activeUnits, RoundEvents);
 
         totalDroppedExp = 0;
+
+        //Animate the combat start ui
+        StartCoroutine(StartCombatDisplay());
     }
 
     public void EndCombat()
@@ -120,11 +126,10 @@ public class CombatHandler : MonoBehaviour
             yield return null;
         }
 
-        if (attacker.GetComponentInChildren<Animator>() != null)
+        if (attacker.anim != null)
         {
-            Animator anim = attacker.GetComponentInChildren<Animator>();
-            anim.Play("Attack");
-            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+            attacker.anim.Play("Attack");
+            yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
         bool tookDamage = false;
@@ -148,11 +153,10 @@ public class CombatHandler : MonoBehaviour
         }
 
         //Animate Taking Damage
-        if (target.GetComponentInChildren<Animator>() != null && tookDamage)
+        if (target.anim != null && tookDamage)
         {
-            Animator anim = target.GetComponentInChildren<Animator>();
-            anim.Play("Take Damage");
-            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+            target.anim.Play("Take Damage");
+            yield return new WaitUntil(() => target.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
         StartCoroutine(DelayedTurnEnd());
@@ -180,11 +184,10 @@ public class CombatHandler : MonoBehaviour
             yield return null;
         }
 
-        if (attacker.GetComponentInChildren<Animator>() != null)
+        if (attacker.anim != null)
         {
-            Animator anim = attacker.GetComponentInChildren<Animator>();
-            anim.Play(ability.AnimationName);
-            yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+            attacker.anim.Play(ability.AnimationName);
+            yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
         foreach (Entity target in affectedTargets)
@@ -363,5 +366,21 @@ public class CombatHandler : MonoBehaviour
             otherTeam.Add(entity.GetComponent<CombatAIController>());
         }
     }
+    
+    private IEnumerator StartCombatDisplay()
+    {
+        startCombatAnim.gameObject.SetActive(true);
+        startCombatAnim.Play("Start Combat");
+
+        if (startCombatAnim != null)
+        {
+            startCombatAnim.Play("StartCombat");
+            yield return new WaitUntil(() => startCombatAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+        }
+
+        startCombatAnim.gameObject.SetActive(false);
+        CombatEvents.current.StartCombatSetup();
+    }
+
     #endregion
 }

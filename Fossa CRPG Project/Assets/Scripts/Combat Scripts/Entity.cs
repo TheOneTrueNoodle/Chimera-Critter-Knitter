@@ -15,7 +15,7 @@ public class Entity : MonoBehaviour
     [HideInInspector] public bool isDead = false;
     public int TeamID; //0 = player ID, 1 = Enemies, 2 = Allies
 
-    private Animator anim;
+    public Animator anim;
 
     [HideInInspector] public bool isDefending;
 

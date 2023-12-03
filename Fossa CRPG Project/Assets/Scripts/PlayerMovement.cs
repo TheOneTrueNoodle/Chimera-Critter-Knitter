@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (CombatEvents.current != null)
         {
-            CombatEvents.current.onStartCombatSetup += StartCombat;
+            CombatEvents.current.onStartCombat += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
             if(DialogueEvents.current != null)
             {
@@ -171,13 +171,14 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Rotation", animRotation);
     }
 
-    private void StartCombat()
+    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
     {
         inCombat = true;
     }
     private void EndCombat()
     {
         inCombat = false;
+        anim.Play("Movement Blend");
     }
     private void StartDialogue()
     {
