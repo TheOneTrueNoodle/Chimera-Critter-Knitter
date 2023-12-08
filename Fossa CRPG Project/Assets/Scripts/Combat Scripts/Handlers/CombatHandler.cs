@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 using Combat;
 
 public class CombatHandler : MonoBehaviour
@@ -17,6 +18,7 @@ public class CombatHandler : MonoBehaviour
 
     //Unit Teams
     [Header("Unit Teams")]
+    private Entity oscar;
     public List<Entity> playerTeam;
     public List<CombatAIController> enemyTeam;
     public List<CombatAIController> otherTeam;
@@ -27,6 +29,9 @@ public class CombatHandler : MonoBehaviour
     //Dropped Loot after combat
     //List of dropped items
     public int totalDroppedExp;
+
+    [Header("Music")]
+    public StudioEventEmitter eventEmitter;
 
     private void Start()
     {
@@ -47,7 +52,7 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
     {
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
@@ -94,8 +99,15 @@ public class CombatHandler : MonoBehaviour
 
     public void TurnEnd()
     {
+        UpdateMusic();
         tileHandler.ClearTiles();
         turnHandler.nextTurn();
+    }
+
+    private void UpdateMusic()
+    {
+        var percentageHealthMissing = ((oscar.activeStatsDir["MaxHP"].baseStatValue - oscar.activeStatsDir["MaxHP"].statValue) / oscar.activeStatsDir["MaxHP"].baseStatValue) * 100;
+        eventEmitter.Params[0].Value = percentageHealthMissing;
     }
 
     #region Combat Interactions
@@ -281,6 +293,8 @@ public class CombatHandler : MonoBehaviour
         playerTeam = new List<Entity>();
         enemyTeam = enemies;
         otherTeam = others;
+
+        oscar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
 
         foreach (var item in UnitsUnsorted)
         {

@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Rotation", animRotation);
     }
 
-    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
+    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
     {
         inCombat = true;
     }

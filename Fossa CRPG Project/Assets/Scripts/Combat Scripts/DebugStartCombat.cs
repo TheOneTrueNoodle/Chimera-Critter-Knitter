@@ -6,6 +6,6 @@ public class DebugStartCombat : MonoBehaviour
 {
     public void Call()
     {
-        CombatEvents.current.StartCombat(null, null, null);
+        //CombatEvents.current.StartCombat(null, null, null, null);
     }
 }

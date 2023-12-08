@@ -1,5 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8731527974522679376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Synth Battle Theme/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 3435597141
+    data2: 3533344424
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-5112272232976100101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +39,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638370690736876793
+  lastModified: 638376449340702367
   FileSizes:
   - Name: Desktop
-    Value: 8538560
+    Value: 10665056
   Exists: 1
 --- !u!114 &-5048287000575278700
 MonoBehaviour:
@@ -63,10 +87,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638370690736577576
+  lastModified: 638376449288796703
   FileSizes:
   - Name: Desktop
-    Value: 964
+    Value: 1076
   Exists: 1
 --- !u!114 &-2355530187874687512
 MonoBehaviour:
@@ -83,7 +107,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Oscar
-  lastModified: 638370690736886743
+  lastModified: 638376449341520345
   FileSizes:
   - Name: Desktop
     Value: 57056
@@ -103,7 +127,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638357478277385471
+  lastModified: 638376449288776069
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -128,13 +152,42 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 5516033000607997400}
   - {fileID: -5048287000575278700}
+  - {fileID: 310832406655117020}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638370690736886743
+  cacheTime: 638376449341520345
   cacheVersion: 131609
+--- !u!114 &310832406655117020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Synth Battle Theme
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Synth Battle Theme
+  Guid:
+    Data1: -467460182
+    Data2: 1208287167
+    Data3: 1847353482
+    Data4: -1885566849
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8731527974522679376}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 103384
 --- !u!114 &4866422764725654706
 MonoBehaviour:
   m_ObjectHideFlags: 0

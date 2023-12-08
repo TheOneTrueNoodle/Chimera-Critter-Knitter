@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class CombatEvents : MonoBehaviour
 {
@@ -11,12 +12,12 @@ public class CombatEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>> onStartCombat;
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents)
+    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, EventReference> onStartCombat;
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
     {
         if (onStartCombat != null)
         {
-            onStartCombat(enemies, others, RoundEvents);
+            onStartCombat(enemies, others, RoundEvents, BattleTheme);
         }
     }
 

@@ -2891,6 +2891,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CombatName: Test Combat 1
+  BattleTheme:
+    Guid:
+      Data1: -467460182
+      Data2: 1208287167
+      Data3: 1847353482
+      Data4: -1885566849
+    Path: event:/Music/Synth Battle Theme
   EnemiesInThisCombat:
   - {fileID: 1046803242}
   - {fileID: 373582176}
@@ -10912,6 +10919,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: 1
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -28447,6 +28455,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: 1
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -32414,6 +32423,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: 1
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -48776,6 +48786,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: -1
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -57572,6 +57583,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: 1
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -69539,8 +69551,47 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6623838905585082712, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1459894122}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8392726127292093124, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8490449486564745797}
   m_SourcePrefab: {fileID: 100100000, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
+--- !u!1 &8490449486564745796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8392726127292093124, guid: 4519b058f2c7ef24f8200bff3ef9ba98, type: 3}
+  m_PrefabInstance: {fileID: 8490449486564745795}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8490449486564745797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8490449486564745796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -467460182
+      Data2: 1208287167
+      Data3: 1847353482
+      Data4: -1885566849
+    Path: event:/Music/Synth Battle Theme
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
