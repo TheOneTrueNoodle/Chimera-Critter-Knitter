@@ -30,8 +30,7 @@ public class CombatHandler : MonoBehaviour
     //List of dropped items
     public int totalDroppedExp;
 
-    [Header("Music")]
-    public StudioEventEmitter eventEmitter;
+    private float previousSong;
 
     private void Start()
     {
@@ -52,7 +51,7 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
@@ -67,6 +66,10 @@ public class CombatHandler : MonoBehaviour
 
         //Animate the combat start ui
         StartCoroutine(StartCombatDisplay());
+
+        //Music Time
+        previousSong = AudioManager.instance.GetCurrentSong();
+        AudioManager.instance.SetMusicSong(BattleTheme);
     }
 
     public void EndCombat()
@@ -88,6 +91,7 @@ public class CombatHandler : MonoBehaviour
         otherTeam.Clear();
 
         turnHandler.EndCombat();
+        AudioManager.instance.SetMusicSong(previousSong);
         CombatEvents.current.EndCombat();
     }
 
@@ -106,8 +110,8 @@ public class CombatHandler : MonoBehaviour
 
     private void UpdateMusic()
     {
-        var percentageHealthMissing = ((oscar.activeStatsDir["MaxHP"].baseStatValue - oscar.activeStatsDir["MaxHP"].statValue) / oscar.activeStatsDir["MaxHP"].baseStatValue) * 100;
-        eventEmitter.Params[0].Value = percentageHealthMissing;
+        float percentageHealthMissing = ((oscar.activeStatsDir["MaxHP"].baseStatValue - oscar.activeStatsDir["MaxHP"].statValue) / oscar.activeStatsDir["MaxHP"].baseStatValue) * 100;
+        AudioManager.instance.SetSongParameter("Intensity", percentageHealthMissing);
     }
 
     #region Combat Interactions

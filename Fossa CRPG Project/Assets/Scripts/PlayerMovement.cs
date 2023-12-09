@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 oldForward;
 
     private bool doingBigTurn;
-
-    public EventInstance playerFootsteps;
+    [HideInInspector] public FootstepInstance footstepInstance;
 
     private void Start()
     {
@@ -40,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         anim = GetComponentInChildren<Animator>();
+        footstepInstance = GetComponent<FootstepInstance>();
         Debug.Log(anim);
-        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.oscarFootsteps);
 
         oldForward = transform.forward;
     }
@@ -55,9 +54,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (inCombat || inDialogue) { return; }
+        if (inCombat || inDialogue) { return; } 
         Move();
-        UpdateSound();
+        bool playing = _input != Vector3.zero ? true : false;
+        Debug.Log(playing);
+        footstepInstance.UpdateSound(playing, Input.GetButton("Run") ? 1f : 0.4f);
     }
 
     private void GatherInput()
@@ -173,29 +174,10 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Rotation", animRotation);
     }
 
-    private void UpdateSound()
-    {
-        if (_input.normalized.magnitude != 0)
-        {
-            PLAYBACK_STATE playbackstate;
-            playerFootsteps.getPlaybackState(out playbackstate);
-            if (playbackstate.Equals(PLAYBACK_STATE.STOPPED))
-            {
-                playerFootsteps.start();
-            }
-
-            float velocityValue = Input.GetButton("Run") ? 1f : 0.4f;
-            playerFootsteps.setParameterByName("Velocity", velocityValue);
-        }
-        else
-        {
-            playerFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        }
-    }
-
-    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
+    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         inCombat = true;
+        footstepInstance.UpdateSound(false, 0f);
     }
     private void EndCombat()
     {
@@ -205,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
     private void StartDialogue()
     {
         inDialogue = true;
+        footstepInstance.UpdateSound(false, 0f);
     }
     private void EndDialogue()
     {

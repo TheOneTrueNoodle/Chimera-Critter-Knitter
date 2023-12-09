@@ -5,9 +5,18 @@ using FMODUnity;
 
 public class FMODEvents : MonoBehaviour
 {
+
+    [field: Header("Ambience")]
+    [field: SerializeField] public EventReference areaAmbience { get; private set; }
+
+    [field: Header("Music")]
+    [field: SerializeField] public EventReference areaMusic { get; private set; }
+
     [field: Header("Oscar SFX")]
     [field: SerializeField] public EventReference oscarBark { get; private set; }
-    [field: SerializeField] public EventReference oscarFootsteps { get; private set; }
+
+    [field: Header("Unit SFX")]
+    [field: SerializeField] public EventReference footsteps { get; private set; }
     public static FMODEvents instance { get; private set; }
 
     private void Awake()

@@ -12,8 +12,8 @@ public class CombatEvents : MonoBehaviour
         current = this;
     }
 
-    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, EventReference> onStartCombat;
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)
+    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, float> onStartCombat;
+    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         if (onStartCombat != null)
         {

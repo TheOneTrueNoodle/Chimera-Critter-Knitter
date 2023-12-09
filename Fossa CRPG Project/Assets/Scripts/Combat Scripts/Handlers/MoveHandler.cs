@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveHandler
 {
-    private static int unitSpeed = 3;
+    private static int unitSpeed = 5;
     private static int unitTurnSpeed = 720;
     static private float animSmoothingSpeed = 2f;
     private float animSpeed;
@@ -54,6 +54,7 @@ public class MoveHandler
             }
         }
 
+        entity.footstepInstance.UpdateSound(false, 0f);
         CombatEvents.current.TilePositionEntity(entity, finalTile);
         if(entity.TeamID == 0)
         {
@@ -69,6 +70,7 @@ public class MoveHandler
     {
         Rigidbody rb = entity.gameObject.GetComponent<Rigidbody>();
         rb.MovePosition(entity.transform.position + entity.transform.forward * unitSpeed * Time.deltaTime);
+        entity.footstepInstance.UpdateSound(true, 1f);
     }
 
     private void Look(Entity entity, Vector3 target, bool lastTile)

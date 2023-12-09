@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1509471493680038482}
   - component: {fileID: 2834023146450161041}
   - component: {fileID: 5788418332756671876}
-  - component: {fileID: 4837792867932378996}
+  - component: {fileID: 8603322746952953031}
   m_Layer: 0
   m_Name: Oscar (Player)
   m_TagString: Player
@@ -54,6 +54,7 @@ MonoBehaviour:
   myTurn: 0
   isDead: 0
   TeamID: 0
+  anim: {fileID: 0}
   isDefending: 0
   activeAbilities: []
   Resistances: 
@@ -80,6 +81,7 @@ MonoBehaviour:
   walkTurnSpeed: 351.5
   runTurnSpeed: 213.2
   animSmoothingSpeed: 2
+  footstepInstance: {fileID: 0}
 --- !u!54 &2834023146450161041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ CapsuleCollider:
   m_Height: 0.87
   m_Direction: 2
   m_Center: {x: 0, y: 0.2680845, z: -0.03999999}
---- !u!114 &4837792867932378996
+--- !u!114 &8603322746952953031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,28 +141,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2832980219465188229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Script: {fileID: 11500000, guid: 537da7d9c82a3aa4d93ba92b5d58b435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1488647691
-      Data2: 1093187803
-      Data3: -2110865744
-      Data4: 544056417
-    Path: event:/SFX/Bark
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &3072398623241547592
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,14 +19,15 @@ public class Entity : MonoBehaviour
 
     [HideInInspector] public bool isDefending;
 
-    //ACTIVE STATS
+    [Header("Active Stats")]
     public Dictionary<string, Stat> activeStatsDir;
-    //ACTIVE ABILITIES
+    [Header("Active Abilities")]
     public List<AbilityData> activeAbilities;
-    //RESISTANCES AND WEAKNESSES
+    [Header("Resistances & Weaknesses")]
     public List<DamageTypes> Resistances = new List<DamageTypes>();
     public List<DamageTypes> Weaknesses = new List<DamageTypes>();
-    //DAMAGE TYPE
+    
+    //Damage Types
     [HideInInspector] public DamageTypes AttackDamageType;
     [HideInInspector] public int WeaponRange;
 
@@ -35,6 +36,8 @@ public class Entity : MonoBehaviour
     public int exp;
     private int requiredExp;
 
+    [HideInInspector] public FootstepInstance footstepInstance;
+
     private void Start()
     {
         if (CombatEvents.current != null)
@@ -42,6 +45,7 @@ public class Entity : MonoBehaviour
             CombatEvents.current.onEndCombat += EndCombat;
         }
         if (GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
+        footstepInstance = GetComponent<FootstepInstance>();
     }
 
     public void UpdateStats()

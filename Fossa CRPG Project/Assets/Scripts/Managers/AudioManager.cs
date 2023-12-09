@@ -9,6 +9,9 @@ public class AudioManager : MonoBehaviour
 {
     private List<EventInstance> eventInstances;
 
+    private EventInstance ambienceEventInstance;
+    private EventInstance musicEventInstance;
+
     public static AudioManager instance { get; private set; }
 
     private void Awake()
@@ -20,6 +23,44 @@ public class AudioManager : MonoBehaviour
         instance = this;
 
         eventInstances = new List<EventInstance>();
+    }
+
+    private void Start()
+    {
+        if (!FMODEvents.instance.areaAmbience.IsNull) { InitializeAmbience(FMODEvents.instance.areaAmbience); }
+        if (!FMODEvents.instance.areaMusic.IsNull) { InitializeMusic(FMODEvents.instance.areaMusic); }
+    }
+
+    private void InitializeAmbience(EventReference ambienceEventReference)
+    {
+        ambienceEventInstance = CreateInstance(ambienceEventReference);
+        ambienceEventInstance.start();
+    }
+
+    private void InitializeMusic(EventReference musicEventReference)
+    {
+        musicEventInstance = CreateInstance(musicEventReference);
+        musicEventInstance.start();
+    }
+
+    public void SetAmbienceParameter(string parameterName, float parameterValue)
+    {
+        ambienceEventInstance.setParameterByName(parameterName, parameterValue);
+    }
+    public float GetCurrentSong()
+    {
+        float currentSong;
+        musicEventInstance.getParameterByName("Song", out currentSong);
+        return currentSong;
+    }
+    public void SetMusicSong(float Song)
+    {
+        musicEventInstance.setParameterByName("Song", Song);
+        Debug.Log("Changing song supposedly to this number: " + Song);
+    }
+    public void SetSongParameter(string parameterName, float parameterValue)
+    {
+        musicEventInstance.setParameterByName(parameterName, parameterValue);
     }
 
     public void PlayOneShot(EventReference sound, Vector3 worldPos)
