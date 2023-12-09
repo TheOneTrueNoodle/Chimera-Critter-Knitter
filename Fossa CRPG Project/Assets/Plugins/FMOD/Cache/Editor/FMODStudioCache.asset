@@ -39,10 +39,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638376449340702367
+  lastModified: 638377231304309283
   FileSizes:
   - Name: Desktop
-    Value: 10665056
+    Value: 10665120
   Exists: 1
 --- !u!114 &-5048287000575278700
 MonoBehaviour:
@@ -87,10 +87,34 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638376449288796703
+  lastModified: 638377261269066157
   FileSizes:
   - Name: Desktop
-    Value: 1076
+    Value: 1208
+  Exists: 1
+--- !u!114 &-2638738465839351985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 113230309
+    data2: 1501533093
+  Type: 0
+  IsGlobal: 0
+  Labels: []
   Exists: 1
 --- !u!114 &-2355530187874687512
 MonoBehaviour:
@@ -107,11 +131,40 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Oscar
-  lastModified: 638376449341520345
+  lastModified: 638377261269975284
   FileSizes:
   - Name: Desktop
-    Value: 57056
+    Value: 72544
   Exists: 1
+--- !u!114 &-1178390186597127467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Footsteps
+  Guid:
+    Data1: 2147094255
+    Data2: 1290520812
+    Data3: -380704587
+    Data4: 1301752058
+  Banks:
+  - {fileID: -2355530187874687512}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 3019920591943824063}
+  - {fileID: -2638738465839351985}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 251
 --- !u!114 &-474671126756450370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +180,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638376449288776069
+  lastModified: 638377261269046250
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -153,12 +206,13 @@ MonoBehaviour:
   - {fileID: 5516033000607997400}
   - {fileID: -5048287000575278700}
   - {fileID: 310832406655117020}
+  - {fileID: -1178390186597127467}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638376449341520345
+  cacheTime: 638377261269975284
   cacheVersion: 131609
 --- !u!114 &310832406655117020
 MonoBehaviour:
@@ -188,6 +242,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 103384
+--- !u!114 &3019920591943824063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Floor Type
+  m_EditorClassIdentifier: 
+  Name: Floor Type
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1298702443
+    data2: 725362663
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Carpet
+  - Grass
+  - Wood
+  Exists: 1
 --- !u!114 &4866422764725654706
 MonoBehaviour:
   m_ObjectHideFlags: 0

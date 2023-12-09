@@ -390,7 +390,7 @@ public class CursorController : MonoBehaviour
         {
             usingMouse = true;
         }
-        else if (Input.GetAxisRaw("Combat Horizontal") != 0 || Input.GetAxisRaw("Combat Vertical") != 0)
+        else if (Input.GetAxisRaw("Combat Horizontal") >= 0.1 || Input.GetAxisRaw("Combat Horizontal") <= -0.1 || Input.GetAxisRaw("Combat Vertical") >= 0.1 || Input.GetAxisRaw("Combat Vertical") <= -0.1)
         {
             usingMouse = false;
         }

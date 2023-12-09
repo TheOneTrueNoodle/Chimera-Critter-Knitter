@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -22,9 +23,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Vector3 oldForward;
 
-    private StudioEventEmitter barkSFX;
-
     private bool doingBigTurn;
+
+    public EventInstance playerFootsteps;
 
     private void Start()
     {
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         }
         anim = GetComponentInChildren<Animator>();
         Debug.Log(anim);
-        barkSFX = GetComponent<StudioEventEmitter>();
+        playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.oscarFootsteps);
 
         oldForward = transform.forward;
     }
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inCombat || inDialogue) { return; }
         Move();
+        UpdateSound();
     }
 
     private void GatherInput()
@@ -67,9 +69,9 @@ public class PlayerMovement : MonoBehaviour
     private void Bark()
     {
         //Do bark code
-        if (barkSFX.IsPlaying()) { return; }
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Bark")) { return; }
         anim.Play("Bark");
-        barkSFX.Play();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position);
     }
 
     private void Look()
@@ -169,6 +171,26 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetFloat("Speed", animSpeed);
         anim.SetFloat("Rotation", animRotation);
+    }
+
+    private void UpdateSound()
+    {
+        if (_input.normalized.magnitude != 0)
+        {
+            PLAYBACK_STATE playbackstate;
+            playerFootsteps.getPlaybackState(out playbackstate);
+            if (playbackstate.Equals(PLAYBACK_STATE.STOPPED))
+            {
+                playerFootsteps.start();
+            }
+
+            float velocityValue = Input.GetButton("Run") ? 1f : 0.4f;
+            playerFootsteps.setParameterByName("Velocity", velocityValue);
+        }
+        else
+        {
+            playerFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
 
     private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, EventReference BattleTheme)

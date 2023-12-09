@@ -2,64 +2,49 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using FMODUnity;
+using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour
 {
+    private List<EventInstance> eventInstances;
 
-    public Sound[] sounds;
-
-    static AudioManager instance;
+    public static AudioManager instance { get; private set; }
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
+        if(instance != null)
         {
-            Destroy(gameObject);
-            return;
+            Debug.LogError("Found more than one Audio Manager in the scene");
         }
+        instance = this;
 
-        //DontDestroyOnLoad(gameObject);
-
-        foreach (Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
+        eventInstances = new List<EventInstance>();
     }
 
-    private void Start()
+    public void PlayOneShot(EventReference sound, Vector3 worldPos)
     {
-        //Play("BackgroundTheme");
+        RuntimeManager.PlayOneShot(sound, worldPos); 
     }
 
-    public void Play(string name)
+    public EventInstance CreateInstance(EventReference eventReference)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
-        }
-        s.source.Play();
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        eventInstances.Add(eventInstance);
+        return eventInstance;
     }
 
-    public void Stop(string name)
+    private void CleanUp()
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.source.Stop();
-        if (s == null)
+        foreach (EventInstance eventInstance in eventInstances)
         {
-            return;
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
         }
     }
 
+    private void OnDestroy()
+    {
+        CleanUp();
+    }
 }
-
-// FindObjectOfType<AudioManager>().Play("soundname");
