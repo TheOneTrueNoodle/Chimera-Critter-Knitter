@@ -70,6 +70,27 @@ public class Entity : MonoBehaviour
             }
         }
     }
+
+    public void FlashWhite(Material DMGMat) { StartCoroutine(Flash(DMGMat)); }
+
+    public IEnumerator Flash(Material DMGMat)
+    {
+        Debug.Log("FLASH");
+        List<Material> mats = new List<Material>();
+        foreach(Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            mats.Add(renderer.material);
+            renderer.material = DMGMat;
+        }
+        yield return new WaitForSeconds(0.5f);
+        int i = 0;
+        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
+        {
+            renderer.material = mats[i];
+            i++;
+        }
+    }
+
     #endregion
     #region initialization
     public void Initialize()
