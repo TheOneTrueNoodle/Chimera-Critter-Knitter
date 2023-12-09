@@ -40,7 +40,6 @@ public class PlayerMovement : MonoBehaviour
         }
         anim = GetComponentInChildren<Animator>();
         footstepInstance = GetComponent<FootstepInstance>();
-        Debug.Log(anim);
 
         oldForward = transform.forward;
     }

@@ -21,7 +21,6 @@ public class FootstepInstance : MonoBehaviour
             if (playbackstate.Equals(PLAYBACK_STATE.STOPPED))
             {
                 playerFootsteps.start();
-                Debug.Log("Playing footstep");
             }
 
             playerFootsteps.setParameterByName("Velocity", velocity);
