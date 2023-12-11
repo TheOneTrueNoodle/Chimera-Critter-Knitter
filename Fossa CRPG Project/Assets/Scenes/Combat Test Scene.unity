@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657618, g: 0.4964127, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657576, g: 0.49641234, b: 0.5748163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14140,6 +14140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 479612635}
   - component: {fileID: 479612634}
+  - component: {fileID: 479612636}
   m_Layer: 0
   m_Name: Main Cam Handler
   m_TagString: Untagged
@@ -14202,6 +14203,23 @@ Transform:
   - {fileID: 1116912891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 45, z: 0.002}
+--- !u!114 &479612636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479612633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729aad4491e915a41bda2b8325cf757a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FocusTracksTarget: 0
+  m_FocusTracking: 0
+  m_FocusTarget: {fileID: 0}
+  m_FocusOffset: 0
+  m_Profile: {fileID: 11400000, guid: a865d6ae1241d624890c203a23796301, type: 2}
 --- !u!1001 &480640944
 PrefabInstance:
   m_ObjectHideFlags: 0
