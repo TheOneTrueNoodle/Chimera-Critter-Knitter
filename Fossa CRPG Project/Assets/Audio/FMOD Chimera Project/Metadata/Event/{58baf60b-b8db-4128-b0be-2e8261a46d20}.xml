@@ -92,8 +92,10 @@
 		<property name="length">
 			<value>0.60000000000000009</value>
 		</property>
+		<property name="pitch">
+			<value>-2</value>
+		</property>
 		<relationship name="sounds">
-			<destination>{4dbf1f9a-e3c4-4bc8-a4ff-949197128159}</destination>
 			<destination>{312c85a2-acd7-4280-8448-17a214c0addc}</destination>
 			<destination>{a0f5ccaa-3bd5-4723-9ff1-bd89e1162d48}</destination>
 			<destination>{a39e7e55-0f1d-4427-a0c2-d9884ad18045}</destination>
@@ -101,6 +103,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{6742f403-f968-4420-b54e-281950ac3699}">
+		<property name="volume">
+			<value>-11.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -120,13 +125,12 @@
 			<destination>{68d23245-ab72-4a18-b79b-7f2006139621}</destination>
 		</relationship>
 	</object>
-	<object class="MixerBusPanner" id="{3f174da5-b8e0-4582-84b8-a2d1bb98ac7f}" />
-	<object class="MixerBusFader" id="{69303dae-843c-4b42-959a-ea4459f67420}" />
-	<object class="SingleSound" id="{4dbf1f9a-e3c4-4bc8-a4ff-949197128159}">
-		<relationship name="audioFile">
-			<destination>{5f8db535-18ff-4d92-bbb1-de12adb8ece3}</destination>
-		</relationship>
+	<object class="MixerBusPanner" id="{3f174da5-b8e0-4582-84b8-a2d1bb98ac7f}">
+		<property name="surroundLFELevel">
+			<value>10</value>
+		</property>
 	</object>
+	<object class="MixerBusFader" id="{69303dae-843c-4b42-959a-ea4459f67420}" />
 	<object class="SingleSound" id="{312c85a2-acd7-4280-8448-17a214c0addc}">
 		<relationship name="audioFile">
 			<destination>{3ac536c0-0239-4300-9a23-e373f8637112}</destination>

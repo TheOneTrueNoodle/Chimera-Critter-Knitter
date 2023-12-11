@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5814439992306401021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TakeDamage
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TakeDamage
+  Guid:
+    Data1: 141395909
+    Data2: 1266929020
+    Data3: 99256473
+    Data4: -572672105
+  Banks:
+  - {fileID: -2355530187874687512}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 500
 --- !u!114 &-5674773873118958337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,10 +110,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638377355477373709
+  lastModified: 638379273626167433
   FileSizes:
   - Name: Desktop
-    Value: 1206
+    Value: 1246
   Exists: 1
 --- !u!114 &-2638738465839351985
 MonoBehaviour:
@@ -127,10 +154,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Oscar
-  lastModified: 638377330912409769
+  lastModified: 638379273627350066
   FileSizes:
   - Name: Desktop
-    Value: 72672
+    Value: 73120
   Exists: 1
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
@@ -176,7 +203,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638377355477347492
+  lastModified: 638379273626137132
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -228,12 +255,13 @@ MonoBehaviour:
   - {fileID: 5516033000607997400}
   - {fileID: -1178390186597127467}
   - {fileID: 8495811127305233432}
+  - {fileID: -5814439992306401021}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638377355478487451
+  cacheTime: 638379273627350066
   cacheVersion: 131609
 --- !u!114 &3019920591943824063
 MonoBehaviour:

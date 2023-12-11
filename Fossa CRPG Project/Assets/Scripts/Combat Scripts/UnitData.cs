@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 using Combat;
 
 [CreateAssetMenu(fileName = "New_Unit_Data", menuName = "Combat/Units/New Unit Data", order = 0)]
@@ -34,6 +35,10 @@ public class UnitData : ScriptableObject
     public ScriptableArmour Armour;
     public ScriptableAccessory Accessory1;
     public ScriptableAccessory Accessory2;
+
+    [Header("Audio")]
+    public EventReference defaultAttackSFX;
+    public EventReference takeDamageSFX;
 
     [Header("Loot Tables")]
     //A LIST OF DROPPABLE ITEMS WITH WEIGHTS FOR DROP CHANCE
