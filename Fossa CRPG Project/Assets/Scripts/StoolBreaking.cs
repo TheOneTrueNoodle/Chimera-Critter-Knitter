@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Break : MonoBehaviour
+public class StoolBreaking : MonoBehaviour
 {
 
     public GameObject Stool1;
