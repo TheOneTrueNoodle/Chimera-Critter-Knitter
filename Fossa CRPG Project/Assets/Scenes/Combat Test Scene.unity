@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657576, g: 0.49641234, b: 0.5748163, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657618, g: 0.4964127, b: 0.57481706, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -65651,6 +65651,30 @@ PrefabInstance:
     - target: {fileID: 2832980219465188229, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_Name
       value: Oscar (Player)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740421388293811093, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.293
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740421388293811093, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_LocalPosition.x
