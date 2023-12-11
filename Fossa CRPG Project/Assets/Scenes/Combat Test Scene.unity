@@ -48606,6 +48606,7 @@ MonoBehaviour:
   WeaponRange: 0
   level: 1
   exp: 0
+  bloodSplatter: {fileID: 0}
   footstepInstance: {fileID: 0}
   Destructable: 1
 --- !u!1001 &1582601476
@@ -65607,6 +65608,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2545947775919547025, guid: 3e90d7c450dcf914682403780bbc09c5, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5606900446924855428, guid: 3e90d7c450dcf914682403780bbc09c5, type: 3}
       propertyPath: m_Name
       value: Test Enemy
@@ -65762,36 +65767,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 230181543659135786, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2832980219465188229, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_Name
       value: Oscar (Player)
       objectReference: {fileID: 0}
     - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: InitialModule.rotation3D
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.2
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3800246743274379082, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.1
+      propertyPath: CollisionModule.multiplyColliderForceByCollisionAngle
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6740421388293811093, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.293
+    - target: {fileID: 4981016394378279697, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6740421388293811093, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
-      propertyPath: m_LocalPosition.z
+    - target: {fileID: 6405791144317142764, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
@@ -65832,6 +65829,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7524623978805808578, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7617882462431403121, guid: cda73dc2770846e479d112ee24b1da60, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

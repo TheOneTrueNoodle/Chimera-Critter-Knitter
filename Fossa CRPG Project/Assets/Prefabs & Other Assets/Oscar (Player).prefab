@@ -35,7 +35,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7761004722208141797}
-  - {fileID: 7021513932974819958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2074194747416481621
@@ -64,6 +63,7 @@ MonoBehaviour:
   WeaponRange: 0
   level: 1
   exp: 0
+  bloodSplatter: {fileID: 3800246743274379082}
   footstepInstance: {fileID: 0}
 --- !u!114 &1509471493680038482
 MonoBehaviour:
@@ -176,6 +176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7278061570925085493}
+  - {fileID: 7021513932974819958}
   m_Father: {fileID: 7524623978805808578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3623558716256977844
@@ -246,15 +247,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7524623978805808578}
+    m_TransformParent: {fileID: 7761004722208141797}
     m_Modifications:
     - target: {fileID: 1256005146229321992, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.155
+      value: 0.293
       objectReference: {fileID: 0}
     - target: {fileID: 1256005146229321992, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3284705451640787179, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -301,6 +302,18 @@ PrefabInstance:
       value: Blood
       objectReference: {fileID: 0}
     - target: {fileID: 8672177837128109527, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672177837128109527, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672177837128109527, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672177837128109527, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 3
       objectReference: {fileID: 0}
@@ -309,6 +322,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
+--- !u!198 &3800246743274379082 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8672177837128109527, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
+  m_PrefabInstance: {fileID: 5540821228299557533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7021513932974819958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3284705451640787179, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}

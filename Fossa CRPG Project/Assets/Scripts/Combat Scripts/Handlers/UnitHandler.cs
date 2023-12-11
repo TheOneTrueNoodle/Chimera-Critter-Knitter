@@ -5,9 +5,9 @@ using Combat;
 
 public class UnitHandler
 {
-    public void UnitSufferAbility(Entity target, AbilityData ability, int damage, Material DamageMaterial)
+    public void UnitSufferAbility(Entity target, AbilityData ability, int damage)
     {
-        if (ability.damageType != DamageTypes.Healing) { UnitSufferDamage(target, damage, DamageMaterial); }
+        if (ability.damageType != DamageTypes.Healing) { UnitSufferDamage(target, damage); }
         else if (damage > 0 && ability.damageType == DamageTypes.Healing) { UnitHeals(target, damage); }
     }
 
@@ -28,12 +28,12 @@ public class UnitHandler
         }
     }
 
-    public void UnitSufferDamage(Entity target, int damage, Material DMGMat)
+    public void UnitSufferDamage(Entity target, int damage)
     {
         Debug.Log("Taken " + damage + " damage");
         target.activeStatsDir["MaxHP"].statValue -= damage;
 
-        target.FlashWhite(DMGMat);
+        target.BloodSplash();
 
         if (target.activeStatsDir["MaxHP"].statValue <= 0)
         {

@@ -15,7 +15,6 @@ public class CombatHandler : MonoBehaviour
     [Header("Damage Text")]
     public Transform damageTextParent;
     public GameObject damageTextPrefab;
-    public Material DamageMaterial;
     //Unit Teams
     [Header("Unit Teams")]
     private Entity oscar;
@@ -155,14 +154,14 @@ public class CombatHandler : MonoBehaviour
             {
                 if (obstacle.Destructable)
                 {
-                    unitHandler.UnitSufferDamage(target, damage, DamageMaterial);
+                    unitHandler.UnitSufferDamage(target, damage);
                     DisplayDamageText(damage, target, attacker.AttackDamageType);
                     tookDamage = true;
                 }
             }
             else
             {
-                unitHandler.UnitSufferDamage(target, damage, DamageMaterial);
+                unitHandler.UnitSufferDamage(target, damage);
                 DisplayDamageText(damage, target, attacker.AttackDamageType);
                 tookDamage = true;
             }
@@ -226,12 +225,12 @@ public class CombatHandler : MonoBehaviour
 
             if (physicalDamage > 0 && !target.isDead)
             {
-                unitHandler.UnitSufferDamage(target, physicalDamage, DamageMaterial);
+                unitHandler.UnitSufferDamage(target, physicalDamage);
                 DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
             }
             if (abilityDamage > 0 && !target.isDead)
             {
-                unitHandler.UnitSufferAbility(target, ability, abilityDamage, DamageMaterial);
+                unitHandler.UnitSufferAbility(target, ability, abilityDamage);
                 DisplayDamageText(abilityDamage, target, ability.damageType);
             }
         }

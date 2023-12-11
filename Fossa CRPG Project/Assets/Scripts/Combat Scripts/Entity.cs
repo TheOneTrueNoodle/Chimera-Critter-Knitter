@@ -36,6 +36,9 @@ public class Entity : MonoBehaviour
     public int exp;
     private int requiredExp;
 
+    [Header("Visuals")]
+    public ParticleSystem bloodSplatter;
+
     [HideInInspector] public FootstepInstance footstepInstance;
 
     private void Start()
@@ -71,24 +74,13 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void FlashWhite(Material DMGMat) { StartCoroutine(Flash(DMGMat)); }
-
-    public IEnumerator Flash(Material DMGMat)
+    public void BloodSplash() 
     {
-        Debug.Log("FLASH");
-        List<Material> mats = new List<Material>();
-        foreach(Renderer renderer in GetComponentsInChildren<Renderer>())
+        if (bloodSplatter != null)
         {
-            mats.Add(renderer.material);
-            renderer.material = DMGMat;
+            bloodSplatter.Play();
         }
-        yield return new WaitForSeconds(0.5f);
-        int i = 0;
-        foreach (Renderer renderer in GetComponentsInChildren<Renderer>())
-        {
-            renderer.material = mats[i];
-            i++;
-        }
+        else { Debug.LogError("No assigned blood splatter"); }
     }
 
     #endregion
