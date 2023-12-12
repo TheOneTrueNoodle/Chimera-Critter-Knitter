@@ -111,6 +111,15 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
+    public event Action<Entity, int> onGiveUnitEXP;
+    public void GiveUnitEXP(Entity unit, int xp)
+    {
+        if (onGiveUnitEXP != null)
+        {
+            onGiveUnitEXP(unit, xp);
+        }
+    }
+
     public event Action<Entity, Entity> onAttackAttempt;
     public void AttackAttempt(Entity attacker, Entity target)
     {

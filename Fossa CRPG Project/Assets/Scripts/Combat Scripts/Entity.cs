@@ -34,7 +34,7 @@ public class Entity : MonoBehaviour
     [Header("Level Information")]
     public int level = 1;
     public int exp;
-    [HideInInspector] public int requiredExp;
+    public int requiredExp;
 
     [Header("Visuals")]
     public GameObject GFX;
@@ -106,7 +106,7 @@ public class Entity : MonoBehaviour
             activeStatsDir = new Dictionary<string, Stat>();
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
-                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue));
+                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue * (level * CharacterData.level_modifier)));
             }
         }
         CharacterData.SetEquipment();
@@ -141,9 +141,13 @@ public class Entity : MonoBehaviour
     #endregion
 
     #region EXP AND LEVELING
-    public void IncreaseEXP(int xp)
+    public void IncreaseEXP(XPBar bar, int xp)
     {
-        if(exp < requiredExp && level < CharacterData.levelConfig.MaxLevel)
+        if (bar != null)
+        {
+            StartCoroutine(XPBarAnimated(bar, xp));
+        }
+        else
         {
             exp += xp;
             while (exp >= requiredExp && level < CharacterData.levelConfig.MaxLevel)
@@ -156,11 +160,51 @@ public class Entity : MonoBehaviour
     public void LevelUp()
     {
         level++;
+
+        //Animate the XP Bar
+        //Update Stats
+
         CalculateRequiredEXP();
     }
     public void CalculateRequiredEXP()
     {
         requiredExp = CharacterData.levelConfig.GetRequiredExp(level);
+    }
+    private IEnumerator XPBarAnimated(XPBar bar, int totalXP)
+    {
+        bar.xpBar.maxValue = requiredExp;
+        bar.xpBar.value = exp;
+
+        while (totalXP > 0)
+        {
+            bar.xpBar.maxValue = requiredExp;
+            bar.xpBar.value = exp;
+            int targetValue = exp + totalXP;
+            bool levelUp = false;
+
+            if (targetValue >= requiredExp)
+            {
+                targetValue = requiredExp - exp;
+                totalXP -= targetValue;
+                levelUp = true;
+            }
+            else { totalXP = 0; }
+
+            float lerpTimer = 0;
+            while (lerpTimer < 1)
+            {
+                lerpTimer += Time.deltaTime;
+                bar.xpBar.value = Mathf.Lerp(bar.xpBar.value, targetValue, lerpTimer);
+                yield return null;
+            }
+
+            if (levelUp && level < CharacterData.levelConfig.MaxLevel)
+            {
+                exp = 0;
+                bar.LevelUpEffect();
+                LevelUp();
+            }
+        }
     }
     #endregion
 }

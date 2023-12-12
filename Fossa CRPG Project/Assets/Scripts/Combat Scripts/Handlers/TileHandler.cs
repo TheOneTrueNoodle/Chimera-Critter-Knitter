@@ -56,7 +56,7 @@ public class TileHandler
             entity.activeTile.isBlocked = false;
             entity.activeTile.activeCharacter = null;
         }
-        if (tile == null) { Debug.LogError("Tile is null"); }
+        if (tile == null) { Debug.LogError("Tile is null for " + entity.CharacterData.Name); }
 
         entity.transform.position = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - 0.0001f, tile.gameObject.transform.position.z);
         entity.activeTile = tile;

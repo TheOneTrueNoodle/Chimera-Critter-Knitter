@@ -53,6 +53,7 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onActionComplete += ActionComplete;
         CombatEvents.current.onGetSelectedTile += SetupExamineUI;
+        CombatEvents.current.onGiveUnitEXP += GiveUnitEXP;
 
         cursor = FindObjectOfType<CursorController>();
     }
@@ -315,6 +316,17 @@ public class CombatUI : MonoBehaviour
         ExamineUI.gameObject.SetActive(true);
         ExamineUI.AssignEntity(overlayTile);
         ChangeCursorMode(6);
+    }
+    private void GiveUnitEXP(Entity unit, int xp)
+    {
+        if (currentUnitUI.currentChar = unit)
+        {
+            unit.IncreaseEXP(currentUnitUI.EXPBar, xp);
+        }
+        else
+        {
+            unit.IncreaseEXP(null, xp);
+        }
     }
     private void StartCombat()
     {

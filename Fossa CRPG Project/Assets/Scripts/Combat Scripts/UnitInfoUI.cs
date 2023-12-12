@@ -21,7 +21,7 @@ public class UnitInfoUI : MonoBehaviour
     public TMP_Text SPText;
 
     [Header("XP Variables")]
-    public Slider XPBar;
+    public XPBar EXPBar;
     public TMP_Text XPCurrentText;
     public TMP_Text XPRequiredText;
 
@@ -62,22 +62,6 @@ public class UnitInfoUI : MonoBehaviour
             SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
             SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
             SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
-
-            //XP Updates
-            if (XPBar != null)
-            {
-                if (Char == currentChar)
-                {
-                    if (XPBar.value != Char.exp) { StartCoroutine(SliderCatchup(XPBar, Char.exp, XPBar.value, Char.requiredExp)); }
-                }
-                else
-                {
-                    XPBar.maxValue = Char.requiredExp;
-                    XPBar.value = Char.exp;
-                }
-                XPCurrentText.text = Char.exp.ToString();
-                XPRequiredText.text = Char.requiredExp.ToString();
-            }
 
             currentChar = Char;
         }

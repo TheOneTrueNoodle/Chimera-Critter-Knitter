@@ -241,20 +241,31 @@ public class CombatHandler : MonoBehaviour
         turnHandler.UnitDeath(target);
 
         //Find dropped items
-        float EXP = Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
-        EXP /= playerTeam.Count;
-        foreach (Entity entity in playerTeam)
+        if(target.TeamID > 0)
         {
-            entity.IncreaseEXP((int)EXP);
+            int EXP = Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
+            EXP /= playerTeam.Count;
+            foreach (Entity entity in playerTeam)
+            {
+                CombatEvents.current.GiveUnitEXP(entity, EXP);
+            }
         }
+
         if (target.TeamID == 1)
         {
             enemyTeam.Remove(target.GetComponent<CombatAIController>());
         }
-
+        else if (target.TeamID == 0)
+        {
+            playerTeam.Remove(target);
+        }
         if (enemyTeam.Count <= 0)
         {
             EndCombat();
+        }
+        else if (playerTeam.Count <= 0)
+        {
+            //Lose combat L bozo
         }
     }
 
