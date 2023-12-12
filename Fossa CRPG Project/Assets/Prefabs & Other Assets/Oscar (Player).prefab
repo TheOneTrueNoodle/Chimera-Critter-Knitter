@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7761004722208141797}
+  - {fileID: 7021513932974819958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2074194747416481621
@@ -63,6 +64,8 @@ MonoBehaviour:
   WeaponRange: 0
   level: 1
   exp: 0
+  requiredExp: 0
+  GFX: {fileID: 3072398623241547592}
   bloodSplatter: {fileID: 3800246743274379082}
   footstepInstance: {fileID: 0}
 --- !u!114 &1509471493680038482
@@ -176,7 +179,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7278061570925085493}
-  - {fileID: 7021513932974819958}
   m_Father: {fileID: 7524623978805808578}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3623558716256977844
@@ -247,7 +249,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 7761004722208141797}
+    m_TransformParent: {fileID: 7524623978805808578}
     m_Modifications:
     - target: {fileID: 1256005146229321992, guid: 7b8b30ab32c81324d85a92245d8e9b5e, type: 3}
       propertyPath: m_LocalPosition.y

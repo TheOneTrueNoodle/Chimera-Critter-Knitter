@@ -34,9 +34,10 @@ public class Entity : MonoBehaviour
     [Header("Level Information")]
     public int level = 1;
     public int exp;
-    private int requiredExp;
+    [HideInInspector] public int requiredExp;
 
     [Header("Visuals")]
+    public GameObject GFX;
     public ParticleSystem bloodSplatter;
 
     [HideInInspector] public FootstepInstance footstepInstance;
@@ -49,6 +50,7 @@ public class Entity : MonoBehaviour
         }
         if (GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
         footstepInstance = GetComponent<FootstepInstance>();
+        CalculateRequiredEXP();
     }
 
     public void UpdateStats()
@@ -126,9 +128,13 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void Die()
+    {
+        GFX.SetActive(false);
+    }
+
     private void EndCombat()
     {
-        activeTile = null;
         UpdateStats();
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
     }
@@ -137,10 +143,10 @@ public class Entity : MonoBehaviour
     #region EXP AND LEVELING
     public void IncreaseEXP(int xp)
     {
-        if(exp >= requiredExp && level < CharacterData.levelConfig.MaxLevel)
+        if(exp < requiredExp && level < CharacterData.levelConfig.MaxLevel)
         {
             exp += xp;
-            while (exp >= requiredExp)
+            while (exp >= requiredExp && level < CharacterData.levelConfig.MaxLevel)
             {
                 exp -= requiredExp;
                 LevelUp();

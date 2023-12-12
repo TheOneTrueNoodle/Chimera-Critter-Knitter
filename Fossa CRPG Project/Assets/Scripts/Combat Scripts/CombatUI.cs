@@ -11,6 +11,7 @@ public class CombatUI : MonoBehaviour
     public UnitInfoUI selectedUnitUI;
     public ExamineUnitUI ExamineUI;
 
+    private Entity previousPlayerChar;
     private Entity Char;
     private bool started;
 
@@ -201,6 +202,7 @@ public class CombatUI : MonoBehaviour
     {
         if (Char != null)
         {
+            if(Char.TeamID == 0) { previousPlayerChar = Char; }
             var previousTurnIcon = activeTurnIcons.First();
             activeTurnIcons.RemoveAt(0);
             Destroy(previousTurnIcon.gameObject);
@@ -242,7 +244,15 @@ public class CombatUI : MonoBehaviour
         if (!started) { return; }
         var selectedTile = cursor.currentTile;
 
-        currentUnitUI.UpdateUI(Char);
+        if(Char.TeamID == 0)
+        {
+            currentUnitUI.UpdateUI(Char);
+        }
+        else if(previousPlayerChar != null)
+        {
+            currentUnitUI.UpdateUI(previousPlayerChar);
+        }
+
 
         if (selectedTile != null)
         {

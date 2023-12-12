@@ -56,10 +56,51 @@ public class TileHandler
             entity.activeTile.isBlocked = false;
             entity.activeTile.activeCharacter = null;
         }
+        if (tile == null) { Debug.LogError("Tile is null"); }
 
         entity.transform.position = new Vector3(tile.gameObject.transform.position.x, tile.gameObject.transform.position.y - 0.0001f, tile.gameObject.transform.position.z);
         entity.activeTile = tile;
         entity.activeTile.isBlocked = true;
         entity.activeTile.activeCharacter = entity;
+    }
+
+    public void ClearUnitTiles(List<Entity> playerEntities, List<CombatAIController> enemyEntities, List<CombatAIController> otherEntities, List<CombatObstacle> obstacles)
+    {
+        foreach (Entity player in playerEntities)
+        {
+            if (player.activeTile != null)
+            {
+                player.activeTile.isBlocked = false;
+                player.activeTile.activeCharacter = null;
+                player.activeTile = null;
+            }
+        }
+        foreach (Entity enemy in enemyEntities)
+        {
+            if (enemy.activeTile != null)
+            {
+                enemy.activeTile.isBlocked = false;
+                enemy.activeTile.activeCharacter = null;
+                enemy.activeTile = null;
+            }
+        }
+        foreach (Entity other in otherEntities)
+        {
+            if (other.activeTile != null)
+            {
+                other.activeTile.isBlocked = false;
+                other.activeTile.activeCharacter = null;
+                other.activeTile = null;
+            }
+        }
+        foreach (CombatObstacle obstacle in obstacles)
+        {
+            if (obstacle.activeTile != null)
+            {
+                obstacle.activeTile.isBlocked = false;
+                obstacle.activeTile.activeCharacter = null;
+                obstacle.activeTile = null;
+            }
+        }
     }
 }

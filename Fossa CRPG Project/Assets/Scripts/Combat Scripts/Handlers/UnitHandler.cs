@@ -53,7 +53,6 @@ public class UnitHandler
         }
     }
 
-
     public void UnitDeath(Entity target)
     {
         if (target.activeTile != null)
@@ -63,7 +62,7 @@ public class UnitHandler
         }
 
         target.isDead = true;
-        target.gameObject.SetActive(false);
+        target.Die();
         CombatEvents.current.UnitDeath(target);
     }
 }

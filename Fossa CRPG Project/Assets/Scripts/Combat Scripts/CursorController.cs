@@ -40,7 +40,6 @@ public class CursorController : MonoBehaviour
     private List<OverlayTile> abilityArea = new List<OverlayTile>();
 
     private bool UIMode;
-    private OverlayTile UISelectedTile;
 
     private void Start()
     {
@@ -487,16 +486,6 @@ public class CursorController : MonoBehaviour
             case 5:
                 //UI Startup
                 actionActive = false;
-                if (currentTile != null && !UIMode)
-                {
-                    UISelectedTile = currentTile;
-                    UIMode = true;
-                }
-                else if(UISelectedTile != null)
-                {
-                    transform.position = UISelectedTile.gameObject.transform.position;
-                    gameObject.GetComponentInChildren<Canvas>().sortingOrder = UISelectedTile.GetComponentInChildren<Canvas>().sortingOrder + 1;
-                }
                 break;
             case 4:
                 //Ability Startup

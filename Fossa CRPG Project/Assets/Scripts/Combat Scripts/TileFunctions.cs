@@ -15,8 +15,9 @@ namespace Combat
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer_mask))
             {
-                Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow);
+                Debug.DrawRay(pos3d, Vector3.down * 10, Color.yellow, 10f);
                 OverlayTile hitTile = hit.collider.gameObject.GetComponent<OverlayTile>();
+                Debug.Log(hitTile.transform.position + " | Hit tile is blocked = " + hitTile.isBlocked);
 
                 if (hitTile.isBlocked != true || hideBlockedTiles == false)
                 {
@@ -53,7 +54,6 @@ namespace Combat
                     }
                 }
             }
-
             Debug.Log("They arent finding the tiles anymore...");
             return null;
         }

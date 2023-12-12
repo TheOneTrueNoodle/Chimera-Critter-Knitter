@@ -27,7 +27,6 @@ public class CombatHandler : MonoBehaviour
     public Animator startCombatAnim;
     //Dropped Loot after combat
     //List of dropped items
-    public int totalDroppedExp;
 
     private float previousSong;
 
@@ -61,8 +60,6 @@ public class CombatHandler : MonoBehaviour
         var activeUnits = FindAllActiveUnits(enemies, others);
         turnHandler.StartCombat(activeUnits, RoundEvents);
 
-        totalDroppedExp = 0;
-
         //Animate the combat start ui
         StartCoroutine(StartCombatDisplay());
 
@@ -74,16 +71,8 @@ public class CombatHandler : MonoBehaviour
     public void EndCombat()
     {
         Debug.Log("Combat over");
-        Debug.Log("Player Number: " + playerTeam.Count);
-        Debug.Log("EXP: " + totalDroppedExp);
-        if (totalDroppedExp > 0)
-        {
-            totalDroppedExp /= playerTeam.Count;
-            foreach (Entity entity in playerTeam)
-            {
-                entity.IncreaseEXP(totalDroppedExp);
-            }
-        }
+
+        tileHandler.ClearUnitTiles(playerTeam, enemyTeam, otherTeam, obstacles);
 
         playerTeam.Clear();
         enemyTeam.Clear();
@@ -252,7 +241,12 @@ public class CombatHandler : MonoBehaviour
         turnHandler.UnitDeath(target);
 
         //Find dropped items
-        totalDroppedExp += Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
+        float EXP = Random.Range(target.CharacterData.minExpDrop, target.CharacterData.maxExpDrop);
+        EXP /= playerTeam.Count;
+        foreach (Entity entity in playerTeam)
+        {
+            entity.IncreaseEXP((int)EXP);
+        }
         if (target.TeamID == 1)
         {
             enemyTeam.Remove(target.GetComponent<CombatAIController>());
