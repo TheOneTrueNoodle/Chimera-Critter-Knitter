@@ -32,6 +32,11 @@ public class UnitInfoUI : MonoBehaviour
     {
         if (Char != null)
         {
+            if (Char.activeStatsDir == null)
+            {
+                Char.UpdateStats();
+            }
+
             //Basic Updates
             portrait.sprite = Char.CharacterData.portrait;
             Name.text = Char.CharacterData.Name;

@@ -38,10 +38,12 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private Transform turnIconParent;
     private List<TurnOrderIcon> activeTurnIcons;
 
+    [Header("End Combat UI")]
+    [SerializeField] private GameObject endCombatUI;
+
     private bool UIOpen;
     private bool actionActive;
     private bool hasMoved;
-    private OverlayTile selectedTile;
 
     private CursorController cursor;
 
@@ -50,12 +52,13 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onNewTurn += SetupCombatUI;
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onTurnOrderDisplay += NewRoundTurnOrder;
-        CombatEvents.current.onEndCombat += EndCombat;
+        CombatEvents.current.onOpenVictoryUI += OpenVictoryUI;
         CombatEvents.current.onActionComplete += ActionComplete;
         CombatEvents.current.onGetSelectedTile += SetupExamineUI;
         CombatEvents.current.onGiveUnitEXP += GiveUnitEXP;
 
         cursor = FindObjectOfType<CursorController>();
+        Char = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
     }
 
     private void Update()
@@ -125,7 +128,12 @@ public class CombatUI : MonoBehaviour
         UIOpen = true;
         //Display Action UI
         ActionUI.gameObject.SetActive(true);
-        PositionUI(ActionUI, Char.gameObject.transform.position);
+
+        Vector3 position = Char.gameObject.transform.position;
+        if(Char.UITarget != null) { position = Char.UITarget.position; }
+        else { Debug.LogError("No assigned UITarget"); }
+
+        PositionUI(ActionUI, position);
         if (ActionUI.TryGetComponent(out Animator anim))
         {
             anim.Play("Open");
@@ -201,6 +209,7 @@ public class CombatUI : MonoBehaviour
 
     private void SetupCombatUI(Entity entity)
     {
+        Debug.Log(Char);
         if (Char != null)
         {
             if(Char.TeamID == 0) { previousPlayerChar = Char; }
@@ -242,36 +251,40 @@ public class CombatUI : MonoBehaviour
     }
     public void UpdateInformationUI()
     {
-        if (!started) { return; }
-        var selectedTile = cursor.currentTile;
-
-        if(Char.TeamID == 0)
+        if (!started) 
+        { return; }
+        if (Char != null)
         {
-            currentUnitUI.UpdateUI(Char);
-        }
-        else if(previousPlayerChar != null)
-        {
-            currentUnitUI.UpdateUI(previousPlayerChar);
-        }
+            var selectedTile = cursor.currentTile;
 
-
-        if (selectedTile != null)
-        {
-            if(selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
+            if (Char.TeamID == 0)
             {
-                //Display ui of selected character
-                selectedUnitUI.UpdateUI(selectedTile.activeCharacter);
-                if (!selectedUnitUI.gameObject.activeInHierarchy)
-                {
-                    selectedUnitUI.gameObject.SetActive(true);
-                }
+                currentUnitUI.UpdateUI(Char);
             }
-            else
+            else if (previousPlayerChar != null)
             {
-                //Hide unit UI
-                if (selectedUnitUI.gameObject.activeInHierarchy)
+                currentUnitUI.UpdateUI(previousPlayerChar);
+            }
+
+
+            if (selectedTile != null)
+            {
+                if (selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
                 {
-                    selectedUnitUI.gameObject.SetActive(false);
+                    //Display ui of selected character
+                    selectedUnitUI.UpdateUI(selectedTile.activeCharacter);
+                    if (!selectedUnitUI.gameObject.activeInHierarchy)
+                    {
+                        selectedUnitUI.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    //Hide unit UI
+                    if (selectedUnitUI.gameObject.activeInHierarchy)
+                    {
+                        selectedUnitUI.gameObject.SetActive(false);
+                    }
                 }
             }
         }
@@ -302,7 +315,7 @@ public class CombatUI : MonoBehaviour
             Destroy(turnIcon.gameObject);
         }
         activeTurnIcons.Clear();
-
+        Debug.Log(allUnits.Count);
         foreach (Entity unit in allUnits)
         {
             TurnOrderIcon newTurnOrderIcon = Instantiate(turnIconPrefab, turnIconParent).GetComponent<TurnOrderIcon>();
@@ -319,6 +332,7 @@ public class CombatUI : MonoBehaviour
     }
     private void GiveUnitEXP(Entity unit, int xp)
     {
+
         if (currentUnitUI.currentChar = unit)
         {
             unit.IncreaseEXP(currentUnitUI.EXPBar, xp);
@@ -331,11 +345,19 @@ public class CombatUI : MonoBehaviour
     private void StartCombat()
     {
         started = true;
+        started = true;
         UIParent.SetActive(true);
     }
-    private void EndCombat()
+    private void OpenVictoryUI()
+    {
+        endCombatUI.SetActive(true);
+        endCombatUI.GetComponent<Animator>().Play("Open");
+    }
+    public void EndCombat()
     {
         started = false;
         UIParent.SetActive(false);
+        Char = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
+        CombatEvents.current.EndCombat();
     }
 }

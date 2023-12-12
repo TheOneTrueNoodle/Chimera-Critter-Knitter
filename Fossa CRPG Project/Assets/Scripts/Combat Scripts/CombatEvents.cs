@@ -48,6 +48,15 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
+    public event Action onOpenVictoryUI;
+    public void OpenVictoryUI()
+    {
+        if (onOpenVictoryUI != null)
+        {
+            onOpenVictoryUI();
+        }
+    }
+
     public event Action<Entity> onNewTurn;
     public void NewTurn(Entity activeChar)
     {

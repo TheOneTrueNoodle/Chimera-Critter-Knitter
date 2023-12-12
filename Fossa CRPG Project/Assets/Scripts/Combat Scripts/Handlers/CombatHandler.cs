@@ -12,9 +12,11 @@ public class CombatHandler : MonoBehaviour
     [HideInInspector] public UnitHandler unitHandler;
     [HideInInspector] public TileHandler tileHandler;
 
-    [Header("Damage Text")]
-    public Transform damageTextParent;
+    [Header("World Text")]
+    public Transform worldTextParent;
     public GameObject damageTextPrefab;
+    public GameObject xpTextPrefab;
+
     //Unit Teams
     [Header("Unit Teams")]
     private Entity oscar;
@@ -25,6 +27,7 @@ public class CombatHandler : MonoBehaviour
 
     [Header("Start Combat Animation")]
     public Animator startCombatAnim;
+
     //Dropped Loot after combat
     //List of dropped items
 
@@ -80,7 +83,7 @@ public class CombatHandler : MonoBehaviour
 
         turnHandler.EndCombat();
         AudioManager.instance.SetMusicSong(previousSong);
-        CombatEvents.current.EndCombat();
+        CombatEvents.current.OpenVictoryUI();
     }
 
     public IEnumerator DelayedTurnEnd()
@@ -247,6 +250,12 @@ public class CombatHandler : MonoBehaviour
             EXP /= playerTeam.Count;
             foreach (Entity entity in playerTeam)
             {
+                GameObject xpDisp = Instantiate(xpTextPrefab, worldTextParent);
+
+                var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
+                xpDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
+
+                xpDisp.GetComponent<XPText>().Setup(EXP);
                 CombatEvents.current.GiveUnitEXP(entity, EXP);
             }
         }
@@ -273,7 +282,7 @@ public class CombatHandler : MonoBehaviour
     {
         string dmgText = damage.ToString();
         if (damage <= 0) { dmgText = "MISS"; }
-        GameObject dmgDisp = Instantiate(damageTextPrefab, damageTextParent);
+        GameObject dmgDisp = Instantiate(damageTextPrefab, worldTextParent);
 
         var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
         dmgDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);

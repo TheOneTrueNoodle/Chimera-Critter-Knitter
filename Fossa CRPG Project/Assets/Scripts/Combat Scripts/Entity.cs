@@ -39,6 +39,7 @@ public class Entity : MonoBehaviour
 
     [Header("Visuals")]
     public GameObject GFX;
+    public Transform UITarget;
     public ParticleSystem bloodSplatter;
 
     [HideInInspector] public FootstepInstance footstepInstance;
@@ -62,7 +63,7 @@ public class Entity : MonoBehaviour
             activeStatsDir = new Dictionary<string, Stat>();
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
-                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue * (level * CharacterData.level_modifier)));
+                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue));
             }
         }
         else

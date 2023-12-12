@@ -40,8 +40,8 @@ public class TurnHandler
             }
         }
 
-        CombatEvents.current.NewTurn(activeTurnOrder.First());
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
+        CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 
     public void EndCombat()
