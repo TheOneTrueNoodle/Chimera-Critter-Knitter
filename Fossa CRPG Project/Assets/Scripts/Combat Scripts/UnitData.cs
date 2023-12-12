@@ -50,6 +50,9 @@ public class UnitData : ScriptableObject
         if (statsDir == null)
             statsDir = new Dictionary<string, Stat>();
 
+        var usedLevelModifier = level_modifier;
+        if(level == 1) { usedLevelModifier = 1; }
+
         var fields = typeof(UnitStats).GetFields();
         for (int i = 1; i < fields.Length; i++)
         {
@@ -58,11 +61,11 @@ public class UnitData : ScriptableObject
             //If already declared, just update the stat
             if (statsDir.ContainsKey(fields[i].Name))
             {
-                statsDir[fields[i].Name].updateStat(Mathf.Round(value * (level * level_modifier)));
+                statsDir[fields[i].Name].updateStat(Mathf.Round(value * (level * usedLevelModifier)));
             }
             else
             {
-                statsDir.Add(fields[i].Name, new Stat(fields[i].Name, Mathf.Round(value * (level * level_modifier))));
+                statsDir.Add(fields[i].Name, new Stat(fields[i].Name, Mathf.Round(value * (level * usedLevelModifier))));
             }
         }
     }

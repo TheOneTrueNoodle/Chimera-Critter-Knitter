@@ -8908,8 +8908,8 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 100
+  m_WholeNumbers: 0
+  m_Value: 9.1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8935,6 +8935,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpBar: {fileID: 8940246396602530960}
   anim: {fileID: 7617202984506105913}
+  currentXP: {fileID: 6326405593953081541}
+  requiredXP: {fileID: 253128284531833342}
+  unit: {fileID: 0}
+  speed: 3
 --- !u!95 &7617202984506105913
 Animator:
   serializedVersion: 5

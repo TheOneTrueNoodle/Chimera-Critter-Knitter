@@ -63,6 +63,13 @@ public class UnitInfoUI : MonoBehaviour
             SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
             SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
 
+            //XP Updates
+            if (EXPBar != null)
+            {
+                XPCurrentText.text = Char.exp.ToString();
+                XPRequiredText.text = Char.requiredExp.ToString();
+            }
+
             currentChar = Char;
         }
         else

@@ -2,42 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class XPBar : MonoBehaviour
 {
     public Slider xpBar;
     public Animator anim;
+    public TMP_Text currentXP;
+    public TMP_Text requiredXP;
 
-    public float targetXP;
     public Entity unit;
 
     public float speed = 3f;
-    private float lerpTimer;
 
     private void Start()
     {
         CombatEvents.current.onNewTurn += NewTurn;
     }
-
-    private void Update()
+    public void UpdateInfo()
     {
-        if (xpBar.value != targetXP && unit != null)
-        {
-            IncreaseEXP();
-        }
+        currentXP.text = unit.exp.ToString();
+        requiredXP.text = unit.requiredExp.ToString();
     }
-
-    public void IncreaseEXP()
-    {
-
-    }
-
-    private void UpdateInfo()
+    private void UpdateBar()
     {
         xpBar.maxValue = unit.requiredExp;
         xpBar.value = unit.exp;
     }
-    
     public void LevelUpEffect()
     {
         anim.Play("Level Up");
@@ -49,6 +40,7 @@ public class XPBar : MonoBehaviour
         {
             unit = newUnit;
             UpdateInfo();
+            UpdateBar();
         }
     }
 }

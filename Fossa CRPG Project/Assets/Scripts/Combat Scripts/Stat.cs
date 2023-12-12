@@ -23,7 +23,11 @@ public class Stat
 
     public void updateStat(float newValue)
     {
-        statValue = newValue;
+        baseStatValue = newValue;
+        if (!isModified)
+        {
+            statValue = newValue;
+        }
     }
     public void ApplyStatMod(Entity entity)
     {

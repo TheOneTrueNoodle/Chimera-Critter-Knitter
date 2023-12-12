@@ -35,6 +35,7 @@ public class Entity : MonoBehaviour
     public int level = 1;
     public int exp;
     public int requiredExp;
+    private static float XPBarSpeed = 3f;
 
     [Header("Visuals")]
     public GameObject GFX;
@@ -56,6 +57,27 @@ public class Entity : MonoBehaviour
     public void UpdateStats()
     {
         CharacterData.SetDictionaryStats(level);
+        if (activeStatsDir == null)
+        {
+            activeStatsDir = new Dictionary<string, Stat>();
+            foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
+            {
+                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue * (level * CharacterData.level_modifier)));
+            }
+        }
+        else
+        {
+            foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
+            {
+                if (item.Value.name == "MaxHP" || item.Value.name == "MaxSP")
+                {
+                    var difference = activeStatsDir[item.Value.name].baseStatValue - activeStatsDir[item.Value.name].statValue;
+                    activeStatsDir[item.Value.name] = item.Value;
+                    activeStatsDir[item.Value.name].statValue -= difference;
+                }
+                activeStatsDir[item.Value.name] = item.Value;
+            }
+        }
     }
 
     #region Combat Functions
@@ -101,14 +123,23 @@ public class Entity : MonoBehaviour
             AttackDamageType = CharacterData.defaultAttack;
             WeaponRange = 1;
         }
+
         if (activeStatsDir == null)
         {
             activeStatsDir = new Dictionary<string, Stat>();
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
-                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue * (level * CharacterData.level_modifier)));
+                activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue));
             }
         }
+        else
+        {
+            foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
+            {
+                activeStatsDir[item.Value.name] = item.Value;
+            }
+        }
+
         CharacterData.SetEquipment();
         activeAbilities = CharacterData.SetAbilities(null);
         Resistances = CharacterData.SetResistances();
@@ -161,9 +192,7 @@ public class Entity : MonoBehaviour
     {
         level++;
 
-        //Animate the XP Bar
-        //Update Stats
-
+        UpdateStats();
         CalculateRequiredEXP();
     }
     public void CalculateRequiredEXP()
@@ -179,13 +208,14 @@ public class Entity : MonoBehaviour
         {
             bar.xpBar.maxValue = requiredExp;
             bar.xpBar.value = exp;
+            int startValue = exp;
             int targetValue = exp + totalXP;
             bool levelUp = false;
 
             if (targetValue >= requiredExp)
             {
-                targetValue = requiredExp - exp;
-                totalXP -= targetValue;
+                targetValue = requiredExp;
+                totalXP -= (requiredExp - exp);
                 levelUp = true;
             }
             else { totalXP = 0; }
@@ -194,7 +224,9 @@ public class Entity : MonoBehaviour
             while (lerpTimer < 1)
             {
                 lerpTimer += Time.deltaTime;
-                bar.xpBar.value = Mathf.Lerp(bar.xpBar.value, targetValue, lerpTimer);
+                bar.xpBar.value = Mathf.Lerp(startValue, targetValue, lerpTimer);
+                exp = (int)bar.xpBar.value;
+                bar.UpdateInfo();
                 yield return null;
             }
 

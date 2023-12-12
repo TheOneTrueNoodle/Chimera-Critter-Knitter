@@ -56,7 +56,6 @@ public class PlayerMovement : MonoBehaviour
         if (inCombat || inDialogue) { return; } 
         Move();
         bool playing = _input != Vector3.zero ? true : false;
-        Debug.Log(playing);
         footstepInstance.UpdateSound(playing, Input.GetButton("Run") ? 1f : 0.4f);
     }
 
