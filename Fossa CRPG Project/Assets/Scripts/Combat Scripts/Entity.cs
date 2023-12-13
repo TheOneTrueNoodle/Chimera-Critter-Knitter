@@ -177,7 +177,7 @@ public class Entity : MonoBehaviour
     {
         if (bar != null)
         {
-            StartCoroutine(XPBarAnimated(bar, xp));
+            StartCoroutine(bar.AnimateXP(xp, this));
         }
         else
         {
@@ -199,45 +199,6 @@ public class Entity : MonoBehaviour
     public void CalculateRequiredEXP()
     {
         requiredExp = CharacterData.levelConfig.GetRequiredExp(level);
-    }
-    private IEnumerator XPBarAnimated(XPBar bar, int totalXP)
-    {
-        bar.xpBar.maxValue = requiredExp;
-        bar.xpBar.value = exp;
-
-        while (totalXP > 0)
-        {
-            bar.xpBar.maxValue = requiredExp;
-            bar.xpBar.value = exp;
-            int startValue = exp;
-            int targetValue = exp + totalXP;
-            bool levelUp = false;
-
-            if (targetValue >= requiredExp)
-            {
-                targetValue = requiredExp;
-                totalXP -= (requiredExp - exp);
-                levelUp = true;
-            }
-            else { totalXP = 0; }
-
-            float lerpTimer = 0;
-            while (lerpTimer < 1)
-            {
-                lerpTimer += Time.deltaTime;
-                bar.xpBar.value = Mathf.Lerp(startValue, targetValue, lerpTimer);
-                exp = (int)bar.xpBar.value;
-                bar.UpdateInfo();
-                yield return null;
-            }
-
-            if (levelUp && level < CharacterData.levelConfig.MaxLevel)
-            {
-                exp = 0;
-                bar.LevelUpEffect();
-                LevelUp();
-            }
-        }
     }
     #endregion
 }

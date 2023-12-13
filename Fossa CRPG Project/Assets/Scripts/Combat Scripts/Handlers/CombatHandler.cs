@@ -13,8 +13,9 @@ public class CombatHandler : MonoBehaviour
     [HideInInspector] public TileHandler tileHandler;
 
     [Header("World Text")]
-    public Transform worldTextParent;
+    public Transform damageTextParent;
     public GameObject damageTextPrefab;
+    public Transform xpTextParent;
     public GameObject xpTextPrefab;
 
     //Unit Teams
@@ -250,10 +251,7 @@ public class CombatHandler : MonoBehaviour
             EXP /= playerTeam.Count;
             foreach (Entity entity in playerTeam)
             {
-                GameObject xpDisp = Instantiate(xpTextPrefab, worldTextParent);
-
-                var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
-                xpDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
+                GameObject xpDisp = Instantiate(xpTextPrefab, xpTextParent);
 
                 xpDisp.GetComponent<XPText>().Setup(EXP);
                 CombatEvents.current.GiveUnitEXP(entity, EXP);
@@ -282,7 +280,7 @@ public class CombatHandler : MonoBehaviour
     {
         string dmgText = damage.ToString();
         if (damage <= 0) { dmgText = "MISS"; }
-        GameObject dmgDisp = Instantiate(damageTextPrefab, worldTextParent);
+        GameObject dmgDisp = Instantiate(damageTextPrefab, damageTextParent);
 
         var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
         dmgDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
