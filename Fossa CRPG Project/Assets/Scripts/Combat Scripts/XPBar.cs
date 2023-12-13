@@ -24,7 +24,7 @@ public class XPBar : MonoBehaviour
         currentXP.text = unit.exp.ToString();
         requiredXP.text = unit.requiredExp.ToString();
     }
-    private void UpdateBar()
+    public void UpdateBar()
     {
         xpBar.maxValue = unit.requiredExp;
         xpBar.value = unit.exp;

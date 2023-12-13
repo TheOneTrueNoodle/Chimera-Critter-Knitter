@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 64
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1127,7 +1127,7 @@ MonoBehaviour:
   RingFill: {fileID: 4018522888218921248}
   turnIconPrefab: {fileID: 7203616429214403647, guid: d7d577e742590e64ba517347be743570, type: 3}
   turnIconParent: {fileID: 1603103356209755194}
-  endCombatUI: {fileID: 0}
+  endCombatUI: {fileID: 8530696073753427617}
 --- !u!114 &2042534662293997925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4740,7 +4740,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 64
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5015,6 +5015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1a2712581765c4892139c33e2e9630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInfoUI: 1
   portrait: {fileID: 5351827097602396218}
   Name: {fileID: 6242306687215033006}
   Level: {fileID: 4102346359945870255}
@@ -5932,7 +5933,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 65
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7105,7 +7106,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -0.000030517578}
-  m_SizeDelta: {x: -250, y: 60}
+  m_SizeDelta: {x: 0, y: 60}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6246455148182380097
 MonoBehaviour:
@@ -10850,7 +10851,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 100
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 66
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11248,6 +11249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd1a2712581765c4892139c33e2e9630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerInfoUI: 0
   portrait: {fileID: 5972198222529168125}
   Name: {fileID: 4616528031171953431}
   Level: {fileID: 3641081026170777128}

@@ -1,32 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5814439992306401021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/TakeDamage
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/TakeDamage
-  Guid:
-    Data1: 141395909
-    Data2: 1266929020
-    Data3: 99256473
-    Data4: -572672105
-  Banks:
-  - {fileID: -2355530187874687512}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 500
 --- !u!114 &-5674773873118958337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +63,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638377355478487451
+  lastModified: 638378959545681541
   FileSizes:
   - Name: Desktop
     Value: 10666432
@@ -110,10 +83,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638379273626167433
+  lastModified: 638380647114660432
   FileSizes:
   - Name: Desktop
-    Value: 1246
+    Value: 1310
   Exists: 1
 --- !u!114 &-2638738465839351985
 MonoBehaviour:
@@ -154,10 +127,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Oscar
-  lastModified: 638379273627350066
+  lastModified: 638380647114710488
   FileSizes:
   - Name: Desktop
-    Value: 73120
+    Value: 105152
   Exists: 1
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
@@ -203,7 +176,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638379273626137132
+  lastModified: 638378959544501224
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -252,17 +225,45 @@ MonoBehaviour:
   - {fileID: -2355530187874687512}
   - {fileID: -5112272232976100101}
   EditorEvents:
-  - {fileID: 5516033000607997400}
   - {fileID: -1178390186597127467}
   - {fileID: 8495811127305233432}
-  - {fileID: -5814439992306401021}
+  - {fileID: 615967795857973743}
+  - {fileID: 5436785713552298462}
+  - {fileID: 5244722468213843797}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638379273627350066
+  cacheTime: 638380647114710488
   cacheVersion: 131609
+--- !u!114 &615967795857973743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oscar/Bark
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oscar/Bark
+  Guid:
+    Data1: 1488647691
+    Data2: 1093187803
+    Data3: -2110865744
+    Data4: 544056417
+  Banks:
+  - {fileID: -2355530187874687512}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
 --- !u!114 &3019920591943824063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ MonoBehaviour:
   - Grass
   - Wood
   Exists: 1
---- !u!114 &5516033000607997400
+--- !u!114 &5244722468213843797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,23 +301,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Bark
+  m_Name: event:/SFX/Oscar/TakeDamage
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Bark
+  Path: event:/SFX/Oscar/TakeDamage
   Guid:
-    Data1: 1488647691
-    Data2: 1093187803
-    Data3: -2110865744
-    Data4: 544056417
+    Data1: 141395909
+    Data2: 1266929020
+    Data3: 99256473
+    Data4: -572672105
   Banks:
   - {fileID: -2355530187874687512}
   IsStream: 0
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 600
+  Length: 500
+--- !u!114 &5436785713552298462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oscar/Bite
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oscar/Bite
+  Guid:
+    Data1: -941657292
+    Data2: 1126531501
+    Data3: -1321376884
+    Data4: -1807192087
+  Banks:
+  - {fileID: -2355530187874687512}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8495811127305233432
 MonoBehaviour:
   m_ObjectHideFlags: 0

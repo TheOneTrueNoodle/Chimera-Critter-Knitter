@@ -50,7 +50,7 @@ public class TurnHandler
         turnOrder.Clear();
         activeTurnOrder.Clear();
     }
-
+    
     public void nextTurn()
     {
         if (!inCombat) { return; }
@@ -83,7 +83,7 @@ public class TurnHandler
         activeTurnOrder.Clear();
         foreach (Entity entity in turnOrder) { activeTurnOrder.Add(entity); }
 
-        if (roundEvents != null)
+        if (roundEvents != null)        
         {
             foreach (CombatRoundEventData Event in roundEvents)
             {
@@ -94,7 +94,7 @@ public class TurnHandler
             }
         }
 
-        CombatEvents.current.NewTurn(activeTurnOrder.First());
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
+        CombatEvents.current.NewTurn(activeTurnOrder.First());
     }
 }

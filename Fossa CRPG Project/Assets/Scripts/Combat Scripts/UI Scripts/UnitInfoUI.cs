@@ -5,6 +5,9 @@ using TMPro;
 
 public class UnitInfoUI : MonoBehaviour
 {
+    public bool PlayerInfoUI;
+    private bool inCombat = false;
+
     [Header("Basic Information")]
     public Image portrait;
     public TMP_Text Name;
@@ -27,6 +30,24 @@ public class UnitInfoUI : MonoBehaviour
 
     //Private variables
     public Entity currentChar;
+
+    private void Start()
+    {
+        if (PlayerInfoUI)
+        {
+            CombatEvents.current.onStartCombatSetup += StartCombat;
+            CombatEvents.current.onEndCombat += EndCombat;
+            currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
+        }
+    }
+
+    private void Update()
+    {
+        if (!inCombat && PlayerInfoUI)
+        {
+            UpdateUI(currentChar    );
+        }
+    }
 
     public void UpdateUI(Entity Char)
     {
@@ -71,8 +92,9 @@ public class UnitInfoUI : MonoBehaviour
             //XP Updates
             if (EXPBar != null)
             {
-                XPCurrentText.text = Char.exp.ToString();
-                XPRequiredText.text = Char.requiredExp.ToString();
+                EXPBar.unit = Char;
+                EXPBar.UpdateInfo();
+                if (!inCombat) { EXPBar.UpdateBar(); }
             }
 
             currentChar = Char;
@@ -85,8 +107,6 @@ public class UnitInfoUI : MonoBehaviour
 
     private IEnumerator<WaitForSecondsRealtime> SliderCatchup(Slider Slider, float targetValue, float previousValue, float maxValue)
     {
-        Debug.LogWarning("STARTED ANIMATED BAR COROUTINE");
-
         Slider.maxValue = maxValue;
         Slider.value = previousValue;
 
@@ -103,5 +123,16 @@ public class UnitInfoUI : MonoBehaviour
             }
             yield return null;
         }
+    }
+
+    private void StartCombat()
+    {
+        inCombat = true;
+        currentChar = null;
+    }
+    private void EndCombat()
+    {
+        inCombat = false;
+        currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
     }
 }

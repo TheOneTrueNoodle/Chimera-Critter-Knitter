@@ -58,7 +58,6 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onGiveUnitEXP += GiveUnitEXP;
 
         cursor = FindObjectOfType<CursorController>();
-        Char = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
     }
 
     private void Update()
@@ -309,6 +308,7 @@ public class CombatUI : MonoBehaviour
     private void NewRoundTurnOrder(List<Entity> allUnits)
     {
         if(activeTurnIcons == null) { activeTurnIcons = new List<TurnOrderIcon>(); }
+        Char = null;
         
         foreach (TurnOrderIcon turnIcon in activeTurnIcons)
         {
@@ -345,8 +345,8 @@ public class CombatUI : MonoBehaviour
     private void StartCombat()
     {
         started = true;
-        started = true;
         UIParent.SetActive(true);
+        endCombatUI.SetActive(false);
     }
     private void OpenVictoryUI()
     {
@@ -357,7 +357,6 @@ public class CombatUI : MonoBehaviour
     {
         started = false;
         UIParent.SetActive(false);
-        Char = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
         CombatEvents.current.EndCombat();
     }
 }
