@@ -59,7 +59,15 @@ public class UnitInfoUI : MonoBehaviour
             }
 
             //Basic Updates
-            portrait.sprite = Char.CharacterData.portrait;
+            float percentageHealthMissing = ((Char.activeStatsDir["MaxHP"].baseStatValue - Char.activeStatsDir["MaxHP"].statValue) / Char.activeStatsDir["MaxHP"].baseStatValue) * 100;
+            if (percentageHealthMissing > 50)
+            {
+                portrait.sprite = Char.CharacterData.injuredPortrait;
+            }
+            else
+            {
+                portrait.sprite = Char.CharacterData.portrait;
+            }
             Name.text = Char.CharacterData.Name;
             Level.text = "LV " + Char.level.ToString();
 

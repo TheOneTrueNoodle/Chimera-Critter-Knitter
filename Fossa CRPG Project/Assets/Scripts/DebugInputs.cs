@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class DebugInputs : MonoBehaviour
 {
     private int counter = 0;
     public GameObject WinScreen;
+    public CinemachineBrain cinemachineBrain;
+    public ICinemachineCamera postprocessingcamera;
+    public ICinemachineCamera nopostprocessingcamera;
  
     void Update()
     {

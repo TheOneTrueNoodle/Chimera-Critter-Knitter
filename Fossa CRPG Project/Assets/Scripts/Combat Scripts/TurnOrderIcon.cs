@@ -13,7 +13,15 @@ public class TurnOrderIcon : MonoBehaviour
     public void Setup(Entity unit)
     {
         Char = unit;
-        portrait.sprite = unit.CharacterData.portrait;
+        float percentageHealthMissing = ((Char.activeStatsDir["MaxHP"].baseStatValue - Char.activeStatsDir["MaxHP"].statValue) / Char.activeStatsDir["MaxHP"].baseStatValue) * 100;
+        if (percentageHealthMissing > 50)
+        {
+            portrait.sprite = Char.CharacterData.injuredPortrait;
+        }
+        else
+        {
+            portrait.sprite = Char.CharacterData.portrait;
+        }
         nameDisp.text = Char.CharacterData.Name;
     }
 }

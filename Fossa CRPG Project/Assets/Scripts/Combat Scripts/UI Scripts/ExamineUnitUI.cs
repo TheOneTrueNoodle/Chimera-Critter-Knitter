@@ -32,7 +32,15 @@ public class ExamineUnitUI : MonoBehaviour
         Unit = tile.activeCharacter;
 
         //Basic Info
-        Portrait.sprite = Unit.CharacterData.portrait;
+        float percentageHealthMissing = ((Unit.activeStatsDir["MaxHP"].baseStatValue - Unit.activeStatsDir["MaxHP"].statValue) / Unit.activeStatsDir["MaxHP"].baseStatValue) * 100;
+        if (percentageHealthMissing > 50)
+        {
+            Portrait.sprite = Unit.CharacterData.injuredPortrait;
+        }
+        else
+        {
+            Portrait.sprite = Unit.CharacterData.portrait;
+        }
         UnitName.text = Unit.CharacterData.Name;
         LevelDisp.text = "Level: " + Unit.level;
         HPDisp.text = "HP: " + (int)Unit.activeStatsDir["MaxHP"].baseStatValue + " / " + (int)Unit.activeStatsDir["MaxHP"].statValue;
