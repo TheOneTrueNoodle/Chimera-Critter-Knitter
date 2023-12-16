@@ -30,6 +30,7 @@ public class UnitInfoUI : MonoBehaviour
 
     //Private variables
     public Entity currentChar;
+    private bool Animating;
 
     private void Start()
     {
@@ -37,7 +38,7 @@ public class UnitInfoUI : MonoBehaviour
         {
             CombatEvents.current.onStartCombatSetup += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
-            currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
+            if (PlayerInfoUI) { currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
         }
     }
 
@@ -45,7 +46,11 @@ public class UnitInfoUI : MonoBehaviour
     {
         if (!inCombat && PlayerInfoUI)
         {
-            UpdateUI(currentChar    );
+            UpdateUI(currentChar);
+        }
+        else if (inCombat && currentChar != null)
+        {
+            UpdateUI(currentChar);
         }
     }
 
@@ -74,10 +79,11 @@ public class UnitInfoUI : MonoBehaviour
             //HP Updates
             if (Char == currentChar)
             {
-                if (HPBar.value != Char.activeStatsDir["MaxHP"].statValue) { StartCoroutine(SliderCatchup(HPBarDelayed, Char.activeStatsDir["MaxHP"].statValue, HPBar.value, (int)Char.activeStatsDir["MaxHP"].baseStatValue)); }
+                if (HPBar.value != Char.activeStatsDir["MaxHP"].statValue && !Animating) { StartCoroutine(SliderCatchup(HPBarDelayed, Char.activeStatsDir["MaxHP"].statValue, HPBar.value, (int)Char.activeStatsDir["MaxHP"].baseStatValue)); }
             }
-            else 
+            else
             {
+                HPBarDelayed.maxValue = Char.activeStatsDir["MaxHP"].baseStatValue;
                 HPBarDelayed.value = Char.activeStatsDir["MaxHP"].statValue; 
             }
             HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
@@ -90,9 +96,13 @@ public class UnitInfoUI : MonoBehaviour
 
             if (Char == currentChar)
             {
-                if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue) { StartCoroutine(SliderCatchup(SPBarDelayed, Char.activeStatsDir["MaxSP"].statValue, SPBar.value, Char.activeStatsDir["MaxSP"].baseStatValue)); }
+                if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue && !Animating) { StartCoroutine(SliderCatchup(SPBarDelayed, Char.activeStatsDir["MaxSP"].statValue, SPBar.value, Char.activeStatsDir["MaxSP"].baseStatValue)); }
             }
-            else { SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue; }
+            else
+            {
+                SPBarDelayed.maxValue = Char.activeStatsDir["MaxSP"].baseStatValue;
+                SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue;
+            }
             SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
             SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
             SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
@@ -113,8 +123,15 @@ public class UnitInfoUI : MonoBehaviour
         }
     }
 
+    public void CloseUI()
+    {
+        currentChar = null;
+        gameObject.SetActive(false);
+    }
+
     private IEnumerator<WaitForSecondsRealtime> SliderCatchup(Slider Slider, float targetValue, float previousValue, float maxValue)
     {
+        Animating = true;
         Slider.maxValue = maxValue;
         Slider.value = previousValue;
 
@@ -131,6 +148,7 @@ public class UnitInfoUI : MonoBehaviour
             }
             yield return null;
         }
+        Animating = false;
     }
 
     private void StartCombat()

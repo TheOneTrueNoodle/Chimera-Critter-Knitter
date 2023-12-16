@@ -217,6 +217,12 @@ public class CombatUI : MonoBehaviour
             Destroy(previousTurnIcon.gameObject);
         }
 
+        if (entity.TeamID != 0)
+        {
+            selectedUnitUI.gameObject.SetActive(true);
+            selectedUnitUI.UpdateUI(entity);
+        }
+
         int cursorMode = 0;
         Char = entity;
         hasMoved = false;
@@ -254,19 +260,23 @@ public class CombatUI : MonoBehaviour
         { return; }
         if (Char != null)
         {
-            var selectedTile = cursor.currentTile;
-
             if (Char.TeamID == 0)
             {
                 currentUnitUI.UpdateUI(Char);
             }
-            else if (previousPlayerChar != null)
+            else
+            {
+                selectedUnitUI.UpdateUI(Char);
+            }
+
+            if (previousPlayerChar != null)
             {
                 currentUnitUI.UpdateUI(previousPlayerChar);
             }
 
 
-            if (selectedTile != null)
+            var selectedTile = cursor.currentTile;
+            if (selectedTile != null && Char.TeamID == 0)
             {
                 if (selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
                 {
@@ -282,7 +292,7 @@ public class CombatUI : MonoBehaviour
                     //Hide unit UI
                     if (selectedUnitUI.gameObject.activeInHierarchy)
                     {
-                        selectedUnitUI.gameObject.SetActive(false);
+                        selectedUnitUI.CloseUI();
                     }
                 }
             }
