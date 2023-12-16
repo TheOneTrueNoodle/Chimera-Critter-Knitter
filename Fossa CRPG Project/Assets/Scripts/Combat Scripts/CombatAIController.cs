@@ -51,7 +51,7 @@ public class CombatAIController : Entity
         var scenario = new Scenario();
         foreach (var tile in tileInMovementRange)
         {
-            if (!tile.isBlocked)
+            if (!tile.isBlocked || tile.activeCharacter == this)
             {
                 var tempSenario = CreateTileScenarioValue(tile);
                 //ApplyTileEffectsToScenarioValue(tile, tempSenario);

@@ -9,6 +9,7 @@ public class PathFinder
     {
         List<OverlayTile> openList = new List<OverlayTile>();
         List<OverlayTile> closedList = new List<OverlayTile>();
+        OverlayTile closestTileToEnd = start;
 
         openList.Add(start);
 
@@ -43,9 +44,14 @@ public class PathFinder
                 {
                     openList.Add(neighbour);
                 }
+
+                if (closestTileToEnd.H > neighbour.H)
+                {
+                    closestTileToEnd = neighbour;
+                }
             }
         }
-        return new List<OverlayTile>();
+        return GetFinishedList(start, closestTileToEnd);
     }
 
     public List<OverlayTile> GetFinishedList(OverlayTile start, OverlayTile end)
