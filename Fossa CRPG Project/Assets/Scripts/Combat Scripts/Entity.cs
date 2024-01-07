@@ -68,15 +68,23 @@ public class Entity : MonoBehaviour
         }
         else
         {
+            Debug.Log("HP is " + activeStatsDir["MaxHP"].statValue);
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
                 if (item.Value.name == "MaxHP" || item.Value.name == "MaxSP")
                 {
                     var difference = activeStatsDir[item.Value.name].baseStatValue - activeStatsDir[item.Value.name].statValue;
+                    Debug.Log(difference);
+                    float currentValue = activeStatsDir[item.Value.name].statValue;
+
                     activeStatsDir[item.Value.name] = item.Value;
-                    activeStatsDir[item.Value.name].statValue -= difference;
+                    if(difference != 0) { activeStatsDir[item.Value.name].statValue = currentValue; }
+                    
                 }
-                activeStatsDir[item.Value.name] = item.Value;
+                else
+                {
+                    activeStatsDir[item.Value.name] = item.Value;
+                }
             }
         }
     }

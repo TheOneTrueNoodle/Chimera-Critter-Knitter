@@ -34,18 +34,16 @@ public class UnitInfoUI : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerInfoUI)
-        {
-            CombatEvents.current.onStartCombatSetup += StartCombat;
-            CombatEvents.current.onEndCombat += EndCombat;
-            if (PlayerInfoUI) { currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
-        }
+        CombatEvents.current.onStartCombatSetup += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
+        if (PlayerInfoUI) { currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
     }
 
     private void Update()
     {
         if (!inCombat && PlayerInfoUI)
         {
+            if (currentChar == null) { currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
             UpdateUI(currentChar);
         }
         else if (inCombat && currentChar != null)

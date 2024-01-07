@@ -11,6 +11,7 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Music")]
     [field: SerializeField] public EventReference areaMusic { get; private set; }
+    [field: SerializeField] public EventReference victoryMusic { get; private set; }
 
     [field: Header("Oscar SFX")]
     [field: SerializeField] public EventReference oscarBark { get; private set; }

@@ -83,6 +83,7 @@ public class CombatHandler : MonoBehaviour
         otherTeam.Clear();
 
         turnHandler.EndCombat();
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.victoryMusic, transform.position);
         AudioManager.instance.SetMusicSong(previousSong);
         CombatEvents.current.OpenVictoryUI();
     }
