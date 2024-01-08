@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8905982750716916857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638403172674824482
+  FileSizes:
+  - Name: Desktop
+    Value: 52416
+  Exists: 1
 --- !u!114 &-8359061114945158426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +47,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3692
+--- !u!114 &-5826679858034908422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Door Open
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Door Open
+  Guid:
+    Data1: 1206984341
+    Data2: 1255572872
+    Data3: 1211397305
+    Data4: -302782023
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1903
 --- !u!114 &-5674773873118958337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,11 +157,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638402417835931418
+  lastModified: 638403172095101070
   FileSizes:
   - Name: Desktop
-    Value: 1366
+    Value: 1524
   Exists: 1
+--- !u!114 &-2810585153981810311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Door Close
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Door Close
+  Guid:
+    Data1: -563403441
+    Data2: 1233289991
+    Data3: -109406838
+    Data4: 1727360117
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1650
 --- !u!114 &-2638738465839351985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,10 +228,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Oscar
-  lastModified: 638383382810526974
+  lastModified: 638402551527592071
   FileSizes:
   - Name: Desktop
-    Value: 105152
+    Value: 128544
   Exists: 1
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
@@ -203,7 +277,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638402417835905557
+  lastModified: 638403172095080229
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -251,6 +325,7 @@ MonoBehaviour:
   - {fileID: -474671126756450370}
   - {fileID: -2355530187874687512}
   - {fileID: -5112272232976100101}
+  - {fileID: -8905982750716916857}
   EditorEvents:
   - {fileID: -1178390186597127467}
   - {fileID: 8495811127305233432}
@@ -258,13 +333,43 @@ MonoBehaviour:
   - {fileID: 5436785713552298462}
   - {fileID: 5244722468213843797}
   - {fileID: -8359061114945158426}
+  - {fileID: 39861281747888039}
+  - {fileID: -2810585153981810311}
+  - {fileID: -5826679858034908422}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638402423045440084
+  cacheTime: 638403172674824482
   cacheVersion: 131609
+--- !u!114 &39861281747888039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oscar/Growl
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oscar/Growl
+  Guid:
+    Data1: 655233104
+    Data2: 1187703249
+    Data3: -1474929513
+    Data4: -1240211481
+  Banks:
+  - {fileID: -2355530187874687512}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2121
 --- !u!114 &615967795857973743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +445,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -2355530187874687512}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
@@ -367,7 +472,7 @@ MonoBehaviour:
   Banks:
   - {fileID: -2355530187874687512}
   IsStream: 0
-  Is3D: 0
+  Is3D: 1
   IsOneShot: 1
   Parameters: []
   MinDistance: 1

@@ -208,7 +208,6 @@ public class CombatUI : MonoBehaviour
 
     private void SetupCombatUI(Entity entity)
     {
-        Debug.Log(Char);
         if (Char != null)
         {
             if(Char.TeamID == 0) { previousPlayerChar = Char; }
@@ -233,7 +232,6 @@ public class CombatUI : MonoBehaviour
 
         cancelDisp.SetActive(false);
 
-        Debug.Log(entity);
         if (entity.TeamID == 0)
         {
             cursorMode = 5;
@@ -325,7 +323,6 @@ public class CombatUI : MonoBehaviour
             Destroy(turnIcon.gameObject);
         }
         activeTurnIcons.Clear();
-        Debug.Log(allUnits.Count);
         foreach (Entity unit in allUnits)
         {
             TurnOrderIcon newTurnOrderIcon = Instantiate(turnIconPrefab, turnIconParent).GetComponent<TurnOrderIcon>();

@@ -42,6 +42,12 @@ public class TurnHandler
 
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+
+        if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
+        {
+            AudioManager.instance.PlayOneShot(activeTurnOrder.First().CharacterData.newTurnSFX, activeTurnOrder.First().transform.position);
+        }
+        else { Debug.LogError("NO NEW TURN AUDIO ASSIGNED"); }
     }
 
     public void EndCombat()
@@ -62,7 +68,16 @@ public class TurnHandler
             //NEW ROUND
             NewRound();
         }
-        else { CombatEvents.current.NewTurn(activeTurnOrder.First()); }
+        else
+        {
+            CombatEvents.current.NewTurn(activeTurnOrder.First());
+
+            if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
+            {
+                AudioManager.instance.PlayOneShot(activeTurnOrder.First().CharacterData.newTurnSFX, activeTurnOrder.First().transform.position);
+            }
+            else { Debug.LogError("NO NEW TURN AUDIO ASSIGNED"); }
+        }
     }
 
     public void AddUnitToTurnOrder(Entity entity)
@@ -96,5 +111,11 @@ public class TurnHandler
 
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+
+        if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
+        {
+            AudioManager.instance.PlayOneShot(activeTurnOrder.First().CharacterData.newTurnSFX, activeTurnOrder.First().transform.position);
+        }
+        else { Debug.LogError("NO NEW TURN AUDIO ASSIGNED"); }
     }
 }

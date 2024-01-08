@@ -40,6 +40,7 @@ public class UnitData : ScriptableObject
     [Header("Audio")]
     public EventReference defaultAttackSFX;
     public EventReference takeDamageSFX;
+    public EventReference newTurnSFX;
 
     [Header("Loot Tables")]
     //A LIST OF DROPPABLE ITEMS WITH WEIGHTS FOR DROP CHANCE
