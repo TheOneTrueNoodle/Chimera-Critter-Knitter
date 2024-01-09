@@ -339,7 +339,6 @@ public class CombatUI : MonoBehaviour
     }
     private void GiveUnitEXP(Entity unit, int xp)
     {
-
         if (currentUnitUI.currentChar = unit)
         {
             unit.IncreaseEXP(currentUnitUI.EXPBar, xp);

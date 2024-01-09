@@ -199,6 +199,7 @@ public class Entity : MonoBehaviour
     }
     public void LevelUp()
     {
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.levelUpSFX, transform.position);
         level++;
 
         UpdateStats();
