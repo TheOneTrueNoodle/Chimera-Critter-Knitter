@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMOD.Studio;
 
 public class XPBar : MonoBehaviour
 {
@@ -14,10 +15,12 @@ public class XPBar : MonoBehaviour
     public Entity unit;
 
     public float speed = 3f;
+    private EventInstance xpGainSFX;
 
     private void Start()
     {
         CombatEvents.current.onNewTurn += NewTurn;
+        xpGainSFX = AudioManager.instance.CreateInstance(FMODEvents.instance.xpGainSFX);
     }
     public void UpdateInfo()
     {
@@ -50,6 +53,8 @@ public class XPBar : MonoBehaviour
 
         while (totalXP > 0)
         {
+            xpGainSFX.start();
+
             xpBar.maxValue = unit.requiredExp;
             xpBar.value = unit.exp;
             int startValue = unit.exp;
@@ -69,9 +74,11 @@ public class XPBar : MonoBehaviour
             {
                 lerpTimer += Time.deltaTime;
                 float newValue = Mathf.Lerp(startValue, targetValue, lerpTimer);
+                float xpPercentage = Mathf.Lerp(0, 100, lerpTimer);
 
                 xpBar.value = newValue;
                 currentXP.text = ((int)newValue).ToString();
+                xpGainSFX.setParameterByName("XP Percentage", xpPercentage);
 
                 unit.exp = (int)xpBar.value;
                 UpdateInfo();
@@ -85,6 +92,6 @@ public class XPBar : MonoBehaviour
                 unit.LevelUp();
             }
         }
-
+        xpGainSFX.stop(STOP_MODE.IMMEDIATE);
     }
 }

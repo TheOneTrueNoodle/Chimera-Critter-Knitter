@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{0ef169a5-3549-4eeb-8db7-1e85572809b5}">
+		<property name="name">
+			<value>XP Percentage</value>
+		</property>
+		<relationship name="folder">
+			<destination>{57798069-48d3-4e50-986e-36dfc42073a0}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d3ba1f18-908b-47f2-a4cb-0716eb918419}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d3ba1f18-908b-47f2-a4cb-0716eb918419}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

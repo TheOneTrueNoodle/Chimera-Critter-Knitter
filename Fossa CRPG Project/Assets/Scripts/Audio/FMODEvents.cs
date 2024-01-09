@@ -17,6 +17,7 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference oscarBark { get; private set; }
 
     [field: Header("Unit SFX")]
+    [field: SerializeField] public EventReference xpGainSFX { get; private set; }
     [field: SerializeField] public EventReference footsteps { get; private set; }
     public static FMODEvents instance { get; private set; }
 
