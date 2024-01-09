@@ -25,7 +25,7 @@ public class BarkTrigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (inCombat || inDialogue) { return; }
-        if (Input.GetButton("Bark") && !used)
+        if (Input.GetButton("Bark") && !used && other.CompareTag("Player"))
         {
             if (oneTimeInteraction != null)
             {

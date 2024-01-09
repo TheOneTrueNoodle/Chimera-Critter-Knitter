@@ -15,11 +15,65 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638404064796350595
+  lastModified: 638404230653429174
   FileSizes:
   - Name: Desktop
     Value: 91616
   Exists: 1
+--- !u!114 &-8637116375802603612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Cat Monster/Rare Meow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Cat Monster/Rare Meow
+  Guid:
+    Data1: 1115379953
+    Data2: 1168205927
+    Data3: -324831833
+    Data4: 1138457697
+  Banks:
+  - {fileID: -935872157915059495}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1050
+--- !u!114 &-8613864249067823009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Jazz Song
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Jazz Song
+  Guid:
+    Data1: -1785666863
+    Data2: 1208805383
+    Data3: 297615769
+    Data4: 1606619543
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 95947
 --- !u!114 &-8359061114945158426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,6 +155,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1903
+--- !u!114 &-5751103732540096274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Cat Monster/Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Cat Monster/Attack
+  Guid:
+    Data1: -64150619
+    Data2: 1086858808
+    Data3: 1636721040
+    Data4: -2094525992
+  Banks:
+  - {fileID: -935872157915059495}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5674773873118958337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +245,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638402423045440084
+  lastModified: 638404253484652868
   FileSizes:
   - Name: Desktop
-    Value: 10709120
+    Value: 11851072
   Exists: 1
 --- !u!114 &-3348362756808868654
 MonoBehaviour:
@@ -184,10 +265,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638404064795379057
+  lastModified: 638404243796137994
   FileSizes:
   - Name: Desktop
-    Value: 1644
+    Value: 2032
   Exists: 1
 --- !u!114 &-2810585153981810311
 MonoBehaviour:
@@ -254,11 +335,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
-  StudioPath: bank:/Oscar
-  lastModified: 638402551527592071
+  StudioPath: bank:/Entities/Oscar
+  lastModified: 638404230653847950
   FileSizes:
   - Name: Desktop
-    Value: 128544
+    Value: 128832
   Exists: 1
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
@@ -289,6 +370,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 251
+--- !u!114 &-935872157915059495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Cat Monster.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Cat Monster.bank
+  Name: Cat Monster
+  StudioPath: bank:/Entities/Cat Monster
+  lastModified: 638404230654195519
+  FileSizes:
+  - Name: Desktop
+    Value: 228064
+  Exists: 1
 --- !u!114 &-474671126756450370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,10 +405,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638404064795358131
+  lastModified: 638404243796116591
   FileSizes:
   - Name: Desktop
-    Value: 1036
+    Value: 1486
   Exists: 1
 --- !u!114 &-327598212771914630
 MonoBehaviour:
@@ -353,6 +454,7 @@ MonoBehaviour:
   - {fileID: -2355530187874687512}
   - {fileID: -5112272232976100101}
   - {fileID: -8905982750716916857}
+  - {fileID: -935872157915059495}
   EditorEvents:
   - {fileID: -1178390186597127467}
   - {fileID: 8495811127305233432}
@@ -365,12 +467,17 @@ MonoBehaviour:
   - {fileID: -5826679858034908422}
   - {fileID: 706544227737308186}
   - {fileID: -8106391138758740888}
+  - {fileID: -5751103732540096274}
+  - {fileID: 6804102487714707051}
+  - {fileID: 2965208535300428167}
+  - {fileID: -8637116375802603612}
+  - {fileID: -8613864249067823009}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638404064796350595
+  cacheTime: 638404253484652868
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -425,7 +532,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 600
+  Length: 605
 --- !u!114 &706544227737308186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +561,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 100
+--- !u!114 &2965208535300428167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Cat Monster/TakeDamage
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Cat Monster/TakeDamage
+  Guid:
+    Data1: -1625315394
+    Data2: 1203072560
+    Data3: 217206196
+    Data4: 1792553376
+  Banks:
+  - {fileID: -935872157915059495}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &3019920591943824063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +669,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6804102487714707051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Cat Monster/Meow
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Cat Monster/Meow
+  Guid:
+    Data1: 1242538664
+    Data2: 1277249504
+    Data3: -332510053
+    Data4: 1440556617
+  Banks:
+  - {fileID: -935872157915059495}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &8085339715194898503
 MonoBehaviour:
   m_ObjectHideFlags: 0

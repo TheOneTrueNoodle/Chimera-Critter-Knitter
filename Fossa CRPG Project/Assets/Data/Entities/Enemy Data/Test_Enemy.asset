@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d440af8cbbdc7f4b9f3bbe6cb834582, type: 3}
   m_Name: Test_Enemy
   m_EditorClassIdentifier: 
-  Name: Enemyyyy
+  Name: Cat Monster
   portrait: {fileID: 1505152953, guid: 8c01b858c52357549b29501f7ea18d6d, type: 3}
   injuredPortrait: {fileID: 1505152953, guid: 8c01b858c52357549b29501f7ea18d6d, type: 3}
   levelConfig: {fileID: 11400000, guid: 3190e9247a0518d4a837e850612c11dd, type: 2}
@@ -29,17 +29,24 @@ MonoBehaviour:
   Accessory2: {fileID: 0}
   defaultAttackSFX:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -64150619
+      Data2: 1086858808
+      Data3: 1636721040
+      Data4: -2094525992
+    Path: event:/SFX/Cat Monster/Attack
   takeDamageSFX:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1625315394
+      Data2: 1203072560
+      Data3: 217206196
+      Data4: 1792553376
+    Path: event:/SFX/Cat Monster/TakeDamage
+  newTurnSFX:
+    Guid:
+      Data1: 1242538664
+      Data2: 1277249504
+      Data3: -332510053
+      Data4: 1440556617
+    Path: event:/SFX/Cat Monster/Meow
   maxExpDrop: 25
   minExpDrop: 15
