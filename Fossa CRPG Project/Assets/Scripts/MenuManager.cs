@@ -8,10 +8,12 @@ public class MenuManager : MonoBehaviour
 
     public GameObject OpeningScreen;
     public GameObject SettingsScreen;
+    public GameObject FirstCutscene;
+    public GameObject SplashScreen;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(OpeningGame());
     }
 
     // Update is called once per frame
@@ -22,7 +24,29 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        StartCoroutine(StartingCutscene());
+        
+    }
+
+    IEnumerator StartingCutscene()
+    {
+        FirstCutscene.SetActive(true);
+        OpeningScreen.SetActive(false);
+        Debug.Log("StartingCutscene");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("EndingCutscene");
         SceneManager.LoadScene("Demo");
+    }
+
+    IEnumerator OpeningGame()
+    {
+        
+        Debug.Log("StartingSplashScreen");
+        yield return new WaitForSeconds(3f);
+        Debug.Log("SplashScreenEnding");
+       OpeningScreen.SetActive(true);
+        SplashScreen.SetActive(false);
+
     }
 
     public void Settings()
