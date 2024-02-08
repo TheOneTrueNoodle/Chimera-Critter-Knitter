@@ -12,6 +12,23 @@ public class CombatEvents : MonoBehaviour
         current = this;
     }
 
+    public event Action onPauseGame;
+    public void PauseGame()
+    {
+        if (onPauseGame != null)
+        {
+            onPauseGame();
+        }
+    }
+    public event Action onUnpauseGame;
+    public void UnpauseGame()
+    {
+        if(onUnpauseGame != null)
+        {
+            onUnpauseGame();
+        }
+    }
+
     public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, float> onStartCombat;
     public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {

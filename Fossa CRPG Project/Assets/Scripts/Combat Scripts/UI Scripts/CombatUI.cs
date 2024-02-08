@@ -42,6 +42,8 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private GameObject endCombatUI;
 
     private bool UIOpen;
+    private bool abilityUIOpen;
+    private bool gamePaused;
     private bool actionActive;
     private bool hasMoved;
 
@@ -56,6 +58,7 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onActionComplete += ActionComplete;
         CombatEvents.current.onGetSelectedTile += SetupExamineUI;
         CombatEvents.current.onGiveUnitEXP += GiveUnitEXP;
+        CombatEvents.current.onUnpauseGame += UnpauseGame;
 
         cursor = FindObjectOfType<CursorController>();
     }
@@ -70,23 +73,27 @@ public class CombatUI : MonoBehaviour
     private void GetActionInput()
     {
         if(Char.TeamID != 0) { return; }
-        if(!UIOpen)
+
+        if (Input.GetButtonDown("Cancel"))
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (!UIOpen)
             {
                 OpenUI();
             }
-        }
-        else
-        {
-            if (Input.GetButtonDown("Cancel"))
+            else if (UIOpen && abilityUIOpen)
             {
                 CancelInput();
+            }
+            else
+            {
+                //Pause Menu Inputs!!!
+                gamePaused = true;
+                CombatEvents.current.PauseGame();
             }
         }
 
         //End Turn Input
-        if (Input.GetButton("End Turn"))
+        if (gamePaused != true && Input.GetButton("End Turn"))
         {
             EndTurnFill += Time.deltaTime * 2f;
             RingFill.fillAmount = EndTurnFill;
@@ -153,9 +160,13 @@ public class CombatUI : MonoBehaviour
             anim.Play("Close");
         }
         else { ActionUI.gameObject.SetActive(false); }
+
+        UIOpen = false;
     }
     public void OpenAbilityUI()
     {
+        abilityUIOpen = true;
+
         abilityUI.gameObject.SetActive(true);
         ActionUI.gameObject.SetActive(false);
         abilityUI.transform.position = new Vector2(ActionUI.transform.position.x + abilityUI.sizeDelta.x, ActionUI.transform.position.y);
@@ -186,6 +197,8 @@ public class CombatUI : MonoBehaviour
         abilityButton.Clear();
         abilityUI.gameObject.SetActive(false);
         ActionUI.gameObject.SetActive(true);
+
+        abilityUIOpen = false;
     }
 
     public void CallAbility(int ID)
@@ -364,5 +377,10 @@ public class CombatUI : MonoBehaviour
         started = false;
         UIParent.SetActive(false);
         CombatEvents.current.EndCombat();
+    }
+
+    public void UnpauseGame()
+    {
+        gamePaused = false;
     }
 }
