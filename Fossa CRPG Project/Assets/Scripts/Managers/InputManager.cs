@@ -7,6 +7,10 @@ public class InputManager : MonoBehaviour
     //Make a function for each input trigger that is connected to all possible functions. 
 
     public bool InCombat;
+    private bool pauseMenuOpen;
+    private bool settingsMenuOpen;
+    private bool characterMenuOpen;
+    private bool actionSelected;
 
     private void Update()
     {
@@ -37,7 +41,31 @@ public class InputManager : MonoBehaviour
 
     private void MenuOrCancel()
     {
+        switch (InCombat)
+        {
+            case true:
+                //In Combat Input Handler
+                if (settingsMenuOpen)
+                {
 
+                }
+                else if(pauseMenuOpen)
+                { 
+
+                }
+                else if(characterMenuOpen)
+                {
+
+                }
+                else if (actionSelected)
+                {
+
+                }
+                break;
+            case false:
+                //Out of Combat Input Handler
+                break;
+        }
     }
 
     private void BarkOrSelect()
