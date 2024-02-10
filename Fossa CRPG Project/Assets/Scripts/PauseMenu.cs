@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Combat;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -77,6 +78,11 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         SettingsMenuImage.SetActive(false);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene("Demo");
     }
 
     private void StartCombat()

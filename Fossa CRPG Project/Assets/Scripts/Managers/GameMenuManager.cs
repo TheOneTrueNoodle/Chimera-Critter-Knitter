@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMenuManager : MonoBehaviour
 {
@@ -103,6 +104,11 @@ public class GameMenuManager : MonoBehaviour
     {
         pauseMenuObj.SetActive(true);
         SettingsMenuObj.SetActive(false);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene("Demo");
     }
 
     public void OpenCharacterMenu()
