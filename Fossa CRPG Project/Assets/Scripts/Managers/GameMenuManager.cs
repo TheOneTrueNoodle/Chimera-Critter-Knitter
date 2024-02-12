@@ -108,7 +108,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("Whitebox");
     }
 
     public void OpenCharacterMenu()

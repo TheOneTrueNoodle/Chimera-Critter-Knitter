@@ -35,7 +35,7 @@ public class MenuManager : MonoBehaviour
         Debug.Log("StartingCutscene");
         yield return new WaitForSeconds(3f);
         Debug.Log("EndingCutscene");
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("Whitebox");
     }
 
     IEnumerator OpeningGame()
