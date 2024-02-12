@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1963350992700864245}
   - component: {fileID: 6754323219119602494}
   - component: {fileID: 8060526846928323237}
+  - component: {fileID: 1744912279687991796}
   m_Layer: 0
   m_Name: Fence
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1744912279687991796
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252757436833567453}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7d943513a3ca77947a06635b698a2a83, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1662005301574518415
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +149,7 @@ GameObject:
   - component: {fileID: 1271473518317419094}
   - component: {fileID: 7028500732532886278}
   - component: {fileID: 4817888892605129964}
+  - component: {fileID: 4809110975338399216}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -142,13 +165,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5314269978331972718}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7071068, y: -6.9849193e-10, z: -2.3283064e-10, w: 0.7071067}
   m_LocalPosition: {x: -0.008983322, y: -0.154, z: 0.571}
   m_LocalScale: {x: 3.1983829, y: 15.991916, z: 54.472458}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8090402137158724008}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &7028500732532886278
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -199,3 +222,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &4809110975338399216
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5314269978331972718}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 865700262ea18004bb3549f9baf21672, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
