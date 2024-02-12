@@ -9,12 +9,19 @@ public class ExamineObject : MonoBehaviour, IDragHandler
 
     private GameObject dataPrefab;
 
-    public void OnEntrySelect(JournalEntryData Data)
+    private void Start()
+    {
+        JournalEvent.current.onEntrySelect += OnEntrySelect;
+    }
+
+    public void OnEntrySelect(JournalEntryData Data, bool discovered)
     {
         if (dataPrefab != null)
         {
             Destroy(dataPrefab.gameObject);
         }
+        if (!discovered) { return; }
+
         dataPrefab = Instantiate(Data.prefab, objectSpawnLocation.position, Quaternion.identity, objectSpawnLocation);
         dataPrefab.layer = dataPrefab.transform.parent.gameObject.layer;
 
