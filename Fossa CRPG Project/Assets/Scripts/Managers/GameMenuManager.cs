@@ -22,6 +22,7 @@ public class GameMenuManager : MonoBehaviour
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onPauseGame += CombatPauseMenuInput;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame

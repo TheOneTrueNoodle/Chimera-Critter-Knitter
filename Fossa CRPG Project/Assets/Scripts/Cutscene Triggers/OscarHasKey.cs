@@ -23,6 +23,7 @@ public class OscarHasKey : MonoBehaviour
     public GameObject barricadeBroken;
     public GameObject Ownerhome;
     public GameObject OwnerhomeCutscene;
+    public GameObject Spawn;
 
 
     void Awake()
@@ -57,7 +58,12 @@ public class OscarHasKey : MonoBehaviour
         {
             ScreenEffect.SetActive(true);
         }
-   
+        if (other.tag == "killFloor")
+        {
+            Oscar.transform.position = Spawn.transform.position;
+        }
+
+
 
 
 
