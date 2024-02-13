@@ -72,7 +72,17 @@ public class CombatUI : MonoBehaviour
 
     private void GetActionInput()
     {
-        if(Char.TeamID != 0) { return; }
+        if(Char.TeamID != 0)
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                //Pause Menu Inputs!!!
+                gamePaused = true;
+                CombatEvents.current.PauseGame();
+            }
+                
+            return; 
+        }
 
         if (Input.GetButtonDown("Cancel"))
         {
