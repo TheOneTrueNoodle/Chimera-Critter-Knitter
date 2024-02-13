@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MoveHandler
 {
-    private static int unitSpeed = 5;
-    private static int unitTurnSpeed = 720;
+    private static int unitSpeed = 4;
+    private static int unitTurnSpeed = 980;
     static private float animSmoothingSpeed = 2f;
     private float animSpeed;
     private float animRotation;
@@ -23,7 +23,7 @@ public class MoveHandler
 
             var targetPos = new Vector3(path[0].transform.position.x, entity.transform.position.y, path[0].transform.position.z);
 
-            if (Vector3.Distance(entity.transform.position, targetPos) < 0.1f)
+            if (Vector3.Distance(entity.transform.position, targetPos) < 0.2f)
             {
                 if (path.Count == 1) { finalTile = path[0]; }
                 path.RemoveAt(0);
