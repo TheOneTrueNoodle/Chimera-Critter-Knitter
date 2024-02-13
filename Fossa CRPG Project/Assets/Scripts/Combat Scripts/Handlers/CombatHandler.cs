@@ -266,6 +266,11 @@ public class CombatHandler : MonoBehaviour
         else if (target.TeamID == 0)
         {
             playerTeam.Remove(target);
+            if (playerTeam.Count <= 0)
+            {
+                //GAME ENDSSSSS!!!!!!
+                CombatEvents.current.GameOver();
+            }
         }
         if (enemyTeam.Count <= 0)
         {

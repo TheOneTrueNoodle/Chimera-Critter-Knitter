@@ -112,6 +112,11 @@ public class GameMenuManager : MonoBehaviour
         SceneManager.LoadScene("Whitebox");
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void OpenCharacterMenu()
     {
         characterMenuObj.SetActive(true);

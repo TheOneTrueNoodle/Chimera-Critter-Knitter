@@ -5,22 +5,15 @@ using Cinemachine;
 
 public class DebugInputs : MonoBehaviour
 {
-    private int counter = 0;
+    public int counter = 0;
     public GameObject WinScreen;
     public CinemachineBrain cinemachineBrain;
     public ICinemachineCamera postprocessingcamera;
     public ICinemachineCamera nopostprocessingcamera;
- 
-    void Update()
-    {
-        if (Input.GetButtonDown("Debug Reset"))
-        {
-            ReloadScene();
-        }
-    }
 
     public void Call()
     {
+        Debug.Log("Called");
         counter++;
         if (counter >= 2)
         {
@@ -31,10 +24,5 @@ public class DebugInputs : MonoBehaviour
     private void ShowWinScreen()
     {
         WinScreen.SetActive(true);
-    }
-
-    public void ReloadScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Demo");
     }
 }

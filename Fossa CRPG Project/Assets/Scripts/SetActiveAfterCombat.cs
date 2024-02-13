@@ -16,5 +16,6 @@ public class SetActiveAfterCombat : MonoBehaviour
         {
             obj.SetActive(true);
         }
+        objs.Clear();
     }
 }

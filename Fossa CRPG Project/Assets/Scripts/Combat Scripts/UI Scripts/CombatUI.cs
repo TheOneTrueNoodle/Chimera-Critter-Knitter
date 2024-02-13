@@ -40,6 +40,7 @@ public class CombatUI : MonoBehaviour
 
     [Header("End Combat UI")]
     [SerializeField] private GameObject endCombatUI;
+    [SerializeField] private GameObject gameOverUI;
 
     private bool UIOpen;
     private bool abilityUIOpen;
@@ -59,6 +60,7 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onGetSelectedTile += SetupExamineUI;
         CombatEvents.current.onGiveUnitEXP += GiveUnitEXP;
         CombatEvents.current.onUnpauseGame += UnpauseGame;
+        CombatEvents.current.onGameOver += GameOver;
 
         cursor = FindObjectOfType<CursorController>();
     }
@@ -392,5 +394,10 @@ public class CombatUI : MonoBehaviour
     public void UnpauseGame()
     {
         gamePaused = false;
+    }
+
+    public void GameOver()
+    {
+        gameOverUI.SetActive(true);
     }
 }

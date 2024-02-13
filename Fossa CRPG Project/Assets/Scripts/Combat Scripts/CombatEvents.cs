@@ -243,4 +243,13 @@ public class CombatEvents : MonoBehaviour
             onGetSelectedTile(overlayTile);
         }
     }
+
+    public event Action onGameOver;
+    public void GameOver()
+    {
+        if (onGameOver != null)
+        {
+            onGameOver();
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class InteractionTrigger : MonoBehaviour
     public GameObject inputUI;
 
     private bool used = false;
-    public Interaction oneTimeInteraction;
+    public Interaction singleInteraction;
 
     private bool active;
     public Interaction enableInteraction;
@@ -34,7 +34,7 @@ public class InteractionTrigger : MonoBehaviour
         {
             if(oneTimeUse == true)
             {
-                oneTimeInteraction.Invoke();
+                singleInteraction.Invoke();
                 used = true;
             }
             else if(enableInteraction != null && disableInteraction != null)
@@ -49,6 +49,10 @@ public class InteractionTrigger : MonoBehaviour
                     enableInteraction.Invoke();
                     active = true;
                 }
+            }
+            else
+            {
+                singleInteraction.Invoke();
             }
         }
     }
