@@ -38,5 +38,6 @@ public class DialogueZoneTrigger : MonoBehaviour
     {
         dm.currentConvo = convoStart;
         dm.beginDialogue();
+        //Debug.Log("DIALOGBUTTON");
     }
 }
