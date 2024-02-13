@@ -160,7 +160,9 @@ public class Entity : MonoBehaviour
         CombatEvents.current.UnitStartingEffects(this, equipmentStatChanges, equipmentEffects);
         var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z), true);
         CombatEvents.current.TilePositionEntity(this, focusedTileHit);
+
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        //gameObject.GetComponent<Collider>().enabled = false;
 
         if (anim != null)
         {
@@ -177,6 +179,7 @@ public class Entity : MonoBehaviour
     {
         UpdateStats();
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        //gameObject.GetComponent<Collider>().enabled = true;
     }
     #endregion
 
