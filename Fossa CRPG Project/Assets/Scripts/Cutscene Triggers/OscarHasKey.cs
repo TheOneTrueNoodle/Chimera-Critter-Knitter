@@ -15,6 +15,7 @@ public class OscarHasKey : MonoBehaviour
     public GameObject Gate;
     public GameObject mutationSpot1;
     public GameObject mutationSpot2;
+    public GameObject PressE;
     public GameObject DogFood;
     public GameObject Oscar;
     public GameObject ScreenEffect;
@@ -99,6 +100,7 @@ public class OscarHasKey : MonoBehaviour
             mutationSpot1.SetActive(false);
             ScreenEffect.SetActive(false);
             dogfoodsparkles.SetActive(false);
+            PressE.SetActive(false);
 
         }
         if ((other.tag == "SecondMutationSpot") && (Input.GetKeyDown(KeyCode.E)))
@@ -112,6 +114,7 @@ public class OscarHasKey : MonoBehaviour
             Ownerhome.SetActive(true);
             Ownerbefore.SetActive(false);
             OwnerAfter.SetActive(true);
+            PressE.SetActive(false);
 
         }
     }
