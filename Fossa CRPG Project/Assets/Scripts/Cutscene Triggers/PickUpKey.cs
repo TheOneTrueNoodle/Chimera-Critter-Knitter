@@ -13,11 +13,14 @@ public class PickUpKey : MonoBehaviour
         }
     }
 
+    public void Call()
+    {
+        StartCoroutine(OscarTakeKey());
+    }
+
     IEnumerator OscarTakeKey()
     {
-    
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
-
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }

@@ -419,6 +419,7 @@ public class CombatHandler : MonoBehaviour
 
         startCombatAnim.gameObject.SetActive(false);
         CombatEvents.current.StartCombatSetup();
+        turnHandler.StartFirstTurn();
     }
 
     #endregion

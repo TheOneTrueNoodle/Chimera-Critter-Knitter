@@ -39,7 +39,10 @@ public class TurnHandler
                 }
             }
         }
+    }
 
+    public void StartFirstTurn()
+    {
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
         CombatEvents.current.NewTurn(activeTurnOrder.First());
 

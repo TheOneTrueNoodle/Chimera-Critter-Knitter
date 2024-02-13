@@ -8,7 +8,6 @@ public class FirstCombatcutscene : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-
         if (other.tag == "Player")
         {
             Debug.Log("Player is here");
@@ -18,10 +17,15 @@ public class FirstCombatcutscene : MonoBehaviour
 
     IEnumerator FirstCombatCutscene1()
     {
+        DialogueEvents.current.StartDialogue();
         FirstCombatCutscene.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        FirstCombatCutscene.SetActive(false);
-        Destroy(gameObject);
 
+        yield return new WaitForSeconds(3f);
+
+        FirstCombatCutscene.SetActive(false);
+        DialogueEvents.current.EndDialogue();
+
+        GetComponent<CombatTrigger>().Call();
+        Destroy(gameObject);
     }
 }
