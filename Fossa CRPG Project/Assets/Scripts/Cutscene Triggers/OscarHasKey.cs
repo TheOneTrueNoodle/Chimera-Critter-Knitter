@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class OscarHasKey : MonoBehaviour
 {
-
+    public GameObject Ownerbefore;
+    public GameObject OwnerAfter;
     public bool HasUpstairsKey;
     public bool gateOpen;
     public Animator animator;
@@ -94,6 +95,8 @@ public class OscarHasKey : MonoBehaviour
             barricadeBroken.SetActive(true);
             barricadeFixed.SetActive(false);
             Ownerhome.SetActive(true);
+            Ownerbefore.SetActive(false);
+            OwnerAfter.SetActive(true);
 
         }
     }
