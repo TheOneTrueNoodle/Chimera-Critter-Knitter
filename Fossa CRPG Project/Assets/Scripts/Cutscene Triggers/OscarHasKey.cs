@@ -60,6 +60,7 @@ public class OscarHasKey : MonoBehaviour
             mutationSpot1.SetActive(true);
             mutationSpot2.SetActive(true);
             Destroy(other.gameObject);
+            Ownerbefore.SetActive(true);
 
         }
         if (other.tag == "FirstMutationSpot")
