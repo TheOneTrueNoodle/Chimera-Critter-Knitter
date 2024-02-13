@@ -32,13 +32,12 @@ public class InteractionTrigger : MonoBehaviour
         if (inCombat|| inDialogue || !other.gameObject.CompareTag("Player")) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
-            Debug.Log("E PRESSED");
             if(oneTimeUse == true)
             {
                 singleInteraction.Invoke();
                 used = true;
             }
-            else if(enableInteraction != null && disableInteraction != null)
+            else if(enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
             {
                 if (active)
                 {
