@@ -24,6 +24,7 @@ public class OscarHasKey : MonoBehaviour
     public GameObject Ownerhome;
     public GameObject OwnerhomeCutscene;
     public GameObject Spawn;
+    private GameObject KeygateDialogue;
 
 
     void Awake()
@@ -34,12 +35,19 @@ public class OscarHasKey : MonoBehaviour
      
 
     }
+
+    void Start()
+    {
+        KeygateDialogue = GameObject.Find("Need A Key(noKey)");
+    }
+
     void OnTriggerEnter(Collider other)
     {
 
         if (other.tag == "UpstairsKey")
         {
             HasUpstairsKey = true;
+            KeygateDialogue.SetActive(true);
         }
         if ((other.tag == "UpstairsGate") && (HasUpstairsKey == true))
         {

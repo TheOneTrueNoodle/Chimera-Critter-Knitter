@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueZoneTrigger : MonoBehaviour
 {
     [SerializeField] private bool oneTimeConversation;
+    [SerializeField] private bool needsInteraction;
     [SerializeField] private Conversation convoStart;
     public DialogueManager dm;
     public bool spawnSpeaker;

@@ -9,5 +9,7 @@ public class Character : ScriptableObject
     public Sprite smilingPortrait; //happy
     public Sprite sadPortrait; //sad
     public Sprite angryPortrait; //angry
+    public Sprite injuredPortrait; //hurt
+
 
 }

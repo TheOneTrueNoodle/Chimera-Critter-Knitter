@@ -116,6 +116,10 @@ public class DialogueManager : MonoBehaviour
                 spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
                 break;
 
+            case "injured":
+                spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
+                break;
+
             case null:
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
