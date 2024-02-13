@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11aaaaa84d757b04082955325bbfac22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterVolume: 1
+  musicVolume: 1
+  SFXVolume: 1
 --- !u!1 &8951598354122697522
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +106,13 @@ MonoBehaviour:
       Data3: -2090576206
       Data4: 1070833156
     Path: event:/Music/Combat Testing Scene Music
+  <victoryMusic>k__BackingField:
+    Guid:
+      Data1: 1684034956
+      Data2: 1239911916
+      Data3: -296227687
+      Data4: -455001544
+    Path: event:/Music/Victory Theme
   <oscarBark>k__BackingField:
     Guid:
       Data1: 1488647691
@@ -110,6 +120,20 @@ MonoBehaviour:
       Data3: -2110865744
       Data4: 544056417
     Path: event:/SFX/Bark
+  <xpGainSFX>k__BackingField:
+    Guid:
+      Data1: 1720910226
+      Data2: 1240645001
+      Data3: -578044748
+      Data4: -723787693
+    Path: event:/SFX/GainXP
+  <levelUpSFX>k__BackingField:
+    Guid:
+      Data1: -430387342
+      Data2: 1252701227
+      Data3: -19515472
+      Data4: 1035564390
+    Path: event:/SFX/LevelUp
   <footsteps>k__BackingField:
     Guid:
       Data1: 2147094255

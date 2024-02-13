@@ -8,8 +8,9 @@ public class JournalManager : MonoBehaviour
     public List<JournalEntryButton> entries;
     [SerializeField] private TMP_Text descriptionText;
 
-    private void Awake()
+    private void Start()
     {
+        Debug.Log(JournalEvent.current);
         JournalEvent.current.onFindEntryObject += DiscoverEntry;
         JournalEvent.current.onEntrySelect += EntrySelect;
 

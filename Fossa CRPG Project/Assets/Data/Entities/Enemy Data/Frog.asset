@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d440af8cbbdc7f4b9f3bbe6cb834582, type: 3}
+  m_Name: Frog
+  m_EditorClassIdentifier: 
+  Name: Frog
+  portrait: {fileID: 1495734162, guid: 0dbf72a569685d74fba51a11d1b79254, type: 3}
+  injuredPortrait: {fileID: 1495734162, guid: 0dbf72a569685d74fba51a11d1b79254, type: 3}
+  levelConfig: {fileID: 11400000, guid: 3190e9247a0518d4a837e850612c11dd, type: 2}
+  level_modifier: 0.3
+  characterClass: {fileID: 11400000, guid: 0ab8d3881eb11324c93a8f800093ccc4, type: 2}
+  Abilities: []
+  defaultAttack: 1
+  Resistances: 
+  Weaknesses: 
+  equippableWeapons: 
+  Weapon: {fileID: 0}
+  Armour: {fileID: 0}
+  Accessory1: {fileID: 0}
+  Accessory2: {fileID: 0}
+  defaultAttackSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  takeDamageSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  newTurnSFX:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  maxExpDrop: 16
+  minExpDrop: 8

@@ -71,6 +71,7 @@ public class UnitInfoUI : MonoBehaviour
             {
                 portrait.sprite = Char.CharacterData.portrait;
             }
+
             Name.text = Char.CharacterData.Name;
             Level.text = "LV " + Char.level.ToString();
 
