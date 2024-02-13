@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 2834023146450161041}
   - component: {fileID: 5788418332756671876}
   - component: {fileID: 8603322746952953031}
+  - component: {fileID: 1001430513368358577}
   m_Layer: 0
   m_Name: Oscar (Player)
   m_TagString: Player
@@ -182,6 +183,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537da7d9c82a3aa4d93ba92b5d58b435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1001430513368358577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2832980219465188229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57254dae4bb2f54e844aacf7a12028c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasUpstairsKey: 0
+  gateOpen: 0
+  animator: {fileID: 0}
+  FoodFall: {fileID: 0}
+  Lick: {fileID: 0}
+  Lick2: {fileID: 0}
+  Gate: {fileID: 0}
+  mutationSpot1: {fileID: 0}
+  mutationSpot2: {fileID: 0}
+  DogFood: {fileID: 0}
+  Oscar: {fileID: 2832980219465188229}
+  ScreenEffect: {fileID: 0}
+  dogfoodsparkles: {fileID: 0}
+  barricadeFixed: {fileID: 0}
+  barricadeBroken: {fileID: 0}
+  Ownerhome: {fileID: 0}
+  OwnerhomeCutscene: {fileID: 0}
 --- !u!1 &3072398623241547592
 GameObject:
   m_ObjectHideFlags: 0

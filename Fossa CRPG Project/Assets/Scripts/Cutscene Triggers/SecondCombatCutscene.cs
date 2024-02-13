@@ -18,10 +18,15 @@ public class SecondCombatCutscene : MonoBehaviour
 
     IEnumerator SecondCombatCutscene1()
     {
+        DialogueEvents.current.StartDialogue();
         SecondCombatCutscene2.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        SecondCombatCutscene2.SetActive(false);
-        Destroy(gameObject);
 
+        yield return new WaitForSeconds(3f);
+
+        SecondCombatCutscene2.SetActive(false);
+        DialogueEvents.current.EndDialogue();
+
+        GetComponent<CombatTrigger>().Call();
+        Destroy(gameObject);
     }
 }
