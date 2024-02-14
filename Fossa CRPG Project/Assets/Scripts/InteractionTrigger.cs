@@ -9,6 +9,8 @@ public class InteractionTrigger : MonoBehaviour
     private bool inCombat;
     private bool inDialogue;
     public bool oneTimeUse;
+    [SerializeField] private bool showDebugUI;
+
 
     public GameObject inputUI;
 
@@ -59,7 +61,7 @@ public class InteractionTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (inCombat || inDialogue || other.gameObject.CompareTag("Player"))
+        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")) && showDebugUI)
         {
             //SHOW UI
             inputUI.SetActive(true);
@@ -68,7 +70,7 @@ public class InteractionTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (inCombat || inDialogue || other.gameObject.CompareTag("Player"))
+        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")) && showDebugUI)
         {
             //HIDE UI
             inputUI.SetActive(false);

@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
   m_Name: SmellsLikeFood
   m_EditorClassIdentifier: 
-  lines: []
+  lines:
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: happy
+    text: It smells like food nearby!
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: sad
+    text: But I can hear something weird...
   choice: {fileID: 0}
   fightBegin: 0
   combatName: 

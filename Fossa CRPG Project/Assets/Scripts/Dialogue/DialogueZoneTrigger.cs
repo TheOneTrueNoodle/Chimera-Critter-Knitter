@@ -5,10 +5,11 @@ using UnityEngine;
 public class DialogueZoneTrigger : MonoBehaviour
 {
     [SerializeField] private bool oneTimeConversation;
-    [SerializeField] private bool needsInteraction;
+    public bool withInteractionTriggerScript;
+    //[SerializeField] private bool needsInteraction;
     [SerializeField] private Conversation convoStart;
     public DialogueManager dm;
-    public bool spawnSpeaker;
+    //public bool spawnSpeaker;
 
     void Start()
     {
@@ -17,15 +18,15 @@ public class DialogueZoneTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !withInteractionTriggerScript)
         {
             dm.currentConvo = convoStart;
             dm.beginDialogue();
 
-            if (spawnSpeaker)
+            /*if (spawnSpeaker)
             {
                 //GameObject.Find("Speaker_A").SetActive(true);
-            }
+            }*/
 
             if (oneTimeConversation)
             {

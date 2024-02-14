@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
   m_Name: What'sThat
   m_EditorClassIdentifier: 
-  lines: []
-  choice: {fileID: 0}
+  lines:
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    text: There's something in the garden!
+  choice: {fileID: 11400000, guid: a60b13fdffb8c3f4aa956afd1951cd78, type: 2}
   fightBegin: 0
   combatName: 

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
   m_Name: Toilet
   m_EditorClassIdentifier: 
-  lines: []
-  choice: {fileID: 0}
+  lines:
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    text: ...
+  choice: {fileID: 11400000, guid: 2001bdbd7558e2f448343a2f6740a21d, type: 2}
   fightBegin: 0
   combatName: 
