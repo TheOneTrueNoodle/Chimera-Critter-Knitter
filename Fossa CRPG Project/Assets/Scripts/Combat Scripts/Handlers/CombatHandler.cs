@@ -121,6 +121,7 @@ public class CombatHandler : MonoBehaviour
 
     public IEnumerator Attack(Entity attacker, Entity target)
     {
+        string newLog = "";
         int damage = actionHandler.Attack(attacker, target);
 
         //Animate Attack
@@ -158,6 +159,7 @@ public class CombatHandler : MonoBehaviour
                 if (obstacle.Destructable)
                 {
                     unitHandler.UnitSufferDamage(target, damage);
+                    newLog = attacker.CharacterData.Name + " attacked " + target.CharacterData.Name + " and dealt " + damage + " " + attacker.AttackDamageType + " damage!";
                     DisplayDamageText(damage, target, attacker.AttackDamageType);
                     tookDamage = true;
                 }
@@ -166,8 +168,14 @@ public class CombatHandler : MonoBehaviour
             {
                 unitHandler.UnitSufferDamage(target, damage);
                 DisplayDamageText(damage, target, attacker.AttackDamageType);
+                newLog = attacker.CharacterData.Name + " attacked " + target.CharacterData.Name + " and dealt " + damage + " " + attacker.AttackDamageType + " damage!";
                 tookDamage = true;
             }
+        }
+        else if(damage < 0)
+        {
+            newLog = attacker.CharacterData.Name + " attacked " + target.CharacterData.Name + " but dealt no damage!";
+            DisplayDamageText(0, target, attacker.AttackDamageType);
         }
 
         //Animate Taking Damage
@@ -177,6 +185,11 @@ public class CombatHandler : MonoBehaviour
             yield return new WaitUntil(() => target.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
+        //LOG RESULT OF THE ATTACK
+        if (newLog != "")
+        {
+            CombatEvents.current.AddLog(newLog);
+        }
         StartCoroutine(DelayedTurnEnd());
     }
 
@@ -187,8 +200,16 @@ public class CombatHandler : MonoBehaviour
 
     public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter)
     {
+        CombatEvents.current.AddLog(new string(attacker.CharacterData.Name + " uses " + ability.Name + "!"));
+
         List<Entity> affectedTargets = actionHandler.CalculateAbilityTargets(attacker, ability.abilityType, targets);
         Debug.Log(affectedTargets.Count);
+
+        List<string> newLogs = new List<string>(affectedTargets.Count);
+        for (int i = 0; i < newLogs.Count; i++)
+        {
+            newLogs[i] = "";
+        }
 
         //Animate Ability
         Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
@@ -208,14 +229,14 @@ public class CombatHandler : MonoBehaviour
             yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
-        foreach (Entity target in affectedTargets)
+        for(int i = 0; i < affectedTargets.Count; i++)
         {
-            int abilityDamage = actionHandler.Ability(attacker, target, ability);
+            int abilityDamage = actionHandler.Ability(attacker, affectedTargets[i], ability);
             int physicalDamage = 0;
 
             if (ability.addMeleeAttack)
             {
-                physicalDamage = actionHandler.Attack(attacker, target);
+                physicalDamage = actionHandler.Attack(attacker, affectedTargets[i]);
             }
 
             foreach (var effect in ability.effects)
@@ -223,18 +244,34 @@ public class CombatHandler : MonoBehaviour
                 if (effect.affectUser)
                     unitHandler.UnitSufferEffect(attacker, effect);
                 else
-                    unitHandler.UnitSufferEffect(target, effect);
+                    unitHandler.UnitSufferEffect(affectedTargets[i], effect);
             }
 
-            if (physicalDamage > 0 && !target.isDead)
+            if (physicalDamage > 0 && !affectedTargets[i].isDead)
             {
-                unitHandler.UnitSufferDamage(target, physicalDamage);
-                DisplayDamageText(physicalDamage, target, attacker.AttackDamageType);
+                newLogs[i] = attacker.CharacterData.Name + " attacked " + affectedTargets[i].CharacterData.Name + " and dealt " + physicalDamage + " " + attacker.AttackDamageType + " damage!";
+                unitHandler.UnitSufferDamage(affectedTargets[i], physicalDamage);
+                DisplayDamageText(physicalDamage, affectedTargets[i], attacker.AttackDamageType);
             }
-            if (abilityDamage > 0 && !target.isDead)
+            if (abilityDamage > 0 && !affectedTargets[i].isDead)
             {
-                unitHandler.UnitSufferAbility(target, ability, abilityDamage);
-                DisplayDamageText(abilityDamage, target, ability.damageType);
+                newLogs[i] = affectedTargets[i].CharacterData.Name + " suffers " + abilityDamage + " " + ability.damageType + " damage from " + ability.Name + "!";
+                unitHandler.UnitSufferAbility(affectedTargets[i], ability, abilityDamage);
+                DisplayDamageText(abilityDamage, affectedTargets[i], ability.damageType);
+            }
+
+            if(physicalDamage + abilityDamage == 0)
+            {
+                newLogs[i] = affectedTargets[i] + " suffered no damage from " + ability.Name + "!";
+            }
+        }
+
+        //LOG RESULT OF THE ABILITY
+        foreach (string newLog in newLogs)
+        {
+            if (newLog != "")
+            {
+                CombatEvents.current.AddLog(newLog);
             }
         }
 
@@ -244,6 +281,9 @@ public class CombatHandler : MonoBehaviour
     public void UnitDeath(Entity target)
     {
         turnHandler.UnitDeath(target);
+
+        //LOG UNIT DEATH
+        CombatEvents.current.AddLog(new string(target.CharacterData.Name + " had died!"));
 
         //Find dropped items
         if(target.TeamID > 0)

@@ -244,6 +244,15 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
+    public event Action<string> onAddLog;
+    public void AddLog(string Log)
+    {
+        if (onAddLog != null)
+        {
+            onAddLog(Log);
+        }
+    }
+
     public event Action onGameOver;
     public void GameOver()
     {

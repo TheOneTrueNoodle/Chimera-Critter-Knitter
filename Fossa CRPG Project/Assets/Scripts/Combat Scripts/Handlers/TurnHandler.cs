@@ -66,6 +66,8 @@ public class TurnHandler
         var lastTurn = activeTurnOrder.First();
         activeTurnOrder.RemoveAt(0);
 
+        CombatEvents.current.AddLog(new string(lastTurn.CharacterData.Name + " had ended their turn!"));
+
         if(activeTurnOrder.Count == 0)
         {
             //NEW ROUND
