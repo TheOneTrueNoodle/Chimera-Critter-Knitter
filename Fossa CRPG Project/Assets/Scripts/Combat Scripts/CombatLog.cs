@@ -35,11 +35,13 @@ public class CombatLog : MonoBehaviour
             case true:
                 //Minimize
                 anim.Play("Minimize Combat Log");
+                logScroll.value = 0;
                 isExpanded = false;
                 break;
             case false:
                 //Expand
                 anim.Play("Expand Combat Log");
+                logScroll.value = 0;
                 isExpanded = true;
                 break;
         }
