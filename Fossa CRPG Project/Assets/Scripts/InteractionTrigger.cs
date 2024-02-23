@@ -11,7 +11,6 @@ public class InteractionTrigger : MonoBehaviour
     public bool oneTimeUse;
     [SerializeField] private bool showDebugUI;
 
-
     public GameObject inputUI;
 
     private bool used = false;
@@ -34,7 +33,7 @@ public class InteractionTrigger : MonoBehaviour
         if (inCombat|| inDialogue || !other.gameObject.CompareTag("Player")) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
-            if(oneTimeUse == true)
+            if(oneTimeUse)
             {
                 singleInteraction.Invoke();
                 used = true;
@@ -76,11 +75,11 @@ public class InteractionTrigger : MonoBehaviour
             inputUI.SetActive(false);
         }
     }
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true;
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
     }

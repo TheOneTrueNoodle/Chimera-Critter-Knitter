@@ -151,12 +151,12 @@ public class UnitInfoUI : MonoBehaviour
         Animating = false;
     }
 
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true;
         currentChar = null;
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
         currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();

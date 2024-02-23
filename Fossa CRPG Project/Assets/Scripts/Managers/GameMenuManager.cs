@@ -131,7 +131,7 @@ public class GameMenuManager : MonoBehaviour
         characterMenuOpen = false;
     }
 
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true; 
         if (characterMenuOpen)
@@ -139,7 +139,7 @@ public class GameMenuManager : MonoBehaviour
             CloseCharacterMenu();
         }
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
     }

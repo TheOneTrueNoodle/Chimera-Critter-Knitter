@@ -170,7 +170,7 @@ public class Entity : MonoBehaviour
         GFX.SetActive(false);
     }
 
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         //gameObject.GetComponent<Collider>().enabled = true;

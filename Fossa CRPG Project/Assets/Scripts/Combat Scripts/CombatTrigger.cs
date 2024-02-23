@@ -20,7 +20,7 @@ public class CombatTrigger : MonoBehaviour
                 //bossMusic
                 break;
         }
-        CombatEvents.current.StartCombat(EnemiesInThisCombat, OtherEntitiesInThisCombat, RoundEvents, music);
+        CombatEvents.current.StartCombat(CombatName, EnemiesInThisCombat, OtherEntitiesInThisCombat, RoundEvents, music);
     }
 }
 

@@ -6,9 +6,10 @@ public class BarkTrigger : MonoBehaviour
 {
     private bool inCombat;
     private bool inDialogue;
+    public bool oneTimeUse;
 
     private bool used = false;
-    public Interaction oneTimeInteraction;
+    public Interaction singleInteraction;
 
     private bool active;
     public Interaction enableInteraction;
@@ -24,15 +25,15 @@ public class BarkTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (inCombat || inDialogue) { return; }
-        if (Input.GetButton("Bark") && !used && other.CompareTag("Player"))
+        if (inCombat || inDialogue || !other.gameObject.CompareTag("Player")) { return; }
+        if (Input.GetButton("Bark") && !used)
         {
-            if (oneTimeInteraction != null)
+            if (oneTimeUse)
             {
-                oneTimeInteraction.Invoke();
+                singleInteraction.Invoke();
                 used = true;
             }
-            else if (enableInteraction != null && disableInteraction != null)
+            else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
             {
                 if (active)
                 {
@@ -45,13 +46,17 @@ public class BarkTrigger : MonoBehaviour
                     active = true;
                 }
             }
+            else
+            {
+                singleInteraction.Invoke();
+            }
         }
     }
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true;
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
     }

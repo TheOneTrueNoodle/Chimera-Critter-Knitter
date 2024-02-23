@@ -17,6 +17,7 @@ public class CombatLog : MonoBehaviour
     private void Start()
     {
         CombatEvents.current.onAddLog += NewLog;
+        CombatEvents.current.onEndCombat += EndCombat;
         anim = GetComponent<Animator>();
     }
 
@@ -47,7 +48,7 @@ public class CombatLog : MonoBehaviour
         }
     }
 
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         foreach (GameObject obj in logs)
         {

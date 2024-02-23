@@ -23,7 +23,7 @@ public class AmbientSound : MonoBehaviour
         }
 
         CombatEvents.current.onStartCombatSetup += startCombat;
-        CombatEvents.current.onEndCombat += endCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
     }
 
     public void Call()
@@ -44,14 +44,14 @@ public class AmbientSound : MonoBehaviour
         soundInstance.stop(stopMode);
     }
 
-    private void startCombat()
+    private void startCombat(string combatName)
     {
         if (!pauseOnCombat) { return; }
 
         if (called) { soundInstance.stop(stopMode); }
     }
 
-    private void endCombat()
+    private void EndCombat(string combatName)
     {
         if (!pauseOnCombat) { return; }
         if (called) { soundInstance.start(); }

@@ -24,14 +24,14 @@ public class CharacterMenu : MonoBehaviour
         
     }
 
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true;
 
         //If menu is open close the menu
         
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
     }

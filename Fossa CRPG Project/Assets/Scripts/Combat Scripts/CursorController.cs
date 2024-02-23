@@ -520,12 +520,12 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    public void StartCombat()
+    public void StartCombat(string combatName)
     {
         inCombat = true;
         GFX.SetActive(true);
     }
-    public void EndCombat()
+    public void EndCombat(string combatName)
     {
         inCombat = false;
         GFX.SetActive(false);

@@ -35,11 +35,11 @@ public class AreaTrigger : MonoBehaviour
             }
         }
     }
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
         inCombat = true;
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
     }

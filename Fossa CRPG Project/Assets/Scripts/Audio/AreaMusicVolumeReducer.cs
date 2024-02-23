@@ -22,8 +22,8 @@ public class AreaMusicVolumeReducer : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerMovement>().gameObject;
-        CombatEvents.current.onStartCombatSetup += startCombat;
-        CombatEvents.current.onEndCombat += endCombat;
+        CombatEvents.current.onStartCombatSetup += StartCombat;
+        CombatEvents.current.onEndCombat += EndCombat;
     }
 
     private void Update()
@@ -67,7 +67,7 @@ public class AreaMusicVolumeReducer : MonoBehaviour
             AudioManager.instance.musicVolume = oldMusicValue;
         }
     }
-    private void startCombat()
+    private void StartCombat(string combatName)
     {
         if (!pauseOnCombat) { return; }
 
@@ -76,7 +76,7 @@ public class AreaMusicVolumeReducer : MonoBehaviour
         inCombat = true;
     }
 
-    private void endCombat()
+    private void EndCombat(string combatName)
     {
         if (!pauseOnCombat) { return; }
         inCombat = false;

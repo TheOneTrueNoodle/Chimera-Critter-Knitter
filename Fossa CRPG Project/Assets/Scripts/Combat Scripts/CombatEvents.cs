@@ -29,21 +29,21 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
-    public event Action<List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, float> onStartCombat;
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
+    public event Action<string, List<CombatAIController>, List<CombatAIController>, List<CombatRoundEventData>, float> onStartCombat;
+    public void StartCombat(string CombatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         if (onStartCombat != null)
         {
-            onStartCombat(enemies, others, RoundEvents, BattleTheme);
+            onStartCombat(CombatName, enemies, others, RoundEvents, BattleTheme);
         }
     }
 
-    public event Action onStartCombatSetup;
-    public void StartCombatSetup()
+    public event Action<string> onStartCombatSetup;
+    public void StartCombatSetup(string CombatName)
     {
         if(onStartCombatSetup != null)
         {
-            onStartCombatSetup();
+            onStartCombatSetup(CombatName);
         }
     }
 
@@ -56,12 +56,12 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
-    public event Action onEndCombat;
-    public void EndCombat()
+    public event Action<string> onEndCombat;
+    public void EndCombat(string combatName)
     {
         if (onEndCombat != null)
         {
-            onEndCombat();
+            onEndCombat(combatName);
         }
     }
 

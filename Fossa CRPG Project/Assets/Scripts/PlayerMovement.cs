@@ -172,12 +172,12 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Rotation", animRotation);
     }
 
-    private void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
+    private void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         inCombat = true;
         footstepInstance.UpdateSound(false, 0f);
     }
-    private void EndCombat()
+    private void EndCombat(string combatName)
     {
         inCombat = false;
         anim.Play("Movement Blend");

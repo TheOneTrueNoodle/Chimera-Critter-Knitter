@@ -32,6 +32,7 @@ public class CombatHandler : MonoBehaviour
     //Dropped Loot after combat
     //List of dropped items
 
+    private string currentCombatName;
     private float previousSong;
 
     private void Start()
@@ -53,13 +54,15 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
-    public void StartCombat(List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
+    public void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
         if (actionHandler == null){ actionHandler = new ActionHandler(); }
         if (unitHandler == null) { unitHandler = new UnitHandler(); }
         if (tileHandler == null) { tileHandler = new TileHandler(); }
+
+        currentCombatName = combatName;
 
         var activeUnits = FindAllActiveUnits(enemies, others);
         turnHandler.StartCombat(activeUnits, RoundEvents);
@@ -460,7 +463,7 @@ public class CombatHandler : MonoBehaviour
         }
 
         startCombatAnim.gameObject.SetActive(false);
-        CombatEvents.current.StartCombatSetup();
+        CombatEvents.current.StartCombatSetup(currentCombatName);
         turnHandler.StartFirstTurn();
     }
 

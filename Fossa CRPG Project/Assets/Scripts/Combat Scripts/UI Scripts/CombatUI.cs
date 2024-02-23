@@ -48,6 +48,8 @@ public class CombatUI : MonoBehaviour
     private bool actionActive;
     private bool hasMoved;
 
+    private string currentCombatName;
+
     private CursorController cursor;
 
     private void Start()
@@ -373,8 +375,9 @@ public class CombatUI : MonoBehaviour
             unit.IncreaseEXP(null, xp);
         }
     }
-    private void StartCombat()
+    private void StartCombat(string combatName)
     {
+        currentCombatName = combatName;
         started = true;
         UIParent.SetActive(true);
         endCombatUI.SetActive(false);
@@ -384,11 +387,11 @@ public class CombatUI : MonoBehaviour
         endCombatUI.SetActive(true);
         endCombatUI.GetComponent<Animator>().Play("Open");
     }
-    public void EndCombat()
+    public void EndCombat( )
     {
         started = false;
         UIParent.SetActive(false);
-        CombatEvents.current.EndCombat();
+        CombatEvents.current.EndCombat(currentCombatName);
     }
 
     public void UnpauseGame()

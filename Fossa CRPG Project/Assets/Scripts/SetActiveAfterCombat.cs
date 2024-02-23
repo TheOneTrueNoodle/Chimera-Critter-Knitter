@@ -10,7 +10,7 @@ public class SetActiveAfterCombat : MonoBehaviour
         CombatEvents.current.onEndCombat += SetActive;
     }
 
-    private void SetActive()
+    private void SetActive(string combatName)
     {
         foreach (var obj in objs)
         {
