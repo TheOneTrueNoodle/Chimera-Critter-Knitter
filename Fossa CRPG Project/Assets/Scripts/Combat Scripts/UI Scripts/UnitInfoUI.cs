@@ -58,6 +58,7 @@ public class UnitInfoUI : MonoBehaviour
         {
             if (Char.activeStatsDir == null)
             {
+                Debug.Log("Getting new stats");
                 Char.UpdateStats();
             }
 

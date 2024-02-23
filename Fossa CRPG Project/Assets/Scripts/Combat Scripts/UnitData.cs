@@ -50,6 +50,7 @@ public class UnitData : ScriptableObject
     public void SetDictionaryStats(int level)
     {
         if (statsDir == null)
+            Debug.Log("Who does this bozo think he is making my stats again?");
             statsDir = new Dictionary<string, Stat>();
 
         float levelMultiplier = (level - 1) * level_modifier;

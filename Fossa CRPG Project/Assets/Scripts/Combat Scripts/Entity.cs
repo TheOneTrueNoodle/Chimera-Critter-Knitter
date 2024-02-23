@@ -57,9 +57,12 @@ public class Entity : MonoBehaviour
 
     public void UpdateStats()
     {
+        if(activeStatsDir != null) Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
         CharacterData.SetDictionaryStats(level);
+        if (activeStatsDir != null) Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
         if (activeStatsDir == null)
         {
+            Debug.Log("It thinks active stats is null");
             activeStatsDir = new Dictionary<string, Stat>();
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
@@ -68,18 +71,16 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            Debug.Log("HP is " + activeStatsDir["MaxHP"].statValue);
+            Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
                 if (item.Value.name == "MaxHP" || item.Value.name == "MaxSP")
                 {
                     var difference = activeStatsDir[item.Value.name].baseStatValue - activeStatsDir[item.Value.name].statValue;
-                    Debug.Log(difference);
                     float currentValue = activeStatsDir[item.Value.name].statValue;
 
                     activeStatsDir[item.Value.name] = item.Value;
                     if(difference != 0) { activeStatsDir[item.Value.name].statValue = currentValue; }
-                    
                 }
                 else
                 {
@@ -143,10 +144,7 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
-            {
-                activeStatsDir[item.Value.name] = item.Value;
-            }
+            UpdateStats();
         }
 
         CharacterData.SetEquipment();
@@ -177,7 +175,6 @@ public class Entity : MonoBehaviour
 
     private void EndCombat()
     {
-        UpdateStats();
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         //gameObject.GetComponent<Collider>().enabled = true;
     }
@@ -196,6 +193,7 @@ public class Entity : MonoBehaviour
             while (exp >= requiredExp && level < CharacterData.levelConfig.MaxLevel)
             {
                 exp -= requiredExp;
+                Debug.Log("Leveling up through entity code");
                 LevelUp();
             }
         }
