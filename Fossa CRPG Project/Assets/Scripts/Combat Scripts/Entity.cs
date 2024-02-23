@@ -57,9 +57,7 @@ public class Entity : MonoBehaviour
 
     public void UpdateStats()
     {
-        if(activeStatsDir != null) Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
         CharacterData.SetDictionaryStats(level);
-        if (activeStatsDir != null) Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
         if (activeStatsDir == null)
         {
             Debug.Log("It thinks active stats is null");
@@ -71,7 +69,6 @@ public class Entity : MonoBehaviour
         }
         else
         {
-            Debug.Log("Current HP is " + activeStatsDir["MaxHP"].statValue);
             foreach (KeyValuePair<string, Stat> item in CharacterData.statsDir)
             {
                 if (item.Value.name == "MaxHP" || item.Value.name == "MaxSP")

@@ -49,25 +49,14 @@ public class UnitData : ScriptableObject
 
     public void SetDictionaryStats(int level)
     {
-        if (statsDir == null)
-            Debug.Log("Who does this bozo think he is making my stats again?");
-            statsDir = new Dictionary<string, Stat>();
+        statsDir = new Dictionary<string, Stat>();
 
         float levelMultiplier = (level - 1) * level_modifier;
         var fields = typeof(UnitStats).GetFields();
         for (int i = 1; i < fields.Length; i++)
         {
             float value = (float)fields[i].GetValue(characterClass);
-
-            //If already declared, just update the stat
-            if (statsDir.ContainsKey(fields[i].Name))
-            {
-                statsDir[fields[i].Name].updateStat(Mathf.Round(value + (value * levelMultiplier)));
-            }
-            else
-            {
-                statsDir.Add(fields[i].Name, new Stat(fields[i].Name, Mathf.Round(value + (value * levelMultiplier))));
-            }
+            statsDir.Add(fields[i].Name, new Stat(fields[i].Name, Mathf.Round(value + (value * levelMultiplier))));
         }
     }
 

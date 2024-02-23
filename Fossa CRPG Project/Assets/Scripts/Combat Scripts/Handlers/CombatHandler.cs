@@ -317,10 +317,6 @@ public class CombatHandler : MonoBehaviour
         {
             EndCombat();
         }
-        else if (playerTeam.Count <= 0)
-        {
-            //Lose combat L bozo
-        }
     }
 
     public void DisplayDamageText(int damage, Entity target, DamageTypes damageType)
