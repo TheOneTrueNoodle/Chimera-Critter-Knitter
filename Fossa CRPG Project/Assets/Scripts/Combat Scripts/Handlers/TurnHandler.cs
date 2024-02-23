@@ -45,6 +45,7 @@ public class TurnHandler
     {
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+        CombatEvents.current.AddLog(activeTurnOrder.First() + " begins their turn!");
 
         if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
         {
@@ -68,7 +69,7 @@ public class TurnHandler
 
         CombatEvents.current.AddLog(new string(lastTurn.CharacterData.Name + " had ended their turn!"));
 
-        if(activeTurnOrder.Count == 0)
+        if (activeTurnOrder.Count == 0)
         {
             //NEW ROUND
             NewRound();
@@ -76,6 +77,7 @@ public class TurnHandler
         else
         {
             CombatEvents.current.NewTurn(activeTurnOrder.First());
+            CombatEvents.current.AddLog(activeTurnOrder.First() + " begins their turn!");
 
             if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
             {
@@ -116,6 +118,7 @@ public class TurnHandler
 
         CombatEvents.current.TurnOrderDisplay(activeTurnOrder);
         CombatEvents.current.NewTurn(activeTurnOrder.First());
+        CombatEvents.current.AddLog(activeTurnOrder.First() + " begins their turn!");
 
         if (!activeTurnOrder.First().CharacterData.newTurnSFX.IsNull)
         {

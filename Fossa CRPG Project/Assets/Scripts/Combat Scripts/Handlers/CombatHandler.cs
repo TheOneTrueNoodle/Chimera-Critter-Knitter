@@ -63,6 +63,7 @@ public class CombatHandler : MonoBehaviour
 
         var activeUnits = FindAllActiveUnits(enemies, others);
         turnHandler.StartCombat(activeUnits, RoundEvents);
+        CombatEvents.current.AddLog("The battle begins!");
 
         //Animate the combat start ui
         StartCoroutine(StartCombatDisplay());
@@ -205,10 +206,10 @@ public class CombatHandler : MonoBehaviour
         List<Entity> affectedTargets = actionHandler.CalculateAbilityTargets(attacker, ability.abilityType, targets);
         Debug.Log(affectedTargets.Count);
 
-        List<string> newLogs = new List<string>(affectedTargets.Count);
-        for (int i = 0; i < newLogs.Count; i++)
+        List<string> newLogs = new List<string>();
+        for (int i = 0; i < affectedTargets.Count; i++)
         {
-            newLogs[i] = "";
+            newLogs.Add("");
         }
 
         //Animate Ability
