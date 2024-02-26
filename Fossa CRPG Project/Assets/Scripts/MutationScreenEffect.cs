@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MutationScreenEffect : MonoBehaviour
 {
-
     public GameObject mutationScreenEffect;
     public GameObject pressE;
 
     void OnTriggerEnter(Collider Player)
     {
-    
         mutationScreenEffect.SetActive(true);
         pressE.SetActive(true);
     }

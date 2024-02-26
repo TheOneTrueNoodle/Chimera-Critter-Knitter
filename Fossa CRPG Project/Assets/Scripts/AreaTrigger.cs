@@ -6,10 +6,11 @@ public class AreaTrigger : MonoBehaviour
 {
     private bool inCombat;
     private bool inDialogue;
-    public bool oneTimeUse; 
+    public bool oneTimeUse;
     
     private bool used = false;
     public Interaction Interaction;
+    public Interaction ExitAreaInteraction;
 
     private void Start()
     {
@@ -35,6 +36,16 @@ public class AreaTrigger : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (inCombat || inDialogue) { return; }
+        if (ExitAreaInteraction.GetPersistentEventCount() > 0 && other.gameObject.CompareTag("Player"))
+        {
+            ExitAreaInteraction.Invoke();
+        }
+    }
+
     private void StartCombat(string combatName)
     {
         inCombat = true;

@@ -6,6 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 public class TutorialHouseArea : AreaManager
 {
     public PostProcessVolume infectionVignette;
+    public FadeOutDogVision dogVision;
 
     private void Start()
     {
@@ -29,6 +30,15 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["Has gate key"] = true;
             Debug.Log("Has house key? " + areaBools["Has gate key"]);
+        }
+    }
+
+    public void DevelopMutations()
+    {
+        if (areaBools.ContainsKey("Has mutated"))
+        {
+            areaBools["Has mutated"] = true;
+            //Grant the player the mutation menu now :D
         }
     }
 
@@ -75,6 +85,7 @@ public class TutorialHouseArea : AreaManager
         }
 
         yield return new WaitForSeconds(0.3f);
+        dogVision.Call();
         lerpTime = 0;
         while (lerpTime < 1)
         {
