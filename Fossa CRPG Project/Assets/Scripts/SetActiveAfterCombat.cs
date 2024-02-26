@@ -13,7 +13,7 @@ public class SetActiveAfterCombat : MonoBehaviour
 
     private void SetActive(string combatName)
     {
-        if(combatName != combat) { return; }
+        if(combatName != combat || objs.Count == 0) { return; }
         foreach (var obj in objs)
         {
             obj.SetActive(true);

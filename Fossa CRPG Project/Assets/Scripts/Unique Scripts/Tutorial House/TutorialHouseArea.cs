@@ -6,7 +6,6 @@ using UnityEngine.Rendering.PostProcessing;
 public class TutorialHouseArea : AreaManager
 {
     public PostProcessVolume infectionVignette;
-    public GameObject interactableObjectsParent;
 
     private void Start()
     {
@@ -24,6 +23,16 @@ public class TutorialHouseArea : AreaManager
         }
     }
 
+    public void CollectGateKey()
+    {
+        if (areaBools.ContainsKey("Has gate key"))
+        {
+            areaBools["Has gate key"] = true;
+            Debug.Log("Has house key? " + areaBools["Has gate key"]);
+        }
+    }
+
+    #region Combat Related Function
     private void StartCombat(string combatName)
     {
         if (combatName == "Tutorial_Combat")
@@ -76,5 +85,6 @@ public class TutorialHouseArea : AreaManager
             yield return null;
         }
     }
+    #endregion
 }
 
