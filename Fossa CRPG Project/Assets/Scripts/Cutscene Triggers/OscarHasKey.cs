@@ -30,11 +30,8 @@ public class OscarHasKey : MonoBehaviour
 
     void Awake()
     {
-      
         HasUpstairsKey = false;
         gateOpen = false;
-     
-
     }
 
     void Start()
