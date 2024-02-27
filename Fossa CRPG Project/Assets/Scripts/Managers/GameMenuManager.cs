@@ -15,6 +15,7 @@ public class GameMenuManager : MonoBehaviour
     private bool characterMenuOpen;
     private bool pauseMenuOpen;
 
+    [SerializeField] private CharacterMenuManager characterMenuManager;
 
     // Start is called before the first frame update
     void Start()
@@ -120,6 +121,7 @@ public class GameMenuManager : MonoBehaviour
     public void OpenCharacterMenu()
     {
         characterMenuObj.SetActive(true);
+        characterMenuManager.UpdateDisplay();
         Time.timeScale = 0;
         characterMenuOpen = true;
     }
