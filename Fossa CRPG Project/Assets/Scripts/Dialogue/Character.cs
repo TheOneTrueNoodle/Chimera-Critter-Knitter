@@ -11,5 +11,5 @@ public class Character : ScriptableObject
     public Sprite angryPortrait; //angry
     public Sprite injuredPortrait; //hurt
 
-
+    public Color characterColour; //text outline clr
 }

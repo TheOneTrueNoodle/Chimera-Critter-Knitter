@@ -7,6 +7,7 @@ public struct Line
 {
     public Character speaker;
     public string emotion;
+    public bool leftSide;
 
     [TextArea(2, 5)]
     public string text;

@@ -18,8 +18,15 @@ public class DialogueManager : MonoBehaviour
     [Header("UI Variables")]
     [SerializeField] private GameObject contentHolder; //Content
     [SerializeField] private GameObject dialogueUI;
-    [SerializeField] private GameObject spriteHolder;
+    [SerializeField] private GameObject spriteHolderLeft;
+    [SerializeField] private GameObject spriteHolderRight;
+    [SerializeField] private GameObject tailLeft;
+    [SerializeField] private GameObject tailRight;
+    private GameObject spriteHolder;
+    private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
+    [SerializeField] private GameObject[] dialogueSprites;
+    private string colourHex;
 
     [Header("OPTIONS")]
     public bool dialogueActive;
@@ -66,7 +73,8 @@ public class DialogueManager : MonoBehaviour
             else if (index != currentConvo.lines.Length && dialogueActive) //if we haven't run out of lines, print next line in dialogue
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
-                addText(currentConvo.lines[index].speaker.fullName + ":<br>" + currentConvo.lines[index].text); //(has to be last here)
+                setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
+                addText("<color=#"+ colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color><br>" + currentConvo.lines[index].text); //(has to be last here)
             }
         }
 
@@ -96,38 +104,76 @@ public class DialogueManager : MonoBehaviour
 
     public void changeImage(Character character, string emotion) //change the sprite in the UI
     {
+        findSide(currentConvo.lines[index].leftSide);
+        spriteChildShadow = spriteHolder.transform.parent.gameObject;
+
+
         if (showDebuggingText) { Debug.Log("Changing Image"); }
 
         switch (emotion)
         {
             case "neutral":
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
 
             case "default":
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
 
             case "angry":
                 spriteHolder.GetComponent<Image>().sprite = character.angryPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.angryPortrait;
                 break;
 
             case "happy":
                 spriteHolder.GetComponent<Image>().sprite = character.smilingPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.smilingPortrait;
                 break;
 
             case "sad":
                 spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.sadPortrait;
+
                 break;
 
             case "injured":
                 spriteHolder.GetComponent<Image>().sprite = character.injuredPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.injuredPortrait;
                 break;
 
             case null:
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
         }
+    }
+
+    public void findSide(bool isLeft)
+    {
+        if (isLeft)
+        {
+            spriteHolder = spriteHolderLeft;
+            tailLeft.SetActive(true);
+            tailRight.SetActive(false);
+        }
+        else
+        {
+            spriteHolder = spriteHolderRight;
+            tailLeft.SetActive(false);
+            tailRight.SetActive(true);
+        }
+    }
+
+    public void setColours(Character character) //change the dialogbox colours
+    {
+        colourHex = ColorUtility.ToHtmlStringRGBA(character.characterColour);
+
+        foreach (GameObject border in dialogueSprites)
+        {
+            border.GetComponent<Image>().color = character.characterColour;
+        }  
     }
 
     public void exitText(bool destroyold) //hide ui and reset vars for next time
@@ -146,7 +192,6 @@ public class DialogueManager : MonoBehaviour
         dialogueUI.SetActive(false);
         index = 0;
         DialogueEvents.current.EndDialogue();
-
     }
 
     void showChoice()
