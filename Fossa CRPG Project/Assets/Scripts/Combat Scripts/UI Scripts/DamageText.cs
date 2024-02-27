@@ -12,9 +12,14 @@ public class DamageText : MonoBehaviour
     [SerializeField] private List<Sprite> damageTypeSymbols;
     [SerializeField] private List<Color> damageTypeColors;
 
-    public void Setup(string Damage, DamageTypes damageType)
+    public void Setup(string Damage, DamageTypes damageType, bool showImage)
     {
         damageText.text = Damage;
+
+        if (!showImage)
+        {
+            damageTypeDisplay.enabled = false;
+        }
 
         switch (damageType)
         {

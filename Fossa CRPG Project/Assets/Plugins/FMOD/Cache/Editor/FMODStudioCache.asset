@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638429990476513076
+  lastModified: 638446344830523302
   FileSizes:
   - Name: Desktop
     Value: 91616
@@ -47,60 +47,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1050
---- !u!114 &-8613864249067823009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Jazz Song
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Jazz Song
-  Guid:
-    Data1: -1785666863
-    Data2: 1208805383
-    Data3: 297615769
-    Data4: 1606619543
-  Banks:
-  - {fileID: -5112272232976100101}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 95947
---- !u!114 &-8359061114945158426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Victory Theme
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Victory Theme
-  Guid:
-    Data1: 1684034956
-    Data2: 1239911916
-    Data3: -296227687
-    Data4: -455001544
-  Banks:
-  - {fileID: -5112272232976100101}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 3692
 --- !u!114 &-8106391138758740888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +74,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2769
+--- !u!114 &-6516539910700395769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Combat Testing Scene Music/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 3435597141
+    data2: 3533344424
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-6416612846356708446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Combat Testing Scene Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Combat Testing Scene Music
+  Guid:
+    Data1: 14120187
+    Data2: 1309383603
+    Data3: -2090576206
+    Data4: 1070833156
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7092226080628054888}
+  - {fileID: 4898475190465275905}
+  - {fileID: -6516539910700395769}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5826679858034908422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,54 +182,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-5674773873118958337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Combat Testing Scene Music/Intensity
-  m_EditorClassIdentifier: 
-  Name: Intensity
-  StudioPath: 
-  Min: 0
-  Max: 100
-  Default: 0
-  ID:
-    data1: 3435597141
-    data2: 3533344424
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &-5591443991048147162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Combat Testing Scene Music/Spooky
-  m_EditorClassIdentifier: 
-  Name: Spooky
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3952809218
-    data2: 3599856984
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &-5112272232976100101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +197,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638429990476483047
+  lastModified: 638446344829282807
   FileSizes:
   - Name: Desktop
     Value: 11851072
@@ -265,7 +217,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638429990475631077
+  lastModified: 638446344772021862
   FileSizes:
   - Name: Desktop
     Value: 2032
@@ -336,7 +288,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Entities/Oscar
-  lastModified: 638429990476503070
+  lastModified: 638446344834537880
   FileSizes:
   - Name: Desktop
     Value: 128832
@@ -385,7 +337,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Cat Monster.bank
   Name: Cat Monster
   StudioPath: bank:/Entities/Cat Monster
-  lastModified: 638429990475611142
+  lastModified: 638446344833197211
   FileSizes:
   - Name: Desktop
     Value: 228064
@@ -405,36 +357,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638429990475621059
+  lastModified: 638446344772000311
   FileSizes:
   - Name: Desktop
     Value: 1486
-  Exists: 1
---- !u!114 &-327598212771914630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Combat Testing Scene Music/Song
-  m_EditorClassIdentifier: 
-  Name: Song
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 3571352701
-    data2: 4121231320
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - Somber Melodies
-  - Synth Battle Music
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -457,11 +383,9 @@ MonoBehaviour:
   - {fileID: -935872157915059495}
   EditorEvents:
   - {fileID: -1178390186597127467}
-  - {fileID: 8495811127305233432}
   - {fileID: 615967795857973743}
   - {fileID: 5436785713552298462}
   - {fileID: 5244722468213843797}
-  - {fileID: -8359061114945158426}
   - {fileID: 39861281747888039}
   - {fileID: -2810585153981810311}
   - {fileID: -5826679858034908422}
@@ -471,13 +395,15 @@ MonoBehaviour:
   - {fileID: 6804102487714707051}
   - {fileID: 2965208535300428167}
   - {fileID: -8637116375802603612}
-  - {fileID: -8613864249067823009}
+  - {fileID: 7251989677662370456}
+  - {fileID: 2291006595840966275}
+  - {fileID: -6416612846356708446}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638429990476513076
+  cacheTime: 638446344834537880
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -561,6 +487,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 100
+--- !u!114 &2291006595840966275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Jazz Song
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Jazz Song
+  Guid:
+    Data1: -1785666863
+    Data2: 1208805383
+    Data3: 297615769
+    Data4: 1606619543
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 95947
 --- !u!114 &2965208535300428167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +567,32 @@ MonoBehaviour:
   - Carpet
   - Grass
   - Wood
+  Exists: 1
+--- !u!114 &4898475190465275905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Combat Testing Scene Music/Song
+  m_EditorClassIdentifier: 
+  Name: Song
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3571352701
+    data2: 4121231320
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Somber Melodies
+  - Synth Battle Music
   Exists: 1
 --- !u!114 &5244722468213843797
 MonoBehaviour:
@@ -696,6 +675,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
+--- !u!114 &7092226080628054888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Combat Testing Scene Music/Spooky
+  m_EditorClassIdentifier: 
+  Name: Spooky
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3952809218
+    data2: 3599856984
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &7251989677662370456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Victory Theme
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Victory Theme
+  Guid:
+    Data1: 1684034956
+    Data2: 1239911916
+    Data3: -296227687
+    Data4: -455001544
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3692
 --- !u!114 &8085339715194898503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,33 +750,3 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &8495811127305233432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/Combat Testing Scene Music
-  m_EditorClassIdentifier: 
-  Path: event:/Music/Combat Testing Scene Music
-  Guid:
-    Data1: 14120187
-    Data2: 1309383603
-    Data3: -2090576206
-    Data4: 1070833156
-  Banks:
-  - {fileID: -5112272232976100101}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -5591443991048147162}
-  - {fileID: -327598212771914630}
-  - {fileID: -5674773873118958337}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0

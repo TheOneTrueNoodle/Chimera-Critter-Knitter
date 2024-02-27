@@ -176,7 +176,7 @@ public class CombatHandler : MonoBehaviour
                 tookDamage = true;
             }
         }
-        else if(damage < 0)
+        else if(damage <= 0)
         {
             newLog = attacker.CharacterData.Name + " attacked " + target.CharacterData.Name + " but dealt no damage!";
             DisplayDamageText(0, target, attacker.AttackDamageType);
@@ -257,11 +257,20 @@ public class CombatHandler : MonoBehaviour
                 unitHandler.UnitSufferDamage(affectedTargets[i], physicalDamage);
                 DisplayDamageText(physicalDamage, affectedTargets[i], attacker.AttackDamageType);
             }
+            else if(physicalDamage <= 0 && !affectedTargets[i].isDead)
+            {
+                DisplayDamageText(0, affectedTargets[i], attacker.AttackDamageType);
+            }
+
             if (abilityDamage > 0 && !affectedTargets[i].isDead)
             {
                 newLogs[i] = affectedTargets[i].CharacterData.Name + " suffers " + abilityDamage + " " + ability.damageType + " damage from " + ability.Name + "!";
                 unitHandler.UnitSufferAbility(affectedTargets[i], ability, abilityDamage);
                 DisplayDamageText(abilityDamage, affectedTargets[i], ability.damageType);
+            }
+            else if(abilityDamage <= 0 && !affectedTargets[i].isDead)
+            {
+                DisplayDamageText(0, affectedTargets[i], ability.damageType);
             }
 
             if(physicalDamage + abilityDamage == 0)
@@ -325,13 +334,18 @@ public class CombatHandler : MonoBehaviour
     public void DisplayDamageText(int damage, Entity target, DamageTypes damageType)
     {
         string dmgText = damage.ToString();
-        if (damage <= 0) { dmgText = "MISS"; }
+        bool showImage = true;
+        if (damage <= 0) 
+        { 
+            dmgText = "MISS";
+            showImage = false;
+        }
         GameObject dmgDisp = Instantiate(damageTextPrefab, damageTextParent);
 
         var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
         dmgDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
 
-        dmgDisp.GetComponent<DamageText>().Setup(dmgText, damageType);
+        dmgDisp.GetComponent<DamageText>().Setup(dmgText, damageType, showImage);
     }
     #endregion
 

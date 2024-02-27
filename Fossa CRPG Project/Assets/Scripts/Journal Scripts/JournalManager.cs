@@ -5,7 +5,10 @@ using TMPro;
 
 public class JournalManager : MonoBehaviour
 {
-    public List<JournalEntryButton> entries;
+    public List<JournalEntryData> entries;
+    private List<JournalEntryButton> buttons;
+    [SerializeField] private JournalEntryButton entryButtonPrefab;
+    [SerializeField] private Transform entryButtonParent;
     [SerializeField] private TMP_Text descriptionText;
 
     private void Start()
@@ -14,17 +17,19 @@ public class JournalManager : MonoBehaviour
         JournalEvent.current.onFindEntryObject += DiscoverEntry;
         JournalEvent.current.onEntrySelect += EntrySelect;
 
-        var buttons = GetComponentsInChildren<JournalEntryButton>(true);
+        buttons = new List<JournalEntryButton>();
 
-        foreach (var entry in buttons)
+        foreach (var entry in entries)
         {
-            entries.Add(entry);
+            var entryButton = Instantiate(entryButtonPrefab, entryButtonParent);
+            buttons.Add(entryButton);
+            entryButton.entryData = entry;
         }
     }
 
     public void DiscoverEntry(JournalEntryData data)
     {
-        foreach (var entry in entries)
+        foreach (var entry in buttons)
         {
             if (entry.entryData.entryName == data.entryName)
             {
