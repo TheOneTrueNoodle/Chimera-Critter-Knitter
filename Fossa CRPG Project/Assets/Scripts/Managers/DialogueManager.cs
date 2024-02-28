@@ -26,10 +26,12 @@ public class DialogueManager : MonoBehaviour
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
-    public List<GameObject> log = new List<GameObject>();
+    private List<GameObject> log = new List<GameObject>();
 
     private string colourHex;
+    [SerializeField] private Color greyOutColor;
     private bool pawPressed = false;
+    private bool isOpen = false;
 
     [Header("OPTIONS")]
     public bool dialogueActive;
@@ -79,7 +81,7 @@ public class DialogueManager : MonoBehaviour
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
                 setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
-                addText("<color=#"+ colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color><br>" + currentConvo.lines[index].text); //(has to be last here)
+                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text); //(has to be last here)
             }
         }
     }
@@ -103,6 +105,8 @@ public class DialogueManager : MonoBehaviour
         previousLine = newObject; //set as previous line
         index++; //move on <<BE CAREFUL OF THIS!!
 
+        openLog(isOpen);
+
         Canvas.ForceUpdateCanvases();
         dialogueScroll.normalizedPosition = new Vector2(0, 0);//scroll to new text
     }
@@ -112,6 +116,14 @@ public class DialogueManager : MonoBehaviour
         findSide(currentConvo.lines[index].leftSide);
         spriteChildShadow = spriteHolder.transform.parent.gameObject;
 
+        if (currentConvo.onlyOneSpeaker)
+        {
+            spriteHolderRight.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            spriteHolderRight.transform.parent.gameObject.SetActive(true);
+        }
 
         if (showDebuggingText) { Debug.Log("Changing Image"); }
 
@@ -160,12 +172,16 @@ public class DialogueManager : MonoBehaviour
         if (isLeft)
         {
             spriteHolder = spriteHolderLeft;
+            spriteHolderLeft.GetComponent<Image>().color = Color.white;
+            spriteHolderRight.GetComponent<Image>().color = greyOutColor;
             tailLeft.SetActive(true);
             tailRight.SetActive(false);
         }
         else
         {
             spriteHolder = spriteHolderRight;
+            spriteHolderLeft.GetComponent<Image>().color = greyOutColor;
+            spriteHolderRight.GetComponent<Image>().color = Color.white;
             tailLeft.SetActive(false);
             tailRight.SetActive(true);
         }
@@ -207,6 +223,7 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        log.Clear();
         dialogueActive = false;
         dialogueUI.SetActive(false);
         index = 0;
