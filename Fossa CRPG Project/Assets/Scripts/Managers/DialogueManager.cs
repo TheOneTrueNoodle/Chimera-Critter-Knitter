@@ -26,7 +26,10 @@ public class DialogueManager : MonoBehaviour
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
+    public List<GameObject> log = new List<GameObject>();
+
     private string colourHex;
+    private bool pawPressed = false;
 
     [Header("OPTIONS")]
     public bool dialogueActive;
@@ -50,8 +53,10 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
+        if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || pawPressed || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
         {
+            pawPressed = false;
+
             if (index == currentConvo.lines.Length && dialogueActive) //check if we've ran out of lines
             {
                 if (currentConvo.choice != null) //if we have run out of lines and there's a choice, show it
@@ -61,7 +66,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
                 {
-                    transitionToBattle(currentConvo.combatName);
+                    //transitionToBattle(currentConvo.combatName);
                     exitText(true);
                 }
                 else //otherwise if there's no choice and no fight exit dialogue
@@ -77,7 +82,6 @@ public class DialogueManager : MonoBehaviour
                 addText("<color=#"+ colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color><br>" + currentConvo.lines[index].text); //(has to be last here)
             }
         }
-
     }
 
     public void addText(string dialogue) //instantiate text game object with dialogue as text childed under textBoxTarget
@@ -88,6 +92,7 @@ public class DialogueManager : MonoBehaviour
         {
             string temp = previousLine.GetComponent<TextMeshProUGUI>().text;
             previousLine.GetComponent<TextMeshProUGUI>().text = "<color=grey>" + temp;
+            log.Add(previousLine);
         }
 
         GameObject newObject = Instantiate(textBoxPrefab); //create
@@ -164,6 +169,20 @@ public class DialogueManager : MonoBehaviour
             tailLeft.SetActive(false);
             tailRight.SetActive(true);
         }
+    }
+
+    public void nextDialogButton()
+    {
+        pawPressed = true;
+    }
+
+    public void openLog(bool open)
+    {
+        foreach (GameObject textLogged in log)
+        {
+            textLogged.SetActive(open);
+        }
+
     }
 
     public void setColours(Character character) //change the dialogbox colours
