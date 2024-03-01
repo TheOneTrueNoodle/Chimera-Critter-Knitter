@@ -28,4 +28,31 @@ public class MenuEvent : MonoBehaviour
             onEntrySelect(data, discovered);
         }
     }
+
+    public event Action<AbilityData> onUnlockNewMutation;
+    public void UnlockNewMutation(AbilityData mutation)
+    {
+        if (onUnlockNewMutation != null)
+        {
+            onUnlockNewMutation(mutation);
+        }
+    }
+
+    public event Action<AbilityData> onEquipMutation;
+    public void EquipMutation(AbilityData mutation)
+    {
+        if (onEquipMutation != null)
+        {
+            onEquipMutation(mutation);
+        }
+    }
+
+    public event Action<AbilityData> onUnequipMutation;
+    public void UnequipMutation(AbilityData mutation)
+    {
+        if (onUnequipMutation != null)
+        {
+            onUnequipMutation(mutation);
+        }
+    }
 }

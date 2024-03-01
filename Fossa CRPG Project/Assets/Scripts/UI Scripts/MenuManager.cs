@@ -5,21 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-
     public GameObject OpeningScreen;
     public GameObject SettingsScreen;
     public GameObject FirstCutscene;
     public GameObject SplashScreen;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(OpeningGame());
-    }
-
-    // Update is called once per frame
-   public void Update()
-    {
-        
     }
 
     public void StartGame()

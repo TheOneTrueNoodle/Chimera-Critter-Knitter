@@ -7,6 +7,7 @@ public class TutorialHouseArea : AreaManager
 {
     public PostProcessVolume infectionVignette;
     public FadeOutDogVision dogVision;
+    public AbilityData lickAbility;
 
     private void Start()
     {
@@ -39,6 +40,7 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["Has mutated"] = true;
             //Grant the player the mutation menu now :D
+            MenuEvent.current.UnlockNewMutation(lickAbility);
         }
     }
 

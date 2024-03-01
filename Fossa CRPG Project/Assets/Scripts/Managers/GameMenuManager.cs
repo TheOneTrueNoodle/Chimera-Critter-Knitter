@@ -12,10 +12,11 @@ public class GameMenuManager : MonoBehaviour
     public GameObject pauseMenuObj;
     public GameObject SettingsMenuObj;
 
-    private bool characterMenuOpen;
+    private bool menuOpen;
     private bool pauseMenuOpen;
 
     [SerializeField] private CharacterMenuManager characterMenuManager;
+    [SerializeField] private MutationMenu mutationMenuManager;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class GameMenuManager : MonoBehaviour
         if (Input.GetButtonDown("Character Menu") && !pauseMenuOpen)
         {
             //Open or close the character menu
-            if (!characterMenuOpen)
+            if (!menuOpen)
             {
                 OpenCharacterMenu();
             }
@@ -46,7 +47,7 @@ public class GameMenuManager : MonoBehaviour
 
         if (Input.GetButtonDown("Pause"))
         {
-            if(characterMenuOpen)
+            if(menuOpen)
             {
                 CloseCharacterMenu();
             }
@@ -121,22 +122,25 @@ public class GameMenuManager : MonoBehaviour
     public void OpenCharacterMenu()
     {
         characterMenuObj.SetActive(true);
+
         characterMenuManager.UpdateDisplay();
+        mutationMenuManager.UpdateDisplay();
+
         Time.timeScale = 0;
-        characterMenuOpen = true;
+        menuOpen = true;
     }
 
     public void CloseCharacterMenu()
     {
         characterMenuObj.SetActive(false);
         Time.timeScale = 1;
-        characterMenuOpen = false;
+        menuOpen = false;
     }
 
     private void StartCombat(string combatName)
     {
         inCombat = true; 
-        if (characterMenuOpen)
+        if (menuOpen)
         {
             CloseCharacterMenu();
         }
