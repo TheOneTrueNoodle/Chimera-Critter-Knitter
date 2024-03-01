@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalEvent : MonoBehaviour
+public class MenuEvent : MonoBehaviour
 {
-    public static JournalEvent current;
+    public static MenuEvent current;
 
     private void Awake()
     {

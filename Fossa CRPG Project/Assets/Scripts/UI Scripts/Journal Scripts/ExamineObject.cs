@@ -11,7 +11,7 @@ public class ExamineObject : MonoBehaviour, IDragHandler
 
     private void Start()
     {
-        JournalEvent.current.onEntrySelect += OnEntrySelect;
+        MenuEvent.current.onEntrySelect += OnEntrySelect;
     }
 
     public void OnEntrySelect(JournalEntryData Data, bool discovered)

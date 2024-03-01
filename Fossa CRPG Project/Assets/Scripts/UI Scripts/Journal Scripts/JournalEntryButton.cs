@@ -47,6 +47,6 @@ public class JournalEntryButton : MonoBehaviour
 
     public void Click()
     {
-        JournalEvent.current.EntrySelect(entryData, discovered);
+        MenuEvent.current.EntrySelect(entryData, discovered);
     }
 }

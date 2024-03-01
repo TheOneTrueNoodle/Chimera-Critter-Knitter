@@ -8,6 +8,6 @@ public class UpdateJournal : MonoBehaviour
 
     public void Call()
     {
-        JournalEvent.current.FindEntryObject(entryData);
+        MenuEvent.current.FindEntryObject(entryData);
     }
 }

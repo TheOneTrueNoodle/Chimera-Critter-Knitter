@@ -13,9 +13,8 @@ public class JournalManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(JournalEvent.current);
-        JournalEvent.current.onFindEntryObject += DiscoverEntry;
-        JournalEvent.current.onEntrySelect += EntrySelect;
+        MenuEvent.current.onFindEntryObject += DiscoverEntry;
+        MenuEvent.current.onEntrySelect += EntrySelect;
 
         buttons = new List<JournalEntryButton>();
 
