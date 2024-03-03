@@ -11,7 +11,7 @@ public class MutationMenu : MonoBehaviour
     private List<AbilityData> unlockedAbilities = new List<AbilityData>();
     private List<AbilityData> setupAbilties = new List<AbilityData>();
 
-    [HideInInspector] public List<AbilityData> equippedMutations;
+    public List<AbilityData> equippedMutations;
 
     [Header("Mutation Displays")]
     [SerializeField] private Transform mutationParent;

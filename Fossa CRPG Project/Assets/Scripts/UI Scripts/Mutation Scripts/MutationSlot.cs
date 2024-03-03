@@ -17,18 +17,17 @@ public class MutationSlot : MonoBehaviour
 
     public void EquipMutation(MutationOption mutation)
     {
+        MenuEvent.current.EquipMutation(mutation.mutationAbility);
         currentSelectedMutation = mutation;
         mutationImage.sprite = currentSelectedMutation.mutationAbility.symbol;
         nameDisp.text = currentSelectedMutation.mutationAbility.Name;
         hasMutationDisp.enabled = true;
         hasEquippedMutation = true;
-        MenuEvent.current.EquipMutation(currentSelectedMutation.mutationAbility);
     }
 
     public void UnequipMutation()
     {
         MenuEvent.current.UnequipMutation(currentSelectedMutation.mutationAbility);
-        currentSelectedMutation.Unequip();
 
         currentSelectedMutation = null;
         mutationImage.sprite = null;
