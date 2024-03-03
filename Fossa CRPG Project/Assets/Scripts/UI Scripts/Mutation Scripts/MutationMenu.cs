@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MutationMenu : MonoBehaviour
 {
+    private Entity oscarData;
+
     [SerializeField] private List<MutationSlot> mutationSlots;
 
     private List<MutationOption> createdMutations = new List<MutationOption>();
@@ -22,6 +24,16 @@ public class MutationMenu : MonoBehaviour
         MenuEvent.current.onUnlockNewMutation += UnlockNewMutation;
         MenuEvent.current.onEquipMutation += EquipMutation;
         MenuEvent.current.onUnequipMutation += UnequipMutation;
+
+        CombatEvents.current.onStartCombatSetup += StartCombat;
+    }
+
+    private void StartCombat(string combatName)
+    {
+        if (oscarData == null) { oscarData = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
+
+        oscarData.activeAbilities.Clear();
+        oscarData.activeAbilities = equippedMutations;
     }
 
     public void UpdateDisplay()
