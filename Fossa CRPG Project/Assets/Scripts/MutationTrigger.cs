@@ -4,13 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
-public class InteractionTrigger : MonoBehaviour
+public class MutationTrigger : MonoBehaviour
 {
     private bool inCombat;
     private bool inDialogue;
+
+    public AbilityData requiredMutation;
     public bool oneTimeUse;
 
     public GameObject inputUI;
+    public Animator wrongMutationAnim;
 
     private bool used = false;
     public Interaction singleInteraction;
@@ -32,27 +35,46 @@ public class InteractionTrigger : MonoBehaviour
         if (inCombat|| inDialogue || !other.gameObject.CompareTag("Player")) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
-            if(oneTimeUse)
+            //Check if player has the correct ability
+            bool hasMutationEquipped = false;
+            MutationMenu mutationMenu = FindObjectOfType<MutationMenu>();
+            foreach (AbilityData mutation in mutationMenu.equippedMutations)
             {
-                singleInteraction.Invoke();
-                used = true;
-            }
-            else if(enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
-            {
-                if (active)
+                if (mutation.Name == requiredMutation.Name)
                 {
-                    disableInteraction.Invoke();
-                    active = false;
+                    hasMutationEquipped = true;
+                    break;
+                }
+            }
+
+            if (hasMutationEquipped)
+            {
+                if (oneTimeUse)
+                {
+                    singleInteraction.Invoke();
+                    used = true;
+                }
+                else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
+                {
+                    if (active)
+                    {
+                        disableInteraction.Invoke();
+                        active = false;
+                    }
+                    else
+                    {
+                        enableInteraction.Invoke();
+                        active = true;
+                    }
                 }
                 else
                 {
-                    enableInteraction.Invoke();
-                    active = true;
+                    singleInteraction.Invoke();
                 }
             }
             else
             {
-                singleInteraction.Invoke();
+                wrongMutationAnim.Play("MissingMutation");
             }
         }
     }
@@ -91,6 +113,3 @@ public class InteractionTrigger : MonoBehaviour
         inDialogue = false;
     }
 }
-
-[Serializable]
-public class Interaction : UnityEvent { }

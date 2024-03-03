@@ -19,6 +19,7 @@ public class MutationSlot : MonoBehaviour
     {
         MenuEvent.current.EquipMutation(mutation.mutationAbility);
         currentSelectedMutation = mutation;
+        mutationImage.enabled = true;
         mutationImage.sprite = currentSelectedMutation.mutationAbility.symbol;
         nameDisp.text = currentSelectedMutation.mutationAbility.Name;
         hasMutationDisp.enabled = true;
@@ -30,6 +31,7 @@ public class MutationSlot : MonoBehaviour
         MenuEvent.current.UnequipMutation(currentSelectedMutation.mutationAbility);
 
         currentSelectedMutation = null;
+        mutationImage.enabled = false;
         mutationImage.sprite = null;
         nameDisp.text = "";
         hasMutationDisp.enabled = false;

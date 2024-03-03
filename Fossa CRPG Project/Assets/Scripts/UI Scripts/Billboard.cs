@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    void Update()
+
+    private void LateUpdate()
     {
-        if (Camera.main is { }) transform.LookAt(-Camera.main.transform.position, Camera.main.transform.up);
+        if (Camera.main is { }) transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
     }
 }

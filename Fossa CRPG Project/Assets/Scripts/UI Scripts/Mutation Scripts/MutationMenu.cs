@@ -6,8 +6,6 @@ public class MutationMenu : MonoBehaviour
 {
     private Entity oscarData;
 
-    [SerializeField] private List<MutationSlot> mutationSlots;
-
     private List<MutationOption> createdMutations = new List<MutationOption>();
 
     private List<AbilityData> unlockedAbilities = new List<AbilityData>();
