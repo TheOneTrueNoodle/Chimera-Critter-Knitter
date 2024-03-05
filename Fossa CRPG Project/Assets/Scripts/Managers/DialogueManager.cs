@@ -18,8 +18,20 @@ public class DialogueManager : MonoBehaviour
     [Header("UI Variables")]
     [SerializeField] private GameObject contentHolder; //Content
     [SerializeField] private GameObject dialogueUI;
-    [SerializeField] private GameObject spriteHolder;
+    [SerializeField] private GameObject spriteHolderLeft;
+    [SerializeField] private GameObject spriteHolderRight;
+    [SerializeField] private GameObject tailLeft;
+    [SerializeField] private GameObject tailRight;
+    private GameObject spriteHolder;
+    private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
+    [SerializeField] private GameObject[] dialogueSprites;
+    private List<GameObject> log = new List<GameObject>();
+
+    private string colourHex;
+    [SerializeField] private Color greyOutColor;
+    private bool pawPressed = false;
+    private bool isOpen = false;
 
     [Header("OPTIONS")]
     public bool dialogueActive;
@@ -43,8 +55,10 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
+        if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || pawPressed || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
         {
+            pawPressed = false;
+
             if (index == currentConvo.lines.Length && dialogueActive) //check if we've ran out of lines
             {
                 if (currentConvo.choice != null) //if we have run out of lines and there's a choice, show it
@@ -54,7 +68,7 @@ public class DialogueManager : MonoBehaviour
                 }
                 else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
                 {
-                    transitionToBattle(currentConvo.combatName);
+                    //transitionToBattle(currentConvo.combatName);
                     exitText(true);
                 }
                 else //otherwise if there's no choice and no fight exit dialogue
@@ -66,10 +80,10 @@ public class DialogueManager : MonoBehaviour
             else if (index != currentConvo.lines.Length && dialogueActive) //if we haven't run out of lines, print next line in dialogue
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
-                addText(currentConvo.lines[index].speaker.fullName + ":<br>" + currentConvo.lines[index].text); //(has to be last here)
+                setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
+                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text); //(has to be last here)
             }
         }
-
     }
 
     public void addText(string dialogue) //instantiate text game object with dialogue as text childed under textBoxTarget
@@ -80,6 +94,7 @@ public class DialogueManager : MonoBehaviour
         {
             string temp = previousLine.GetComponent<TextMeshProUGUI>().text;
             previousLine.GetComponent<TextMeshProUGUI>().text = "<color=grey>" + temp;
+            log.Add(previousLine);
         }
 
         GameObject newObject = Instantiate(textBoxPrefab); //create
@@ -90,44 +105,110 @@ public class DialogueManager : MonoBehaviour
         previousLine = newObject; //set as previous line
         index++; //move on <<BE CAREFUL OF THIS!!
 
+        openLog(isOpen);
+
         Canvas.ForceUpdateCanvases();
         dialogueScroll.normalizedPosition = new Vector2(0, 0);//scroll to new text
     }
 
     public void changeImage(Character character, string emotion) //change the sprite in the UI
     {
+        findSide(currentConvo.lines[index].leftSide);
+        spriteChildShadow = spriteHolder.transform.parent.gameObject;
+
+        if (currentConvo.onlyOneSpeaker)
+        {
+            spriteHolderRight.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            spriteHolderRight.transform.parent.gameObject.SetActive(true);
+        }
+
         if (showDebuggingText) { Debug.Log("Changing Image"); }
 
         switch (emotion)
         {
             case "neutral":
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
 
             case "default":
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
 
             case "angry":
                 spriteHolder.GetComponent<Image>().sprite = character.angryPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.angryPortrait;
                 break;
 
             case "happy":
                 spriteHolder.GetComponent<Image>().sprite = character.smilingPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.smilingPortrait;
                 break;
 
             case "sad":
                 spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.sadPortrait;
+
                 break;
 
             case "injured":
                 spriteHolder.GetComponent<Image>().sprite = character.injuredPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.injuredPortrait;
                 break;
 
             case null:
                 spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
                 break;
         }
+    }
+
+    public void findSide(bool isLeft)
+    {
+        if (isLeft)
+        {
+            spriteHolder = spriteHolderLeft;
+            spriteHolderLeft.GetComponent<Image>().color = Color.white;
+            spriteHolderRight.GetComponent<Image>().color = greyOutColor;
+            tailLeft.SetActive(true);
+            tailRight.SetActive(false);
+        }
+        else
+        {
+            spriteHolder = spriteHolderRight;
+            spriteHolderLeft.GetComponent<Image>().color = greyOutColor;
+            spriteHolderRight.GetComponent<Image>().color = Color.white;
+            tailLeft.SetActive(false);
+            tailRight.SetActive(true);
+        }
+    }
+
+    public void nextDialogButton()
+    {
+        pawPressed = true;
+    }
+
+    public void openLog(bool open)
+    {
+        foreach (GameObject textLogged in log)
+        {
+            textLogged.SetActive(open);
+        }
+
+    }
+
+    public void setColours(Character character) //change the dialogbox colours
+    {
+        colourHex = ColorUtility.ToHtmlStringRGBA(character.characterColour);
+
+        foreach (GameObject border in dialogueSprites)
+        {
+            border.GetComponent<Image>().color = character.characterColour;
+        }  
     }
 
     public void exitText(bool destroyold) //hide ui and reset vars for next time
@@ -142,11 +223,11 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
+        log.Clear();
         dialogueActive = false;
         dialogueUI.SetActive(false);
         index = 0;
         DialogueEvents.current.EndDialogue();
-
     }
 
     void showChoice()
