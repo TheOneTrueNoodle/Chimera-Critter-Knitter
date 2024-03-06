@@ -21,7 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private float animRotation;
 
     private Animator anim;
-    private Vector3 oldForward;
+    private Vector3 oldCamForward;
+    private Vector3 oldCamRight;
 
     private bool doingBigTurn;
     [HideInInspector] public FootstepInstance footstepInstance;
@@ -41,7 +42,8 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         footstepInstance = GetComponent<FootstepInstance>();
 
-        oldForward = transform.forward;
+        oldCamForward = Camera.main.transform.forward;
+        oldCamRight = Camera.main.transform.right;
     }
 
     private void Update()
@@ -61,7 +63,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void GatherInput()
     {
-        _input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 newInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        if (newInput != _input)
+        {
+            oldCamForward = Camera.main.transform.forward;
+            oldCamRight = Camera.main.transform.right;
+        }
+        _input = newInput;
         if (Input.GetButton("Bark")) { Bark(); }
     }
 
@@ -77,9 +85,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input != Vector3.zero)
         {
-
-            Vector3 forward = Camera.main.transform.forward;
-            Vector3 right = Camera.main.transform.right;
+            Vector3 forward = oldCamForward;
+            Vector3 right = oldCamRight;
 
             forward.y = 0;
             right.y = 0;
@@ -103,28 +110,6 @@ public class PlayerMovement : MonoBehaviour
             float rotationDirection = Mathf.Sign(Vector3.Dot(Vector3.up, Vector3.Cross(transform.forward, relative.normalized)));
 
             rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
-
-            /*
-            if (angle > 140 && !running)
-            {
-                //Trigger a "180" turn
-                //rb.MoveRotation(rot);
-
-                doingBigTurn = true;
-                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
-                float newAngle = Quaternion.Angle(transform.rotation, rot);
-                if (newAngle < 15) { doingBigTurn = false; }
-            }
-            else if(doingBigTurn)
-            {
-                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * 3 * Time.deltaTime);
-                float newAngle = Quaternion.Angle(transform.rotation, rot);
-                if (newAngle < 15) { doingBigTurn = false; }
-            }
-            else
-            {
-                rb.rotation = Quaternion.RotateTowards(transform.rotation, rot, turnSpeed * Time.deltaTime);
-            }*/
 
             if (angle < 1.0f) { rotationDirection = 0f; }
             if(rotationDirection > 0f) { rotationDirection = 1f; }
@@ -170,6 +155,14 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetFloat("Speed", animSpeed);
         anim.SetFloat("Rotation", animRotation);
+    }
+
+    public IEnumerator resetCameraForward()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        oldCamForward = Camera.main.transform.forward;
+        oldCamRight = Camera.main.transform.right;
     }
 
     private void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
