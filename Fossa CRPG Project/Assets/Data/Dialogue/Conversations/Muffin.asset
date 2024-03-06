@@ -15,16 +15,21 @@ MonoBehaviour:
   lines:
   - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
     emotion: default
+    leftSide: 1
     text: ...
   - speaker: {fileID: 11400000, guid: ff38baacb7ac8fc489601e9a5dbb3155, type: 2}
     emotion: default
+    leftSide: 0
     text: ...
   - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
     emotion: happy
+    leftSide: 1
     text: BARK! BARK!
   - speaker: {fileID: 11400000, guid: ff38baacb7ac8fc489601e9a5dbb3155, type: 2}
     emotion: angry
+    leftSide: 0
     text: ...
   choice: {fileID: 0}
   fightBegin: 0
   combatName: 
+  onlyOneSpeaker: 0
