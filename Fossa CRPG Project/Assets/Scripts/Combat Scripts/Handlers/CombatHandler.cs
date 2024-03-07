@@ -306,6 +306,7 @@ public class CombatHandler : MonoBehaviour
             foreach (Entity entity in playerTeam)
             {
                 GameObject xpDisp = Instantiate(xpTextPrefab, xpTextParent);
+                CombatEvents.current.AddLog(entity + " gained " + EXP + " exp!");
 
                 xpDisp.GetComponent<XPText>().Setup(EXP);
                 CombatEvents.current.GiveUnitEXP(entity, EXP);

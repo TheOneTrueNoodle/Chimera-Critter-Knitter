@@ -5,7 +5,8 @@ using TMPro;
 
 public class AbilityButton : MonoBehaviour
 {
-    private TMP_Text buttonText;
+    [SerializeField] private TMP_Text buttonText;
+    [SerializeField] private TMP_Text textShadow;
 
     public int abilityID;
     public AbilityData ability;
@@ -13,7 +14,6 @@ public class AbilityButton : MonoBehaviour
 
     private void Start()
     {
-        buttonText = GetComponentInChildren<TMP_Text>();
         hoverTip = GetComponent<HoverTip>();
     }
 
@@ -22,10 +22,10 @@ public class AbilityButton : MonoBehaviour
         ability = abil;
         abilityID = ID;
 
-        buttonText = GetComponentInChildren<TMP_Text>();
         hoverTip = GetComponent<HoverTip>();
 
         buttonText.text = abil.Name;
+        textShadow.text = abil.Name;
         hoverTip.tipToShow = abil.Desc;
     }
     public void Clicked()

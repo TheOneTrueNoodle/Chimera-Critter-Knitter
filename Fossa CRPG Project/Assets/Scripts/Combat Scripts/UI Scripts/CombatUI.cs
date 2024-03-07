@@ -22,16 +22,9 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private GameObject cancelDisp;
 
     [Header("Ability UI")]
+    [SerializeField] private GameObject OscarHPDisp;
     [SerializeField] private RectTransform abilityUI;
-    [SerializeField] private GameObject abilityButtonPrefab;
-    [SerializeField] private RectTransform abilityButtonParent;
-    [SerializeField] private float abilityButtonOffset = 10f;
     private List<AbilityButton> abilityButton = new List<AbilityButton>();
-
-    [Header("End Turn UI")]
-    [SerializeField] private Button EndTurnButton;
-    [SerializeField] private Image RingFill;
-    private float EndTurnFill;
 
     [Header("Turn Order Display")]
     [SerializeField] private GameObject turnIconPrefab;
@@ -65,6 +58,10 @@ public class CombatUI : MonoBehaviour
         CombatEvents.current.onGameOver += GameOver;
 
         cursor = FindObjectOfType<CursorController>();
+        foreach (var item in GetComponentsInChildren<AbilityButton>(true))
+        {
+            abilityButton.Add(item);
+        }
     }
 
     private void Update()
@@ -105,25 +102,6 @@ public class CombatUI : MonoBehaviour
                 CombatEvents.current.PauseGame();
             }
         }
-
-        //End Turn Input
-        if (gamePaused != true && Input.GetButton("End Turn"))
-        {
-            EndTurnFill += Time.deltaTime * 2f;
-            RingFill.fillAmount = EndTurnFill;
-            if (EndTurnFill >= 1)
-            {
-                EndTurnFill = 0;
-                RingFill.fillAmount = EndTurnFill;
-                EndTurnFill += Time.deltaTime * 2f;
-            }
-        }
-        else if (EndTurnFill > 0)
-        {
-            EndTurnFill -= Time.deltaTime * 2f;
-            if(EndTurnFill < 0) { EndTurnFill = 0; }
-            RingFill.fillAmount = EndTurnFill;
-        }
     }
     public void CancelInput()
     {
@@ -153,7 +131,6 @@ public class CombatUI : MonoBehaviour
         if(Char.UITarget != null) { position = Char.UITarget.position; }
         else { Debug.LogError("No assigned UITarget"); }
 
-        PositionUI(ActionUI, position);
         if (ActionUI.TryGetComponent(out Animator anim))
         {
             anim.Play("Open");
@@ -177,26 +154,36 @@ public class CombatUI : MonoBehaviour
 
         UIOpen = false;
     }
+
+    public void AbilityButtonCall()
+    {
+        if (abilityUIOpen)
+        {
+            CloseAbilityUI();
+        }
+        else
+        {
+            OpenAbilityUI();
+        }
+    }
+
     public void OpenAbilityUI()
     {
         abilityUIOpen = true;
 
+        OscarHPDisp.gameObject.SetActive(false);
         abilityUI.gameObject.SetActive(true);
         ActionUI.gameObject.SetActive(false);
-        abilityUI.transform.position = new Vector2(ActionUI.transform.position.x + abilityUI.sizeDelta.x, ActionUI.transform.position.y);
 
-        foreach (var button in abilityButton)
+        foreach (AbilityButton button in abilityButton)
         {
-            Destroy(button);
+            button.gameObject.SetActive(false);
         }
-
-        abilityButton.Clear();
 
         for (int i = 0; i < Char.activeAbilities.Count; i++)
         {
-            AbilityButton newAbilityButton = Instantiate(abilityButtonPrefab, abilityButtonParent).GetComponent<AbilityButton>();
-            newAbilityButton.SetupButton(Char.activeAbilities[i], i);
-            abilityButton.Add(newAbilityButton);
+            abilityButton[i].SetupButton(Char.activeAbilities[i], i);
+            abilityButton[i].gameObject.SetActive(true);
         }
 
         if (Char.activeAbilities.Count > 0)
@@ -207,8 +194,12 @@ public class CombatUI : MonoBehaviour
 
     public void CloseAbilityUI()
     {
-        foreach (var item in abilityButton) { Destroy(item.gameObject); }
-        abilityButton.Clear();
+        foreach (var item in abilityButton)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        OscarHPDisp.gameObject.SetActive(true);
         abilityUI.gameObject.SetActive(false);
         ActionUI.gameObject.SetActive(true);
 
@@ -272,12 +263,6 @@ public class CombatUI : MonoBehaviour
         }
 
         ChangeCursorMode(cursorMode);
-    }
-    public void PositionUI(RectTransform rectTransform, Vector3 worldPos)
-    {
-        //Needs rework
-        var screenPos = Camera.main.WorldToScreenPoint(worldPos);
-        rectTransform.transform.position = new Vector2(screenPos.x, screenPos.y);
     }
     public void UpdateInformationUI()
     {

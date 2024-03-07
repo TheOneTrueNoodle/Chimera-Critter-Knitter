@@ -9,8 +9,6 @@ public class XPBar : MonoBehaviour
 {
     public Slider xpBar;
     public Animator anim;
-    public TMP_Text currentXP;
-    public TMP_Text requiredXP;
 
     public Entity unit;
 
@@ -21,11 +19,6 @@ public class XPBar : MonoBehaviour
     {
         CombatEvents.current.onNewTurn += NewTurn;
         xpGainSFX = AudioManager.instance.CreateInstance(FMODEvents.instance.xpGainSFX);
-    }
-    public void UpdateInfo()
-    {
-        currentXP.text = unit.exp.ToString();
-        requiredXP.text = unit.requiredExp.ToString();
     }
     public void UpdateBar()
     {
@@ -42,7 +35,6 @@ public class XPBar : MonoBehaviour
         if (newUnit.TeamID == 0)
         {
             unit = newUnit;
-            UpdateInfo();
             UpdateBar();
         }
     }
@@ -77,11 +69,9 @@ public class XPBar : MonoBehaviour
                 float xpPercentage = Mathf.Lerp(0, 100, lerpTimer);
 
                 xpBar.value = newValue;
-                currentXP.text = ((int)newValue).ToString();
                 xpGainSFX.setParameterByName("XP Percentage", xpPercentage);
 
                 unit.exp = (int)xpBar.value;
-                UpdateInfo();
                 yield return null;
             }
 

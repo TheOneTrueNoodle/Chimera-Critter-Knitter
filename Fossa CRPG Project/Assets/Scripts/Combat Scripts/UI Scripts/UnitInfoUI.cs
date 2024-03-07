@@ -11,7 +11,6 @@ public class UnitInfoUI : MonoBehaviour
     [Header("Basic Information")]
     public Image portrait;
     public TMP_Text Name;
-    public TMP_Text Level;
 
     [Header("HP Variables")]
     public Slider HPBar;
@@ -25,8 +24,6 @@ public class UnitInfoUI : MonoBehaviour
 
     [Header("XP Variables")]
     public XPBar EXPBar;
-    public TMP_Text XPCurrentText;
-    public TMP_Text XPRequiredText;
 
     //Private variables
     public Entity currentChar;
@@ -74,7 +71,6 @@ public class UnitInfoUI : MonoBehaviour
             }
 
             Name.text = Char.CharacterData.Name;
-            Level.text = "LV " + Char.level.ToString();
 
             //HP Updates
             if (Char == currentChar)
@@ -111,7 +107,6 @@ public class UnitInfoUI : MonoBehaviour
             if (EXPBar != null)
             {
                 EXPBar.unit = Char;
-                EXPBar.UpdateInfo();
                 if (!inCombat) { EXPBar.UpdateBar(); }
             }
 
