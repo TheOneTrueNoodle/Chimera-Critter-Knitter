@@ -87,21 +87,25 @@ public class UnitInfoUI : MonoBehaviour
             HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
 
             //SP Updates
-            if (Char.activeStatsDir["MaxSP"].baseStatValue == 0) { SPBar.gameObject.SetActive(false); }
-            else { SPBar.gameObject.SetActive(true); }
+            if (SPBar != null && SPBarDelayed != null && SPText != null)
+            {
+                if (Char.activeStatsDir["MaxSP"].baseStatValue == 0) { SPBar.gameObject.SetActive(false); }
+                else { SPBar.gameObject.SetActive(true); }
 
-            if (Char == currentChar)
-            {
-                if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue && !Animating) { StartCoroutine(SliderCatchup(SPBarDelayed, Char.activeStatsDir["MaxSP"].statValue, SPBar.value, Char.activeStatsDir["MaxSP"].baseStatValue)); }
+                if (Char == currentChar)
+                {
+                    if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue && !Animating) { StartCoroutine(SliderCatchup(SPBarDelayed, Char.activeStatsDir["MaxSP"].statValue, SPBar.value, Char.activeStatsDir["MaxSP"].baseStatValue)); }
+                }
+                else
+                {
+                    SPBarDelayed.maxValue = Char.activeStatsDir["MaxSP"].baseStatValue;
+                    SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue;
+                }
+                SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
+                SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
+                SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+
             }
-            else
-            {
-                SPBarDelayed.maxValue = Char.activeStatsDir["MaxSP"].baseStatValue;
-                SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue;
-            }
-            SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
-            SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
-            SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
 
             //XP Updates
             if (EXPBar != null)
