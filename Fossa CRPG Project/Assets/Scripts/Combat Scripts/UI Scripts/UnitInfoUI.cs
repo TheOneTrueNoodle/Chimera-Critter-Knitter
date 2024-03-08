@@ -27,7 +27,13 @@ public class UnitInfoUI : MonoBehaviour
 
     //Private variables
     public Entity currentChar;
-    private bool Animating;
+    public bool HPAnimating;
+    public float HPDelay;
+    public float HPOldValue;
+
+    public bool SPAnimating;
+    public float SPDelay;
+    public float SPOldValue;
 
     private void Start()
     {
@@ -40,8 +46,8 @@ public class UnitInfoUI : MonoBehaviour
     {
         if (!inCombat && PlayerInfoUI)
         {
-            if (currentChar == null) { currentChar = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
-            UpdateUI(currentChar);
+            if (currentChar == null) { UpdateUI(FindObjectOfType<PlayerMovement>().GetComponent<Entity>()); }
+            
         }
         else if (inCombat && currentChar != null)
         {
@@ -72,40 +78,11 @@ public class UnitInfoUI : MonoBehaviour
 
             Name.text = Char.CharacterData.Name;
 
-            //HP Updates
-            if (Char == currentChar)
-            {
-                if (HPBar.value != Char.activeStatsDir["MaxHP"].statValue && !Animating) { StartCoroutine(SliderCatchup(HPBarDelayed, Char.activeStatsDir["MaxHP"].statValue, HPBar.value, (int)Char.activeStatsDir["MaxHP"].baseStatValue)); }
-            }
-            else
-            {
-                HPBarDelayed.maxValue = Char.activeStatsDir["MaxHP"].baseStatValue;
-                HPBarDelayed.value = Char.activeStatsDir["MaxHP"].statValue; 
-            }
-            HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
-            HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
-            HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
+            //HP Update
+            UpdateHP(Char);
 
-            //SP Updates
-            if (SPBar != null && SPBarDelayed != null && SPText != null)
-            {
-                if (Char.activeStatsDir["MaxSP"].baseStatValue == 0) { SPBar.gameObject.SetActive(false); }
-                else { SPBar.gameObject.SetActive(true); }
-
-                if (Char == currentChar)
-                {
-                    if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue && !Animating) { StartCoroutine(SliderCatchup(SPBarDelayed, Char.activeStatsDir["MaxSP"].statValue, SPBar.value, Char.activeStatsDir["MaxSP"].baseStatValue)); }
-                }
-                else
-                {
-                    SPBarDelayed.maxValue = Char.activeStatsDir["MaxSP"].baseStatValue;
-                    SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue;
-                }
-                SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
-                SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
-                SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
-
-            }
+            //SP Update
+            UpdateSP(Char);
 
             //XP Updates
             if (EXPBar != null)
@@ -113,6 +90,8 @@ public class UnitInfoUI : MonoBehaviour
                 EXPBar.unit = Char;
                 if (!inCombat) { EXPBar.UpdateBar(); }
             }
+
+            UpdateBars();
 
             currentChar = Char;
         }
@@ -128,32 +107,107 @@ public class UnitInfoUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private IEnumerator<WaitForSecondsRealtime> SliderCatchup(Slider Slider, float targetValue, float previousValue, float maxValue)
+    private void UpdateHP(Entity Char)
     {
-        Animating = true;
-        Slider.maxValue = maxValue;
-        Slider.value = previousValue;
-
-        yield return new WaitForSecondsRealtime(1f);
-
-        float lerpTimer = 0;
-        while(lerpTimer < 1)
+        //HP Updates
+        if (Char == currentChar)
         {
-            lerpTimer += Time.deltaTime;
-            Slider.value = Mathf.Lerp(Slider.value, targetValue, lerpTimer * 4);
-            if(Mathf.Abs(Slider.value) - Mathf.Abs(targetValue) > -1 && Mathf.Abs(Slider.value) - Mathf.Abs(targetValue) < 1)
+            if (HPBarDelayed.value != HPBar.value && !HPAnimating)
             {
-                Slider.value = targetValue;
+                HPAnimating = true;
+                HPDelay = 0;
+                HPOldValue = HPBar.value;
+                HPBarDelayed.maxValue = HPBar.maxValue;
             }
-            yield return null;
         }
-        Animating = false;
+        else
+        {
+            HPBarDelayed.maxValue = Char.activeStatsDir["MaxHP"].baseStatValue;
+            HPBarDelayed.value = Char.activeStatsDir["MaxHP"].statValue;
+        }
+        HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
+        HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
+        HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
+    }
+
+    private void UpdateSP(Entity Char)
+    {
+        //SP Updates
+        if (SPBar != null && SPBarDelayed != null && SPText != null)
+        {
+            if (Char.activeStatsDir["MaxSP"].baseStatValue == 0) { SPBar.gameObject.SetActive(false); }
+            else { SPBar.gameObject.SetActive(true); }
+
+            if (Char == currentChar)
+            {
+                if (SPBar.value != Char.activeStatsDir["MaxSP"].statValue && !SPAnimating) 
+                {
+                    SPAnimating = true;
+                    SPDelay = 0;
+                    SPOldValue = SPBar.value;
+                }
+            }
+            else
+            {
+                SPBarDelayed.maxValue = Char.activeStatsDir["MaxSP"].baseStatValue;
+                SPBarDelayed.value = Char.activeStatsDir["MaxSP"].statValue;
+            }
+            SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
+            SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
+            SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+        }
+    }
+
+    private void UpdateBars()
+    {
+        if (HPAnimating)
+        {
+            if (HPDelay > 1f)
+            {
+                //Lerp the bars together.
+                HPBarDelayed.value = Mathf.Lerp(HPOldValue, HPBar.value, (Time.deltaTime + (HPDelay - 1)) * 4f);
+                HPDelay += Time.deltaTime;
+
+                if (HPDelay > 2f)
+                {
+                    HPBarDelayed.value = HPBar.value;
+                    HPDelay = 0;
+                    HPOldValue = HPBar.value;
+                    HPAnimating = false;
+                }
+            }
+            else
+            {
+                HPDelay += Time.deltaTime;
+            }
+        }
+
+        if (SPAnimating)
+        {
+            if (SPDelay > 1f)
+            {
+                //Lerp the bars together.
+                SPBarDelayed.value = Mathf.Lerp(SPOldValue, SPBar.value, (Time.deltaTime + (SPDelay - 1)) * 4f);
+                if (Mathf.Abs(SPBarDelayed.value) - Mathf.Abs(SPBar.value) > -1 && Mathf.Abs(SPBarDelayed.value) - Mathf.Abs(SPBar.value) < 1)
+                {
+                    SPBarDelayed.value = SPBar.value;
+                    SPAnimating = false;
+                }
+            }
+            else
+            {
+                SPDelay += Time.deltaTime;
+            }
+        }
     }
 
     private void StartCombat(string combatName)
     {
         inCombat = true;
-        currentChar = null;
+        if (!PlayerInfoUI)
+        {
+            currentChar = null;
+        }
     }
     private void EndCombat(string combatName)
     {
