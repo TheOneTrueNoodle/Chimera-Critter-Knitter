@@ -8,6 +8,7 @@ public class TutorialHouseArea : AreaManager
     public PostProcessVolume infectionVignette;
     public FadeOutDogVision dogVision;
     public AbilityData lickAbility;
+    public AbilityData armAbility;
 
     private void Start()
     {
@@ -69,7 +70,7 @@ public class TutorialHouseArea : AreaManager
         //Trigger for Owner Combat
         if (combatName == "Owner")
         {
-
+            MenuEvent.current.UnlockNewMutation(armAbility);
             return;
         }
     }
