@@ -20,12 +20,30 @@ public class PlayerMovement : MonoBehaviour
     private float animSpeed;
     private float animRotation;
 
+    private Entity oscarData;
+
     private Animator anim;
     private Vector3 oldCamForward;
     private Vector3 oldCamRight;
 
     private bool doingBigTurn;
     [HideInInspector] public FootstepInstance footstepInstance;
+
+    public bool idle;
+    public float idleTimer;
+    private static float sitDownTime = 7;
+    private static float lieDownTime = 14;
+
+    [Header("Injured Textures")]
+    [SerializeField] private Material defaultMat;
+    [SerializeField] private Material injuredMat;
+
+    [SerializeField] private GameObject DogsHead;
+    [SerializeField] private GameObject DogsBody;
+    [SerializeField] private GameObject DogsFrontLegs;
+    [SerializeField] private GameObject DogsBackLegs;
+    [SerializeField] private GameObject DogsTail;
+    [SerializeField] private GameObject DogsEyes;
 
     private void Start()
     {
@@ -41,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         }
         anim = GetComponentInChildren<Animator>();
         footstepInstance = GetComponent<FootstepInstance>();
+        oscarData = GetComponent<Entity>();
 
         oldCamForward = Camera.main.transform.forward;
         oldCamRight = Camera.main.transform.right;
@@ -48,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        Injured();
         if (inCombat || inDialogue) { return; }
         GatherInput();
         Look();
@@ -64,11 +84,26 @@ public class PlayerMovement : MonoBehaviour
     private void GatherInput()
     {
         Vector3 newInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (newInput != _input)
+
+        if (newInput == Vector3.zero)
         {
-            oldCamForward = Camera.main.transform.forward;
-            oldCamRight = Camera.main.transform.right;
+            if (!idle)
+            {
+                idleTimer = 0f;
+                idle = true;
+                anim.SetBool("Idle", true);
+            }
         }
+        else
+        {
+            if (idle)
+            {
+                idle = false;
+                anim.SetFloat("Idle Time", 0f);
+                anim.SetBool("Idle", false);
+            }
+        }
+
         _input = newInput;
         if (Input.GetButton("Bark")) { Bark(); }
     }
@@ -153,8 +188,59 @@ public class PlayerMovement : MonoBehaviour
         else if (animRotation > targetRot)
             animRotation -= Time.deltaTime * animSmoothingSpeed;
 
+        if (idle)
+        {
+            idleTimer += Time.deltaTime;
+
+            if (idleTimer > lieDownTime)
+            {
+                anim.SetFloat("Idle Time", 1f);
+            }
+            else if (idleTimer > sitDownTime)
+            {
+                anim.SetFloat("Idle Time", 0.5f);
+            }
+        }
+
         anim.SetFloat("Speed", animSpeed);
         anim.SetFloat("Rotation", animRotation);
+    }
+    public void Injured()
+    {
+        if (oscarData.activeStatsDir == null) { AssignOscarData(); }
+
+        float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
+        if (percentageHealthMissing > 70)
+        {
+            //YOU ARE INJURED SILLY
+            if (anim.GetBool("Injured") == false)
+            {
+                anim.SetBool("Injured", true);
+
+                //Apply injured textures
+                DogsHead.GetComponent<Renderer>().material = injuredMat;
+                DogsBody.GetComponent<Renderer>().material = injuredMat;
+                DogsFrontLegs.GetComponent<Renderer>().material = injuredMat;
+                DogsBackLegs.GetComponent<Renderer>().material = injuredMat;
+                DogsTail.GetComponent<Renderer>().material = injuredMat;
+                DogsEyes.GetComponent<Renderer>().material = injuredMat;
+            }
+        }
+        else
+        {
+            if (anim.GetBool("Injured") == true)
+            {
+                anim.SetBool("Injured", false);
+
+                //Apply default textures
+                DogsHead.GetComponent<Renderer>().material = defaultMat;
+                DogsBody.GetComponent<Renderer>().material = defaultMat;
+                DogsFrontLegs.GetComponent<Renderer>().material = defaultMat;
+                DogsBackLegs.GetComponent<Renderer>().material = defaultMat;
+                DogsTail.GetComponent<Renderer>().material = defaultMat;
+                DogsEyes.GetComponent<Renderer>().material = defaultMat;
+            }
+        }
     }
 
     public IEnumerator resetCameraForward()
@@ -163,6 +249,40 @@ public class PlayerMovement : MonoBehaviour
 
         oldCamForward = Camera.main.transform.forward;
         oldCamRight = Camera.main.transform.right;
+    }
+    private void AssignOscarData()
+    {
+        if (oscarData.level < 1) { oscarData.level = 1; }
+        oscarData.CharacterData.SetDictionaryStats(oscarData.level);
+        if (oscarData.CharacterData.Weapon != null)
+        {
+            oscarData.AttackDamageType = oscarData.CharacterData.Weapon.damageType;
+            oscarData.WeaponRange = oscarData.CharacterData.Weapon.attackRange;
+        }
+        else
+        {
+            oscarData.AttackDamageType = oscarData.CharacterData.defaultAttack;
+            oscarData.WeaponRange = 1;
+        }
+
+        if (oscarData.activeStatsDir == null)
+        {
+            oscarData.activeStatsDir = new Dictionary<string, Stat>();
+            foreach (KeyValuePair<string, Stat> item in oscarData.CharacterData.statsDir)
+            {
+                oscarData.activeStatsDir.Add(item.Value.name, new Stat(item.Value.name, item.Value.baseStatValue));
+            }
+        }
+
+        oscarData.CharacterData.SetEquipment();
+        oscarData.activeAbilities = oscarData.CharacterData.SetAbilities(null);
+        oscarData.Resistances = oscarData.CharacterData.SetResistances();
+        oscarData.Weaknesses = oscarData.CharacterData.SetWeaknesses();
+
+        List<EquipmentStatChanges> equipmentStatChanges = oscarData.CharacterData.SetEquipmentStatChanges();
+        List<ScriptableEffect> equipmentEffects = oscarData.CharacterData.SetStartingEffects();
+
+        CombatEvents.current.UnitStartingEffects(oscarData, equipmentStatChanges, equipmentEffects);
     }
 
     private void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
@@ -177,6 +297,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void StartDialogue()
     {
+        anim.SetBool("Idle", true);
         inDialogue = true;
         footstepInstance.UpdateSound(false, 0f);
     }

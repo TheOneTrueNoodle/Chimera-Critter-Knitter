@@ -35,7 +35,6 @@ public class Entity : MonoBehaviour
     public int level = 1;
     public int exp;
     public int requiredExp;
-    private static float XPBarSpeed = 3f;
 
     [Header("Visuals")]
     public GameObject GFX;

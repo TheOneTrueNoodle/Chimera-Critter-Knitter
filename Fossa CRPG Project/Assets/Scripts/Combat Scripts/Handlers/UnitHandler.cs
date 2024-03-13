@@ -35,7 +35,6 @@ public class UnitHandler
 
         target.BloodSplash();
         if(!target.CharacterData.takeDamageSFX.IsNull) { AudioManager.instance.PlayOneShot(target.CharacterData.takeDamageSFX, target.transform.position); } else { Debug.LogError("NO TAKE DAMAGE SOUND ASSIGNED"); }
-        
 
         if (target.activeStatsDir["MaxHP"].statValue <= 0)
         {

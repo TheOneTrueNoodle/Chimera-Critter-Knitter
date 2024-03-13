@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OscarBloodyTest : MonoBehaviour
-
 {
     public Material basic;
     public Material Injured;
