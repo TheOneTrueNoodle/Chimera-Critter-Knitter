@@ -182,8 +182,8 @@ public class CombatUI : MonoBehaviour
 
         for (int i = 0; i < Char.activeAbilities.Count; i++)
         {
-            abilityButton[i].SetupButton(Char.activeAbilities[i], i);
             abilityButton[i].gameObject.SetActive(true);
+            abilityButton[i].SetupButton(Char.activeAbilities[i], i);
         }
 
         if (Char.activeAbilities.Count > 0)
@@ -210,9 +210,10 @@ public class CombatUI : MonoBehaviour
     {
         actionActive = true;
         cancelDisp.SetActive(true);
-        foreach (var item in abilityButton) { Destroy(item.gameObject); }
-        abilityButton.Clear();
-        abilityUI.gameObject.SetActive(false);
+        foreach (var item in abilityButton)
+        {
+            item.gameObject.SetActive(false);
+        }
         CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID]);
     }
     private void ActionComplete()
@@ -244,6 +245,8 @@ public class CombatUI : MonoBehaviour
         Char = entity;
         hasMoved = false;
         MoveButton.interactable = true;
+        OscarHPDisp.gameObject.SetActive(true);
+        abilityUI.gameObject.SetActive(false);
 
         UIOpen = false;
         actionActive = false;
