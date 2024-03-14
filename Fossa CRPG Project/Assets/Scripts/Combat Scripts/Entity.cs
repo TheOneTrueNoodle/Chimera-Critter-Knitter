@@ -168,14 +168,16 @@ public class Entity : MonoBehaviour
     {
         if (anim != null)
         {
-            anim.Play("Die");
-        }
-        else
-        {
-            GFX.SetActive(false);
+            anim.SetBool("Dead", true);
         }
 
         GetComponent<Collider>().enabled = false;
+        GetComponent<Rigidbody>().useGravity = false;
+
+        if (TryGetComponent(out DestroyOffScreen destroyOffScreen))
+        {
+            destroyOffScreen.enabled = true;
+        }
     }
 
     private void EndCombat(string combatName)

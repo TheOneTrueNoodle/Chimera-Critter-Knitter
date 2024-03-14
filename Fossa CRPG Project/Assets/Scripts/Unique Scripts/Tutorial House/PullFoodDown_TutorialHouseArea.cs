@@ -16,8 +16,6 @@ public class PullFoodDown_TutorialHouseArea : MonoBehaviour
             foodFallingAnim.enabled = true;
             foodFallingAnim.Play("DogFoodFall");
             sparkles.SetActive(false);
-            ownerAtWindow.SetActive(false);
-            ownerAtDoor.SetActive(true);
 
             gameObject.SetActive(false);
         }

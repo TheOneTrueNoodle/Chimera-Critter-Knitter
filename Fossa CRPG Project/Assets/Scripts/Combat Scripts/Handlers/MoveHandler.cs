@@ -95,7 +95,7 @@ public class MoveHandler
 
     private void Animate(Animator anim, float rotationDirection, float angle, bool lastTile)
     {
-        var targetSpeed = lastTile ? 0f : 0.7f;
+        var targetSpeed = lastTile ? 0f : 1f;
         var targetRot = 0f;
 
         if (angle > 40)

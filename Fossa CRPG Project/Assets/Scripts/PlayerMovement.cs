@@ -162,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Animate(float rotationDirection, float angle)
     {
-        var moveSpeed = Input.GetButton("Run") ? 0.7f : 0.4f;
+        var moveSpeed = Input.GetButton("Run") ? 1f : 0.4f;
         var targetSpeed = _input.normalized.magnitude * moveSpeed;
         var targetRot = 0f;
 
