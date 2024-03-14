@@ -166,7 +166,16 @@ public class Entity : MonoBehaviour
 
     public void Die()
     {
-        GFX.SetActive(false);
+        if (anim != null)
+        {
+            anim.Play("Die");
+        }
+        else
+        {
+            GFX.SetActive(false);
+        }
+
+        GetComponent<Collider>().enabled = false;
     }
 
     private void EndCombat(string combatName)
