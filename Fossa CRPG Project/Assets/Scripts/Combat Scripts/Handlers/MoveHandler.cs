@@ -14,7 +14,7 @@ public class MoveHandler
 
     public IEnumerator MoveAlongPath(Entity entity, List<OverlayTile> path)
     {
-        if(entity.anim != null) { entity.anim.Play("Movement Blend"); }
+        if(entity.anim != null) { entity.anim.SetBool("Idle", false); }
 
         while (path.Count != 0)
         {
@@ -53,6 +53,7 @@ public class MoveHandler
                 entity.anim.SetFloat("Rotation", animRotation);
             }
         }
+        if (entity.anim != null) { entity.anim.SetBool("Idle", true); }
 
         entity.footstepInstance.UpdateSound(false, 0f);
         CombatEvents.current.TilePositionEntity(entity, finalTile);
@@ -118,6 +119,15 @@ public class MoveHandler
             animRotation += Time.deltaTime * animSmoothingSpeed;
         else if (animRotation > targetRot)
             animRotation -= Time.deltaTime * animSmoothingSpeed;
+
+        if (targetSpeed > 0)
+        {
+            anim.SetBool("Idle", false);
+        }
+        else
+        {
+            anim.SetBool("Idle", true);
+        }
 
         anim.SetFloat("Speed", animSpeed);
         anim.SetFloat("Rotation", animRotation);

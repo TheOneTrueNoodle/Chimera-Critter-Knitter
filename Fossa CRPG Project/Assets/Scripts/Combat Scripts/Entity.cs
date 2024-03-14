@@ -160,7 +160,7 @@ public class Entity : MonoBehaviour
 
         if (anim != null)
         {
-            anim.Play("Combat Idle");
+            anim.SetBool("InCombat", true);
         }
     }
 
@@ -172,6 +172,7 @@ public class Entity : MonoBehaviour
     private void EndCombat(string combatName)
     {
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        if(anim != null) { anim.SetBool("InCombat", false); }
         //gameObject.GetComponent<Collider>().enabled = true;
     }
     #endregion
