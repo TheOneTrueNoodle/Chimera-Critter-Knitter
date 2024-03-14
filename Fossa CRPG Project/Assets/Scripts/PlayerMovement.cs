@@ -22,7 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     private Entity oscarData;
 
-    private Animator anim;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Animator cutsceneAnim;
+
     private Vector3 oldCamForward;
     private Vector3 oldCamRight;
 
@@ -57,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
                 DialogueEvents.current.onEndDialogue += EndDialogue;
             }
         }
-        anim = GetComponentInChildren<Animator>();
         footstepInstance = GetComponent<FootstepInstance>();
         oscarData = GetComponent<Entity>();
 
