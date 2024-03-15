@@ -31,7 +31,7 @@ public class TriggerCutscene : MonoBehaviour
     {
         BasementC.SetActive(true);
         MainCamera.SetActive(false);
-        yield return new WaitForSeconds(19f);
+        yield return new WaitForSeconds(17f);
         BasementC.SetActive(false);
         MainCamera.SetActive(true);
 
