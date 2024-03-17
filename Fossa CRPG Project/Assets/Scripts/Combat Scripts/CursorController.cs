@@ -269,6 +269,7 @@ public class CursorController : MonoBehaviour
                 hasAttacked = true;
 
                 CombatEvents.current.AttackAttempt(activeCharacter, overlayTile.activeCharacter);
+                ClearRangeTiles();
             }
         }
     }

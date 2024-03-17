@@ -35,8 +35,6 @@ public class CombatHandler : MonoBehaviour
     private string currentCombatName;
     private float previousSong;
 
-    private bool animationFinished;
-
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
