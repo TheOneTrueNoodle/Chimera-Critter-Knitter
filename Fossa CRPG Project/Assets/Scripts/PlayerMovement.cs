@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 oldCamForward;
     private Vector3 oldCamRight;
+    private bool cameraChange;
 
     private bool doingBigTurn;
     [HideInInspector] public FootstepInstance footstepInstance;
@@ -122,6 +123,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_input != Vector3.zero)
         {
+            if (!cameraChange)
+            {
+                oldCamForward = Camera.main.transform.forward;
+                oldCamRight = Camera.main.transform.right;
+            }
+
             Vector3 forward = oldCamForward;
             Vector3 right = oldCamRight;
 
@@ -247,10 +254,11 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator resetCameraForward()
     {
+        cameraChange = true;
+
         yield return new WaitForSeconds(0.5f);
 
-        oldCamForward = Camera.main.transform.forward;
-        oldCamRight = Camera.main.transform.right;
+        cameraChange = false;
     }
     private void AssignOscarData()
     {
