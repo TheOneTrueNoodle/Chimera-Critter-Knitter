@@ -12,6 +12,7 @@ public class UnitData : ScriptableObject
     public string Name;
     public Sprite portrait;
     public Sprite injuredPortrait;
+    public float attackAnimationTimer;
 
     [Header("Leveling Information")]
     public LevelConfig levelConfig;

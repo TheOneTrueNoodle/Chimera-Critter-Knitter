@@ -115,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(1).IsName("Bark")) { return; }
         anim.Play("Bark");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position);
+        idleTimer = 0;
     }
 
     private void Look()

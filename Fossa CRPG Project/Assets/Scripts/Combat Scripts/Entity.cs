@@ -49,7 +49,7 @@ public class Entity : MonoBehaviour
         {
             CombatEvents.current.onEndCombat += EndCombat;
         }
-        if (GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
+        if (anim == null && GetComponentInChildren<Animator>() != null) { anim = GetComponentInChildren<Animator>(); }
         footstepInstance = GetComponent<FootstepInstance>();
         CalculateRequiredEXP();
     }

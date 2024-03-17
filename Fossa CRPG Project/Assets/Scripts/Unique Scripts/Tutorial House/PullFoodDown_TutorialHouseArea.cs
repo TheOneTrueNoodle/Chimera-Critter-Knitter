@@ -5,9 +5,7 @@ using UnityEngine;
 public class PullFoodDown_TutorialHouseArea : MonoBehaviour
 {
     [SerializeField] private Animator foodFallingAnim;
-    [SerializeField] private GameObject sparkles;
-    [SerializeField] private GameObject ownerAtWindow;
-    [SerializeField] private GameObject ownerAtDoor;
+    [SerializeField] private GameObject eatFoodInteraction;
 
     public void Call()
     {
@@ -15,7 +13,7 @@ public class PullFoodDown_TutorialHouseArea : MonoBehaviour
         {
             foodFallingAnim.enabled = true;
             foodFallingAnim.Play("DogFoodFall");
-            sparkles.SetActive(false);
+            eatFoodInteraction.SetActive(true);
 
             gameObject.SetActive(false);
         }

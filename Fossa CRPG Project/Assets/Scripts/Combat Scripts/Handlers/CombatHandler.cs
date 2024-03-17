@@ -35,27 +35,17 @@ public class CombatHandler : MonoBehaviour
     private string currentCombatName;
     private float previousSong;
 
+    private bool animationFinished;
+
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
-
-        CombatEvents.current.onUnitDeath += UnitDeath;
-        CombatEvents.current.onUnitStartingEffects += UnitStartingEffects;
-        CombatEvents.current.onUnitStartingAbilities += UnitStartingAbilities;
-        CombatEvents.current.onMoveAttempt += MoveAttempt;
-        CombatEvents.current.onAttackAttempt += AttackAttempt;
-        CombatEvents.current.onAbilityAttempt += AbilityAttempt;
-        CombatEvents.current.onDamageDealt += DisplayDamageText;
-
-        CombatEvents.current.onTileColor += TileColor;
-        CombatEvents.current.onTileClearSpecific += TileClearSpecific;
-        CombatEvents.current.onPositionEntity += TilePositionEntity;
-
-        CombatEvents.current.onTurnEnd += TurnEnd;
     }
 
     public void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
+        SubscribeToCombatEvents();
+
         if (turnHandler == null) { turnHandler = new TurnHandler(); }
         if (moveHandler == null) { moveHandler = new MoveHandler(); }
         if (actionHandler == null){ actionHandler = new ActionHandler(); }
@@ -79,6 +69,7 @@ public class CombatHandler : MonoBehaviour
     public void EndCombat()
     {
         Debug.Log("Combat over");
+        UnsubscribeToCombatEvents();
 
         tileHandler.ClearUnitTiles(playerTeam, enemyTeam, otherTeam, obstacles);
 
@@ -152,7 +143,7 @@ public class CombatHandler : MonoBehaviour
                 AudioManager.instance.PlayOneShot(attacker.CharacterData.defaultAttackSFX, attacker.transform.position);
             }
             else { Debug.LogError("NO ATTACK AUDIO ASSIGNED"); }
-            yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+            yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > attacker.CharacterData.attackAnimationTimer);
         }
 
         bool tookDamage = false;
@@ -481,6 +472,38 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.StartCombatSetup(currentCombatName);
         turnHandler.StartFirstTurn();
     }
-
     #endregion
+
+    private void SubscribeToCombatEvents()
+    {
+        CombatEvents.current.onUnitDeath += UnitDeath;
+        CombatEvents.current.onUnitStartingEffects += UnitStartingEffects;
+        CombatEvents.current.onUnitStartingAbilities += UnitStartingAbilities;
+        CombatEvents.current.onMoveAttempt += MoveAttempt;
+        CombatEvents.current.onAttackAttempt += AttackAttempt;
+        CombatEvents.current.onAbilityAttempt += AbilityAttempt;
+        CombatEvents.current.onDamageDealt += DisplayDamageText;
+
+        CombatEvents.current.onTileColor += TileColor;
+        CombatEvents.current.onTileClearSpecific += TileClearSpecific;
+        CombatEvents.current.onPositionEntity += TilePositionEntity;
+
+        CombatEvents.current.onTurnEnd += TurnEnd;
+    }
+    private void UnsubscribeToCombatEvents()
+    {
+        CombatEvents.current.onUnitDeath -= UnitDeath;
+        CombatEvents.current.onUnitStartingEffects -= UnitStartingEffects;
+        CombatEvents.current.onUnitStartingAbilities -= UnitStartingAbilities;
+        CombatEvents.current.onMoveAttempt -= MoveAttempt;
+        CombatEvents.current.onAttackAttempt -= AttackAttempt;
+        CombatEvents.current.onAbilityAttempt -= AbilityAttempt;
+        CombatEvents.current.onDamageDealt -= DisplayDamageText;
+
+        CombatEvents.current.onTileColor -= TileColor;
+        CombatEvents.current.onTileClearSpecific -= TileClearSpecific;
+        CombatEvents.current.onPositionEntity -= TilePositionEntity;
+
+        CombatEvents.current.onTurnEnd -= TurnEnd;
+    }
 }
