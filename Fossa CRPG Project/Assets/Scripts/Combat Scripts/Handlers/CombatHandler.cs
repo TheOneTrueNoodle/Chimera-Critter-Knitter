@@ -40,6 +40,7 @@ public class CombatHandler : MonoBehaviour
     private void Start()
     {
         CombatEvents.current.onStartCombat += StartCombat;
+        CombatEvents.current.onHealAttempt += HealAttempt;
     }
 
     public void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
@@ -280,6 +281,10 @@ public class CombatHandler : MonoBehaviour
         }
 
         StartCoroutine(DelayedTurnEnd());
+    }
+    public void HealAttempt(Entity entity, int value)
+    {
+        unitHandler.UnitHeals(entity, value);
     }
 
     public void UnitDeath(Entity target)

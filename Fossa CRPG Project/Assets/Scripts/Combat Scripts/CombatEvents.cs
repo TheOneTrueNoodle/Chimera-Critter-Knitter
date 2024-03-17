@@ -171,6 +171,14 @@ public class CombatEvents : MonoBehaviour
             onMoveAttempt(entity, path);
         }
     }
+    public event Action<Entity, int> onHealAttempt;
+    public void HealAttempt(Entity entity, int value)
+    {
+        if (onHealAttempt != null)
+        {
+            onHealAttempt(entity, value);
+        }
+    }
 
     //TILE STUFF
     public event Action<OverlayTile> onTileClicked;
