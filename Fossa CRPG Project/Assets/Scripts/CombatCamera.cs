@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class CombatCamera : MonoBehaviour
 {
-    [SerializeField] private Cinemachine.CinemachineVirtualCamera combatCamera;
+    [SerializeField] private Cinemachine.CinemachineFreeLook combatCamera;
     [SerializeField] private float cameraRotationSpeed = 2f;
-
-    private Vector3 oldMousePosition;
 
     private bool inCombat;
 
@@ -15,39 +13,29 @@ public class CombatCamera : MonoBehaviour
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
         CombatEvents.current.onEndCombat += EndCombat;
+
+        Cinemachine.CinemachineCore.GetInputAxis = GetAxisCustom;
     }
 
-    void Update()
+    private float GetAxisCustom(string axisName)
     {
-        //if (!inCombat) { return; }
-        if (Input.GetButtonDown("Control Camera"))
+        if (axisName == "Mouse X")
         {
-            Debug.Log("Pressed right button");
-            oldMousePosition = Input.mousePosition;
-            return;
-        }
-
-        if (Input.GetButton("Control Camera"))
-        {
-            Debug.Log("Held right button");
-            Vector3 currentMousePosition = Input.mousePosition;
-
-            if (currentMousePosition.x < oldMousePosition.x)
+            if (Input.GetButton("Control Camera"))
             {
-                float x = combatCamera.transform.eulerAngles.x;
-                float y = combatCamera.transform.eulerAngles.y;
-                combatCamera.transform.eulerAngles = new Vector3(x, y + cameraRotationSpeed);
+                return Input.GetAxis("Mouse X");
             }
-
-            if (currentMousePosition.x > oldMousePosition.x)
+            else
             {
-                float x = combatCamera.transform.eulerAngles.x;
-                float y = combatCamera.transform.eulerAngles.y;
-                combatCamera.transform.eulerAngles = new Vector3(x, y - cameraRotationSpeed);
+                return 0;
             }
         }
+        else if (axisName == "Mouse Y")
+        {
+            return 0;
+        }
+        return Input.GetAxis(axisName);
     }
-
     private void StartCombat(string combatName)
     {
         combatCamera.Priority = 20;
