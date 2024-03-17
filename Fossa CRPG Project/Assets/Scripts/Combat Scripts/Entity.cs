@@ -219,4 +219,9 @@ public class Entity : MonoBehaviour
         requiredExp = CharacterData.levelConfig.GetRequiredExp(level);
     }
     #endregion
+
+    private void OnDestroy()
+    {
+        CombatEvents.current.onEndCombat -= EndCombat;
+    }
 }
