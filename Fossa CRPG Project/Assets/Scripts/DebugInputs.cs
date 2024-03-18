@@ -7,15 +7,12 @@ public class DebugInputs : MonoBehaviour
 {
     public int counter = 0;
     public GameObject WinScreen;
-    public CinemachineBrain cinemachineBrain;
-    public ICinemachineCamera postprocessingcamera;
-    public ICinemachineCamera nopostprocessingcamera;
 
     public void Call()
     {
         Debug.Log("Called");
         counter++;
-        if (counter >= 2)
+        if (counter >= 3)
         {
             ShowWinScreen();
         }
