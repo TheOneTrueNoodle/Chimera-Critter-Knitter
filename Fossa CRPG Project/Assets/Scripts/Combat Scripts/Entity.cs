@@ -171,8 +171,15 @@ public class Entity : MonoBehaviour
             anim.SetBool("Dead", true);
         }
 
-        GetComponent<Collider>().enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        if (TryGetComponent<Collider>(out Collider col))
+        {
+            col.enabled = false;
+        }
+
+        if (TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            rb.useGravity = false;
+        }
 
         if (TryGetComponent(out DestroyOffScreen destroyOffScreen))
         {

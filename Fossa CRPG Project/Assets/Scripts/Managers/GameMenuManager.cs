@@ -21,9 +21,12 @@ public class GameMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CombatEvents.current.onStartCombatSetup += StartCombat;
-        CombatEvents.current.onEndCombat += EndCombat;
-        CombatEvents.current.onPauseGame += CombatPauseMenuInput;
+        if (CombatEvents.current != null)
+        {
+            CombatEvents.current.onStartCombatSetup += StartCombat;
+            CombatEvents.current.onEndCombat += EndCombat;
+            CombatEvents.current.onPauseGame += CombatPauseMenuInput;
+        }
         Time.timeScale = 1;
     }
 
@@ -111,7 +114,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void RestartScene()
     {
-        SceneManager.LoadScene("Whitebox");
+        SceneManager.LoadScene("Alpha");
     }
 
     public void QuitGame()
