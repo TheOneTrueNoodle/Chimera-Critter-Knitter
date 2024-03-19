@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public struct Snippet
 {
     public Conversation conversation;
-
-    [TextArea(2, 5)]
-    public string[] choiceID;
+    public Choice choice;
 
 }
 

@@ -1,0 +1,36 @@
+This is the naming scheme for dialogue elements.
+
+Here is the explanation of each element and their uses:
+* Continuities: Each Continuity Scriptable Object is a full conversation that can happen from the start to the end of the dialogue box closing. It includes
+every variation of the possible conversation, each possibility being a Thread. Threads contain Snippets, which are the Conversation SO along with the number of and
+ID of any choices they contain. Continuities are not used programatically, but are useful for sorting and for making sure dialogue choices and variations all 
+exist and lead to the right places.
+* Conversations: Conversations are the bulk of the dialogue system, and are snippets of linear conversation with either a Choice or a dialogue break at the end.
+Conversations are chiefly composed of Lines, which in turn contain speech strings, the relevant speaking Character, the side the Character appears on screen, and the emotion 
+they are expressing as the line is printed. Aside from Lines, Conversations hold a possible Choice that is triggered once all the Lines run out, a variable for when
+there is only one speaker, and (currently defunct i believe) variables for starting combat straight at the end of dialogue.
+* Choices: Choices contain each choice available to the player at the end of a given Conversation snippet
+* Characters: Characters are an SO that hold the signature colour of the character that affects effects in dialogue UI, as well as sprites for each emotion they can express in dialogue.
+
+For new Continuity Scriptable Objects:
+1. Fully capitalised followed by an underscore, CNT_, standing for the type of SO this object is.
+2. The first letter of the scene the Continuity appears in (ex: scene alpha = a, CNT_a)
+4. A number, one higher than any previous Continuity objects, starting at 0 (ex: the fourth Continuity would be number 3, as 0>1>2>3 = CNT_a3)
+
+For new Conversation Scriptable Objects:
+1. Fully capitalised followed by an underscore, CON_, standing for the type of SO this object is.
+2. Inherit the number of the Continuity the conversation is a part of (ex. CNT_a3 = CON_a3)
+3. An underscore
+4. A number, one higher than any previous Conversation objects of this Continuity. (ex. CON_a3_4) 
+
+For new Choice Scriptable Objects:
+1. Inherit the number of the Conversation the choice is a part of (ex. CNT_a3_4 = a3_4)
+2. An full stop
+3. A number, one higher than any previous Choice objects of this Continuity (ex. CON_a3_4 = a3_4.14)
+
+For new Character Scriptable Objects:
+1. The full name of the character, seperated by underscores for surnames and other additionals.
+
+For new Dialogue Triggers:
+1. Take the name/ID of the triggering conversation.
+2. If necessary for clarity, add a subject shorthand after the ID.
