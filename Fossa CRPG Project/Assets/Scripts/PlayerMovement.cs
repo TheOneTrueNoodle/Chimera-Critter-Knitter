@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Animator cutsceneAnim;
 
+    private DialogueManager dm;
+
     private Vector3 oldCamForward;
     private Vector3 oldCamRight;
     private bool cameraChange;
@@ -65,6 +67,9 @@ public class PlayerMovement : MonoBehaviour
 
         oldCamForward = Camera.main.transform.forward;
         oldCamRight = Camera.main.transform.right;
+
+        dm = GameObject.Find("DialogueManagement").GetComponent<DialogueManager>();
+
     }
 
     private void Update()
@@ -221,6 +226,8 @@ public class PlayerMovement : MonoBehaviour
         float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
         if (percentageHealthMissing > 70)
         {
+            dm.isInjured = true;
+
             //YOU ARE INJURED SILLY
             if (anim.GetBool("Injured") == false)
             {
@@ -237,6 +244,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            dm.isInjured = false;
+
             if (anim.GetBool("Injured") == true)
             {
                 anim.SetBool("Injured", false);

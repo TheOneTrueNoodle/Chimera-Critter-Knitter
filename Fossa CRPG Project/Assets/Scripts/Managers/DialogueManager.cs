@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
     private bool pawPressed = false;
     private bool isOpen = false;
 
+    public bool isInjured = false;
+
     [Header("OPTIONS")]
     public bool dialogueActive;
     public bool showDebuggingText;
@@ -127,44 +129,79 @@ public class DialogueManager : MonoBehaviour
 
         if (showDebuggingText) { Debug.Log("Changing Image"); }
 
-        switch (emotion)
+        if (isInjured && character.fullName == "Oscar")
         {
-            case "neutral":
-                spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
-                break;
+            switch (emotion)
+            {
+                case "neutral":
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    break;
 
-            case "default":
-                spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
-                break;
+                case "default":
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    break;
 
-            case "angry":
-                spriteHolder.GetComponent<Image>().sprite = character.angryPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.angryPortrait;
-                break;
+                case "angry":
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredAngryPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredAngryPortrait;
+                    break;
 
-            case "happy":
-                spriteHolder.GetComponent<Image>().sprite = character.smilingPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.smilingPortrait;
-                break;
+                case "happy":
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredSmilingPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredSmilingPortrait;
+                    break;
 
-            case "sad":
-                spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.sadPortrait;
+                case "sad":
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredSadPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredSadPortrait;
 
-                break;
+                    break;
 
-            case "injured":
-                spriteHolder.GetComponent<Image>().sprite = character.injuredPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.injuredPortrait;
-                break;
-
-            case null:
-                spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
-                spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
-                break;
+                case null:
+                    spriteHolder.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.injuredDefaultPortrait;
+                    break;
+            }
         }
+        else
+        {
+            switch (emotion)
+            {
+                case "neutral":
+                    spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
+                    break;
+
+                case "default":
+                    spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
+                    break;
+
+                case "angry":
+                    spriteHolder.GetComponent<Image>().sprite = character.angryPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.angryPortrait;
+                    break;
+
+                case "happy":
+                    spriteHolder.GetComponent<Image>().sprite = character.smilingPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.smilingPortrait;
+                    break;
+
+                case "sad":
+                    spriteHolder.GetComponent<Image>().sprite = character.sadPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.sadPortrait;
+
+                    break;
+
+                case null:
+                    spriteHolder.GetComponent<Image>().sprite = character.defaultPortrait;
+                    spriteChildShadow.GetComponent<Image>().sprite = character.defaultPortrait;
+                    break;
+            }
+        }
+
     }
 
     public void findSide(bool isLeft)
