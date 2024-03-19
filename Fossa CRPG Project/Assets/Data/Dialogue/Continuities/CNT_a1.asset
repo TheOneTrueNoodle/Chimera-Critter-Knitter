@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5ec4523a806664d9384a68cee64017, type: 3}
   m_Name: CNT_a1
   m_EditorClassIdentifier: 
+  descriptor: Toilet interactions, thread 1 is pre-frog, thread 2 is after.
   thread:
   - snippets:
     - conversation: {fileID: 11400000, guid: 22564b015c646e949b96322b3e2e26b7, type: 2}
@@ -21,9 +22,5 @@ MonoBehaviour:
     - conversation: {fileID: 11400000, guid: eeb14eb7b25378b42a2798e249bab7e9, type: 2}
       choice: {fileID: 0}
   - snippets:
-    - conversation: {fileID: 0}
-      choice: {fileID: 0}
-    - conversation: {fileID: 0}
-      choice: {fileID: 0}
-    - conversation: {fileID: 0}
+    - conversation: {fileID: 11400000, guid: f5a29d176ad32634bbf7edac32c51b1c, type: 2}
       choice: {fileID: 0}

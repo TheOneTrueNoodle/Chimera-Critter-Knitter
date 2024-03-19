@@ -22,6 +22,8 @@ public struct Thread
 [CreateAssetMenu(fileName = "New Continuity", menuName = "Dialogue/Continuity")]
 public class Continuity : ScriptableObject
 {
+    [TextArea(2, 5)]
+    public string descriptor;
     public Thread[] thread;
 
 }

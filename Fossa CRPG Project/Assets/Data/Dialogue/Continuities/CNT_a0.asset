@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5ec4523a806664d9384a68cee64017, type: 3}
   m_Name: CNT_a0
   m_EditorClassIdentifier: 
-  thread: []
+  descriptor: Waking up dialogue. Auto triggers.
+  thread:
+  - snippets:
+    - conversation: {fileID: 11400000, guid: a9e3ad4cc781d4442881ce93ed0f4d08, type: 2}
+      choice: {fileID: 0}
