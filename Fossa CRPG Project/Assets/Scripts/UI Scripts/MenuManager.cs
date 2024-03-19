@@ -28,12 +28,12 @@ public class MenuManager : MonoBehaviour
         Debug.Log("StartingCutscene");
         yield return new WaitForSeconds(3f);
         Debug.Log("EndingCutscene");
-        SceneManager.LoadScene("Whitebox");
+        SceneManager.LoadScene("Alpha");
     }
 
     IEnumerator OpeningGame()
     {
-        
+        SplashScreen.SetActive(true);
         Debug.Log("StartingSplashScreen");
         yield return new WaitForSeconds(3f);
         Debug.Log("SplashScreenEnding");
