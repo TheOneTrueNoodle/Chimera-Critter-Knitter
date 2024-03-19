@@ -19,6 +19,7 @@ public class OverlayTile : MonoBehaviour
     public Vector2Int grid2DLocation { get { return new Vector2Int(gridLocation.x, gridLocation.y); } }
 
     public Image gridSprite;
+    public Color arrowColor;
     public List<Sprite> arrows;
 
     public void ShowTile()
@@ -42,7 +43,7 @@ public class OverlayTile : MonoBehaviour
         }
         else
         {
-            arrow.color = new Color(1, 1, 1, 1);
+            arrow.color = arrowColor;
             arrow.sprite = arrows[(int)d];
             arrow.sortingOrder = gameObject.GetComponentInChildren<Canvas>().sortingOrder;
         }

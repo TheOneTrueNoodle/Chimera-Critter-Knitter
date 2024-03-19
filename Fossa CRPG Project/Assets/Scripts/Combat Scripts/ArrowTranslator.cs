@@ -50,29 +50,40 @@ public class ArrowTranslator
         //Corners
         if (direction == new Vector2Int(1, 1))
         {
+            //Up and then right
+            return ArrowDirection.TopRight;
+            /*
             if (pastDirection.y < futureDirection.y)
-            {
-                return ArrowDirection.BottomLeft;
-            }
-            else
             {
                 return ArrowDirection.TopRight;
             }
+            else
+            {
+                return ArrowDirection.BottomLeft;
+            }
+            */
         }
         if (direction == new Vector2Int(-1, 1))
         {
+            //Up and the left
+            return ArrowDirection.TopLeft;
+            /*
             if (pastDirection.y < futureDirection.y)
-            {
-                return ArrowDirection.BottomRight;
-            }
-            else
             {
                 return ArrowDirection.TopLeft;
             }
+            else
+            {
+                return ArrowDirection.BottomRight;
+            }
+            */
         }
         if (direction == new Vector2Int(1, -1))
         {
-            if (pastDirection.y > futureDirection.y)
+            //Down and then right
+            return ArrowDirection.BottomRight;
+            /*
+            if (pastDirection.y < futureDirection.y)
             {
                 return ArrowDirection.TopLeft;
             }
@@ -80,10 +91,14 @@ public class ArrowTranslator
             {
                 return ArrowDirection.BottomRight;
             }
+            */
         }
         if (direction == new Vector2Int(-1, -1))
         {
-            if (pastDirection.y > futureDirection.y)
+            //Down and the left
+            return ArrowDirection.BottomLeft;
+            /*
+            if (pastDirection.y < futureDirection.y)
             {
                 return ArrowDirection.TopRight;
             }
@@ -91,6 +106,7 @@ public class ArrowTranslator
             {
                 return ArrowDirection.BottomLeft;
             }
+            */
         }
 
         //Final Arrows
