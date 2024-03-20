@@ -57,5 +57,6 @@ public class MenuManager : MonoBehaviour
     public void Quit()
     {
         Debug.Log("QuittingGame");
+        Application.Quit();
     }
 }

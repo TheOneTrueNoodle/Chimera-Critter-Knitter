@@ -7,6 +7,7 @@ public class TriggerCutscene : MonoBehaviour
 
     public GameObject BasementC;
     public GameObject MainCamera;
+    public GameObject triggerC;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class TriggerCutscene : MonoBehaviour
     {
         BasementC.SetActive(true);
         MainCamera.SetActive(false);
+        triggerC.SetActive(false);
         yield return new WaitForSeconds(18.2f);
         BasementC.SetActive(false);
         MainCamera.SetActive(true);
