@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63893cc592d4a12409f8022203f74e28, type: 3}
   m_Name: a8_3.1
   m_EditorClassIdentifier: 
-  options: []
+  options:
+  - choiceText: We can chew in turns?
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: a325893bb0aa5034a9e14dc8195357a9, type: 2}
+  - choiceText: Isn't there another way to open it?
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: a325893bb0aa5034a9e14dc8195357a9, type: 2}

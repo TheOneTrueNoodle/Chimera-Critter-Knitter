@@ -52,12 +52,12 @@ public class ChoicePrefabButton : MonoBehaviour
 
     public void fontUp()
     {
-        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 13;
+        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 16;
     }
 
     public void fontDown()
     {
-        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 12;
+        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 15;
     }
 
     public void taskOnClick()

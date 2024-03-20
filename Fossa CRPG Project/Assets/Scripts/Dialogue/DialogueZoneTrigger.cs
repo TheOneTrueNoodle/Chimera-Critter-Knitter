@@ -18,9 +18,11 @@ public class DialogueZoneTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Player" && !withInteractionTriggerScript)
         {
             dm.currentConvo = convoStart;
+
             dm.beginDialogue();
 
             /*if (spawnSpeaker)

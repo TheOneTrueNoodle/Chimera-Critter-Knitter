@@ -12,8 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
   m_Name: CON_a8_2
   m_EditorClassIdentifier: 
-  lines: []
-  choice: {fileID: 0}
-  fightBegin: 0
-  combatName: 
+  lines:
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: angry
+    leftSide: 0
+    text: 'I *was* having a nap. '
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: No, I mean, why are you in a box?
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: Crazy guy put me in here. Don't really know what the deal is, really.
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: default
+    leftSide: 0
+    text: I think he's about forgotten lil ol' me.
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: default
+    leftSide: 1
+    text: 'Do you want help? '
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: default
+    leftSide: 0
+    text: Do you have opposable thumbs?
+  choice: {fileID: 11400000, guid: 5824f6f99ab8378479b72be0271227ac, type: 2}
   onlyOneSpeaker: 0

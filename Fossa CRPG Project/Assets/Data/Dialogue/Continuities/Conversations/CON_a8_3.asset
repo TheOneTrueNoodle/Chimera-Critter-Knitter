@@ -12,8 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
   m_Name: CON_a8_3
   m_EditorClassIdentifier: 
-  lines: []
-  choice: {fileID: 0}
-  fightBegin: 0
-  combatName: 
+  lines:
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: Muffintown. At least for as long as the big guy is away.
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: What about when he's here?
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: Pointy place? You must know about it, since you're talking to me.
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: angry
+    leftSide: 1
+    text: The frogs were pointy. It stinks of frog in here too.
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: I'd love to help with the uuh... "frogs", but this door doesn't open and
+      I've chipped a tooth on it already.
+  choice: {fileID: 11400000, guid: 5428603a6e45e404f94e2ade7b7907b4, type: 2}
   onlyOneSpeaker: 0
