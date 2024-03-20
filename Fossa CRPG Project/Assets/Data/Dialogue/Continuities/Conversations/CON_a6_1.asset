@@ -10,14 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
-  m_Name: CON_a2_2
+  m_Name: CON_a6_1
   m_EditorClassIdentifier: 
   lines:
-  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
-    emotion: happy
+  - speaker: {fileID: 11400000, guid: 062174705fea6a44da1017e26658aaec, type: 2}
+    emotion: neutral
     leftSide: 0
-    text: It looks like me!
+    text: ...
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: 
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: 
   choice: {fileID: 0}
   fightBegin: 0
   combatName: 
-  onlyOneSpeaker: 1
+  onlyOneSpeaker: 0

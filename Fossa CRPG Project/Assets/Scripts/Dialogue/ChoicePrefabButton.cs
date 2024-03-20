@@ -102,11 +102,11 @@ public class ChoicePrefabButton : MonoBehaviour
         }
 
         int y = transform.GetSiblingIndex();
-        Debug.Log(y);
-        Debug.Log(x);
+        //Debug.Log(y);
+        //Debug.Log(x);
 
         this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //show correct text
-        dm.changeImage(choiceMaker, "neutral"); //change the sprite in the UI
+        //dm.changeImage(choiceMaker, "neutral"); //change the sprite in the UI
 
 
         Canvas.ForceUpdateCanvases();
