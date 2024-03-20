@@ -20,8 +20,8 @@ public class Conversation : ScriptableObject
 {
     public Line[] lines;
     public Choice choice;
-    public bool fightBegin;
-    public string combatName;
+   // public bool fightBegin;
+   // public string combatName;
     public bool onlyOneSpeaker;
 
 }

@@ -68,11 +68,11 @@ public class DialogueManager : MonoBehaviour
                     dialogueActive = false;
                     showChoice();
                 }
-                else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
-                {
+                //else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
+                //{
                     //transitionToBattle(currentConvo.combatName);
-                    exitText(true);
-                }
+                    //exitText(true);
+                //}
                 else //otherwise if there's no choice and no fight exit dialogue
                 {
                     Debug.Log("Exiting Dialog");

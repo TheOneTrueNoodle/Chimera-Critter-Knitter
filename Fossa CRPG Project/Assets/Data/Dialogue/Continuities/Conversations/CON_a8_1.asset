@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
+  m_Name: CON_a8_1
+  m_EditorClassIdentifier: 
+  lines:
+  - speaker: {fileID: 11400000, guid: ceca8cb27e2f6094cb3318903554d759, type: 2}
+    emotion: angry
+    leftSide: 0
+    text: WHO'RE YOU
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: sad
+    leftSide: 1
+    text: Me?
+  - speaker: {fileID: 11400000, guid: ceca8cb27e2f6094cb3318903554d759, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: ...Who else?
+  - speaker: {fileID: 0}
+    emotion: neutral
+    leftSide: 0
+    text: Oscar. Are you a friend or a frog?
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: 
+    leftSide: 0
+    text: A frog? I'm Muffin.
+  choice: {fileID: 11400000, guid: 385726229165f054abbdd4511142bf56, type: 2}
+  fightBegin: 0
+  combatName: 
+  onlyOneSpeaker: 0
