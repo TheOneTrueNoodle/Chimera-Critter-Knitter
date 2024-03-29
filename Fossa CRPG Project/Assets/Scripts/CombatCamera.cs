@@ -32,7 +32,14 @@ public class CombatCamera : MonoBehaviour
         }
         else if (axisName == "Mouse Y")
         {
-            return 0;
+            if (Input.GetButton("Control Camera"))
+            {
+                return Input.GetAxis("Mouse Y");
+            }
+            else
+            {
+                return 0;
+            }
         }
         return Input.GetAxis(axisName);
     }

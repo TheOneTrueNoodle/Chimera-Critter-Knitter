@@ -42,13 +42,20 @@ public class ActionHandler
     }
     private bool CalculateHitChance(Entity attacker, Entity target)
     {
-        float accuracy = Random.Range(0.5f, 3) * attacker.activeStatsDir["Accuracy"].statValue;
+        //FORMULA Attacker Accuracy / Attacker Accuracy - (1 - Defender Evasion / Attacker Accuracy)
+        float accuracy = attacker.activeStatsDir["Accuracy"].statValue;
+        float evasion = target.activeStatsDir["Dodge"].statValue;
 
-        float dodgeChance = target.activeStatsDir["Dodge"].statValue * 0.1f;
-        float dodgeRole = Random.Range(0, accuracy);
+        float hitChance = 1 - (evasion / (3 * accuracy));
+        if (hitChance < 0.05f) { hitChance = 0.05f; }
+        hitChance *= 100;
 
-        if (dodgeRole > dodgeChance) { return true; }
-
+        float hitRole = Random.Range(0, 100);
+        if (hitRole <= hitChance)
+        {
+            //Attack hits
+            //return true; 
+        }
         return false;
     }
     private int CalculateDamage(Entity attacker, Entity target, bool crits)

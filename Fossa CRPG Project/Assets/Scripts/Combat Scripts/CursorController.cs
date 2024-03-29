@@ -16,6 +16,8 @@ public class CursorController : MonoBehaviour
     public float unitSpeed;
     public Entity activeCharacter;
 
+    public BattleTips battleTips;
+
     private TileFunctions tileFunctions;
     private PathFinder pathFinder;
     private RangeFinder rangeFinder;
@@ -84,6 +86,14 @@ public class CursorController : MonoBehaviour
             case 3:
                 //Attack Mode
                 overlayTile = GetCursorPosition();
+                if(overlayTile.isBlocked && overlayTile.activeCharacter != activeCharacter)
+                {
+                    battleTips.AttackHitChanceDisplay(activeCharacter, overlayTile.activeCharacter);
+                }
+                else
+                {
+                    battleTips.HideAttackHitChanceDisplay();
+                }
                 break;
             case 2:
                 //Move Mode
@@ -267,6 +277,7 @@ public class CursorController : MonoBehaviour
             if (overlayTile.activeCharacter.TeamID != activeCharacter.TeamID)
             {
                 hasAttacked = true;
+                battleTips.HideAttackHitChanceDisplay();
 
                 CombatEvents.current.AttackAttempt(activeCharacter, overlayTile.activeCharacter);
                 ClearRangeTiles();

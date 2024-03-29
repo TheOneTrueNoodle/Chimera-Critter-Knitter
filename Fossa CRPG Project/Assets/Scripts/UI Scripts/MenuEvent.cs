@@ -55,4 +55,13 @@ public class MenuEvent : MonoBehaviour
             onUnequipMutation(mutation);
         }
     }
+
+    public event Action<string> onSpawnPopup;
+    public void SpawnPopup(string text)
+    {
+        if (onSpawnPopup != null)
+        {
+            onSpawnPopup(text);
+        }
+    }
 }

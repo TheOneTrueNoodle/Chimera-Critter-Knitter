@@ -40,6 +40,7 @@ public class JournalManager : MonoBehaviour
                 {
                     entry.Discover();
                     entry.discovered = true;
+                    MenuEvent.current.SpawnPopup("You found a new Journal Entry!");
 
                     return;
                 }

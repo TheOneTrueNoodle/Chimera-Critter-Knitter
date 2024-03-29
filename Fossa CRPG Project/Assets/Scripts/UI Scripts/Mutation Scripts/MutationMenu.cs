@@ -63,6 +63,7 @@ public class MutationMenu : MonoBehaviour
 
         //Assign mutation if we dont have it
         unlockedAbilities.Add(mutation);
+        MenuEvent.current.SpawnPopup("You gained a new Mutation!");
     }
 
     public void EquipMutation(AbilityData mutation)

@@ -18,6 +18,10 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] private CharacterMenuManager characterMenuManager;
     [SerializeField] private MutationMenu mutationMenuManager;
 
+    [Header("Popups")]
+    [SerializeField] private GameObject popupParent;
+    public Popup popupPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,7 @@ public class GameMenuManager : MonoBehaviour
             CombatEvents.current.onEndCombat += EndCombat;
             CombatEvents.current.onPauseGame += CombatPauseMenuInput;
         }
+        MenuEvent.current.onSpawnPopup += SpawnPopup;
         Time.timeScale = 1;
     }
 
@@ -138,6 +143,12 @@ public class GameMenuManager : MonoBehaviour
         characterMenuObj.SetActive(false);
         Time.timeScale = 1;
         menuOpen = false;
+    }
+
+    public void SpawnPopup(string text)
+    {
+        var popup = Instantiate(popupPrefab, popupParent.transform);
+        popup.Setup(text);
     }
 
     private void StartCombat(string combatName)
