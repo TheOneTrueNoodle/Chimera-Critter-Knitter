@@ -113,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
         _input = newInput;
         if (Input.GetButton("Bark")) { Bark(); }
+        if (Input.GetButton("Smell")) { Smell(); }
     }
 
     private void Bark()
@@ -122,6 +123,17 @@ public class PlayerMovement : MonoBehaviour
         anim.Play("Bark");
         AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position);
         idleTimer = 0;
+        anim.SetFloat("Idle Time", 0);
+    }
+
+    private void Smell()
+    {
+        //Do smell code
+        if (anim.GetCurrentAnimatorStateInfo(1).IsName("Smell")) { return; }
+        anim.Play("Smell");
+        AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarSmell, transform.position);
+        idleTimer = 0;
+        anim.SetFloat("Idle Time", 0);
     }
 
     private void Look()
