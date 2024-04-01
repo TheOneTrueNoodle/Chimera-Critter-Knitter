@@ -487,6 +487,7 @@ public class CursorController : MonoBehaviour
             }
         }
         cursorMode = mode;
+        battleTips.HideAttackHitChanceDisplay();
 
         //Mode Startup
         switch (cursorMode)

@@ -54,7 +54,7 @@ public class ActionHandler
         if (hitRole <= hitChance)
         {
             //Attack hits
-            //return true; 
+            return true; 
         }
         return false;
     }

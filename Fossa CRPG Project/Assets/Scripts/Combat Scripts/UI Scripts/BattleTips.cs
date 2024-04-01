@@ -1,37 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using Combat;
 
 public class BattleTips : MonoBehaviour
 {
+    [Header("Oscar")]
     [SerializeField] private TMP_Text oscarHitText;
-    [SerializeField] private TMP_Text enemyHitText;
+    [SerializeField] private TMP_Text oscarDmgText;
+    [SerializeField] private Image oscarDmgSymbol;
 
+    
+    [Header("Enemy")]
+    [SerializeField] private TMP_Text enemyHitText;
+    [SerializeField] private TMP_Text enemyDmgText;
+    [SerializeField] private Image enemyDmgSymbol;
+
+    [Header("Damage Symbols")]
+    [SerializeField] private List<Sprite> damageSymbols;
+
+    //Oscar private variables
     private int oscarTargetPercent;
+    private int oscarTargetDamage;
+
+    //Enemy private variables
     private int enemyTargetPercent;
+    private int enemyTargetDamage;
 
     private bool displayAttackHitChance;
-    public float attackHitChanceTimer;
+    [HideInInspector] public float attackHitChanceTimer;
+
 
 
     public void AttackHitChanceDisplay(Entity attacker, Entity defender)
     {
         if (displayAttackHitChance)
         {
-            AnimateAttackHitChance();
+            AnimateText();
             return;
         }
         //I want it to tick up from 0% over the course of like half a second
         displayAttackHitChance = true;
 
+        //Oscar calculations
         oscarTargetPercent = CalculateHitChance(attacker, defender);
+        oscarTargetDamage = CalculateDamage(attacker, defender);
+
+        //Enemy calculations
         enemyTargetPercent = CalculateHitChance(defender, attacker);
+        enemyTargetDamage = CalculateDamage(defender, attacker);
 
         attackHitChanceTimer = 0;
 
+        //Damage Type Displays
+        oscarDmgSymbol.sprite = damageSymbols[(int)attacker.AttackDamageType];
+
+        //Oscar displays
         oscarHitText.gameObject.SetActive(true);
+        oscarDmgText.gameObject.SetActive(true);
+        oscarDmgSymbol.gameObject.SetActive(true);
+
+        //Enemy displays
         enemyHitText.gameObject.SetActive(true);
+        enemyDmgText.gameObject.SetActive(true);
+        enemyDmgSymbol.gameObject.SetActive(true);
     }
 
     private int CalculateHitChance(Entity attacker, Entity defender)
@@ -47,23 +81,66 @@ public class BattleTips : MonoBehaviour
         return (int)hitChance;
     }
 
-    private void AnimateAttackHitChance()
+    private int CalculateDamage(Entity attacker, Entity defender)
+    {
+        int rawDamage = (int)attacker.activeStatsDir["Attack"].statValue;
+        if (attacker.CharacterData.Weapon != null) { rawDamage += attacker.CharacterData.Weapon.weaponDamage; }
+
+        int takenDamage;
+        if ((int)attacker.AttackDamageType < 3)
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + defender.activeStatsDir["Defence"].statValue));
+        }
+        else
+        {
+            takenDamage = (int)(rawDamage * 100 / (100 + defender.activeStatsDir["MagicDefence"].statValue));
+        }
+
+        takenDamage = (int)(takenDamage * (defender.isDefending == true ? 0.5 : 1));
+        if (defender.Resistances.Contains(attacker.AttackDamageType)) { takenDamage /= 2; }
+        if (defender.Weaknesses.Contains(attacker.AttackDamageType)) { takenDamage *= 2; }
+
+        if (takenDamage < 0) { takenDamage = 0; }
+
+        return takenDamage;
+    }
+
+    private void AnimateText()
     {
         if (attackHitChanceTimer <= 1f)
         {
             attackHitChanceTimer += Time.deltaTime * 2;
+
+            //Oscar
             oscarHitText.text = ((int)Mathf.Lerp(0, oscarTargetPercent, attackHitChanceTimer)).ToString() + "%";
+            oscarDmgText.text = ((int)Mathf.Lerp(0, oscarTargetDamage, attackHitChanceTimer)).ToString();
+
+            //Enemy
             enemyHitText.text = ((int)Mathf.Lerp(0, enemyTargetPercent, attackHitChanceTimer)).ToString() + "%";
+            enemyDmgText.text = ((int)Mathf.Lerp(0, enemyTargetDamage, attackHitChanceTimer)).ToString();
         }
     }
 
     public void HideAttackHitChanceDisplay()
     {
         displayAttackHitChance = false;
-        oscarTargetPercent = 0;
-        enemyTargetPercent = 0;
 
+        //Oscar variables
+        oscarTargetPercent = 0;
+        oscarTargetDamage = 0;
+        
+        //Enemy variables
+        enemyTargetPercent = 0;
+        enemyTargetDamage = 0;
+
+        //Oscar displays
         oscarHitText.gameObject.SetActive(false);
+        oscarDmgText.gameObject.SetActive(false);
+        oscarDmgSymbol.gameObject.SetActive(false);
+
+        //Enemy displays
         enemyHitText.gameObject.SetActive(false);
+        enemyDmgText.gameObject.SetActive(false);
+        enemyDmgSymbol.gameObject.SetActive(false);
     }
 }
