@@ -23,6 +23,10 @@ public class Entity : MonoBehaviour
     public Dictionary<string, Stat> activeStatsDir;
     [Header("Active Abilities")]
     public List<AbilityData> activeAbilities;
+
+    [Header("Equipment")]
+    public ScriptableWeapon heldWeapon;
+
     [Header("Resistances & Weaknesses")]
     public List<DamageTypes> Resistances = new List<DamageTypes>();
     public List<DamageTypes> Weaknesses = new List<DamageTypes>();
@@ -148,8 +152,9 @@ public class Entity : MonoBehaviour
         Resistances = CharacterData.SetResistances();
         Weaknesses = CharacterData.SetWeaknesses();
 
-        List<EquipmentStatChanges> equipmentStatChanges = CharacterData.SetEquipmentStatChanges();
-        List<ScriptableEffect> equipmentEffects = CharacterData.SetStartingEffects();
+        //EQUIPMENT / HELD ITEMS
+        List<EquipmentStatChanges> equipmentStatChanges = SetEquipmentStatChanges();
+        List<ScriptableEffect> equipmentEffects = SetStartingEffects();
 
         CombatEvents.current.UnitStartingEffects(this, equipmentStatChanges, equipmentEffects);
         var focusedTileHit = tileFunctions.GetSingleFocusedOnTile(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 10f, gameObject.transform.position.z), true);
@@ -163,7 +168,76 @@ public class Entity : MonoBehaviour
             anim.SetBool("InCombat", true);
         }
     }
+    public List<EquipmentStatChanges> SetEquipmentStatChanges()
+    {
+        List<EquipmentStatChanges> returnStatChanges = new List<EquipmentStatChanges>();
+        if (heldWeapon != null)
+        {
+            foreach (EquipmentStatChanges statChange in heldWeapon.StatChanges)
+            {
+                returnStatChanges.Add(statChange);
+            }
+        }
+        /*
+        if (Armour != null)
+        {
+            foreach (EquipmentStatChanges statChange in Armour.StatChanges)
+            {
+                returnStatChanges.Add(statChange);
+            }
+        }
+        if (Accessory1 != null)
+        {
+            foreach (EquipmentStatChanges statChange in Accessory1.StatChanges)
+            {
+                returnStatChanges.Add(statChange);
+            }
+        }
+        if (Accessory2 != null)
+        {
+            foreach (EquipmentStatChanges statChange in Accessory2.StatChanges)
+            {
+                returnStatChanges.Add(statChange);
+            }
+        }*/
 
+        return returnStatChanges;
+    }
+    public List<ScriptableEffect> SetStartingEffects()
+    {
+        List<ScriptableEffect> returnEffects = new List<ScriptableEffect>();
+        if (heldWeapon != null)
+        {
+            foreach (ScriptableEffect effect in heldWeapon.AdditionalEffects)
+            {
+                returnEffects.Add(effect);
+            }
+        }
+        /*
+        if (Armour != null)
+        {
+            foreach (ScriptableEffect effect in Armour.AdditionalEffects)
+            {
+                returnEffects.Add(effect);
+            }
+        }
+        if (Accessory1 != null)
+        {
+            foreach (ScriptableEffect effect in Accessory1.AdditionalEffects)
+            {
+                returnEffects.Add(effect);
+            }
+        }
+        if (Accessory2 != null)
+        {
+            foreach (ScriptableEffect effect in Accessory2.AdditionalEffects)
+            {
+                returnEffects.Add(effect);
+            }
+        }*/
+
+        return returnEffects;
+    }
     public void Die()
     {
         if (anim != null)

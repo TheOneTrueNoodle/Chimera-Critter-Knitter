@@ -132,7 +132,14 @@ public class CombatHandler : MonoBehaviour
 
         if (attacker.anim != null)
         {
-            attacker.anim.Play("Attack");
+            if (attacker.heldWeapon != null)
+            {
+                attacker.anim.Play("Attack With Weapon");
+            }
+            else
+            {
+                attacker.anim.Play("Attack");
+            }
             if (attacker.CharacterData.Weapon != null && !attacker.CharacterData.Weapon.weaponAttackSFX.IsNull)
             {
                 AudioManager.instance.PlayOneShot(attacker.CharacterData.Weapon.weaponAttackSFX, attacker.transform.position);
