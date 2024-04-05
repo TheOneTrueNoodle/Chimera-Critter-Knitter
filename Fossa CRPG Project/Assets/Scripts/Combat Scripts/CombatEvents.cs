@@ -92,12 +92,12 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
-    public event Action<int, AbilityData> onSetCursorMode;
-    public void SetCursorMode(int mode, AbilityData abilityData)
+    public event Action<int, AbilityData, bool> onSetCursorMode;
+    public void SetCursorMode(int mode, AbilityData abilityData, bool isItem)
     {
         if (onSetCursorMode != null)
         {
-            onSetCursorMode(mode, abilityData);
+            onSetCursorMode(mode, abilityData, isItem);
         }
     }
 
@@ -155,12 +155,12 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
-    public event Action<Entity, List<Entity>, AbilityData, Vector3> onAbilityAttempt;
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 AbilityCenter)
+    public event Action<Entity, List<Entity>, AbilityData, Vector3, bool> onAbilityAttempt;
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 AbilityCenter, bool isItem)
     {
         if (onAbilityAttempt != null)
         {
-            onAbilityAttempt(attacker, targets, ability, AbilityCenter);
+            onAbilityAttempt(attacker, targets, ability, AbilityCenter, isItem);
         }
     }
     public event Action<Entity, List<OverlayTile>> onMoveAttempt;

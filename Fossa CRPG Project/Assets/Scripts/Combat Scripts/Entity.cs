@@ -26,6 +26,7 @@ public class Entity : MonoBehaviour
 
     [Header("Equipment")]
     public ScriptableWeapon heldWeapon;
+    public ConsumableItem heldConsumableItem;
 
     [Header("Resistances & Weaknesses")]
     public List<DamageTypes> Resistances = new List<DamageTypes>();

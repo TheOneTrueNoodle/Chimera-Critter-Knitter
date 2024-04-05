@@ -39,6 +39,7 @@ public class CursorController : MonoBehaviour
     private bool hasAttacked;
     private bool hasCastAbility;
     private AbilityData currentAbility;
+    private bool isItemAbility;
     private List<OverlayTile> abilityArea = new List<OverlayTile>();
 
     private bool UIMode;
@@ -263,7 +264,7 @@ public class CursorController : MonoBehaviour
 
             if (hasCastAbility)
             {
-                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility, AbilityCenter.transform.position);
+                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility, AbilityCenter.transform.position, isItemAbility);
             }
         }
     }
@@ -476,7 +477,7 @@ public class CursorController : MonoBehaviour
         hasCastAbility = false;
     }
 
-    private void SetCursorMode(int mode, AbilityData abilityData)
+    private void SetCursorMode(int mode, AbilityData abilityData, bool isItem)
     {
         ClearRangeTiles();
         if (abilityArea.Count > 0)
@@ -505,6 +506,7 @@ public class CursorController : MonoBehaviour
                 if (abilityData != null)
                 {
                     currentAbility = abilityData;
+                    isItemAbility = isItem;
                     GetInRangeTiles(activeCharacter, currentAbility.range, false, currentAbility.includeCenter);
                     CombatEvents.current.TileColor(activeCharacter, Color.white, inRangeTiles, false);
                 }

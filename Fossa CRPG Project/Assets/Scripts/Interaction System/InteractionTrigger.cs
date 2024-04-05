@@ -7,18 +7,19 @@ using System;
 public class InteractionTrigger : Interactable
 {
     public GameObject inputUI;
+    private bool playerInArea;
 
-    private void OnTriggerStay(Collider other)
+    private void Update()
     {
-        if (inCombat|| inDialogue || !other.gameObject.CompareTag("Player")) { return; }
+        if (inCombat || inDialogue || !playerInArea) { return; }
         if (Input.GetButtonDown("Interact") && !used)
         {
-            if(oneTimeUse)
+            if (oneTimeUse)
             {
                 singleInteraction.Invoke();
                 used = true;
             }
-            else if(enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
+            else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
             {
                 if (active)
                 {
@@ -44,6 +45,7 @@ public class InteractionTrigger : Interactable
         {
             //SHOW UI
             inputUI.SetActive(true);
+            playerInArea = true;
         }
     }
 
@@ -53,6 +55,7 @@ public class InteractionTrigger : Interactable
         {
             //HIDE UI
             inputUI.SetActive(false);
+            playerInArea = false;
         }
     }
 }

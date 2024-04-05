@@ -26,6 +26,10 @@ public class CombatUI : MonoBehaviour
     [SerializeField] private RectTransform abilityUI;
     private List<AbilityButton> abilityButton = new List<AbilityButton>();
 
+    [Header("Use Item UI")]
+    [SerializeField] private GameObject ItemButtonUI;
+    [SerializeField] private TMP_Text itemNameText;
+
     [Header("Turn Order Display")]
     [SerializeField] private GameObject turnIconPrefab;
     [SerializeField] private Transform turnIconParent;
@@ -126,6 +130,15 @@ public class CombatUI : MonoBehaviour
         UIOpen = true;
         //Display Action UI
         ActionUI.gameObject.SetActive(true);
+        if (Char.heldConsumableItem != null)
+        {
+            ItemButtonUI.SetActive(true);
+            itemNameText.text = Char.heldConsumableItem.itemName;
+        }
+        else
+        {
+            ItemButtonUI.SetActive(false);
+        }
 
         Vector3 position = Char.gameObject.transform.position;
         if(Char.UITarget != null) { position = Char.UITarget.position; }
@@ -205,6 +218,17 @@ public class CombatUI : MonoBehaviour
 
         abilityUIOpen = false;
     }
+    public void UseConsumableItem()
+    {
+        actionActive = true;
+        cancelDisp.SetActive(true);
+        foreach (var item in abilityButton)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        CombatEvents.current.SetCursorMode(4, Char.heldConsumableItem.itemAbility, true);
+    }
 
     public void CallAbility(int ID)
     {
@@ -214,7 +238,7 @@ public class CombatUI : MonoBehaviour
         {
             item.gameObject.SetActive(false);
         }
-        CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID]);
+        CombatEvents.current.SetCursorMode(4, Char.activeAbilities[ID], false);
     }
     private void ActionComplete()
     {
@@ -267,6 +291,7 @@ public class CombatUI : MonoBehaviour
 
         ChangeCursorMode(cursorMode);
     }
+
     public void UpdateInformationUI()
     {
         if (!started) 
@@ -326,7 +351,7 @@ public class CombatUI : MonoBehaviour
             cancelDisp.SetActive(true);
         }
         else { cancelDisp.SetActive(false); }
-        CombatEvents.current.SetCursorMode(mode, null);
+        CombatEvents.current.SetCursorMode(mode, null, false);
     }
     private void NewRoundTurnOrder(List<Entity> allUnits)
     {

@@ -194,12 +194,12 @@ public class CombatHandler : MonoBehaviour
         StartCoroutine(DelayedTurnEnd());
     }
 
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter)
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter, bool isItem)
     {
-        StartCoroutine(Ability(attacker, targets, ability, abilityCenter));
+        StartCoroutine(Ability(attacker, targets, ability, abilityCenter, isItem));
     }
 
-    public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter)
+    public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter, bool isItem)
     {
         CombatEvents.current.AddLog(new string(attacker.CharacterData.Name + " uses " + ability.Name + "!"));
 
@@ -283,6 +283,13 @@ public class CombatHandler : MonoBehaviour
             {
                 CombatEvents.current.AddLog(newLog);
             }
+        }
+
+        if (isItem)
+        {
+            var item = attacker.heldConsumableItem;
+            attacker.GetComponent<HeldItem>().DropItem();
+            Destroy(item.gameObject);
         }
 
         StartCoroutine(DelayedTurnEnd());
