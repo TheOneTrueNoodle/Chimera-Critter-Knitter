@@ -9,10 +9,12 @@ public struct Option
     public string choiceText;
     public bool startFight;
     public Conversation continueDialogue;
+    public string progressionID;
 }
 
 [CreateAssetMenu(fileName = "New Choice", menuName = "Dialogue/Choice")]
 public class Choice : ScriptableObject
 {
     public Option[] options;
+    
 }
