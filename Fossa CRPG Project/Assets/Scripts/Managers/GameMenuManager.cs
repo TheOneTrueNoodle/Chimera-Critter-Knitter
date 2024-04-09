@@ -31,7 +31,10 @@ public class GameMenuManager : MonoBehaviour
             CombatEvents.current.onEndCombat += EndCombat;
             CombatEvents.current.onPauseGame += CombatPauseMenuInput;
         }
-        MenuEvent.current.onSpawnPopup += SpawnPopup;
+        if (MenuEvent.current != null)
+        {
+            MenuEvent.current.onSpawnPopup += SpawnPopup;
+        }
         Time.timeScale = 1;
     }
 

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public GameObject OpeningScreen;
+    public Animator SettingsAnim;
     public GameObject SettingsScreen;
     public GameObject FirstCutscene;
     public GameObject SplashScreen;
@@ -37,21 +38,19 @@ public class MenuManager : MonoBehaviour
         Debug.Log("StartingSplashScreen");
         yield return new WaitForSeconds(3f);
         Debug.Log("SplashScreenEnding");
-       OpeningScreen.SetActive(true);
+        OpeningScreen.SetActive(true);
         SplashScreen.SetActive(false);
 
     }
 
     public void Settings()
     {
-        OpeningScreen.SetActive(false);
-        SettingsScreen.SetActive(true);
+        SettingsAnim.Play("Open");
     }
 
     public void SettingsBack()
     {
-        OpeningScreen.SetActive(true);
-        SettingsScreen.SetActive(false);
+        SettingsAnim.Play("Close");
     }
 
     public void Quit()
