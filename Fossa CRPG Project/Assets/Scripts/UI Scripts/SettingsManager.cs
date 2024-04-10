@@ -6,8 +6,6 @@ using TMPro;
 public class SettingsManager : MonoBehaviour
 {
     [Header("Settings Variables")]
-
-
     private Resolution[] resolutions;
     private List<Resolution> filteredResolutions;
 
@@ -17,11 +15,20 @@ public class SettingsManager : MonoBehaviour
     [Header("UI References")]
     public TMP_Dropdown resolutionDropdown;
 
+    //Before Applying Settings
+    private int newResolutionIndex;
+
     private void OnEnable()
     {
         GetResolutionOptions();
     }
 
+    public void ApplySettings()
+    {
+        currentResolutionIndex = newResolutionIndex;
+    }
+
+    #region Resolution Settings
     private void GetResolutionOptions()
     {
         resolutions = Screen.resolutions;
@@ -58,5 +65,7 @@ public class SettingsManager : MonoBehaviour
     {
         Resolution resolution = filteredResolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, true);
+        newResolutionIndex = resolutionIndex;
     }
+    #endregion
 }
