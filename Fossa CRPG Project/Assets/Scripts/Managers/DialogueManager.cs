@@ -13,6 +13,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject textBoxPrefab; //prefab to instantiate
     public GameObject choicePrefab; //prefab to instantiate
     public GameObject textBoxTarget; //target parent
+    public GameObject choiceBoxTarget; //target parent for choices
     public GameObject previousLine; //previous textbox
 
     [Header("UI Variables")]
@@ -100,7 +101,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         GameObject newObject = Instantiate(textBoxPrefab); //create
-        newObject.transform.SetParent(textBoxTarget.transform); //make child of
+        newObject.transform.SetParent(choiceBoxTarget.transform); //make child of
         newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
         newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox
 

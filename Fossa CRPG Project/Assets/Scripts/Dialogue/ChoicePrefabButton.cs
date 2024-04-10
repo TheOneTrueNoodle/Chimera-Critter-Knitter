@@ -50,12 +50,12 @@ public class ChoicePrefabButton : MonoBehaviour
 
     public void fontUp()
     {
-        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 16;
+        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 20;
     }
 
     public void fontDown()
     {
-        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 15;
+        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 22;
     }
 
     public void taskOnClick()
@@ -103,7 +103,9 @@ public class ChoicePrefabButton : MonoBehaviour
         //Debug.Log(y);
         //Debug.Log(x);
 
-        this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //show correct text
+        GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
+
+        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //show correct text (this is for old version)
         //dm.changeImage(choiceMaker, "neutral"); //change the sprite in the UI
 
 
