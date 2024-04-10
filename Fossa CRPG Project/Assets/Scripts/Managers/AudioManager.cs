@@ -46,9 +46,14 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
-        masterBus.setVolume(masterVolume);
-        musicBus.setVolume(musicVolume);
-        SFXBus.setVolume(SFXVolume);
+        SetAudioVolume();
+    }
+
+    public void SetAudioVolume()
+    {
+        masterBus.setVolume(PlayerPrefs.GetFloat("Master Volume"));
+        musicBus.setVolume(PlayerPrefs.GetFloat("Music Volume"));
+        SFXBus.setVolume(PlayerPrefs.GetFloat("SFX Volume"));
     }
 
     private void InitializeAmbience(EventReference ambienceEventReference)
