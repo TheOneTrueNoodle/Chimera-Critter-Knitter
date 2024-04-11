@@ -114,16 +114,19 @@ public class SettingsManager : MonoBehaviour
     {
         newMasterVolume = volume;
         changedSettings = true;
+        masterVolumePercent.text = (volume * 100).ToString() + "%";
     }
     public void SetMusicVolume(float volume)
     {
         newMusicVolume = volume;
         changedSettings = true;
+        musicVolumePercent.text = (volume * 100).ToString() + "%";
     }
     public void SetSFXVolume(float volume)
     {
         newSFXVolume = volume;
         changedSettings = true;
+        SFXVolumePercent.text = (volume * 100).ToString() + "%";
     }
     #endregion
 
@@ -169,28 +172,28 @@ public class SettingsManager : MonoBehaviour
         changedSettings = true;
     }
 
-    public void ToggleFullscreen()
+    public void ToggleFullscreen(bool value)
     {
-        Screen.fullScreen = !Screen.fullScreen;
-        newFullscreen = Screen.fullScreen;
+        Screen.fullScreen = value;
+        newFullscreen = value;
         changedSettings = true;
     }
     #endregion
 
     #region Toggles
-    public void ToggleDogVision()
+    public void ToggleDogVision(bool value)
     {
-        newDogVision = PlayerPrefs.GetInt("Dog Vision") == 1;
+        newDogVision = value;
         changedSettings = true;
     }
-    public void ToggleInfectionEffect()
+    public void ToggleInfectionEffect(bool value)
     {
-        newInfectionEffect = PlayerPrefs.GetInt("Infection Effect") == 1;
+        newInfectionEffect = value;
         changedSettings = true;
     } 
-    private void ToggleGore()
+    public void ToggleGore(bool value)
     {
-        newRemoveGore = PlayerPrefs.GetInt("Remove Gore") == 1;
+        newRemoveGore = value;
         changedSettings = true;
     }
     #endregion
@@ -201,19 +204,20 @@ public class SettingsManager : MonoBehaviour
         newColourBlindID = ID;
         changedSettings = true;
     }
-    public void toggleInvertCamY()
+    public void toggleInvertCamY(bool value)
     {
-        newInvertCamY = PlayerPrefs.GetInt("Invert Camera Y") == 1;
+        newInvertCamY = value;
         changedSettings = true;
     }
-    public void toggleInvertCamX()
+    public void toggleInvertCamX(bool value)
     {
-        newInvertCamX = PlayerPrefs.GetInt("Invert Camera X") == 1;
+        newInvertCamX = value;
         changedSettings = true;
     }
     public void SetCameraSensitivity(float sensitivity)
     {
         newCamSens = sensitivity;
+        camSensitivityValue.text = sensitivity.ToString();
         changedSettings = true;
     }
     #endregion
