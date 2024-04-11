@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 4806106957468349283}
   - component: {fileID: 694658887080852620}
   - component: {fileID: 1956508322367223256}
+  - component: {fileID: 8374778152871629569}
   m_Layer: 0
   m_Name: RedBone(PickUp)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5322882007919473817
 Transform:
   m_ObjectHideFlags: 0
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959927429709295672}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.25, y: -6.516512, z: -7.049}
   m_LocalScale: {x: 0.06641201, y: 0.066412, z: 0.051547006}
   m_ConstrainProportionsScale: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 3978949680811136721}
-  itemData: {fileID: 0}
+  itemData: {fileID: 8374778152871629569}
   inputUI: {fileID: 6102496022727589845}
 --- !u!54 &4806106957468349283
 Rigidbody:
@@ -137,6 +138,24 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6.2782803
   m_Center: {x: 0, y: 0, z: -0.00000028907908}
+--- !u!114 &8374778152871629569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959927429709295672}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93806c802f937604f84328822aef9b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: RedBone
+  holdRotationV3: {x: 0, y: 0, z: 0}
+  rb: {fileID: 4806106957468349283}
+  physicsCollider: {fileID: 694658887080852620}
+  triggerCollider: {fileID: 694658887080852620}
 --- !u!1 &1448618006918347189
 GameObject:
   m_ObjectHideFlags: 0

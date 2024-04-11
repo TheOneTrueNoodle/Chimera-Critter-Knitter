@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2690578244899782533}
   - component: {fileID: 9094256490656872938}
   - component: {fileID: 6229789336046136376}
+  - component: {fileID: 5712535674645765657}
   - component: {fileID: 2646460423333858095}
-  - component: {fileID: 3978204995096980655}
+  - component: {fileID: 2583886853317510218}
   m_Layer: 0
   m_Name: TennisBall(PickUp)
   m_TagString: Untagged
@@ -28,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490582212343699122}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.25, y: -6.471, z: -7.049}
   m_LocalScale: {x: 0.06641201, y: 0.066412, z: 0.051547006}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4213940737167993586}
   - {fileID: 1342126541619662830}
-  - {fileID: 7371029961766536011}
+  - {fileID: 2768603206640335140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9094256490656872938
@@ -66,7 +67,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 2456285491792972677}
-  itemData: {fileID: 0}
+  itemData: {fileID: 2583886853317510218}
   inputUI: {fileID: 3910729291548102396}
 --- !u!54 &6229789336046136376
 Rigidbody:
@@ -95,6 +96,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5712535674645765657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490582212343699122}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.370662, y: 2.5700288, z: 3.0593262}
+  m_Center: {x: 0.012461311, y: -0.037381694, z: -0.002511519}
 --- !u!135 &2646460423333858095
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -114,29 +136,26 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6.2782803
-  m_Center: {x: 0, y: 0, z: -0.00000028907908}
---- !u!135 &3978204995096980655
-SphereCollider:
+  m_Radius: 12.015265
+  m_Center: {x: 0, y: 0, z: -0.056557745}
+--- !u!114 &2583886853317510218
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490582212343699122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.3025056
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93806c802f937604f84328822aef9b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: TennisBall
+  holdRotationV3: {x: 0, y: 0, z: 0}
+  rb: {fileID: 6229789336046136376}
+  physicsCollider: {fileID: 5712535674645765657}
+  triggerCollider: {fileID: 5712535674645765657}
 --- !u!1 &3910729291548102396
 GameObject:
   m_ObjectHideFlags: 0
@@ -5355,7 +5374,7 @@ Transform:
   - {fileID: 1156175363887858199}
   m_Father: {fileID: 2690578244899782533}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7160147153450823416
+--- !u!1001 &2556591749504111767
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5381,11 +5400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 366721573621525939, guid: f356c8cfc087f4c4e9125a461c7c1fb3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.54
       objectReference: {fileID: 0}
     - target: {fileID: 366721573621525939, guid: f356c8cfc087f4c4e9125a461c7c1fb3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 366721573621525939, guid: f356c8cfc087f4c4e9125a461c7c1fb3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5424,8 +5443,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f356c8cfc087f4c4e9125a461c7c1fb3, type: 3}
---- !u!4 &7371029961766536011 stripped
+--- !u!4 &2768603206640335140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 366721573621525939, guid: f356c8cfc087f4c4e9125a461c7c1fb3, type: 3}
-  m_PrefabInstance: {fileID: 7160147153450823416}
+  m_PrefabInstance: {fileID: 2556591749504111767}
   m_PrefabAsset: {fileID: 0}

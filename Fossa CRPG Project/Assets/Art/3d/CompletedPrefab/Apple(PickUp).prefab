@@ -5095,8 +5095,9 @@ GameObject:
   - component: {fileID: 314518591401500013}
   - component: {fileID: 5267889219884052981}
   - component: {fileID: 3195734902568890981}
-  - component: {fileID: 6669038476294241941}
   - component: {fileID: 2083038839179740587}
+  - component: {fileID: 6669038476294241941}
+  - component: {fileID: 2453174840383537271}
   m_Layer: 0
   m_Name: Apple(PickUp)
   m_TagString: Untagged
@@ -5112,7 +5113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8904809858081661179}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.918, y: -6.471, z: -6.606}
   m_LocalScale: {x: 0.06641201, y: 0.066412, z: 0.051547006}
   m_ConstrainProportionsScale: 0
@@ -5150,7 +5151,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 7612511317548891300}
-  itemData: {fileID: 0}
+  itemData: {fileID: 2453174840383537271}
   inputUI: {fileID: 79340414407557748}
 --- !u!54 &3195734902568890981
 Rigidbody:
@@ -5179,27 +5180,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &6669038476294241941
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8904809858081661179}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 6.2782803
-  m_Center: {x: 0, y: 0, z: -0.00000028907908}
 --- !u!135 &2083038839179740587
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5219,8 +5199,47 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.3025056
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.2844058
+  m_Center: {x: 0, y: 0, z: 0.34983656}
+--- !u!135 &6669038476294241941
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904809858081661179}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6.531708
+  m_Center: {x: 0, y: 0, z: 0.3265102}
+--- !u!114 &2453174840383537271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904809858081661179}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93806c802f937604f84328822aef9b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: Apple
+  holdRotationV3: {x: 0, y: 0, z: 0}
+  rb: {fileID: 3195734902568890981}
+  physicsCollider: {fileID: 2083038839179740587}
+  triggerCollider: {fileID: 2083038839179740587}
 --- !u!1 &9026864922287893733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,11 +5400,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36d1fed41e2466f4e82af964af5d2c16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36d1fed41e2466f4e82af964af5d2c16, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36d1fed41e2466f4e82af964af5d2c16, type: 3}
       propertyPath: m_LocalRotation.w

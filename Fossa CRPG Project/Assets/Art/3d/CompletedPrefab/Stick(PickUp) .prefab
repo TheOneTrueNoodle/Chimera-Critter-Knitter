@@ -293,15 +293,16 @@ GameObject:
   - component: {fileID: 6410634492993969024}
   - component: {fileID: 2557770318482683408}
   - component: {fileID: 8292426207700062666}
-  - component: {fileID: 4542505477901093741}
   - component: {fileID: 8043834423881349301}
+  - component: {fileID: 4542505477901093741}
+  - component: {fileID: 7187856001366455943}
   m_Layer: 0
   m_Name: 'Stick(PickUp) '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6410634492993969024
 Transform:
   m_ObjectHideFlags: 0
@@ -348,7 +349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 1308900773133354303}
-  itemData: {fileID: 0}
+  itemData: {fileID: 7187856001366455943}
   inputUI: {fileID: 263464990070806964}
 --- !u!54 &8292426207700062666
 Rigidbody:
@@ -377,27 +378,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &4542505477901093741
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4513962309130749994}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 6.2782803
-  m_Center: {x: 0, y: 0, z: -0.00000028907908}
 --- !u!65 &8043834423881349301
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -419,6 +399,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.1131554, y: 0.52374995, z: 0.7589409}
   m_Center: {x: -0.10729499, y: 0.034017447, z: -0.12052957}
+--- !u!135 &4542505477901093741
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513962309130749994}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 6.2782803
+  m_Center: {x: 0, y: 0, z: -0.00000028907908}
+--- !u!114 &7187856001366455943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513962309130749994}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93806c802f937604f84328822aef9b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: Stick
+  holdRotationV3: {x: 0, y: 0, z: 0}
+  rb: {fileID: 8292426207700062666}
+  physicsCollider: {fileID: 8043834423881349301}
+  triggerCollider: {fileID: 8043834423881349301}
 --- !u!1 &4756561624256958479
 GameObject:
   m_ObjectHideFlags: 0

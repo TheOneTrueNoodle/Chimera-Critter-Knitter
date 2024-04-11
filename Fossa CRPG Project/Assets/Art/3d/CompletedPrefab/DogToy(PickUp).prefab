@@ -145,8 +145,9 @@ GameObject:
   - component: {fileID: 5240666713350305502}
   - component: {fileID: 7556867853439915256}
   - component: {fileID: 5640941367592745688}
-  - component: {fileID: 9078519115014211419}
   - component: {fileID: 8283681967266415968}
+  - component: {fileID: 9078519115014211419}
+  - component: {fileID: 2603350259517438691}
   m_Layer: 0
   m_Name: DogToy(PickUp)
   m_TagString: Untagged
@@ -162,7 +163,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4856012530982753712}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.613, y: -6.488, z: -6.843}
   m_LocalScale: {x: 0.06641201, y: 0.066412, z: 0.051547006}
   m_ConstrainProportionsScale: 0
@@ -200,7 +201,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 8753300890251318864}
-  itemData: {fileID: 0}
+  itemData: {fileID: 2603350259517438691}
   inputUI: {fileID: 5362817467596503513}
 --- !u!54 &5640941367592745688
 Rigidbody:
@@ -229,27 +230,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &9078519115014211419
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4856012530982753712}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 6.2782803
-  m_Center: {x: 0, y: 0, z: -0.00000028907908}
 --- !u!135 &8283681967266415968
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -269,8 +249,47 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8463167
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.742475
+  m_Center: {x: 0.079413764, y: -1.5088621, z: -0.35417044}
+--- !u!135 &9078519115014211419
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856012530982753712}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 5.0954847
+  m_Center: {x: 0, y: -1.1827956, z: 0}
+--- !u!114 &2603350259517438691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856012530982753712}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93806c802f937604f84328822aef9b5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: DogToy
+  holdRotationV3: {x: 0, y: 0, z: 0}
+  rb: {fileID: 5640941367592745688}
+  physicsCollider: {fileID: 8283681967266415968}
+  triggerCollider: {fileID: 8283681967266415968}
 --- !u!1 &5362817467596503513
 GameObject:
   m_ObjectHideFlags: 0
@@ -5377,15 +5396,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442968266876043192, guid: 4cd69655e5686684ebaacafdf69b964c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.41
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5442968266876043192, guid: 4cd69655e5686684ebaacafdf69b964c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -1.61
       objectReference: {fileID: 0}
     - target: {fileID: 5442968266876043192, guid: 4cd69655e5686684ebaacafdf69b964c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 5442968266876043192, guid: 4cd69655e5686684ebaacafdf69b964c, type: 3}
       propertyPath: m_LocalRotation.w
