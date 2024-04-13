@@ -11,9 +11,12 @@ public class FrogTongue : AbilityVisual
 
     public float animationMult;
 
-    private void Start()
+    public override void Call()
     {
         InitialScale = transform.localScale;
+
+        startPosition.transform.position = abilitySource.transform.position;
+
         UpdateTransformForScale();
         StartCoroutine(LerpAttack());
     }
