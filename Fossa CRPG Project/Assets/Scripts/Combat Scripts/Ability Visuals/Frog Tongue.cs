@@ -30,8 +30,8 @@ public class FrogTongue : MonoBehaviour
             UpdateTransformForScale();
             yield return null;
         }
+
         //Return to attack caster
-        
         while (t > 0)
         {
             t -= Time.deltaTime * animationMult;
@@ -39,7 +39,6 @@ public class FrogTongue : MonoBehaviour
             UpdateTransformForScale();
             yield return null;
         }
-        
     }
 
     private void UpdateTransformForScale()
