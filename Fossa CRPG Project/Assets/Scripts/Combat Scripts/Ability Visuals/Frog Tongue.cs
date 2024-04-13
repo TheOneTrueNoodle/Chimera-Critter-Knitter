@@ -10,7 +10,7 @@ public class FrogTongue : MonoBehaviour
     private Vector3 InitialScale;
 
     public GameObject targetUnit;
-    public float animationTime;
+    public float animationMult;
 
     private void Start()
     {
@@ -23,32 +23,34 @@ public class FrogTongue : MonoBehaviour
     {
         float t = 0;
         //Reach Target Destination
-        while (t < animationTime)
+        while (t < 1)
         {
-            t += Time.deltaTime;
+            t += Time.deltaTime * animationMult;
             endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetUnit.transform.position, t);
             UpdateTransformForScale();
             yield return null;
         }
         //Return to attack caster
+        
         while (t > 0)
         {
-            t -= Time.deltaTime;
+            t -= Time.deltaTime * animationMult;
             endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetUnit.transform.position, t);
             UpdateTransformForScale();
             yield return null;
         }
+        
     }
 
     private void UpdateTransformForScale()
     {
-        float distance = Vector3.Distance(startPosition.transform.position, endPosition.transform.position);
-        visuals.transform.localScale = new Vector3(InitialScale.x, distance / 2f, InitialScale.z);
 
-        Vector3 middlePoint = (startPosition.transform.position + endPosition.transform.position) / 2f;
+        float distance = Vector3.Distance(startPosition.transform.position, endPosition.transform.position);
+        visuals.transform.localScale = new Vector3(InitialScale.x, InitialScale.y, distance);
+
+        Vector3 middlePoint = Vector3.Lerp(startPosition.transform.position, endPosition.transform.position, 0.5f);
         visuals.transform.position = middlePoint;
 
-        Vector3 rotationDirection = (endPosition.transform.position - startPosition.transform.position);
-        visuals.transform.up = rotationDirection;
+        visuals.transform.LookAt(endPosition.transform.position);
     }
 }
