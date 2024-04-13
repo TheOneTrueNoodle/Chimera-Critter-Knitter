@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrogTongue : MonoBehaviour
+public class FrogTongue : AbilityVisual
 {
     [SerializeField] private GameObject startPosition;
     [SerializeField] private GameObject endPosition;
     [SerializeField] private GameObject visuals;
     private Vector3 InitialScale;
 
-    public GameObject targetUnit;
     public float animationMult;
 
     private void Start()

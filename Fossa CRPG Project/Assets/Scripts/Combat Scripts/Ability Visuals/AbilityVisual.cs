@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class AbilityVisual : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Entity targetUnit;
 
-    // Update is called once per frame
-    void Update()
+    public void Setup(Entity target)
     {
-        
+        targetUnit = target;
     }
 }
