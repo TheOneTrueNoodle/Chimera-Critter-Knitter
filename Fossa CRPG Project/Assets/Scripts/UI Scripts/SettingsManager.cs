@@ -6,7 +6,10 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    [Header("Settings Variables")]
+    [Header("Menu Manager")]
+    [SerializeField] private MenuManager menuManager;
+    [SerializeField] private GameObject applySettingsPopup;
+
     private Resolution[] resolutions;
     private List<Resolution> filteredResolutions;
 
@@ -59,11 +62,11 @@ public class SettingsManager : MonoBehaviour
     private void GetCurrentSettings()
     {
         masterVolumeSlider.value = PlayerPrefs.GetFloat("Master Volume", 1);
-        masterVolumePercent.text = (PlayerPrefs.GetFloat("Master Volume", 1) * 100).ToString() + "%";
+        masterVolumePercent.text = (PlayerPrefs.GetFloat("Master Volume", 1) * 100).ToString("F0") + "%";
         musicVolumeSlider.value = PlayerPrefs.GetFloat("Music Volume", 1);
-        musicVolumePercent.text = (PlayerPrefs.GetFloat("Music Volume", 1) * 100).ToString() + "%";
+        musicVolumePercent.text = (PlayerPrefs.GetFloat("Music Volume", 1) * 100).ToString("F0") + "%";
         SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFX Volume", 1);
-        SFXVolumePercent.text = (PlayerPrefs.GetFloat("SFX Volume", 1) * 100).ToString() + "%";
+        SFXVolumePercent.text = (PlayerPrefs.GetFloat("SFX Volume", 1) * 100).ToString("F0") + "%";
 
         colourBlindDropdown.value = PlayerPrefs.GetInt("Colour Blind ID", 0);
         colourBlindDropdown.RefreshShownValue();
@@ -75,9 +78,42 @@ public class SettingsManager : MonoBehaviour
         invertCamYToggle.isOn = PlayerPrefs.GetInt("Invert Camera Y", 0) == 1;
         invertCamXToggle.isOn = PlayerPrefs.GetInt("Invert Camera X", 0) == 1;
         cameraSensitivitySlider.value = PlayerPrefs.GetFloat("Camera Sensitivity", 3);
-        camSensitivityValue.text = PlayerPrefs.GetFloat("Camera Sensitivity").ToString();
+        camSensitivityValue.text = PlayerPrefs.GetFloat("Camera Sensitivity").ToString("F2");
 
         GetResolutionOptions();
+    }
+
+    public void ResetSettings()
+    {
+        PlayerPrefs.SetFloat("Master Volume", 1);
+        PlayerPrefs.SetFloat("Music Volume", 1);
+        PlayerPrefs.SetFloat("SFX Volume", 1); 
+        PlayerPrefs.SetInt("Colour Blind ID", 0);
+        PlayerPrefs.SetInt("Dog Vision", 0);
+        PlayerPrefs.SetInt("Infection Effect", 0);
+        PlayerPrefs.SetInt("Remove Gore", 0);
+        PlayerPrefs.SetInt("Invert Camera Y", 0);
+        PlayerPrefs.SetInt("Invert Camera X", 0);
+        PlayerPrefs.SetFloat("Camera Sensitivity", 3);
+
+        changedSettings = false;
+        ClearChanges();
+
+        GetCurrentSettings();
+    }
+
+    public void TryCloseSettings()
+    {
+        if (changedSettings)
+        {
+            //Show menu where settings have been changed but not applied
+            applySettingsPopup.SetActive(true);
+        }
+        else
+        {
+            //Just close the damn menu
+            menuManager.SettingsBack();
+        }
     }
 
     public void ApplySettings()
@@ -106,7 +142,24 @@ public class SettingsManager : MonoBehaviour
         Resolution resolution = filteredResolutions[PlayerPrefs.GetInt("Resolution ID")];
         Screen.SetResolution(resolution.width, resolution.height, PlayerPrefs.GetInt("Fullscreen") == 1);
 
+        ClearChanges();
         changedSettings = false;
+    }
+
+    private void ClearChanges()
+    {
+        newMasterVolume = PlayerPrefs.GetFloat("Master Volume");
+        newMusicVolume = PlayerPrefs.GetFloat("Music Volume");
+        newSFXVolume = PlayerPrefs.GetFloat("SFX Volume");
+        newResolutionIndex = PlayerPrefs.GetInt("Resolution ID");
+        newFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
+        newColourBlindID = PlayerPrefs.GetInt("Colour Blind ID");
+        newDogVision = PlayerPrefs.GetInt("Dog Vision") == 1;
+        newInfectionEffect = PlayerPrefs.GetInt("Infection Effect") == 1;
+        newInvertCamY = PlayerPrefs.GetInt("Invert Camera Y") == 1;
+        newInvertCamX = PlayerPrefs.GetInt("Invert Camera X") == 1;
+        newCamSens = PlayerPrefs.GetFloat("Camera Sensitivity");
+        newRemoveGore = PlayerPrefs.GetInt("Remove Gore") == 1;
     }
 
     #region Volume
@@ -114,19 +167,19 @@ public class SettingsManager : MonoBehaviour
     {
         newMasterVolume = volume;
         changedSettings = true;
-        masterVolumePercent.text = (volume * 100).ToString() + "%";
+        masterVolumePercent.text = (volume * 100).ToString("F0") + "%";
     }
     public void SetMusicVolume(float volume)
     {
         newMusicVolume = volume;
         changedSettings = true;
-        musicVolumePercent.text = (volume * 100).ToString() + "%";
+        musicVolumePercent.text = (volume * 100).ToString("F0") + "%";
     }
     public void SetSFXVolume(float volume)
     {
         newSFXVolume = volume;
         changedSettings = true;
-        SFXVolumePercent.text = (volume * 100).ToString() + "%";
+        SFXVolumePercent.text = (volume * 100).ToString("F0") + "%";
     }
     #endregion
 
@@ -217,7 +270,7 @@ public class SettingsManager : MonoBehaviour
     public void SetCameraSensitivity(float sensitivity)
     {
         newCamSens = sensitivity;
-        camSensitivityValue.text = sensitivity.ToString();
+        camSensitivityValue.text = sensitivity.ToString("F2");
         changedSettings = true;
     }
     #endregion

@@ -21,7 +21,7 @@ public class TutorialHouseArea : AreaManager
         if (target.CharacterData.Name == "Oscar")
         {
             //Trigger the cool infection vignette for the first time!
-            StartCoroutine(AnimateInfectionVignette());
+            if (PlayerPrefs.GetInt("Infection Effect") != 1) { StartCoroutine(AnimateInfectionVignette()); }
             CombatEvents.current.onAttackAttempt -= OscarGetsHitForTheFirstTime;
         }
     }

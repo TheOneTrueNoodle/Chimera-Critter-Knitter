@@ -23,7 +23,10 @@ public class CombatCamera : MonoBehaviour
         {
             if (Input.GetButton("Control Camera"))
             {
-                return Input.GetAxis("Mouse X");
+                float x = Input.GetAxis("Mouse X") * PlayerPrefs.GetFloat("Camera Sensitivity");
+                x = PlayerPrefs.GetInt("Invert Camera X") == 1 ? x * -1 : x;
+
+                return x;
             }
             else
             {
@@ -34,7 +37,10 @@ public class CombatCamera : MonoBehaviour
         {
             if (Input.GetButton("Control Camera"))
             {
-                return Input.GetAxis("Mouse Y");
+                float y = Input.GetAxis("Mouse Y") * PlayerPrefs.GetFloat("Camera Sensitivity");
+                y = PlayerPrefs.GetInt("Invert Camera Y") == 1 ? y * -1 : y;
+
+                return y;
             }
             else
             {

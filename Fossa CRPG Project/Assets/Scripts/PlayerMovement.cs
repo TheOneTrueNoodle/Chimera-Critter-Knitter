@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     private static float lieDownTime = 14;
 
     [Header("Injured Textures")]
+    private bool goreActive;
+
     [SerializeField] private Material defaultMat;
     [SerializeField] private Material injuredMat;
 
@@ -235,6 +237,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (oscarData.activeStatsDir == null) { AssignOscarData(); }
 
+        if (goreActive && PlayerPrefs.GetInt("Remove Gore") == 1)
+        {
+            ApplyDefaultTextures();
+        }
+        else if (!goreActive && PlayerPrefs.GetInt("Remove Gore") != 1)
+        {
+            ApplyInjuredTextures();
+        }
+
         float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
         if (percentageHealthMissing > 70)
         {
@@ -245,13 +256,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.SetBool("Injured", true);
 
-                //Apply injured textures
-                DogsHead.GetComponent<Renderer>().material = injuredMat;
-                DogsBody.GetComponent<Renderer>().material = injuredMat;
-                DogsFrontLegs.GetComponent<Renderer>().material = injuredMat;
-                DogsBackLegs.GetComponent<Renderer>().material = injuredMat;
-                DogsTail.GetComponent<Renderer>().material = injuredMat;
-                DogsEyes.GetComponent<Renderer>().material = injuredMat;
+                if (PlayerPrefs.GetInt("Remove Gore") != 1)
+                {
+                    ApplyInjuredTextures();
+                }
             }
         }
         else
@@ -261,16 +269,32 @@ public class PlayerMovement : MonoBehaviour
             if (anim.GetBool("Injured") == true)
             {
                 anim.SetBool("Injured", false);
-
-                //Apply default textures
-                DogsHead.GetComponent<Renderer>().material = defaultMat;
-                DogsBody.GetComponent<Renderer>().material = defaultMat;
-                DogsFrontLegs.GetComponent<Renderer>().material = defaultMat;
-                DogsBackLegs.GetComponent<Renderer>().material = defaultMat;
-                DogsTail.GetComponent<Renderer>().material = defaultMat;
-                DogsEyes.GetComponent<Renderer>().material = defaultMat;
+                ApplyDefaultTextures();
             }
         }
+    }
+
+    private void ApplyDefaultTextures()
+    {
+        //Apply default textures
+        DogsHead.GetComponent<Renderer>().material = defaultMat;
+        DogsBody.GetComponent<Renderer>().material = defaultMat;
+        DogsFrontLegs.GetComponent<Renderer>().material = defaultMat;
+        DogsBackLegs.GetComponent<Renderer>().material = defaultMat;
+        DogsTail.GetComponent<Renderer>().material = defaultMat;
+        DogsEyes.GetComponent<Renderer>().material = defaultMat;
+        goreActive = false;
+    }
+    private void ApplyInjuredTextures()
+    {
+        //Apply injured textures
+        DogsHead.GetComponent<Renderer>().material = injuredMat;
+        DogsBody.GetComponent<Renderer>().material = injuredMat;
+        DogsFrontLegs.GetComponent<Renderer>().material = injuredMat;
+        DogsBackLegs.GetComponent<Renderer>().material = injuredMat;
+        DogsTail.GetComponent<Renderer>().material = injuredMat;
+        DogsEyes.GetComponent<Renderer>().material = injuredMat;
+        goreActive = true;
     }
 
     public IEnumerator resetCameraForward()

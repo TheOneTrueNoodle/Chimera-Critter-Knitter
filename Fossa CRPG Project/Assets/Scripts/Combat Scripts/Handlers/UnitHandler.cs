@@ -33,7 +33,7 @@ public class UnitHandler
         Debug.Log("Taken " + damage + " damage");
         target.activeStatsDir["MaxHP"].statValue -= damage;
 
-        target.BloodSplash();
+        if (PlayerPrefs.GetInt("Remove Gore") != 1) { target.BloodSplash(); }
         if(!target.CharacterData.takeDamageSFX.IsNull) { AudioManager.instance.PlayOneShot(target.CharacterData.takeDamageSFX, target.transform.position); } else { Debug.LogError("NO TAKE DAMAGE SOUND ASSIGNED"); }
 
         if (target.activeStatsDir["MaxHP"].statValue <= 0)
