@@ -12,6 +12,7 @@ public class ChoicePrefabButton : MonoBehaviour
     public Choice choice;
     private ScrollRect dialogueScroll;
     [SerializeField] private Character choiceMaker;
+    public GameObject textChoiceField;
 
 
     void Start()
@@ -50,14 +51,16 @@ public class ChoicePrefabButton : MonoBehaviour
 
     public void fontUp()
     {
-        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 20; old version
-        GetComponent<TextMeshProUGUI>().fontSize = 20;
+        this.GetComponentInParent<TextMeshProUGUI>().fontSize = 20;
+        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 20; //old version
+        //GetComponent<TextMeshProUGUI>().fontSize = 20;
     }
 
     public void fontDown()
     {
-        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 22; old version
-        GetComponent<TextMeshProUGUI>().fontSize = 22;
+        this.GetComponentInParent<TextMeshProUGUI>().fontSize = 22;
+        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 22; //old version
+        //GetComponent<TextMeshProUGUI>().fontSize = 22;
     }
 
     public void taskOnClick()
@@ -105,7 +108,7 @@ public class ChoicePrefabButton : MonoBehaviour
         //Debug.Log(y);
         //Debug.Log(x);
 
-        GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
+        GetComponentInParent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
 
         //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //show correct text (this is for old version)
         //dm.changeImage(choiceMaker, "neutral"); //change the sprite in the UI
