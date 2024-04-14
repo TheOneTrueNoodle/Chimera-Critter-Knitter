@@ -87,13 +87,16 @@ public class CursorController : MonoBehaviour
             case 3:
                 //Attack Mode
                 overlayTile = GetCursorPosition();
-                if(overlayTile.isBlocked && overlayTile.activeCharacter != activeCharacter)
+                if (overlayTile != null)
                 {
-                    battleTips.AttackHitChanceDisplay(activeCharacter, overlayTile.activeCharacter);
-                }
-                else
-                {
-                    battleTips.HideAttackHitChanceDisplay();
+                    if (overlayTile.isBlocked && overlayTile.activeCharacter != activeCharacter)
+                    {
+                        battleTips.AttackHitChanceDisplay(activeCharacter, overlayTile.activeCharacter);
+                    }
+                    else
+                    {
+                        battleTips.HideAttackHitChanceDisplay();
+                    }
                 }
                 break;
             case 2:

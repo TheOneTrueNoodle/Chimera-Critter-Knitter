@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9839e44b14827b44aa76a93eebeb4564, type: 3}
   m_Name: Frog Lick
   m_EditorClassIdentifier: 
-  Name: Lick
+  Name: Frogs Tongue
   Desc: Extend a frog tongue with a jagged hook at the end.
-  AnimationName: 
+  AnimationName: Attack
   symbol: {fileID: 896934463, guid: f8284e8dbb94e434793af3116a286ed4, type: 3}
-  abilityShape: {fileID: 4900000, guid: e2332b030f837674a93088789a98ce11, type: 3}
+  abilityVisual: {fileID: 6121605486357839414, guid: 3f0d699d678cbd74cbdcc96da7c0a521, type: 3}
+  abilityShape: {fileID: 4900000, guid: c8f3366b642b0af44862fcb0f65156a1, type: 3}
   effects: []
-  range: 1
+  range: 5
   cooldown: 0
   TurnsSinceUsed: 0
   costType: 0

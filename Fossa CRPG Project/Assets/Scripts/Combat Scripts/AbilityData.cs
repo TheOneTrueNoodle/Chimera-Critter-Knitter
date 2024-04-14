@@ -15,7 +15,7 @@ public class AbilityData : ScriptableObject
 
     public Sprite symbol;
 
-    public GameObject abilityVisuals;
+    public GameObject abilityVisual;
 
     [Header("Ability Information")]
     public TextAsset abilityShape;

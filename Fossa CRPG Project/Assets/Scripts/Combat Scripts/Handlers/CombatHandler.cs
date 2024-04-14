@@ -213,6 +213,8 @@ public class CombatHandler : MonoBehaviour
         }
 
         //Animate Ability
+
+        //Rotate Towards Target
         Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
         var rot = Quaternion.LookRotation((abilityCenter - attacker.transform.position), Vector3.up);
         float angle = Quaternion.Angle(rb.rotation, rot);
@@ -224,10 +226,28 @@ public class CombatHandler : MonoBehaviour
             yield return null;
         }
 
+        //Play Attacker Animation
         if (attacker.anim != null)
         {
             attacker.anim.Play(ability.AnimationName);
             yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+        }
+
+        //Spawn and Play Animation Visuals
+        if (ability.abilityVisual != null)
+        {
+            AbilityVisual visuals = Instantiate(ability.abilityVisual).GetComponent<AbilityVisual>();
+
+            //Get middle of group of enemies
+            var bound = new Bounds(affectedTargets[0].transform.position, Vector3.zero);
+            for (int i = 1; i < affectedTargets.Count; i++)
+            {
+                bound.Encapsulate(affectedTargets[i].transform.position);
+            }
+
+            Vector3 targetPosition = bound.center;
+
+            visuals.Setup(targetPosition, attacker.transform);
         }
 
         for(int i = 0; i < affectedTargets.Count; i++)

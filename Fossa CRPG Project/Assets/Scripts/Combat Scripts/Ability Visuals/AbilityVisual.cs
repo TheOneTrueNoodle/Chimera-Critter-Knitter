@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class AbilityVisual : MonoBehaviour
 {
-    public GameObject targetUnit;
-    public GameObject abilitySource;
+    [HideInInspector] public Vector3 targetPosition;
+    [HideInInspector] public Transform abilitySource;
 
     private void Start()
     {
         Call();
     }
 
-    public void Setup(Entity target, Entity source)
+    public void Setup(Vector3 targetPos, Transform source)
     {
-        targetUnit = target.gameObject;
-        abilitySource = source.gameObject;
+        targetPosition = targetPos;
+        abilitySource = source;
         Call();
     }
 

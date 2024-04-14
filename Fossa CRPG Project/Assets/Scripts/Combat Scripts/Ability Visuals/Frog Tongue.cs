@@ -28,7 +28,7 @@ public class FrogTongue : AbilityVisual
         while (t < 1)
         {
             t += Time.deltaTime * animationMult;
-            endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetUnit.transform.position, t);
+            endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetPosition, t);
             UpdateTransformForScale();
             yield return null;
         }
@@ -37,10 +37,12 @@ public class FrogTongue : AbilityVisual
         while (t > 0)
         {
             t -= Time.deltaTime * animationMult;
-            endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetUnit.transform.position, t);
+            endPosition.transform.position = Vector3.Lerp(startPosition.transform.position, targetPosition, t);
             UpdateTransformForScale();
             yield return null;
         }
+
+        Destroy(this);
     }
 
     private void UpdateTransformForScale()
