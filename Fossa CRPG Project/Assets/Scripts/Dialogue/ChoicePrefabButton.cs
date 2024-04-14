@@ -14,6 +14,7 @@ public class ChoicePrefabButton : MonoBehaviour
     private ScrollRect dialogueScroll;
     [SerializeField] private Character choiceMaker;
     public GameObject textChoiceField;
+    public AreaManager relevantAreaManager;
 
 
     void Start()
@@ -25,7 +26,7 @@ public class ChoicePrefabButton : MonoBehaviour
         dialogueScroll = GameObject.Find("DialogueHolder").GetComponent<ScrollRect>();
         textChoiceField = this.transform.parent.gameObject;
         initialiseText(); //set button text
-
+        relevantAreaManager = dm.currentAreaManager;
     }
 
     private void AddEventScript(GameObject gm)
@@ -67,8 +68,6 @@ public class ChoicePrefabButton : MonoBehaviour
 
     public void taskOnClick()
     {
-        Debug.Log("BUTTONPRESSED");
-
         int j = 0;
         GameObject content = GameObject.Find("Content");
         foreach (Transform child in content.transform)
@@ -80,8 +79,9 @@ public class ChoicePrefabButton : MonoBehaviour
         }
         int i = transform.GetSiblingIndex();
 
+        checkForFlagChanges(this.choice.options[order].progressionID);
 
-        dm.currentConvo = this.choice.options[(i - j)].continueDialogue;
+        dm.currentConvo = this.choice.options[order].continueDialogue;
         dm.dialogueActive = true;
 
         //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
@@ -92,6 +92,18 @@ public class ChoicePrefabButton : MonoBehaviour
         foreach (var obj in objects)
         {
             Destroy(obj);
+        }
+    }
+
+    private void checkForFlagChanges(string ID)
+    {
+        //Debug.Log(relevantAreaManager.areaBools.ContainsKey(ID));
+
+        if (relevantAreaManager.areaBools.ContainsKey(ID))
+        {
+            relevantAreaManager.areaBools[ID] = true;
+            Debug.Log(relevantAreaManager.areaBools[ID]);
+
         }
     }
 

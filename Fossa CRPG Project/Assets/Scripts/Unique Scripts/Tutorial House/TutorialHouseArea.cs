@@ -45,6 +45,15 @@ public class TutorialHouseArea : AreaManager
         }
     }
 
+    public void HasBlanket()
+    {
+        if (areaBools.ContainsKey("hasBlanket"))
+        {
+            areaBools["hasBlanket"] = true;
+            
+        }
+    }
+
     #region Combat Related Function
     private void StartCombat(string combatName)
     {

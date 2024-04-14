@@ -29,6 +29,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject[] dialogueSprites;
     public List<GameObject> log = new List<GameObject>();
 
+    [SerializeField] public AreaManager currentAreaManager;
+
     private string colourHex;
     [SerializeField] private Color greyOutColor;
     private bool pawPressed = false;
