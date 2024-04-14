@@ -237,15 +237,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (oscarData.activeStatsDir == null) { AssignOscarData(); }
 
-        if (goreActive && PlayerPrefs.GetInt("Remove Gore") == 1)
-        {
-            ApplyDefaultTextures();
-        }
-        else if (!goreActive && PlayerPrefs.GetInt("Remove Gore") != 1)
-        {
-            ApplyInjuredTextures();
-        }
-
         float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
         if (percentageHealthMissing > 70)
         {
@@ -260,6 +251,14 @@ public class PlayerMovement : MonoBehaviour
                 {
                     ApplyInjuredTextures();
                 }
+            }
+            if (goreActive && PlayerPrefs.GetInt("Remove Gore") == 1)
+            {
+                ApplyDefaultTextures();
+            }
+            else if (!goreActive && PlayerPrefs.GetInt("Remove Gore") != 1)
+            {
+                ApplyInjuredTextures();
             }
         }
         else
