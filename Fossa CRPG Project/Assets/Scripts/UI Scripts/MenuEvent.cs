@@ -64,4 +64,22 @@ public class MenuEvent : MonoBehaviour
             onSpawnPopup(text);
         }
     }
+
+    public event Action onOpenMenu;
+    public void OpenMenu()
+    {
+        if (onOpenMenu != null)
+        {
+            onOpenMenu();
+        }
+    }
+
+    public event Action onCloseMenu;
+    public void CloseMenu()
+    {
+        if (onCloseMenu != null)
+        {
+            onCloseMenu();
+        }
+    }
 }

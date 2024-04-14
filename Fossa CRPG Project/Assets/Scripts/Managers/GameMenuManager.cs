@@ -7,7 +7,7 @@ public class GameMenuManager : MonoBehaviour
 {
     private bool inCombat;
 
-    [SerializeField] public GameObject characterMenuObj;
+    [SerializeField] public Animator characterMenuObj;
 
     public GameObject pauseMenuObj;
     public SettingsManager SettingsMenuObj;
@@ -133,18 +133,19 @@ public class GameMenuManager : MonoBehaviour
 
     public void OpenCharacterMenu()
     {
-        characterMenuObj.SetActive(true);
+        MenuEvent.current.OpenMenu();
+        characterMenuObj.Play("Open Menu");
 
         characterMenuManager.UpdateDisplay();
         mutationMenuManager.UpdateDisplay();
 
-        Time.timeScale = 0;
         menuOpen = true;
     }
 
     public void CloseCharacterMenu()
     {
-        characterMenuObj.SetActive(false);
+        MenuEvent.current.CloseMenu();
+        characterMenuObj.Play("Close Menu");
         Time.timeScale = 1;
         menuOpen = false;
     }
