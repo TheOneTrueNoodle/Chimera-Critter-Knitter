@@ -8,6 +8,7 @@ public class SettingsManager : MonoBehaviour
 {
     [Header("Menu Manager")]
     [SerializeField] private MenuManager menuManager;
+    [SerializeField] private GameMenuManager gameMenuManager;
     [SerializeField] private GameObject applySettingsPopup;
 
     private Resolution[] resolutions;
@@ -112,7 +113,14 @@ public class SettingsManager : MonoBehaviour
         else
         {
             //Just close the damn menu
-            menuManager.SettingsBack();
+            if (menuManager != null)
+            {
+                menuManager.SettingsBack();
+            }
+            else
+            {
+                gameMenuManager.SettingsBack();
+            }
         }
     }
 
@@ -143,6 +151,7 @@ public class SettingsManager : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, PlayerPrefs.GetInt("Fullscreen") == 1);
 
         ClearChanges();
+        GetCurrentSettings();
         changedSettings = false;
     }
 

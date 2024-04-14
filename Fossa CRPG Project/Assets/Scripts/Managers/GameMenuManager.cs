@@ -7,10 +7,10 @@ public class GameMenuManager : MonoBehaviour
 {
     private bool inCombat;
 
-    [SerializeField] public GameObject characterMenuObj;
+    [SerializeField] public Animator characterMenuObj;
 
     public GameObject pauseMenuObj;
-    public GameObject SettingsMenuObj;
+    public SettingsManager SettingsMenuObj;
 
     private bool menuOpen;
     private bool pauseMenuOpen;
@@ -62,9 +62,10 @@ public class GameMenuManager : MonoBehaviour
             {
                 CloseCharacterMenu();
             }
-            else if (SettingsMenuObj.activeInHierarchy)
+            else if (SettingsMenuObj.gameObject.activeInHierarchy)
             {
-                SettingsBack();
+                //Handle in Settings Menu object;
+                SettingsMenuObj.TryCloseSettings();
             }
             else if (pauseMenuObj.activeInHierarchy)
             {
@@ -82,7 +83,7 @@ public class GameMenuManager : MonoBehaviour
     public void CombatPauseMenuInput()
     {
         
-        if (SettingsMenuObj.activeInHierarchy)
+        if (SettingsMenuObj.gameObject.activeInHierarchy)
         {
             SettingsBack();
         }
@@ -100,7 +101,7 @@ public class GameMenuManager : MonoBehaviour
     public void unPause()
     {
         pauseMenuObj.SetActive(false);
-        SettingsMenuObj.SetActive(false);
+        SettingsMenuObj.gameObject.SetActive(false);
         Time.timeScale = 1;
 
         pauseMenuOpen = false;
@@ -111,13 +112,13 @@ public class GameMenuManager : MonoBehaviour
     public void SettingsMenu()
     {
         pauseMenuObj.SetActive(false);
-        SettingsMenuObj.SetActive(true);
+        SettingsMenuObj.gameObject.SetActive(true);
     }
 
     public void SettingsBack()
     {
         pauseMenuObj.SetActive(true);
-        SettingsMenuObj.SetActive(false);
+        SettingsMenuObj.gameObject.SetActive(false);
     }
 
     public void RestartScene()
@@ -132,18 +133,19 @@ public class GameMenuManager : MonoBehaviour
 
     public void OpenCharacterMenu()
     {
-        characterMenuObj.SetActive(true);
+        MenuEvent.current.OpenMenu();
+        characterMenuObj.Play("Open Menu");
 
         characterMenuManager.UpdateDisplay();
         mutationMenuManager.UpdateDisplay();
 
-        Time.timeScale = 0;
         menuOpen = true;
     }
 
     public void CloseCharacterMenu()
     {
-        characterMenuObj.SetActive(false);
+        MenuEvent.current.CloseMenu();
+        characterMenuObj.Play("Close Menu");
         Time.timeScale = 1;
         menuOpen = false;
     }

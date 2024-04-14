@@ -216,12 +216,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 412d8d69c3897604d889f4677f5ced0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   abilitySource: {fileID: 0}
   startPosition: {fileID: 6418194237132444973}
   endPosition: {fileID: 2517510920813446101}
   visuals: {fileID: 3655663661608458187}
   animationMult: 7
+  startOffset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6418194237132444973
 GameObject:
   m_ObjectHideFlags: 0
