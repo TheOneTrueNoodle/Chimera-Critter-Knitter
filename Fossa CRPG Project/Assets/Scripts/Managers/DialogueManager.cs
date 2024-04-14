@@ -17,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject previousLine; //previous textbox
 
     [Header("UI Variables")]
-    [SerializeField] private GameObject contentHolder; //Content
+    [SerializeField] public GameObject contentHolder; //Content
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private GameObject spriteHolderLeft;
     [SerializeField] private GameObject spriteHolderRight;
@@ -27,7 +27,7 @@ public class DialogueManager : MonoBehaviour
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
-    private List<GameObject> log = new List<GameObject>();
+    public List<GameObject> log = new List<GameObject>();
 
     private string colourHex;
     [SerializeField] private Color greyOutColor;
@@ -272,14 +272,17 @@ public class DialogueManager : MonoBehaviour
     {
         if (showDebuggingText) { Debug.Log("Adding Choices"); }
 
+        int iteration = 0;
         foreach (Option option in currentConvo.choice.options)
         {
-
+            
             GameObject newObject = Instantiate(choicePrefab); //create
             newObject.transform.SetParent(textBoxTarget.transform); //make child of
             newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
-            newObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice;
-
+            //newObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice; //old system
+            newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice;
+            newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().order = iteration;
+            iteration++;
         }
 
         //spawn two buttons with the text from the conversations' Choice scriptable object then set the variable on click
