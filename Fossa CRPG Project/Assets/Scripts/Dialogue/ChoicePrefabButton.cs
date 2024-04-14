@@ -8,6 +8,7 @@ using TMPro;
 public class ChoicePrefabButton : MonoBehaviour
 {
     public Button button;
+    public int order = 0;
     public DialogueManager dm;
     public Choice choice;
     private ScrollRect dialogueScroll;
@@ -22,8 +23,9 @@ public class ChoicePrefabButton : MonoBehaviour
         button.onClick.AddListener(taskOnClick);
         dm = GameObject.Find("DialogueManagement").GetComponent<DialogueManager>();
         dialogueScroll = GameObject.Find("DialogueHolder").GetComponent<ScrollRect>();
-
+        textChoiceField = this.transform.parent.gameObject;
         initialiseText(); //set button text
+
     }
 
     private void AddEventScript(GameObject gm)
@@ -82,7 +84,8 @@ public class ChoicePrefabButton : MonoBehaviour
         dm.currentConvo = this.choice.options[(i - j)].continueDialogue;
         dm.dialogueActive = true;
 
-        dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //add dialogue
+        //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
+        dm.addText(choiceMaker.fullName + ":<br>" + textChoiceField.GetComponent<TextMeshProUGUI>().text); //add dialogue
         dm.index = 0;
 
         var objects = GameObject.FindGameObjectsWithTag("Choice"); //destory buttons
@@ -94,7 +97,7 @@ public class ChoicePrefabButton : MonoBehaviour
 
     private void initialiseText()
     {
-        int x = 0;
+        /*int x = 0;
         GameObject content = GameObject.Find("Content");
         foreach (Transform child in content.transform)
         {
@@ -107,8 +110,10 @@ public class ChoicePrefabButton : MonoBehaviour
         int y = transform.GetSiblingIndex();
         //Debug.Log(y);
         //Debug.Log(x);
-
-        GetComponentInParent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
+        */
+        Debug.Log(order);
+        textChoiceField.GetComponent<TextMeshProUGUI>().text = choice.options[order].choiceText; //set text in textbox
+        //GetComponentInParent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
 
         //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //show correct text (this is for old version)
         //dm.changeImage(choiceMaker, "neutral"); //change the sprite in the UI
