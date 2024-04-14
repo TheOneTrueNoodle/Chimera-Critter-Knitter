@@ -10,12 +10,14 @@ public class FrogTongue : AbilityVisual
     private Vector3 InitialScale;
 
     public float animationMult;
+    public Vector3 startOffset;
 
     public override void Call()
     {
         InitialScale = transform.localScale;
 
         startPosition.transform.position = abilitySource.transform.position;
+        startPosition.transform.position += startOffset;
 
         UpdateTransformForScale();
         StartCoroutine(LerpAttack());
@@ -47,7 +49,6 @@ public class FrogTongue : AbilityVisual
 
     private void UpdateTransformForScale()
     {
-
         float distance = Vector3.Distance(startPosition.transform.position, endPosition.transform.position);
         visuals.transform.localScale = new Vector3(InitialScale.x, InitialScale.y, distance);
 
