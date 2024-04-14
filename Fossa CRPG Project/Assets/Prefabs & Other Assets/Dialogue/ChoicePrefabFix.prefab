@@ -134,9 +134,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  order: 0
   dm: {fileID: 0}
   choice: {fileID: 0}
   choiceMaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+  textChoiceField: {fileID: 0}
 --- !u!1 &2868745195820681228
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,9 +199,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 0}
+  order: 0
   dm: {fileID: 0}
   choice: {fileID: 0}
   choiceMaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+  textChoiceField: {fileID: 0}
 --- !u!114 &2243088222066423342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,8 +258,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

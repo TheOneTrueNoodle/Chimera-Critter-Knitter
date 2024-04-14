@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     public GameObject textBoxPrefab; //prefab to instantiate
     public GameObject choicePrefab; //prefab to instantiate
     public GameObject textBoxTarget; //target parent
-    public GameObject choiceBoxTarget; //target parent for choices
+    public GameObject choiceBoxTarget; //target parent for choices (TEXTBOXTARGET AND CHOICEBOXTARGET ARE SWAPPED ACRTUALLY)
     public GameObject previousLine; //previous textbox
 
     [Header("UI Variables")]
@@ -103,6 +103,7 @@ public class DialogueManager : MonoBehaviour
         GameObject newObject = Instantiate(textBoxPrefab); //create
         newObject.transform.SetParent(choiceBoxTarget.transform); //make child of
         newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
+        newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
         newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox
 
         previousLine = newObject; //set as previous line
@@ -279,13 +280,27 @@ public class DialogueManager : MonoBehaviour
             GameObject newObject = Instantiate(choicePrefab); //create
             newObject.transform.SetParent(textBoxTarget.transform); //make child of
             newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
+            newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
+
             //newObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice; //old system
             newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice;
             newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().order = iteration;
             iteration++;
         }
 
-        //spawn two buttons with the text from the conversations' Choice scriptable object then set the variable on click
+        centerChoices();
+        //spawn however many buttons with the text from the conversations' Choice scriptable object then set the variable on click
+
+    }
+
+    public void centerChoices()
+    {
+        RectTransform box = textBoxTarget.GetComponent<RectTransform>();
+        Vector2 detle = box.sizeDelta;
+        box.anchorMax = new Vector2(0.5f, 0.5f);
+        box.anchorMin = new Vector2(0.5f, 0.5f);
+        box.pivot = new Vector2(1f, 0.5f);
+        box.anchoredPosition = new Vector3((detle[0]/2), (detle[1]/2), 0f);
     }
 
     public void beginDialogue()
