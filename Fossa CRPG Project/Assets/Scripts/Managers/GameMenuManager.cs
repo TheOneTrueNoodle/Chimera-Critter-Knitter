@@ -139,6 +139,7 @@ public class GameMenuManager : MonoBehaviour
         characterMenuManager.UpdateDisplay();
         mutationMenuManager.UpdateDisplay();
 
+
         menuOpen = true;
     }
 
