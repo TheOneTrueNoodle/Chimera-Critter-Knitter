@@ -26,13 +26,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject spriteHolderRight;
     [SerializeField] private GameObject tailLeft;
     [SerializeField] private GameObject tailRight;
+    [SerializeField] public GameObject pawButton;
 
     [Header("Sprites")]
     private GameObject spriteHolder;
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
-    [SerializeField] private GameObject[] choiceSprites;
+    [SerializeField] public GameObject[] choiceSprites;
     private List<GameObject> log = new List<GameObject>();
     private string colourHex;
     [SerializeField] private Color greyOutColor;
@@ -69,6 +70,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (currentConvo.choice != null) //if we have run out of lines and there's a choice, show it
                 {
+                    changeBackgroundColour(dialogueSprites, Color.white);
                     dialogueActive = false;
                     showChoice();
                 }
@@ -244,7 +246,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-
     public void changeBackgroundColour(GameObject[] images, Color colour)
     {
         colourHex = ColorUtility.ToHtmlStringRGBA(colour);
@@ -276,6 +277,7 @@ public class DialogueManager : MonoBehaviour
 
     void showChoice()
     {
+        pawButton.SetActive(false);
         changeBackgroundColour(choiceSprites, currentConvo.lines[index - 1].speaker.characterColour);
 
         if (showDebuggingText) { Debug.Log("Adding Choices"); }
@@ -290,8 +292,8 @@ public class DialogueManager : MonoBehaviour
             newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
 
             //newObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice; //old system
-            newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice;
-            newObject.transform.GetChild(0).gameObject.GetComponent<ChoicePrefabButton>().order = iteration;
+            newObject.GetComponentInChildren<ChoicePrefabButton>().choice = currentConvo.choice;
+            newObject.GetComponentInChildren<ChoicePrefabButton>().order = iteration;
             iteration++;
         }
 
