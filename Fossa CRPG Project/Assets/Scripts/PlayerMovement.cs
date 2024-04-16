@@ -58,11 +58,11 @@ public class PlayerMovement : MonoBehaviour
         {
             CombatEvents.current.onStartCombat += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
-            if(DialogueEvents.current != null)
-            {
-                DialogueEvents.current.onStartDialogue += StartDialogue;
-                DialogueEvents.current.onEndDialogue += EndDialogue;
-            }
+        }
+        if (DialogueEvents.current != null)
+        {
+            DialogueEvents.current.onStartDialogue += StartDialogue;
+            DialogueEvents.current.onEndDialogue += EndDialogue;
         }
         footstepInstance = GetComponent<FootstepInstance>();
         oscarData = GetComponent<Entity>();
