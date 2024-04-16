@@ -58,11 +58,11 @@ public class PlayerMovement : MonoBehaviour
         {
             CombatEvents.current.onStartCombat += StartCombat;
             CombatEvents.current.onEndCombat += EndCombat;
-            if(DialogueEvents.current != null)
-            {
-                DialogueEvents.current.onStartDialogue += StartDialogue;
-                DialogueEvents.current.onEndDialogue += EndDialogue;
-            }
+        }
+        if (DialogueEvents.current != null)
+        {
+            DialogueEvents.current.onStartDialogue += StartDialogue;
+            DialogueEvents.current.onEndDialogue += EndDialogue;
         }
         footstepInstance = GetComponent<FootstepInstance>();
         oscarData = GetComponent<Entity>();
@@ -103,14 +103,11 @@ public class PlayerMovement : MonoBehaviour
                 anim.SetBool("Idle", true);
             }
         }
-        else
+        else if (idle)
         {
-            if (idle)
-            {
-                idle = false;
-                anim.SetFloat("Idle Time", 0f);
-                anim.SetBool("Idle", false);
-            }
+            idle = false;
+            anim.SetFloat("Idle Time", 0f);
+            anim.SetBool("Idle", false);
         }
 
         _input = newInput;
@@ -342,6 +339,7 @@ public class PlayerMovement : MonoBehaviour
     private void StartCombat(string combatName, List<CombatAIController> enemies, List<CombatAIController> others, List<CombatRoundEventData> RoundEvents, float BattleTheme)
     {
         inCombat = true;
+        anim.SetBool("Idle", true);
         footstepInstance.UpdateSound(false, 0f);
     }
     private void EndCombat(string combatName)
@@ -352,6 +350,7 @@ public class PlayerMovement : MonoBehaviour
     private void StartDialogue()
     {
         anim.SetBool("Idle", true);
+        idle = true;
         inDialogue = true;
         footstepInstance.UpdateSound(false, 0f);
     }
