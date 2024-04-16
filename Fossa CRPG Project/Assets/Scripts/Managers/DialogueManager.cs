@@ -7,14 +7,17 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Prefabs & Vars")]
     private GameManagement gm;
     public GameData gd;
+    [SerializeField] public AreaManager currentAreaManager;
 
     public GameObject textBoxPrefab; //prefab to instantiate
     public GameObject choicePrefab; //prefab to instantiate
     public GameObject textBoxTarget; //target parent
     public GameObject choiceBoxTarget; //target parent for choices (TEXTBOXTARGET AND CHOICEBOXTARGET ARE SWAPPED ACRTUALLY)
-    public GameObject previousLine; //previous textbox
+    private GameObject previousLine; //previous textbox
+    public bool isInjured = false;
 
     [Header("UI Variables")]
     [SerializeField] public GameObject contentHolder; //Content
@@ -23,22 +26,20 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject spriteHolderRight;
     [SerializeField] private GameObject tailLeft;
     [SerializeField] private GameObject tailRight;
+
+    [Header("Sprites")]
     private GameObject spriteHolder;
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
-    public List<GameObject> log = new List<GameObject>();
-
-    [SerializeField] public AreaManager currentAreaManager;
-
+    [SerializeField] private GameObject[] choiceSprites;
+    private List<GameObject> log = new List<GameObject>();
     private string colourHex;
     [SerializeField] private Color greyOutColor;
     private bool pawPressed = false;
     private bool isOpen = false;
 
-    public bool isInjured = false;
-
-    [Header("OPTIONS")]
+    [Header("Options & Debug")]
     public bool dialogueActive;
     public bool showDebuggingText;
     public Conversation currentConvo; //conversation with lines
@@ -85,7 +86,8 @@ public class DialogueManager : MonoBehaviour
             else if (index != currentConvo.lines.Length && dialogueActive) //if we haven't run out of lines, print next line in dialogue
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
-                setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
+                changeBackgroundColour(dialogueSprites, currentConvo.lines[index].speaker.characterColour);
+                //setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
                 addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text); //(has to be last here)
             }
         }
@@ -242,14 +244,15 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void setColours(Character character) //change the dialogbox colours
-    {
-        colourHex = ColorUtility.ToHtmlStringRGBA(character.characterColour);
 
-        foreach (GameObject border in dialogueSprites)
+    public void changeBackgroundColour(GameObject[] images, Color colour)
+    {
+        colourHex = ColorUtility.ToHtmlStringRGBA(colour);
+
+        foreach (GameObject image in images)
         {
-            border.GetComponent<Image>().color = character.characterColour;
-        }  
+            image.GetComponent<Image>().color = colour;
+        }
     }
 
     public void exitText(bool destroyold) //hide ui and reset vars for next time
@@ -273,6 +276,8 @@ public class DialogueManager : MonoBehaviour
 
     void showChoice()
     {
+        changeBackgroundColour(choiceSprites, currentConvo.lines[index - 1].speaker.characterColour);
+
         if (showDebuggingText) { Debug.Log("Adding Choices"); }
 
         int iteration = 0;
