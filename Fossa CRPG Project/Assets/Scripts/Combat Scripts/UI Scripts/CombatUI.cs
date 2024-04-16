@@ -95,7 +95,7 @@ public class CombatUI : MonoBehaviour
             {
                 OpenUI();
             }
-            else if (UIOpen && abilityUIOpen)
+            else if (UIOpen)
             {
                 CancelInput();
             }
@@ -109,11 +109,11 @@ public class CombatUI : MonoBehaviour
     }
     public void CancelInput()
     {
-        if (abilityUI.gameObject.activeInHierarchy && actionActive != true)
+        if (abilityUIOpen && actionActive != true)
         {
             CloseAbilityUI();
+            ExamineUI.gameObject.SetActive(false);
             OpenUI();
-            ChangeCursorMode(5);
         }
         else if (actionActive)
         {
@@ -122,8 +122,16 @@ public class CombatUI : MonoBehaviour
             OpenUI();
             actionActive = false;
         }
-
-        ExamineUI.gameObject.SetActive(false);
+        else if (cursor.cursorMode == 6)
+        {
+            ExamineUI.gameObject.SetActive(false);
+            ChangeCursorMode(1);
+        }
+        else if (cursor.cursorMode == 1)
+        {
+            ExamineUI.gameObject.SetActive(false);
+            OpenUI();
+        }
     }
     public void OpenUI()
     {
@@ -338,7 +346,7 @@ public class CombatUI : MonoBehaviour
     }
     public void ChangeCursorMode(int mode)
     {
-        if (mode == 2 || mode == 3 || mode == 4 || mode == 6)
+        if (mode == 2 || mode == 3 || mode == 4)
         {
             actionActive = true;
             cancelDisp.SetActive(true);

@@ -49,19 +49,19 @@ public class CharacterMenuManager : MonoBehaviour
             portrait.sprite = oscarChar.defaultPortrait;
         }
 
-        levelDisp.text = "Level: " + oscarData.level;
+        levelDisp.text = "LV: " + oscarData.level;
         //HP
-        hpDisp.text = "HP: " + (int)oscarData.activeStatsDir["MaxHP"].statValue + " / " + (int)oscarData.activeStatsDir["MaxHP"].baseStatValue;
+        hpDisp.text = (int)oscarData.activeStatsDir["MaxHP"].statValue + "\n---\n" + (int)oscarData.activeStatsDir["MaxHP"].baseStatValue;
         hpBar.maxValue = oscarData.activeStatsDir["MaxHP"].baseStatValue;
         hpBar.value = oscarData.activeStatsDir["MaxHP"].statValue;
 
         //SP
-        spDisp.text = "SP: " + (int)oscarData.activeStatsDir["MaxSP"].statValue + " / " + (int)oscarData.activeStatsDir["MaxSP"].baseStatValue;
+        spDisp.text = (int)oscarData.activeStatsDir["MaxSP"].statValue + "\n---\n" + (int)oscarData.activeStatsDir["MaxSP"].baseStatValue;
         spBar.maxValue = oscarData.activeStatsDir["MaxSP"].baseStatValue;
         spBar.value = oscarData.activeStatsDir["MaxSP"].statValue;
 
         //XP
-        xpDisp.text = "XP: " + (int)oscarData.exp + " / " + (int)oscarData.requiredExp;
+        xpDisp.text = (int)oscarData.exp + " / " + (int)oscarData.requiredExp;
         xpBar.maxValue = oscarData.requiredExp;
         xpBar.value = oscarData.exp;
 
