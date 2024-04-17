@@ -15,6 +15,11 @@ public class FadeOutDogVision : MonoBehaviour
             ppVolume.weight = 0;
             disabled = true;
         }
+        else
+        {
+            ppVolume.weight = 1;
+            disabled = true;
+        }
     }
 
     public void Call()
