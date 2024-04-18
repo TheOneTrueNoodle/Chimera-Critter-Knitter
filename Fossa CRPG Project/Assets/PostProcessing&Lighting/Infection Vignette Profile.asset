@@ -21,12 +21,59 @@ MonoBehaviour:
     value: 0
   intensity:
     overrideState: 1
-    value: 0.75
+    value: 0.649
   size:
     overrideState: 1
-    value: 0.84
+    value: 0.3
   lumContrib:
     overrideState: 1
+    value: 0.411
+--- !u!114 &-5887146153821746938
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: 2.41
+  threshold:
+    overrideState: 0
+    value: 1
+  softKnee:
+    overrideState: 0
+    value: 0.5
+  clamp:
+    overrideState: 0
+    value: 65472
+  diffusion:
+    overrideState: 0
+    value: 7
+  anamorphicRatio:
+    overrideState: 0
+    value: 0
+  color:
+    overrideState: 0
+    value: {r: 1, g: 1, b: 1, a: 1}
+  fastMode:
+    overrideState: 0
+    value: 0
+  dirtTexture:
+    overrideState: 0
+    value: {fileID: 0}
+    defaultState: 1
+  dirtIntensity:
+    overrideState: 0
     value: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -44,6 +91,7 @@ MonoBehaviour:
   - {fileID: 8993794182849226526}
   - {fileID: 340973311671078244}
   - {fileID: -7085133196319475142}
+  - {fileID: -5887146153821746938}
 --- !u!114 &340973311671078244
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -62,7 +110,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: -42.9
+    value: -28
   intensityX:
     overrideState: 1
     value: 1
@@ -99,19 +147,19 @@ MonoBehaviour:
     value: 0
   color:
     overrideState: 1
-    value: {r: 0.3633543, g: 0.07320219, b: 0.4433962, a: 1}
+    value: {r: 1, g: 0.8023636, b: 0.1462264, a: 1}
   center:
     overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.471
+    value: 0.604
   smoothness:
     overrideState: 1
     value: 1
   roundness:
     overrideState: 1
-    value: 1
+    value: 0.742
   rounded:
     overrideState: 1
     value: 0
