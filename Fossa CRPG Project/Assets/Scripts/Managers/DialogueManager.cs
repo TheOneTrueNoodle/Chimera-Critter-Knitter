@@ -241,13 +241,24 @@ public class DialogueManager : MonoBehaviour
     public void openLog(bool open)
     {
         GameObject last = log.Last();
+        pawButton.SetActive(!open);
 
         foreach (GameObject textLogged in log)
         {
             textLogged.SetActive(open);
 
-            if(open && dialogueActive)
+            if (open && dialogueActive)
             {
+                pawButton.SetActive(!open);
+                last.SetActive(true);
+            }
+            else if (!open && !dialogueActive)
+            {
+                pawButton.SetActive(false);
+            }
+            else if (open && !dialogueActive)
+            {
+                pawButton.SetActive(!open);
                 last.SetActive(true);
             }
         }
@@ -300,10 +311,15 @@ public class DialogueManager : MonoBehaviour
     void showChoice()
     {
         pawButton.SetActive(false);
-        pawButton.SetActive(false);
-        choiceBoxTarget.SetActive(false);
+        //choiceBoxTarget.SetActive(false);
 
         changeBackgroundColour(choiceSprites, currentConvo.lines[index - 1].speaker.characterColour);
+
+        foreach (GameObject textLogged in log)
+        {
+            textLogged.SetActive(false);
+
+        }
 
         if (showDebuggingText) { Debug.Log("Adding Choices"); }
 

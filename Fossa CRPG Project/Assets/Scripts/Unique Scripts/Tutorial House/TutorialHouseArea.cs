@@ -9,7 +9,9 @@ public class TutorialHouseArea : AreaManager
     public FadeOutDogVision dogVision;
     public AbilityData lickAbility;
     public AbilityData armAbility;
-    public GameObject muffin;
+    public GameObject muffinByTheDoor;
+    public GameObject muffinReleaseScene;
+
 
     private void Start()
     {
@@ -60,6 +62,9 @@ public class TutorialHouseArea : AreaManager
         if (areaBools.ContainsKey("freedMuffin"))
         {
             areaBools["freedMuffin"] = true;
+            muffinByTheDoor.SetActive(true);
+            muffinReleaseScene.SetActive(true);
+
         }
     }
 
