@@ -9,6 +9,7 @@ public class TutorialHouseArea : AreaManager
     public FadeOutDogVision dogVision;
     public AbilityData lickAbility;
     public AbilityData armAbility;
+    public GameObject muffin;
 
     private void Start()
     {
@@ -51,6 +52,14 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["hasBlanket"] = true;
             
+        }
+    }
+
+    public void freedMuffin()
+    {
+        if (areaBools.ContainsKey("freedMuffin"))
+        {
+            areaBools["freedMuffin"] = true;
         }
     }
 
