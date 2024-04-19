@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 using TMPro;
 
 public class DialogueManager : MonoBehaviour
@@ -239,12 +240,20 @@ public class DialogueManager : MonoBehaviour
 
     public void openLog(bool open)
     {
+        GameObject last = log.Last();
+
         foreach (GameObject textLogged in log)
         {
             textLogged.SetActive(open);
+
+            if(open && dialogueActive)
+            {
+                last.SetActive(true);
+            }
         }
 
     }
+
 
     public void changeBackgroundColour(GameObject[] images, Color colour)
     {
@@ -275,9 +284,25 @@ public class DialogueManager : MonoBehaviour
         DialogueEvents.current.EndDialogue();
     }
 
+    public void checkContent(bool opening)
+    {
+        if (dialogueActive) //conversation is ongoing
+        {
+            choiceBoxTarget.SetActive(opening);
+        }
+        else //choices are being made
+        {
+            Debug.Log(opening);
+            choiceBoxTarget.SetActive(!opening);
+        }
+    }
+
     void showChoice()
     {
         pawButton.SetActive(false);
+        pawButton.SetActive(false);
+        choiceBoxTarget.SetActive(false);
+
         changeBackgroundColour(choiceSprites, currentConvo.lines[index - 1].speaker.characterColour);
 
         if (showDebuggingText) { Debug.Log("Adding Choices"); }

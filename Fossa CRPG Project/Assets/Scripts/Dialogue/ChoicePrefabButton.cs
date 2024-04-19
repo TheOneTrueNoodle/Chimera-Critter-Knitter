@@ -68,6 +68,9 @@ public class ChoicePrefabButton : MonoBehaviour
 
     public void taskOnClick()
     {
+        dm.choiceBoxTarget.SetActive(true);
+
+        /*
         int j = 0;
         GameObject content = GameObject.Find("Content");
         foreach (Transform child in content.transform)
@@ -78,7 +81,7 @@ public class ChoicePrefabButton : MonoBehaviour
             }
         }
         int i = transform.GetSiblingIndex();
-
+        */
         checkForFlagChanges(this.choice.options[order].progressionID);
 
         dm.changeBackgroundColour(dm.choiceSprites, Color.white);
