@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dafdbc215b93e043878736161dbf1ca, type: 3}
+  m_Name: CON_a8_9
+  m_EditorClassIdentifier: 
+  lines:
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: 'Then take me with you! Or, well, at least help me out of here. '
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: I thought you wanted to be left alone?
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: angry
+    leftSide: 0
+    text: That was when it was dangerous! I heard the sounds, I know there's nothing
+      hiding down that way anymore.
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: neutral
+    leftSide: 0
+    text: 'Plus, I could probably get out on my own! Eventually! '
+  - speaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
+    emotion: neutral
+    leftSide: 1
+    text: Not before chipping more teeth.
+  - speaker: {fileID: 11400000, guid: 1d2088ec646d8c448bdd4351261c3ab2, type: 2}
+    emotion: sad
+    leftSide: 0
+    text: And we can't have that! I can't eat cheese toothless. What do you say?
+  choice: {fileID: 11400000, guid: 0e64cd6b18b037e458a09154a3bc387e, type: 2}
+  onlyOneSpeaker: 0
