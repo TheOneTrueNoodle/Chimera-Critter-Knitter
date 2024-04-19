@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63893cc592d4a12409f8022203f74e28, type: 3}
+  m_Name: a8_10
+  m_EditorClassIdentifier: 
+  options:
+  - choiceText: Why should I?
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: 57a9482bdebe035438f77362ec738042, type: 2}
+    progressionID: 
+  - choiceText: I can't do it.
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: 0beb2b1669d569f4f8463beba5099519, type: 2}
+    progressionID: 
+  - choiceText: ...Sure
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: 1e1dd558db55d5a4da2ff50513b911e6, type: 2}
+    progressionID: 
