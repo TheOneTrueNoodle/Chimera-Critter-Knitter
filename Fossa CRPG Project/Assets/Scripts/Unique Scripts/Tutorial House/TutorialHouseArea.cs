@@ -57,6 +57,16 @@ public class TutorialHouseArea : AreaManager
         }
     }
 
+    public void BlanketBribed()
+    {
+        if (areaBools.ContainsKey("blanketBribed"))
+        {
+            areaBools["hasBlanket"] = true;
+            areaBools["blanketBribed"] = true;
+            freedMuffin();
+        }
+    }
+
     public void freedMuffin()
     {
         if (areaBools.ContainsKey("freedMuffin"))
