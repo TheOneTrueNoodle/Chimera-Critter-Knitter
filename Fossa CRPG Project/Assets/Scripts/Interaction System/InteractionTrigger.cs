@@ -6,56 +6,51 @@ using System;
 
 public class InteractionTrigger : Interactable
 {
-    public GameObject inputUI;
-    private bool playerInArea;
-
-    private void Update()
+    public override void CallInteraction()
     {
-        if (inCombat || inDialogue || !playerInArea) { return; }
-        if (Input.GetButtonDown("Interact") && !used)
+        if (oneTimeUse)
         {
-            if (oneTimeUse)
+            singleInteraction.Invoke();
+            used = true;
+        }
+        else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
+        {
+            if (active)
             {
-                singleInteraction.Invoke();
-                used = true;
-            }
-            else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
-            {
-                if (active)
-                {
-                    disableInteraction.Invoke();
-                    active = false;
-                }
-                else
-                {
-                    enableInteraction.Invoke();
-                    active = true;
-                }
+                disableInteraction.Invoke();
+                active = false;
             }
             else
             {
-                singleInteraction.Invoke();
+                enableInteraction.Invoke();
+                active = true;
             }
+        }
+        else
+        {
+            singleInteraction.Invoke();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")))
+        if (!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm) && !used)
         {
-            //SHOW UI
-            inputUI.SetActive(true);
-            playerInArea = true;
+            if (!pm.nearbyInteractions.Contains(this))
+            {
+                pm.nearbyInteractions.Add(this);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")))
+        if ((!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm)))
         {
-            //HIDE UI
-            inputUI.SetActive(false);
-            playerInArea = false;
+            if (pm.nearbyInteractions.Contains(this))
+            {
+                pm.nearbyInteractions.Remove(this);
+            }
         }
     }
 }

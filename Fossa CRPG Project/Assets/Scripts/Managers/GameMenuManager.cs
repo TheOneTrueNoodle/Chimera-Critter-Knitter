@@ -22,6 +22,10 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] private GameObject popupParent;
     public Popup popupPrefab;
 
+    [Header("Interaction UI")]
+    [SerializeField] private GameObject interactionUI;
+    [SerializeField] private UnityEngine.UI.Image interactSpriteImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,8 @@ public class GameMenuManager : MonoBehaviour
         if (MenuEvent.current != null)
         {
             MenuEvent.current.onSpawnPopup += SpawnPopup;
+            MenuEvent.current.onShowInteractUI += ShowInteractUI;
+            MenuEvent.current.onHideInteractUI += HideInteractUI;
         }
         Time.timeScale = 1;
     }
@@ -155,6 +161,30 @@ public class GameMenuManager : MonoBehaviour
     {
         var popup = Instantiate(popupPrefab, popupParent.transform);
         popup.Setup(text);
+    }
+
+    public void ShowInteractUI(Sprite sprite)
+    {
+        if (sprite != null)
+        {
+            interactSpriteImage.sprite = sprite;
+            interactSpriteImage.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            interactSpriteImage.sprite = sprite;
+            interactSpriteImage.color = new Color(1, 1, 1, 0);
+        }
+
+        interactionUI.SetActive(true);
+    }
+
+    public void HideInteractUI()
+    {
+        interactSpriteImage.sprite = null;
+        interactSpriteImage.color = new Color(1, 1, 1, 0);
+
+        interactionUI.SetActive(false);
     }
 
     private void StartCombat(string combatName)

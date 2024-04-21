@@ -23,6 +23,8 @@ public class Interactable : MonoBehaviour
 
     [SerializeField] private ParticleSystem smellParticles;
 
+    public Sprite interactSprite;
+
     void Start()
     {
         initializedEvents = true;
@@ -34,6 +36,11 @@ public class Interactable : MonoBehaviour
         {
             InteractionManager.current.interactables.Add(this);
         }
+    }
+
+    public virtual void CallInteraction()
+    {
+
     }
 
     public void enableSmell()

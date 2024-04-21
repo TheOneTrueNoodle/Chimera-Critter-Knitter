@@ -52,6 +52,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject DogsTail;
     [SerializeField] private GameObject DogsEyes;
 
+    public List<Interactable> nearbyInteractions;
+    public Interactable nearestInteraction;
+
     private void Start()
     {
         if (CombatEvents.current != null)
@@ -72,11 +75,13 @@ public class PlayerMovement : MonoBehaviour
 
         dm = GameObject.Find("DialogueManagement").GetComponent<DialogueManager>();
 
+        nearbyInteractions = new List<Interactable>();
     }
 
     private void Update()
     {
         Injured();
+        CheckInteractables();
         if (inCombat || inDialogue) { return; }
         GatherInput();
         Look();
@@ -113,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
         _input = newInput;
         if (Input.GetButton("Bark")) { Bark(); }
         if (Input.GetButton("Smell")) { Smell(); }
+        if (Input.GetButtonDown("Interact")) { Interact(); }
     }
 
     private void Bark()
@@ -133,6 +139,57 @@ public class PlayerMovement : MonoBehaviour
         AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarSmell, transform.position);
         idleTimer = 0;
         anim.SetFloat("Idle Time", 0);
+    }
+
+    private void CheckInteractables()
+    {
+        if (nearbyInteractions.Count <= 0) 
+        {
+            nearestInteraction = null;
+
+            //hide interaction UI
+            MenuEvent.current.HideInteractUI();
+
+            return; 
+        }
+
+        //Get closest interactable
+        Interactable closestInteraction = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (Interactable potentialInteractable in nearbyInteractions)
+        {
+            Vector3 directionToTarget = potentialInteractable.transform.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                closestInteraction = potentialInteractable;
+            }
+        }
+
+        nearestInteraction = closestInteraction;
+
+        //Update Displays for Interacting
+        if (nearestInteraction != null)
+        {
+            if (nearestInteraction.interactSprite == null)
+            {
+                Debug.LogError(nearestInteraction.gameObject.name + "GameObject does not have an interact sprite!");
+            }
+            else
+            {
+                MenuEvent.current.ShowInteractUI(nearestInteraction.interactSprite);
+            }
+        }
+    }
+
+    private void Interact()
+    {
+        if (nearestInteraction == null) { return; }
+
+        //Call interactable interaction
+        nearestInteraction.CallInteraction();
     }
 
     private void Look()

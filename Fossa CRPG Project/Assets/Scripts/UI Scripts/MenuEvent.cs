@@ -65,6 +65,24 @@ public class MenuEvent : MonoBehaviour
         }
     }
 
+    public event Action<Sprite> onShowInteractUI;
+    public void ShowInteractUI(Sprite sprite)
+    {
+        if (onShowInteractUI != null)
+        {
+            onShowInteractUI(sprite);
+        }
+    }
+
+    public event Action onHideInteractUI;
+    public void HideInteractUI()
+    {
+        if (onHideInteractUI != null)
+        {
+            onHideInteractUI();
+        }
+    }
+
     public event Action onOpenMenu;
     public void OpenMenu()
     {

@@ -19,6 +19,7 @@ public class HeldItem : MonoBehaviour
     {
         Debug.Log("Picking up Item");
         currentItem = item;
+
         //Disable any object physics
         if (currentItem.rb != null)
         {
@@ -47,9 +48,10 @@ public class HeldItem : MonoBehaviour
     public void DropItem()
     {
         Debug.Log("Dropping Item");
+
         //Drop Item From parent
         currentItem.gameObject.transform.parent = null;
-        currentItem.GetComponent<PickupItem>().enabled = true;
+        currentItem.GetComponent<PickupItem>().held = false;
 
         //Re enable any object physics
         if (currentItem.rb != null)

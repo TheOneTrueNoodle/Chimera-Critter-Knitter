@@ -7,50 +7,47 @@ public class PickupItem : Interactable
     //This script goes on the item
     public Item itemData;
 
-    public GameObject inputUI;
-    private bool playerInArea;
-
     private HeldItem OscarHeldItem;
+    public PlayerMovement pMovement;
 
-    public void PickupTrigger()
+    public bool held;
+
+    public override void CallInteraction()
     {
         //Check if Oscar is holding a weapon first
-        if (OscarHeldItem != null)
+        if (OscarHeldItem != null && !held)
         {
-            if(OscarHeldItem.currentItem != null) { OscarHeldItem.DropItem(); }
+            if (OscarHeldItem.currentItem != null) { OscarHeldItem.DropItem(); }
             OscarHeldItem.HoldNewItem(itemData);
-            enabled = false;
 
-            inputUI.SetActive(false);
-        }
-    }
-    private void Update()
-    {
-        if (inCombat || inDialogue || !playerInArea) { return; }
-        if (Input.GetButtonDown("Interact"))
-        {
-            PickupTrigger();
+            pMovement.nearbyInteractions.Remove(this);
+
+            held = true;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")))
+        if (!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm) && !held)
         {
-            //SHOW UI
-            inputUI.SetActive(true);
-            playerInArea = true;
-            if(OscarHeldItem == null) { OscarHeldItem = other.gameObject.GetComponent<HeldItem>(); }
+            if (!pm.nearbyInteractions.Contains(this))
+            {
+                pm.nearbyInteractions.Add(this);
+            }
+
+            if (OscarHeldItem == null) { OscarHeldItem = other.gameObject.GetComponent<HeldItem>(); }
+            if(pMovement == null) { pMovement = pm; }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((inCombat || inDialogue || other.gameObject.CompareTag("Player")))
+        if (!inCombat && !inDialogue && other.gameObject.TryGetComponent(out PlayerMovement pm) && !held)
         {
-            //HIDE UI
-            inputUI.SetActive(false);
-            playerInArea = false;
+            if (pm.nearbyInteractions.Contains(this))
+            {
+                pm.nearbyInteractions.Remove(this);
+            }
         }
     }
 }
