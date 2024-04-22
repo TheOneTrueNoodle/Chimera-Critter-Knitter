@@ -14,11 +14,12 @@ public class ExamineUnitUI : MonoBehaviour
     [SerializeField] private TMP_Text UnitName;
     [SerializeField] private TMP_Text LevelDisp;
     [SerializeField] private TMP_Text HPDisp;
+    [SerializeField] private Slider HPBar;
     [SerializeField] private TMP_Text SPDisp;
+    [SerializeField] private Slider SPBar;
     [HideInInspector] public Entity Unit;
 
     [Header("Section UI")]
-    [SerializeField] private Transform AbilitiesContent;
     [SerializeField] private Transform ResistancesContent;
     [SerializeField] private Transform WeaknessesContent;
 
@@ -44,8 +45,15 @@ public class ExamineUnitUI : MonoBehaviour
         }
         UnitName.text = "Subject: " + Unit.CharacterData.Name;
         LevelDisp.text = "LV: " + Unit.level;
+
         HPDisp.text = "HP: " + (int)Unit.activeStatsDir["MaxHP"].baseStatValue + " / " + (int)Unit.activeStatsDir["MaxHP"].statValue;
+        HPBar.maxValue = (int)Unit.activeStatsDir["MaxHP"].statValue;
+        HPBar.value = (int)Unit.activeStatsDir["MaxHP"].baseStatValue;
+
         SPDisp.text = "SP: " + (int)Unit.activeStatsDir["MaxSP"].baseStatValue + " / " + (int)Unit.activeStatsDir["MaxSP"].statValue;
+        SPBar.maxValue = (int)Unit.activeStatsDir["MaxSP"].statValue;
+        SPBar.value = (int)Unit.activeStatsDir["MaxSP"].baseStatValue;
+
 
         //Clear older UI Elements
         if (ActiveInstantiatedObjects.Count > 0)
@@ -69,14 +77,6 @@ public class ExamineUnitUI : MonoBehaviour
             ElementalDisp newWeakness = Instantiate(ElementDisp, WeaknessesContent);
             newWeakness.Setup(damageType);
             ActiveInstantiatedObjects.Add(newWeakness.gameObject);
-        }
-
-        //Setup Abilities
-        foreach (AbilityData ability in Unit.activeAbilities)
-        {
-            AbilityDisp newAbil = Instantiate(AbilityDisp, AbilitiesContent);
-            newAbil.Setup(ability);
-            ActiveInstantiatedObjects.Add(newAbil.gameObject);
         }
     }
 }
