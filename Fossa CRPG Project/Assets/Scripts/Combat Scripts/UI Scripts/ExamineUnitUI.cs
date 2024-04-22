@@ -14,6 +14,7 @@ public class ExamineUnitUI : MonoBehaviour
     [SerializeField] private TMP_Text UnitName;
     [SerializeField] private TMP_Text LevelDisp;
     [SerializeField] private TMP_Text HPDisp;
+    [SerializeField] private TMP_Text SPDisp;
     [HideInInspector] public Entity Unit;
 
     [Header("Section UI")]
@@ -41,9 +42,10 @@ public class ExamineUnitUI : MonoBehaviour
         {
             Portrait.sprite = Unit.CharacterData.portrait;
         }
-        UnitName.text = Unit.CharacterData.Name;
-        LevelDisp.text = "Level: " + Unit.level;
+        UnitName.text = "Subject: " + Unit.CharacterData.Name;
+        LevelDisp.text = "LV: " + Unit.level;
         HPDisp.text = "HP: " + (int)Unit.activeStatsDir["MaxHP"].baseStatValue + " / " + (int)Unit.activeStatsDir["MaxHP"].statValue;
+        SPDisp.text = "SP: " + (int)Unit.activeStatsDir["MaxSP"].baseStatValue + " / " + (int)Unit.activeStatsDir["MaxSP"].statValue;
 
         //Clear older UI Elements
         if (ActiveInstantiatedObjects.Count > 0)
