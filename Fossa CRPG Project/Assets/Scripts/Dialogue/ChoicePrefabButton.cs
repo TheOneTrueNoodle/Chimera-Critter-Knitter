@@ -86,13 +86,14 @@ public class ChoicePrefabButton : MonoBehaviour
 
         dm.changeBackgroundColour(dm.choiceSprites, Color.white);
         dm.pawButton.SetActive(true);
-
+        dm.choicesActive = false;
 
         dm.currentConvo = this.choice.options[order].continueDialogue;
         dm.dialogueActive = true;
+        dm.nodialogue = false;
 
         //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
-        dm.addText(choiceMaker.fullName + ":<br>" + textChoiceField.text); //add dialogue
+        dm.addText("<uppercase><color=#" + dm.colourHex + ">" + choiceMaker.fullName + ":</color></uppercase><br>" + textChoiceField.text); //add dialogue
         dm.index = 0;
 
         var objects = GameObject.FindGameObjectsWithTag("Choice"); //destory buttons
