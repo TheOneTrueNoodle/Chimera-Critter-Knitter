@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameMenuManager : MonoBehaviour
 {
     private bool inCombat;
+    private bool inDialogue;
 
     [SerializeField] public Animator characterMenuObj;
 
@@ -32,8 +33,11 @@ public class GameMenuManager : MonoBehaviour
         if (CombatEvents.current != null)
         {
             CombatEvents.current.onStartCombatSetup += StartCombat;
-            CombatEvents.current.onEndCombat += EndCombat;
             CombatEvents.current.onPauseGame += CombatPauseMenuInput;
+        }
+        if (DialogueEvents.current != null)
+        {
+            DialogueEvents.current.onStartDialogue += StartDialogue;
         }
         if (MenuEvent.current != null)
         {
@@ -165,6 +169,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void ShowInteractUI(Sprite sprite)
     {
+        if (inDialogue) { return; }
         if (sprite != null)
         {
             interactSpriteImage.sprite = sprite;
@@ -194,9 +199,23 @@ public class GameMenuManager : MonoBehaviour
         {
             CloseCharacterMenu();
         }
+        CombatEvents.current.onEndCombat += EndCombat;
     }
     private void EndCombat(string combatName)
     {
         inCombat = false;
+        CombatEvents.current.onEndCombat -= EndCombat;
+    }
+
+    private void StartDialogue()
+    {
+        inDialogue = true;
+        HideInteractUI();
+        DialogueEvents.current.onEndDialogue += EndDialogue;
+    }
+    private void EndDialogue()
+    {
+        inDialogue = false;
+        DialogueEvents.current.onEndDialogue -= EndDialogue;
     }
 }
