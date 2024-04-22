@@ -76,11 +76,6 @@ public class DialogueManager : MonoBehaviour
                     dialogueActive = false;
                     showChoice();
                 }
-                //else if (currentConvo.fightBegin) //if we have run out of lines and there's a fight
-                //{
-                    //transitionToBattle(currentConvo.combatName);
-                    //exitText(true);
-                //}
                 else //otherwise if there's no choice and no fight exit dialogue
                 {
                     Debug.Log("Exiting Dialog");
@@ -91,13 +86,12 @@ public class DialogueManager : MonoBehaviour
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
                 changeBackgroundColour(dialogueSprites, currentConvo.lines[index].speaker.characterColour);
-                //setColours(currentConvo.lines[index].speaker); //change dialogbox border colours according to character
-                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text); //(has to be last here)
+                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker); //(has to be last here)
             }
         }
     }
 
-    public void addText(string dialogue) //instantiate text game object with dialogue as text childed under textBoxTarget
+    public void addText(string dialogue, Character character) //instantiate text game object with dialogue as text childed under textBoxTarget
     {
         if (showDebuggingText) { Debug.Log("Adding Text"); }
 
@@ -113,6 +107,15 @@ public class DialogueManager : MonoBehaviour
         newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
         newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
         newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox
+
+        if (character.characterFont) 
+        {
+            newObject.GetComponent<TextMeshProUGUI>().font = character.characterFont; //set font in textbox
+        }
+        if (character.fontSize != 0)
+        {
+            newObject.GetComponent<TextMeshProUGUI>().fontSize = character.fontSize; //set font in textbox
+        }
 
         previousLine = newObject; //set as previous line
         index++; //move on <<BE CAREFUL OF THIS!!

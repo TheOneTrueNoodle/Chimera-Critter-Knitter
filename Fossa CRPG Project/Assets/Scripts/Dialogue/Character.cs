@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 [CreateAssetMenu(fileName = "New Character", menuName = "Dialogue/Character")]
 public class Character : ScriptableObject
@@ -13,7 +14,10 @@ public class Character : ScriptableObject
     public Sprite injuredDefaultPortrait; 
     public Sprite injuredSmilingPortrait;
     public Sprite injuredSadPortrait; 
-    public Sprite injuredAngryPortrait; 
+    public Sprite injuredAngryPortrait;
 
+    [Header("Character Customisation")]
     public Color characterColour; //text outline clr
+    public TMP_FontAsset characterFont;
+    public int fontSize;
 }

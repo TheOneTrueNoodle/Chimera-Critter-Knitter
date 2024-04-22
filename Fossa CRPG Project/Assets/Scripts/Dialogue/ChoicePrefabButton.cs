@@ -93,7 +93,7 @@ public class ChoicePrefabButton : MonoBehaviour
         dm.nodialogue = false;
 
         //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
-        dm.addText("<uppercase><color=#" + dm.colourHex + ">" + choiceMaker.fullName + ":</color></uppercase><br>" + textChoiceField.text); //add dialogue
+        dm.addText("<uppercase><color=#" + dm.colourHex + ">" + choiceMaker.fullName + ":</color></uppercase><br>" + textChoiceField.text, choiceMaker); //add dialogue
         dm.index = 0;
 
         var objects = GameObject.FindGameObjectsWithTag("Choice"); //destory buttons
