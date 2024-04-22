@@ -29,20 +29,21 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject tailRight;
     [SerializeField] public GameObject pawButton;
 
-    [Header("Sprites")]
+    [Header("Sprites & Colour")]
     private GameObject spriteHolder;
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
     [SerializeField] public GameObject[] choiceSprites;
     private List<GameObject> log = new List<GameObject>();
-    private string colourHex;
+    public string colourHex;
     [SerializeField] private Color greyOutColor;
     private bool pawPressed = false;
     private bool isOpen = false;
 
     [Header("Options & Debug")]
     public bool dialogueActive;
+    public bool choicesActive;
     public bool showDebuggingText;
     public Conversation currentConvo; //conversation with lines
     public int index = 0; //current line 
@@ -240,31 +241,30 @@ public class DialogueManager : MonoBehaviour
 
     public void openLog(bool open)
     {
-        GameObject last = log.Last();
-        pawButton.SetActive(!open);
+        GameObject last = new GameObject();
 
-        foreach (GameObject textLogged in log)
+        if (log.Count != 0) { last = log.Last(); } //save the last printed line
+
+        nodialogue = open; //disallow continuing dialogue via spacebar
+
+        foreach (GameObject textLogged in log) 
         {
-            textLogged.SetActive(open);
-
-            if (open && dialogueActive)
-            {
-                pawButton.SetActive(!open);
-                last.SetActive(true);
-            }
-            else if (!open && !dialogueActive)
-            {
-                pawButton.SetActive(false);
-            }
-            else if (open && !dialogueActive)
-            {
-                pawButton.SetActive(!open);
-                last.SetActive(true);
-            }
+            textLogged.SetActive(open); //reveal or hide all logged dialogue
         }
 
+        if (choicesActive)
+        {
+            pawButton.SetActive(false);
+            nodialogue = true;
+            textBoxTarget.SetActive(!open);
+            choiceBoxTarget.SetActive(open);
+        }
+        else
+        {
+            pawButton.SetActive(!open);
+        }
+        
     }
-
 
     public void changeBackgroundColour(GameObject[] images, Color colour)
     {
@@ -295,22 +295,12 @@ public class DialogueManager : MonoBehaviour
         DialogueEvents.current.EndDialogue();
     }
 
-    public void checkContent(bool opening)
-    {
-        if (dialogueActive) //conversation is ongoing
-        {
-            choiceBoxTarget.SetActive(opening);
-        }
-        else //choices are being made
-        {
-            Debug.Log(opening);
-            choiceBoxTarget.SetActive(!opening);
-        }
-    }
+
 
     void showChoice()
     {
         pawButton.SetActive(false);
+        choicesActive = true;
         //choiceBoxTarget.SetActive(false);
 
         changeBackgroundColour(choiceSprites, currentConvo.lines[index - 1].speaker.characterColour);
