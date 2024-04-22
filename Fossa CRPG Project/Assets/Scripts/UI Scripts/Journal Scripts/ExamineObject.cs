@@ -9,9 +9,22 @@ public class ExamineObject : MonoBehaviour, IDragHandler
 
     private GameObject dataPrefab;
 
+    [SerializeField] private Camera inspectCam;
+    [Range(0.5f, 7f)] public float zoom = 4f;
+
     private void Start()
     {
         MenuEvent.current.onEntrySelect += OnEntrySelect;
+    }
+
+    private void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        {
+            zoom += Input.GetAxis("Mouse ScrollWheel");
+            zoom = Mathf.Clamp(zoom, 0.5f, 7f);
+            inspectCam.orthographicSize = zoom;
+        }
     }
 
     public void OnEntrySelect(JournalEntryData Data, bool discovered)
