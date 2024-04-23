@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public GameObject pawButton;
 
     [Header("Sprites & Colour")]
-    private GameObject spriteHolder;
+    public GameObject spriteHolder;
     private GameObject spriteChildShadow;
     [SerializeField] private ScrollRect dialogueScroll;
     [SerializeField] private GameObject[] dialogueSprites;
@@ -40,6 +41,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private Color greyOutColor;
     private bool pawPressed = false;
     private bool isOpen = false;
+
+    [Header("Typewriter Vars")]
+    [SerializeField] private bool useTypewriting;
+    public int indey = 0;
+    public string actualText = "";
+    public PauseInfo pauseInfo;
 
     [Header("Options & Debug")]
     public bool dialogueActive;
@@ -86,14 +93,17 @@ public class DialogueManager : MonoBehaviour
             {
                 changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
                 changeBackgroundColour(dialogueSprites, currentConvo.lines[index].speaker.characterColour);
-                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker); //(has to be last here)
+                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker, useTypewriting); //(has to be last here)
             }
         }
     }
 
-    public void addText(string dialogue, Character character) //instantiate text game object with dialogue as text childed under textBoxTarget
+    public void addText(string dialogue, Character character, bool typewrite) //instantiate text game object with dialogue as text childed under textBoxTarget
     {
-        if (showDebuggingText) { Debug.Log("Adding Text"); }
+        indey = 0;
+        actualText = "";
+
+        if (showDebuggingText) { Debug.Log(character + dialogue); }
 
         if (previousLine != null)
         {
@@ -106,7 +116,6 @@ public class DialogueManager : MonoBehaviour
         newObject.transform.SetParent(choiceBoxTarget.transform); //make child of
         newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
         newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
-        newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox
 
         if (character.characterFont) 
         {
@@ -114,16 +123,81 @@ public class DialogueManager : MonoBehaviour
         }
         if (character.fontSize != 0)
         {
-            newObject.GetComponent<TextMeshProUGUI>().fontSize = character.fontSize; //set font in textbox
+            newObject.GetComponent<TextMeshProUGUI>().fontSize = character.fontSize; //set font size in textbox
+        }
+        if (typewrite)
+        {
+            TypeWrite(newObject.GetComponent<TextMeshProUGUI>(), dialogue);
+        }
+        else
+        {
+            newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox DO NOT DELETE
         }
 
         previousLine = newObject; //set as previous line
+
         index++; //move on <<BE CAREFUL OF THIS!!
 
         openLog(isOpen);
 
         Canvas.ForceUpdateCanvases();
         dialogueScroll.normalizedPosition = new Vector2(0, 0);//scroll to new text
+    }
+
+    public void TypeWrite(TextMeshProUGUI textfield, string fullText)
+    {
+        Debug.Log("length =" + fullText.Length);
+
+        if (indey < fullText.Length)
+        {
+            Debug.Log("indey =" + indey);
+
+            char letter = fullText[indey]; //get letter
+
+            if (letter == '<')
+            {
+                while (letter != '>')
+                {
+                    textfield.text = Write(letter); //add to box
+                    indey += 1;
+                    letter = fullText[indey];
+                }
+
+            }
+
+            textfield.text = Write(letter); //add to box
+            indey += 1; //move up one
+            StartCoroutine(TextPause(letter, textfield, fullText));
+        }
+    }
+
+    private string Write(char letter)
+    {
+        actualText += letter;
+        return actualText;
+    }
+
+    private IEnumerator TextPause(char letter, TextMeshProUGUI textfield, string fullText)
+    {
+        switch (letter)
+        {
+            case '.':
+                yield return new WaitForSeconds(pauseInfo.dotPause);
+                TypeWrite(textfield, fullText);
+                yield break;
+            case ',':
+                yield return new WaitForSeconds(pauseInfo.commaPause);
+                TypeWrite(textfield, fullText);
+                yield break;
+            case ' ':
+                yield return new WaitForSeconds(pauseInfo.spacePause);
+                TypeWrite(textfield, fullText);
+                yield break;
+            default:
+                yield return new WaitForSeconds(pauseInfo.normalPause);
+                TypeWrite(textfield, fullText);
+                yield break;
+        }
     }
 
     public void changeImage(Character character, string emotion) //change the sprite in the UI
@@ -295,10 +369,10 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
         dialogueUI.SetActive(false);
         index = 0;
+        indey = 0;
+        actualText = "";
         DialogueEvents.current.EndDialogue();
     }
-
-
 
     void showChoice()
     {
@@ -374,4 +448,13 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+}
+
+[Serializable]
+public class PauseInfo
+{
+    public float dotPause;
+    public float commaPause;
+    public float spacePause;
+    public float normalPause;
 }

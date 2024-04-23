@@ -61,7 +61,7 @@ public class GameData : MonoBehaviour
         string gameStatusJson = JsonUtility.ToJson(currentGameStatus);
         //write a text file containing the string value as simple text
         File.WriteAllText(filePath + "/" + FILE_NAME, gameStatusJson);
-        Debug.Log("File created and saved");
+        //Debug.Log("File created and saved");
     }
 
     public void LoadGameStatus() //if json exists, read it and load
@@ -76,14 +76,14 @@ public class GameData : MonoBehaviour
             //deserialise the loaded string into a GameStatus struct
             currentGameStatus = JsonUtility.FromJson<GameStatus>(loadedJson);
 
-            Debug.Log("File" + FILE_NAME + "loaded successfully");
+            //Debug.Log("File" + FILE_NAME + "loaded successfully");
         }
         else
         {
             //initilise a new game status
             setAsDefaultStatus();
 
-            Debug.Log("File not found: overwritten with default");
+            //Debug.Log("File not found: overwritten with default");
         }
     }
 
@@ -100,6 +100,6 @@ public class GameData : MonoBehaviour
         currentGameStatus.maxStress = 30;
 
         SaveGameStatus();
-        Debug.Log("Set to default game status");
+        //Debug.Log("Set to default game status");
     }
 }
