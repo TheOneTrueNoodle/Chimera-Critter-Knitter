@@ -157,12 +157,6 @@ public class CombatUI : MonoBehaviour
             anim.Play("Open");
         }
 
-        if (hasMoved)
-        {
-            MoveButton.interactable = false;
-            ActionUI.GetComponentsInChildren<Button>()[1].Select();
-        }
-        else { ActionUI.GetComponentInChildren<Button>().Select(); }
         ChangeCursorMode(5);
     }
     public void CloseUI()
