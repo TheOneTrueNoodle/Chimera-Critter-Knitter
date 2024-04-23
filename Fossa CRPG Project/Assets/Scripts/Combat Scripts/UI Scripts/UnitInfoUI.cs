@@ -10,7 +10,6 @@ public class UnitInfoUI : MonoBehaviour
 
     [Header("Basic Information")]
     public Image portrait;
-    public TMP_Text Name;
 
     [Header("HP Variables")]
     public Slider HPBar;
@@ -75,8 +74,6 @@ public class UnitInfoUI : MonoBehaviour
             {
                 portrait.sprite = Char.CharacterData.portrait;
             }
-
-            Name.text = Char.CharacterData.Name;
 
             //HP Update
             UpdateHP(Char);

@@ -12,6 +12,9 @@ public class TutorialHouseArea : AreaManager
     public GameObject muffinByTheDoor;
     public GameObject muffinReleaseScene;
 
+    [Header("Tutorial Combat")]
+    [SerializeField] private GameObject preFrog;
+    [SerializeField] private GameObject postFrog;
 
     private void Start()
     {
@@ -98,8 +101,14 @@ public class TutorialHouseArea : AreaManager
             {
                 areaBools["Infected"] = true;
             }
+
+            //Turn on post frog and turn off pre frog
+            preFrog.SetActive(false);
+            postFrog.SetActive(true);
+
             return;
         }
+
         //Trigger for Owner Combat
         if (combatName == "Owner")
         {
