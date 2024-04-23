@@ -7,7 +7,6 @@ public class TutorialHouseArea : AreaManager
 {
     public PostProcessVolume infectionVignette;
     public FadeOutDogVision dogVision;
-    public AbilityData lickAbility;
     public AbilityData armAbility;
     public GameObject muffinByTheDoor;
     public GameObject muffinReleaseScene;
@@ -15,6 +14,8 @@ public class TutorialHouseArea : AreaManager
     [Header("Tutorial Combat")]
     [SerializeField] private GameObject preFrog;
     [SerializeField] private GameObject postFrog;
+    [SerializeField] private AbilityData FrogTongueAbility;
+
 
     private void Start()
     {
@@ -46,8 +47,6 @@ public class TutorialHouseArea : AreaManager
         if (areaBools.ContainsKey("Has mutated"))
         {
             areaBools["Has mutated"] = true;
-            //Grant the player the mutation menu now :D
-            MenuEvent.current.UnlockNewMutation(lickAbility);
         }
     }
 
@@ -105,6 +104,9 @@ public class TutorialHouseArea : AreaManager
             //Turn on post frog and turn off pre frog
             preFrog.SetActive(false);
             postFrog.SetActive(true);
+
+            //Grant the player the mutation menu now :D
+            MenuEvent.current.UnlockNewMutation(FrogTongueAbility);
 
             return;
         }
