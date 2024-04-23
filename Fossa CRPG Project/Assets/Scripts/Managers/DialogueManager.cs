@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Linq;
 using TMPro;
+using FMODUnity;
+using FMOD.Studio;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -44,9 +46,10 @@ public class DialogueManager : MonoBehaviour
 
     [Header("Typewriter Vars")]
     [SerializeField] private bool useTypewriting;
-    public int indey = 0;
-    public string actualText = "";
+    private int indey = 0;
+    private string actualText = "";
     public PauseInfo pauseInfo;
+    private FMOD.Studio.EventInstance speech;
 
     [Header("Options & Debug")]
     public bool dialogueActive;
@@ -63,6 +66,7 @@ public class DialogueManager : MonoBehaviour
 
         gm = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         gd = GameObject.Find("GameData").GetComponent<GameData>();
+        speech = FMODUnity.RuntimeManager.CreateInstance(FMODEvents.instance.speech);
 
         dialogueUI.SetActive(false);
     }
@@ -146,12 +150,9 @@ public class DialogueManager : MonoBehaviour
 
     public void TypeWrite(TextMeshProUGUI textfield, string fullText)
     {
-        Debug.Log("length =" + fullText.Length);
 
         if (indey < fullText.Length)
         {
-            Debug.Log("indey =" + indey);
-
             char letter = fullText[indey]; //get letter
 
             if (letter == '<')
@@ -173,6 +174,7 @@ public class DialogueManager : MonoBehaviour
 
     private string Write(char letter)
     {
+        PlaySpeechNoise();
         actualText += letter;
         return actualText;
     }
@@ -446,6 +448,13 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private void PlaySpeechNoise()
+    {
+        speech.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        speech.start();
+        speech.release();
     }
 
 }

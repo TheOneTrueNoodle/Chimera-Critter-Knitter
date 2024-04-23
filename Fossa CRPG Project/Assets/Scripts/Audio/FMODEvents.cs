@@ -21,6 +21,10 @@ public class FMODEvents : MonoBehaviour
     [field: SerializeField] public EventReference xpGainSFX { get; private set; }
     [field: SerializeField] public EventReference levelUpSFX { get; private set; }
     [field: SerializeField] public EventReference footsteps { get; private set; }
+
+    [field: Header("UI")]
+    [field: SerializeField] public EventReference speech { get; private set; }
+
     public static FMODEvents instance { get; private set; }
 
     private void Awake()
