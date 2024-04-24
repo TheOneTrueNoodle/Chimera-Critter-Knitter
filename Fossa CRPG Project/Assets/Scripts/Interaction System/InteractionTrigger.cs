@@ -6,6 +6,9 @@ using System;
 
 public class InteractionTrigger : Interactable
 {
+    private bool playerInArea;
+    private PlayerMovement playerMovement;
+
     public override void CallInteraction()
     {
         if (oneTimeUse)
@@ -36,6 +39,8 @@ public class InteractionTrigger : Interactable
     {
         if (!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm) && !used)
         {
+            if(playerMovement == null) { playerMovement = pm; }
+            
             if (!pm.nearbyInteractions.Contains(this))
             {
                 pm.nearbyInteractions.Add(this);
@@ -45,12 +50,23 @@ public class InteractionTrigger : Interactable
 
     private void OnTriggerExit(Collider other)
     {
-        if ((!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm)))
+        if (other.TryGetComponent(out PlayerMovement pm))
         {
-            if (pm.nearbyInteractions.Contains(this))
+            if (playerMovement == null) { playerMovement = pm; }
+
+            if (playerMovement.nearbyInteractions.Contains(this))
             {
-                pm.nearbyInteractions.Remove(this);
+                playerMovement.nearbyInteractions.Remove(this);
             }
+
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (playerMovement != null && playerMovement.nearbyInteractions.Contains(this))
+        {
+            playerMovement.nearbyInteractions.Remove(this);
         }
     }
 }

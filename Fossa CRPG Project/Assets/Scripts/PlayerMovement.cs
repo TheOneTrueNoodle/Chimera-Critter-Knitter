@@ -157,14 +157,19 @@ public class PlayerMovement : MonoBehaviour
         Interactable closestInteraction = null;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
+
         foreach (Interactable potentialInteractable in nearbyInteractions)
         {
-            Vector3 directionToTarget = potentialInteractable.transform.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            if (potentialInteractable.gameObject.activeInHierarchy == true)
             {
-                closestDistanceSqr = dSqrToTarget;
-                closestInteraction = potentialInteractable;
+                Vector3 directionToTarget = potentialInteractable.transform.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    closestInteraction = potentialInteractable;
+                }
+
             }
         }
 
