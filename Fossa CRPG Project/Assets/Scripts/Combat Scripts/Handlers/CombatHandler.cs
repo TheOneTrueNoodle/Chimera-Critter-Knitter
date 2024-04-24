@@ -326,7 +326,7 @@ public class CombatHandler : MonoBehaviour
         turnHandler.UnitDeath(target);
 
         //LOG UNIT DEATH
-        CombatEvents.current.AddLog(new string(target.CharacterData.Name + " had died!"));
+        CombatEvents.current.AddLog(new string(target.CharacterData.Name + " has died!"));
 
         //Find dropped items
         if(target.TeamID > 0)
@@ -356,6 +356,7 @@ public class CombatHandler : MonoBehaviour
                 CombatEvents.current.GameOver();
             }
         }
+
         if (enemyTeam.Count <= 0)
         {
             EndCombat();
