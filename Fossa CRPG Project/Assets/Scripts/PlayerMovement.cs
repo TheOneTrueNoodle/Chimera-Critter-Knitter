@@ -169,7 +169,6 @@ public class PlayerMovement : MonoBehaviour
                     closestDistanceSqr = dSqrToTarget;
                     closestInteraction = potentialInteractable;
                 }
-
             }
         }
 
@@ -180,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (nearestInteraction.interactSprite == null)
             {
-                Debug.LogError(nearestInteraction.gameObject.name + "GameObject does not have an interact sprite!");
+                MenuEvent.current.ShowInteractUI(nearestInteraction.interactSprite);
             }
             else
             {

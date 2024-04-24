@@ -13,13 +13,14 @@ public class CombatTrigger : MonoBehaviour
 
     public void Call()
     {
-        float music = 1;
+        float music = 3;
         switch ((int)battleMusic)
         {
             case 2:
-                //bossMusic
+                music = 4;
                 break;
         }
+
         CombatEvents.current.StartCombat(CombatName, EnemiesInThisCombat, OtherEntitiesInThisCombat, RoundEvents, music);
     }
 }

@@ -14,8 +14,6 @@ public class PullFoodDown_TutorialHouseArea : MonoBehaviour
     {
         if (AreaManager.current.GetComponent<TutorialHouseArea>().areaBools.ContainsKey("Has mutated") && AreaManager.current.GetComponent<TutorialHouseArea>().areaBools["Has mutated"] == true)
         {
-            //foodFallingAnim.enabled = true;
-            //foodFallingAnim.Play("DogFoodFall");
             eatFoodInteraction.SetActive(true);
 
             twoFrogsCombatTrigger.SetActive(true);

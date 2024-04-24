@@ -61,7 +61,11 @@ public class GameMenuManager : MonoBehaviour
 
         if (Input.GetButtonDown("Pause"))
         {
-            if(menuOpen)
+            if (controlsMenuObj.activeInHierarchy)
+            {
+                CloseControlsMenu();
+            }
+            else if(menuOpen)
             {
                 CloseCharacterMenu();
             }

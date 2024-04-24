@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638495861233092296
+  lastModified: 638495889342906597
   FileSizes:
   - Name: Desktop
     Value: 210464
@@ -197,10 +197,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638495855210584069
+  lastModified: 638495889342503628
   FileSizes:
   - Name: Desktop
-    Value: 11851072
+    Value: 19302976
   Exists: 1
 --- !u!114 &-3348362756808868654
 MonoBehaviour:
@@ -217,10 +217,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638495855208279552
+  lastModified: 638495889311277325
   FileSizes:
   - Name: Desktop
-    Value: 2110
+    Value: 2158
   Exists: 1
 --- !u!114 &-2967818218214744826
 MonoBehaviour:
@@ -300,6 +300,39 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-2408674389419803645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/The Old Home Music/Song
+  m_EditorClassIdentifier: 
+  Name: Song
+  StudioPath: 
+  Min: 0
+  Max: 8
+  Default: 0
+  ID:
+    data1: 3571352701
+    data2: 4121231320
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - Upstairs
+  - Ground Floor
+  - Basement
+  - Combat
+  - Boss
+  - Post Boss
+  - Owner Cutscene
+  - Stay Ending
+  - Leave Ending
+  Exists: 1
 --- !u!114 &-2355530187874687512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +402,34 @@ MonoBehaviour:
   - Name: Desktop
     Value: 228064
   Exists: 1
+--- !u!114 &-625371979030063624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/The Old Home Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music/The Old Home Music
+  Guid:
+    Data1: -1754510985
+    Data2: 1325362334
+    Data3: 673940404
+    Data4: -1191245272
+  Banks:
+  - {fileID: -5112272232976100101}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2408674389419803645}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-474671126756450370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,7 +445,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638495855208259549
+  lastModified: 638495889311251447
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -427,12 +488,13 @@ MonoBehaviour:
   - {fileID: -6416612846356708446}
   - {fileID: 1195978792546604789}
   - {fileID: -2967818218214744826}
+  - {fileID: -625371979030063624}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638495861233092296
+  cacheTime: 638495889342906597
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -639,7 +701,7 @@ MonoBehaviour:
   Name: Song
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 8
   Default: 0
   ID:
     data1: 3571352701
@@ -647,8 +709,15 @@ MonoBehaviour:
   Type: 2
   IsGlobal: 0
   Labels:
-  - Somber Melodies
-  - Synth Battle Music
+  - Upstairs
+  - Ground Floor
+  - Basement
+  - Combat
+  - Boss
+  - Post Boss
+  - Owner Cutscene
+  - Stay Ending
+  - Leave Ending
   Exists: 1
 --- !u!114 &5244722468213843797
 MonoBehaviour:

@@ -8,8 +8,9 @@ public class MutationTrigger : Interactable
 {
     public AbilityData requiredMutation;
 
-    public ParticleSystem mutationParticles;
     public Animator wrongMutationAnim;
+
+    private PlayerMovement playerMovement;
 
     public override void CallInteraction()
     {
@@ -60,24 +61,33 @@ public class MutationTrigger : Interactable
     {
         if (!inDialogue && other.TryGetComponent(out PlayerMovement pm) && !used)
         {
+            if (playerMovement == null) { playerMovement = pm; }
+
             if (!pm.nearbyInteractions.Contains(this))
             {
                 pm.nearbyInteractions.Add(this);
-            }
-
-            mutationParticles.Play();
+            };
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!inCombat && !inDialogue && other.TryGetComponent(out PlayerMovement pm))
+        if (other.TryGetComponent(out PlayerMovement pm))
         {
+            if (playerMovement == null) { playerMovement = pm; }
+
             if (pm.nearbyInteractions.Contains(this))
             {
                 pm.nearbyInteractions.Remove(this);
             }
-            mutationParticles.Stop();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (playerMovement != null && playerMovement.nearbyInteractions.Contains(this))
+        {
+            playerMovement.nearbyInteractions.Remove(this);
         }
     }
 }

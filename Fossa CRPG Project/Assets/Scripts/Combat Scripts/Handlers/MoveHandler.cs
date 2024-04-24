@@ -16,7 +16,9 @@ public class MoveHandler
     {
         if(entity.anim != null) { entity.anim.SetBool("Idle", false); }
 
-        while (path.Count != 0)
+        float animTime = 0;
+
+        while (path.Count != 0 || animTime < 15f)
         {
             Look(entity, path[0].transform.position, false);
             Move(entity);
@@ -29,6 +31,7 @@ public class MoveHandler
                 path.RemoveAt(0);
             }
 
+            animTime += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
 

@@ -91,10 +91,16 @@ public class TutorialHouseArea : AreaManager
 
     private void EndCombat(string combatName)
     {
+        if (areaBools.ContainsKey("InCombat"))
+        {
+            areaBools["InCombat"] = false;
+        }
+
         //Trigger for Tutorial Combat
         if (combatName == "Tutorial_Combat")
         {
             CombatEvents.current.onAttackAttempt -= OscarGetsHitForTheFirstTime;
+
             //Run code for after the first combat
             if (areaBools.ContainsKey("Infected"))
             {
@@ -115,6 +121,19 @@ public class TutorialHouseArea : AreaManager
         if (combatName == "Owner")
         {
             MenuEvent.current.UnlockNewMutation(armAbility);
+
+            if (areaBools.ContainsKey("defeatedOwner"))
+            {
+                areaBools["defeatedOwner"] = true;
+            }
+
+            if (areaFloats.ContainsKey("Current Song"))
+            {
+                areaFloats["Current Song"] = 5;
+            }
+
+            AudioManager.instance.SetMusicSong(areaFloats["Current Song"]);
+
             return;
         }
     }

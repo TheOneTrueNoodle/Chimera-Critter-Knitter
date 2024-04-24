@@ -61,7 +61,13 @@ public class CombatHandler : MonoBehaviour
         StartCoroutine(StartCombatDisplay());
 
         //Music Time
+        if (AreaManager.current.areaBools.ContainsKey("InCombat"))
+        {
+            AreaManager.current.areaBools["InCombat"] = true;
+        }
+
         previousSong = AudioManager.instance.GetCurrentSong();
+        Debug.Log(BattleTheme.ToString());
         AudioManager.instance.SetMusicSong(BattleTheme);
     }
 

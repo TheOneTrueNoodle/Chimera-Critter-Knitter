@@ -6,7 +6,6 @@ using System;
 
 public class InteractionTrigger : Interactable
 {
-    private bool playerInArea;
     private PlayerMovement playerMovement;
 
     public override void CallInteraction()

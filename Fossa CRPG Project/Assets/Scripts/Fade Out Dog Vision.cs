@@ -7,9 +7,15 @@ public class FadeOutDogVision : MonoBehaviour
 {
     public PostProcessVolume ppVolume;
     private bool disabled = false;
+    private bool finished;
 
-    private void Start()
+    private void Update()
     {
+        if (finished)
+        {
+            ppVolume.weight = 0;
+            return;
+        }
         if (PlayerPrefs.GetInt("Dog Vision") == 1)
         {
             ppVolume.weight = 0;
@@ -18,7 +24,7 @@ public class FadeOutDogVision : MonoBehaviour
         else
         {
             ppVolume.weight = 1;
-            disabled = true;
+            disabled = false;
         }
     }
 
@@ -38,5 +44,9 @@ public class FadeOutDogVision : MonoBehaviour
             ppVolume.weight = newValue;
             yield return null;
         }
+
+        ppVolume.weight = 0;
+        finished = true;
+        enabled = false;
     }
 }
