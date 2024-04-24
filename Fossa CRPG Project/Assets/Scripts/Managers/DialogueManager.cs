@@ -49,7 +49,6 @@ public class DialogueManager : MonoBehaviour
     private int indey = 0;
     private string actualText = "";
     public PauseInfo pauseInfo;
-    private FMOD.Studio.EventInstance speech;
 
     [Header("Options & Debug")]
     public bool dialogueActive;
@@ -59,6 +58,8 @@ public class DialogueManager : MonoBehaviour
     public int index = 0; //current line 
     public bool nodialogue = true;
 
+    private EventInstance speechEvent;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,15 +67,15 @@ public class DialogueManager : MonoBehaviour
 
         gm = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         gd = GameObject.Find("GameData").GetComponent<GameData>();
-        speech = FMODUnity.RuntimeManager.CreateInstance(FMODEvents.instance.speech);
 
         dialogueUI.SetActive(false);
+
+        speechEvent = AudioManager.instance.CreateInstance(FMODEvents.instance.speech);
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if ((Input.GetButtonDown("Interact") || Input.GetButtonDown("Submit") || pawPressed || index == 0) && !nodialogue) //on button press (space) or on 0 lines printed
         {
             pawPressed = false;
@@ -104,6 +105,8 @@ public class DialogueManager : MonoBehaviour
 
     public void addText(string dialogue, Character character, bool typewrite) //instantiate text game object with dialogue as text childed under textBoxTarget
     {
+        speechEvent.start();
+
         indey = 0;
         actualText = "";
 
@@ -150,7 +153,6 @@ public class DialogueManager : MonoBehaviour
 
     public void TypeWrite(TextMeshProUGUI textfield, string fullText)
     {
-
         if (indey < fullText.Length)
         {
             char letter = fullText[indey]; //get letter
@@ -163,18 +165,20 @@ public class DialogueManager : MonoBehaviour
                     indey += 1;
                     letter = fullText[indey];
                 }
-
             }
 
             textfield.text = Write(letter); //add to box
             indey += 1; //move up one
             StartCoroutine(TextPause(letter, textfield, fullText));
         }
+        else
+        {
+            speechEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
     }
 
     private string Write(char letter)
     {
-        PlaySpeechNoise();
         actualText += letter;
         return actualText;
     }
@@ -449,14 +453,6 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
-
-    private void PlaySpeechNoise()
-    {
-        speech.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-        speech.start();
-        speech.release();
-    }
-
 }
 
 [Serializable]
