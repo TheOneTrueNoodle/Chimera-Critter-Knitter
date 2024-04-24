@@ -21,7 +21,7 @@ public class ExamineObject : MonoBehaviour, IDragHandler
     {
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
-            zoom += Input.GetAxis("Mouse ScrollWheel");
+            zoom -= Input.GetAxis("Mouse ScrollWheel");
             zoom = Mathf.Clamp(zoom, 0.5f, 7f);
             inspectCam.orthographicSize = zoom;
         }
