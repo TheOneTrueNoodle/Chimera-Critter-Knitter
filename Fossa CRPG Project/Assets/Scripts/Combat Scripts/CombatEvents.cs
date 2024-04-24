@@ -155,8 +155,8 @@ public class CombatEvents : MonoBehaviour
         }
     }
 
-    public event Action<Entity, List<Entity>, AbilityData, Vector3, bool> onAbilityAttempt;
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 AbilityCenter, bool isItem)
+    public event Action<Entity, List<Entity>, AbilityData, OverlayTile, bool> onAbilityAttempt;
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, OverlayTile AbilityCenter, bool isItem)
     {
         if (onAbilityAttempt != null)
         {

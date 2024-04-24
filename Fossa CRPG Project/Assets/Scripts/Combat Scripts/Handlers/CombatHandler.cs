@@ -194,12 +194,12 @@ public class CombatHandler : MonoBehaviour
         StartCoroutine(DelayedTurnEnd());
     }
 
-    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter, bool isItem)
+    public void AbilityAttempt(Entity attacker, List<Entity> targets, AbilityData ability, OverlayTile abilityCenter, bool isItem)
     {
         StartCoroutine(Ability(attacker, targets, ability, abilityCenter, isItem));
     }
 
-    public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, Vector3 abilityCenter, bool isItem)
+    public IEnumerator Ability(Entity attacker, List<Entity> targets, AbilityData ability, OverlayTile abilityCenter, bool isItem)
     {
         CombatEvents.current.AddLog(new string(attacker.CharacterData.Name + " uses " + ability.Name + "!"));
 
@@ -213,17 +213,19 @@ public class CombatHandler : MonoBehaviour
         }
 
         //Animate Ability
-
-        //Rotate Towards Target
-        Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
-        var rot = Quaternion.LookRotation((abilityCenter - attacker.transform.position), Vector3.up);
-        float angle = Quaternion.Angle(rb.rotation, rot);
-
-        while (angle > 0.1f)
+        if (attacker.activeTile != abilityCenter)
         {
-            rb.rotation = Quaternion.RotateTowards(attacker.transform.rotation, rot, 720f * Time.deltaTime);
-            angle = Quaternion.Angle(rb.rotation, rot);
-            yield return null;
+            //Rotate Towards Target
+            Rigidbody rb = attacker.gameObject.GetComponent<Rigidbody>();
+            var rot = Quaternion.LookRotation((abilityCenter.transform.position - attacker.transform.position), Vector3.up);
+            float angle = Quaternion.Angle(rb.rotation, rot);
+
+            while (angle > 0.1f)
+            {
+                rb.rotation = Quaternion.RotateTowards(attacker.transform.rotation, rot, 720f * Time.deltaTime);
+                angle = Quaternion.Angle(rb.rotation, rot);
+                yield return null;
+            }
         }
 
         //Play Attacker Animation

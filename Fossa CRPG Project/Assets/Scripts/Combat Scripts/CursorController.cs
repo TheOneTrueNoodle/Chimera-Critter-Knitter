@@ -267,7 +267,7 @@ public class CursorController : MonoBehaviour
 
             if (hasCastAbility)
             {
-                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility, AbilityCenter.transform.position, isItemAbility);
+                CombatEvents.current.AbilityAttempt(activeCharacter, inRangeCharacters, currentAbility, AbilityCenter, isItemAbility);
             }
         }
     }
