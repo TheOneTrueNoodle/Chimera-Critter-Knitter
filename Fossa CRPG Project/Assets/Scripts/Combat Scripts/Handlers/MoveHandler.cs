@@ -18,8 +18,9 @@ public class MoveHandler
 
         float animTime = 0;
 
-        while (path.Count != 0 || animTime < 15f)
+        while (path.Count > 0 && animTime < 7f)
         {
+            Debug.Log(path.Count);
             Look(entity, path[0].transform.position, false);
             Move(entity);
 
@@ -32,8 +33,11 @@ public class MoveHandler
             }
 
             animTime += Time.deltaTime;
+            Debug.Log(animTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+
+        animTime = 0;
 
         while (animSpeed != 0 || animRotation != 0)
         {
@@ -55,7 +59,18 @@ public class MoveHandler
                 animRotation = 0;
                 entity.anim.SetFloat("Rotation", animRotation);
             }
+
+            animTime += Time.deltaTime;
+            Debug.Log("Second anim time: " + animTime.ToString());
+            if (animTime > 1.5f)
+            {
+                animSpeed = 0;
+                animRotation = 0;
+                entity.anim.SetFloat("Speed", animSpeed);
+                entity.anim.SetFloat("Rotation", animRotation);
+            }
         }
+
         if (entity.anim != null) { entity.anim.SetBool("Idle", true); }
 
         entity.footstepInstance.UpdateSound(false, 0f);
