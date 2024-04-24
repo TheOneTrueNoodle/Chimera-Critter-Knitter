@@ -25,7 +25,6 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private TMP_Text SFXVolumePercent;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
-    [SerializeField] private TMP_Dropdown colourBlindDropdown;
     [SerializeField] private Toggle dogVisionToggle;
     [SerializeField] private Toggle removeInfectionToggle;
     [SerializeField] private Toggle invertCamYToggle;
@@ -33,6 +32,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider cameraSensitivitySlider;
     [SerializeField] private TMP_Text camSensitivityValue;
     [SerializeField] private Toggle removeGoreToggle;
+    [SerializeField] private Toggle removeFilmGrainToggle;
 
     //Before Applying Settings
     public bool changedSettings;
@@ -44,8 +44,6 @@ public class SettingsManager : MonoBehaviour
     private int newResolutionIndex;
     private bool newFullscreen; //0 = Windowed, 1 = Fullscreen
 
-    private int newColourBlindID; //0 = None, 1 = Protonopia, 2 = Deuteranopia, 3 = Trianopia
-
     private bool newDogVision; //0 = Off, 1 = On
     private bool newInfectionEffect; //0 = Off, 1 = On
 
@@ -54,6 +52,7 @@ public class SettingsManager : MonoBehaviour
     private float newCamSens;
 
     private bool newRemoveGore; //0 = Off, 1 = On
+    private bool newRemoveGrain; //0 = Off, 1 = On
 
     private void OnEnable()
     {
@@ -69,17 +68,17 @@ public class SettingsManager : MonoBehaviour
         SFXVolumeSlider.value = PlayerPrefs.GetFloat("SFX Volume", 1);
         SFXVolumePercent.text = (PlayerPrefs.GetFloat("SFX Volume", 1) * 100).ToString("F0") + "%";
 
-        colourBlindDropdown.value = PlayerPrefs.GetInt("Colour Blind ID", 0);
-        colourBlindDropdown.RefreshShownValue();
-
         dogVisionToggle.isOn = PlayerPrefs.GetInt("Dog Vision", 0) == 1;
         removeInfectionToggle.isOn = PlayerPrefs.GetInt("Infection Effect", 0) == 1;
         removeGoreToggle.isOn = PlayerPrefs.GetInt("Remove Gore", 0) == 1;
+        removeFilmGrainToggle.isOn = PlayerPrefs.GetInt("Remove Grain", 0) == 1;
 
         invertCamYToggle.isOn = PlayerPrefs.GetInt("Invert Camera Y", 0) == 1;
         invertCamXToggle.isOn = PlayerPrefs.GetInt("Invert Camera X", 0) == 1;
         cameraSensitivitySlider.value = PlayerPrefs.GetFloat("Camera Sensitivity", 3);
         camSensitivityValue.text = PlayerPrefs.GetFloat("Camera Sensitivity").ToString("F2");
+
+        changedSettings = false;
 
         GetResolutionOptions();
     }
@@ -89,10 +88,10 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("Master Volume", 1);
         PlayerPrefs.SetFloat("Music Volume", 1);
         PlayerPrefs.SetFloat("SFX Volume", 1); 
-        PlayerPrefs.SetInt("Colour Blind ID", 0);
         PlayerPrefs.SetInt("Dog Vision", 0);
         PlayerPrefs.SetInt("Infection Effect", 0);
         PlayerPrefs.SetInt("Remove Gore", 0);
+        PlayerPrefs.SetInt("Remove Grain", 0);
         PlayerPrefs.SetInt("Invert Camera Y", 0);
         PlayerPrefs.SetInt("Invert Camera X", 0);
         PlayerPrefs.SetFloat("Camera Sensitivity", 3);
@@ -131,13 +130,13 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetFloat("SFX Volume", newSFXVolume);
         PlayerPrefs.SetInt("Resolution ID", newResolutionIndex);
         PlayerPrefs.SetInt("Fullscreen", newFullscreen ? 1 : 0);
-        PlayerPrefs.SetInt("Colour Blind ID", newColourBlindID);
         PlayerPrefs.SetInt("Dog Vision", newDogVision ? 1 : 0);
         PlayerPrefs.SetInt("Infection Effect", newInfectionEffect ? 1 : 0);
         PlayerPrefs.SetInt("Invert Camera Y", newInvertCamY ? 1 : 0);
         PlayerPrefs.SetInt("Invert Camera X", newInvertCamX ? 1 : 0);
         PlayerPrefs.SetFloat("Camera Sensitivity", newCamSens);
         PlayerPrefs.SetInt("Remove Gore", newRemoveGore ? 1 : 0);
+        PlayerPrefs.SetInt("Remove Grain", newRemoveGrain ? 1 : 0);
 
         changedSettings = false;
     }
@@ -162,13 +161,13 @@ public class SettingsManager : MonoBehaviour
         newSFXVolume = PlayerPrefs.GetFloat("SFX Volume");
         newResolutionIndex = PlayerPrefs.GetInt("Resolution ID");
         newFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
-        newColourBlindID = PlayerPrefs.GetInt("Colour Blind ID");
         newDogVision = PlayerPrefs.GetInt("Dog Vision") == 1;
         newInfectionEffect = PlayerPrefs.GetInt("Infection Effect") == 1;
         newInvertCamY = PlayerPrefs.GetInt("Invert Camera Y") == 1;
         newInvertCamX = PlayerPrefs.GetInt("Invert Camera X") == 1;
         newCamSens = PlayerPrefs.GetFloat("Camera Sensitivity");
         newRemoveGore = PlayerPrefs.GetInt("Remove Gore") == 1;
+        newRemoveGrain = PlayerPrefs.GetInt("Remove Grain") == 1;
     }
 
     #region Volume
@@ -212,7 +211,7 @@ public class SettingsManager : MonoBehaviour
         List<string> options = new List<string>();
         for (int i = 0; i < filteredResolutions.Count; i++)
         {
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + filteredResolutions[i].refreshRateRatio.value + " Hz";
+            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + (int)filteredResolutions[i].refreshRateRatio.value + " Hz";
             options.Add(resolutionOption);
             if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
             {
@@ -258,14 +257,14 @@ public class SettingsManager : MonoBehaviour
         newRemoveGore = value;
         changedSettings = true;
     }
+    public void ToggleGrain(bool value)
+    {
+        newRemoveGrain = value;
+        changedSettings = true;
+    }
     #endregion
 
     #region Camera Settings
-    public void SetColourBlind(int ID)
-    {
-        newColourBlindID = ID;
-        changedSettings = true;
-    }
     public void toggleInvertCamY(bool value)
     {
         newInvertCamY = value;

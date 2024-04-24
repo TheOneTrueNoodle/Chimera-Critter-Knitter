@@ -11,15 +11,28 @@ public class MenuManager : MonoBehaviour
     public GameObject FirstCutscene;
     public GameObject SplashScreen;
 
+    public GameObject buttons;
+    public GameObject ControlsScreen;
+
     void Start()
     {
         StartCoroutine(OpeningGame());
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (ControlsScreen.activeInHierarchy)
+            {
+                CloseControlsMenu();
+            }
+        }
+    }
+
     public void StartGame()
     {
         StartCoroutine(StartingCutscene());
-        
     }
 
     IEnumerator StartingCutscene()
@@ -42,6 +55,18 @@ public class MenuManager : MonoBehaviour
         SplashScreen.SetActive(false);
 
     }
+
+    public void OpenControlsMenu()
+    {
+        ControlsScreen.SetActive(true);
+        buttons.SetActive(false);
+    }
+    public void CloseControlsMenu()
+    {
+        ControlsScreen.SetActive(false);
+        buttons.SetActive(true);
+    }
+
 
     public void Settings()
     {
