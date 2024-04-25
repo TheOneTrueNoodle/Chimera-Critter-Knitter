@@ -91,19 +91,19 @@ public class CombatUI : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel"))
         {
-            if (!UIOpen)
+            if (!actionActive && !abilityUIOpen)
+            {
+                //Pause Menu Inputs!!!
+                gamePaused = true;
+                CombatEvents.current.PauseGame();
+            }
+            else if (!UIOpen)
             {
                 OpenUI();
             }
             else if (UIOpen)
             {
                 CancelInput();
-            }
-            else
-            {
-                //Pause Menu Inputs!!!
-                gamePaused = true;
-                CombatEvents.current.PauseGame();
             }
         }
     }
@@ -135,6 +135,8 @@ public class CombatUI : MonoBehaviour
     }
     public void OpenUI()
     {
+        //Default mode
+
         UIOpen = true;
         //Display Action UI
         ActionUI.gameObject.SetActive(true);
