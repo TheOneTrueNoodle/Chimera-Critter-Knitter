@@ -16,11 +16,15 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] private GameObject postFrog;
     [SerializeField] private AbilityData FrogTongueAbility;
 
+    [Header("Boss fight")]
+    [SerializeField] private GameObject bossCutsceneSecondPart;
 
     private void Start()
     {
         CombatEvents.current.onEndCombat += EndCombat;
         CombatEvents.current.onStartCombatSetup += StartCombat;
+
+        DialogueEvents.current.onEndDialogue += EndDialogue;
     }
 
     private void OscarGetsHitForTheFirstTime(Entity attacker, Entity target)
@@ -135,6 +139,15 @@ public class TutorialHouseArea : AreaManager
             AudioManager.instance.SetMusicSong(areaFloats["Current Song"]);
 
             return;
+        }
+    }
+
+    private void EndDialogue()
+    {
+        if (areaBools.ContainsKey("BossFightCutscenePT2") && areaBools["BossFightCutscenePT2"])
+        {
+            //Turn on second cutscene
+            bossCutsceneSecondPart.SetActive(true);
         }
     }
 
