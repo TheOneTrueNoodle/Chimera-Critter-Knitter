@@ -49,6 +49,7 @@ public class DialogueManager : MonoBehaviour
     private int indey = 0;
     private string actualText = "";
     public PauseInfo pauseInfo;
+    private bool currentlyPrintingText;
 
     [Header("Options & Debug")]
     public bool dialogueActive;
@@ -80,25 +81,32 @@ public class DialogueManager : MonoBehaviour
         {
             pawPressed = false;
 
-            if (index == currentConvo.lines.Length && dialogueActive) //check if we've ran out of lines
+            if (!currentlyPrintingText)
             {
-                if (currentConvo.choice != null) //if we have run out of lines and there's a choice, show it
+                if (index == currentConvo.lines.Length && dialogueActive) //check if we've ran out of lines
                 {
-                    changeBackgroundColour(dialogueSprites, Color.white);
-                    dialogueActive = false;
-                    showChoice();
+                    if (currentConvo.choice != null) //if we have run out of lines and there's a choice, show it
+                    {
+                        changeBackgroundColour(dialogueSprites, Color.white);
+                        dialogueActive = false;
+                        showChoice();
+                    }
+                    else //otherwise if there's no choice and no fight exit dialogue
+                    {
+                        Debug.Log("Exiting Dialog");
+                        exitText(true);
+                    }
                 }
-                else //otherwise if there's no choice and no fight exit dialogue
+                else if (index != currentConvo.lines.Length && dialogueActive) //if we haven't run out of lines, print next line in dialogue
                 {
-                    Debug.Log("Exiting Dialog");
-                    exitText(true);
+                    changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
+                    changeBackgroundColour(dialogueSprites, currentConvo.lines[index].speaker.characterColour);
+                    addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker, useTypewriting); //(has to be last here)
                 }
             }
-            else if (index != currentConvo.lines.Length && dialogueActive) //if we haven't run out of lines, print next line in dialogue
+            else
             {
-                changeImage(currentConvo.lines[index].speaker, currentConvo.lines[index].emotion); //change image to accomodate speaker
-                changeBackgroundColour(dialogueSprites, currentConvo.lines[index].speaker.characterColour);
-                addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker, useTypewriting); //(has to be last here)
+                midPrintTextBreak();
             }
         }
     }
@@ -134,6 +142,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (typewrite)
         {
+            //typewritingRN = true;
             TypeWrite(newObject.GetComponent<TextMeshProUGUI>(), dialogue);
         }
         else
@@ -204,6 +213,12 @@ public class DialogueManager : MonoBehaviour
                 TypeWrite(textfield, fullText);
                 yield break;
         }
+    }
+
+    private void midPrintTextBreak()
+    {
+
+        currentlyPrintingText = false;
     }
 
     public void changeImage(Character character, string emotion) //change the sprite in the UI

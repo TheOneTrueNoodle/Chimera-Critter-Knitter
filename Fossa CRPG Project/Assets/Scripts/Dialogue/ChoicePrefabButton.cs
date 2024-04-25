@@ -19,7 +19,7 @@ public class ChoicePrefabButton : MonoBehaviour
 
     void Start()
     {
-        AddEventScript(this.gameObject);
+       // AddEventScript(this.gameObject);
         button = GetComponent<Button>();
         button.onClick.AddListener(taskOnClick);
         dm = GameObject.Find("DialogueManagement").GetComponent<DialogueManager>();
@@ -29,6 +29,7 @@ public class ChoicePrefabButton : MonoBehaviour
         relevantAreaManager = dm.currentAreaManager;
     }
 
+    /*
     private void AddEventScript(GameObject gm)
     {
         if (gm.GetComponent<EventTrigger>() == null)
@@ -50,21 +51,8 @@ public class ChoicePrefabButton : MonoBehaviour
         trigger.triggers.Add(entry);
         trigger.triggers.Add(entryTwo);
 
-    }
+    }*/
 
-    public void fontUp()
-    {
-        //this.GetComponentInParent<TextMeshProUGUI>().fontSize = 20;
-        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 20; //old version
-        //GetComponent<TextMeshProUGUI>().fontSize = 20;
-    }
-
-    public void fontDown()
-    {
-        //this.GetComponentInParent<TextMeshProUGUI>().fontSize = 22;
-        //this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().fontSize = 22; //old version
-        //GetComponent<TextMeshProUGUI>().fontSize = 22;
-    }
 
     public void taskOnClick()
     {
@@ -88,21 +76,29 @@ public class ChoicePrefabButton : MonoBehaviour
         dm.pawButton.SetActive(true);
         dm.choicesActive = false;
 
-        dm.currentConvo = this.choice.options[order].continueDialogue;
-        dm.dialogueActive = true;
-        dm.nodialogue = false;
-
-        string cler = ColorUtility.ToHtmlStringRGB(choiceMaker.characterColour);
-
-        //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
-        dm.addText("<uppercase><color=#" + cler + ">" + choiceMaker.fullName + ":</color></uppercase><br>" + textChoiceField.text, choiceMaker, false); //add dialogue
-        dm.index = 0;
-
-        var objects = GameObject.FindGameObjectsWithTag("Choice"); //destory buttons
-        foreach (var obj in objects)
+        if (this.choice.options[order].continueDialogue != null)
         {
-            Destroy(obj);
+            dm.currentConvo = this.choice.options[order].continueDialogue;
+            dm.dialogueActive = true;
+            dm.nodialogue = false;
+
+            string cler = ColorUtility.ToHtmlStringRGB(choiceMaker.characterColour);
+
+            //dm.addText(choiceMaker.fullName + ":<br>" + this.transform.Find("ChoiceText").GetComponent<TextMeshProUGUI>().text); //old add dialogue
+            dm.addText("<uppercase><color=#" + cler + ">" + choiceMaker.fullName + ":</color></uppercase><br>" + textChoiceField.text, choiceMaker, false); //add dialogue
+            dm.index = 0;
+
+            var objects = GameObject.FindGameObjectsWithTag("Choice"); //destory buttons
+            foreach (var obj in objects)
+            {
+                Destroy(obj);
+            }
         }
+        else
+        {
+            dm.exitText(true);
+        }
+        
     }
 
     private void checkForFlagChanges(string ID)
