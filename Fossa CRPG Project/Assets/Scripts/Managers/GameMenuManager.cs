@@ -198,13 +198,14 @@ public class GameMenuManager : MonoBehaviour
         if (inDialogue || inCombat) { return; }
         if (interactable != null)
         {
+            interactSpriteImage.color = new Color(1, 1, 1, 1);
+
             if (interactable.TryGetComponent(out MutationTrigger mutTrig))
             {
-                interactSpriteImage.color = new Color(0, 0, 0, 1);
-            }
-            else
-            {
-                interactSpriteImage.color = new Color(1, 1, 1, 1);
+                if (!mutationMenuManager.equippedMutations.Contains(mutTrig.requiredMutation))
+                {
+                    interactSpriteImage.color = new Color(0, 0, 0, 1);
+                }
             }
 
             interactSpriteImage.sprite = interactable.interactSprite;
