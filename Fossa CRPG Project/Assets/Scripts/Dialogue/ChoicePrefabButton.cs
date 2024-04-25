@@ -96,6 +96,7 @@ public class ChoicePrefabButton : MonoBehaviour
         }
         else
         {
+
             dm.exitText(true);
         }
         

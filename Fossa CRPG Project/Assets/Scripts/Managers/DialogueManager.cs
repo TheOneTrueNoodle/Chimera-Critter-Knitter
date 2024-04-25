@@ -24,7 +24,6 @@ public class DialogueManager : MonoBehaviour
     public bool isInjured = false;
 
     [Header("UI Variables")]
-    [SerializeField] public GameObject contentHolder; //Content
     [SerializeField] private GameObject dialogueUI;
     [SerializeField] private GameObject spriteHolderLeft;
     [SerializeField] private GameObject spriteHolderRight;
@@ -142,7 +141,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (typewrite)
         {
-            //typewritingRN = true;
+            currentlyPrintingText = true;
             TypeWrite(newObject.GetComponent<TextMeshProUGUI>(), dialogue);
         }
         else
@@ -153,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         previousLine = newObject; //set as previous line
 
         index++; //move on <<BE CAREFUL OF THIS!!
-
+        currentlyPrintingText = false;
         openLog(isOpen);
 
         Canvas.ForceUpdateCanvases();
@@ -380,7 +379,11 @@ public class DialogueManager : MonoBehaviour
 
         if (destroyold)
         {
-            foreach (Transform child in contentHolder.transform)
+            foreach (Transform child in textBoxTarget.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            foreach (Transform child in choiceBoxTarget.transform)
             {
                 GameObject.Destroy(child.gameObject);
             }
@@ -429,7 +432,8 @@ public class DialogueManager : MonoBehaviour
 
         centerChoices();
         //spawn however many buttons with the text from the conversations' Choice scriptable object then set the variable on click
-
+        tailLeft.SetActive(true);
+        tailRight.SetActive(false);
     }
 
     public void centerChoices()

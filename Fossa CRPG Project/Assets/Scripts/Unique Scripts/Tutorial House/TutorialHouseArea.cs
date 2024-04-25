@@ -10,6 +10,9 @@ public class TutorialHouseArea : AreaManager
     public AbilityData armAbility;
     public GameObject muffinByTheDoor;
     public GameObject muffinReleaseScene;
+    [SerializeField] public GameObject revealDialogue;
+    [SerializeField] public GameObject postFightDialogue;
+
 
     [Header("Tutorial Combat")]
     [SerializeField] private GameObject preFrog;
@@ -129,6 +132,8 @@ public class TutorialHouseArea : AreaManager
             if (areaBools.ContainsKey("defeatedOwner"))
             {
                 areaBools["defeatedOwner"] = true;
+                revealDialogue.SetActive(true);
+                postFightDialogue.SetActive(true);
             }
 
             if (areaFloats.ContainsKey("Current Song"))
