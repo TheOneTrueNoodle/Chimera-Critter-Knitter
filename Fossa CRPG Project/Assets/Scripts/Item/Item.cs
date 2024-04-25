@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [Header("Item Information")]
     [HideInInspector] public ItemType itemType;
     public string itemName;
+    public string itemDescription;
+    public Sprite itemSprite;
 
+    [Header("Visuals")]
     public Vector3 holdRotationV3;
     public Rigidbody rb;
     public Collider physicsCollider;

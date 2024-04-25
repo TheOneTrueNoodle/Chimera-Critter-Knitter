@@ -360,6 +360,7 @@ public class CombatHandler : MonoBehaviour
             {
                 //GAME ENDSSSSS!!!!!!
                 CombatEvents.current.GameOver();
+                Time.timeScale = 0;
             }
         }
 

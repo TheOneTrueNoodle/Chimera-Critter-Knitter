@@ -17,6 +17,8 @@ public class AbilityData : ScriptableObject
 
     public GameObject abilityVisual;
 
+    public Sprite mutationMenuVisual;
+
     [Header("Ability Information")]
     public TextAsset abilityShape;
 

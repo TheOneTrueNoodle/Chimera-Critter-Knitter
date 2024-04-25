@@ -11,6 +11,7 @@ public class CharacterMenuManager : MonoBehaviour
     [SerializeField] private Image portrait;
     [SerializeField] private Character oscarChar;
     private Entity oscarData;
+    private HeldItem heldItem;
 
     [Header("Level and XP")]
     [SerializeField] private TMP_Text levelDisp;
@@ -27,6 +28,11 @@ public class CharacterMenuManager : MonoBehaviour
     [SerializeField] private Transform resistancesContent;
     [SerializeField] private Transform weaknessesContent;
 
+    [Header("Held Item")]
+    [SerializeField] private Image heldItemImage;
+    [SerializeField] private TMP_Text heldItemName;
+    [SerializeField] private TMP_Text heldItemDescription;
+
     [Header("Prefabs")]
     [SerializeField] private ElementalDisp ElementDisp;
 
@@ -34,7 +40,11 @@ public class CharacterMenuManager : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        if(oscarData == null) { oscarData = FindObjectOfType<PlayerMovement>().GetComponent<Entity>(); }
+        if(oscarData == null) 
+        { 
+            oscarData = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
+            heldItem = oscarData.gameObject.GetComponent<HeldItem>();
+        }
 
         if(oscarData.activeStatsDir == null) { AssignOscarData(); }
 
@@ -93,6 +103,22 @@ public class CharacterMenuManager : MonoBehaviour
                 newWeakness.Setup(damageType);
                 ActiveInstantiatedObjects.Add(newWeakness.gameObject);
             }
+        }
+
+        //Held Item Information
+        if (heldItem.currentItem != null)
+        {
+            //Is holding item
+            heldItemImage.sprite = heldItem.currentItem.itemSprite;
+            heldItemName.text = heldItem.currentItem.itemName;
+            heldItemDescription.text = heldItem.currentItem.itemDescription;
+        }
+        else
+        {
+            //No item held
+            heldItemImage.sprite = null;
+            heldItemName.text = "";
+            heldItemDescription.text = "";
         }
     }
 

@@ -2,13 +2,12 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=20219 (137979), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
 [LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
-[LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000017FF6BAC9F8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000015E08ED9748 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -23,4 +22,185 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[ERR] assert                                   : assertion: 'gSystemInitCount == 0' failed
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 116224
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 12608
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000028394FEF18
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF96F7A3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF96F7A3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF96F7A4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF96F7A4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001602E7BDC48
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Muffin Barking 2', format=5, channels=2, frequency=48000, lengthbytes=9728, lengthpcm=32600, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.595062.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 116224
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 12608
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000028394FEF18
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF96F7A3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF96F7A3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF96F7A4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF96F7A4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001602E7BDC48
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Muffin Barking 6', format=5, channels=2, frequency=48000, lengthbytes=7712, lengthpcm=25077, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.944153.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 116224
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 12608
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000028394FEF18
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF96F7A3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF96F7A3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF96F7A4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF96F7A4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001602E7BDC48
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Muffin Barking 7', format=5, channels=2, frequency=48000, lengthbytes=10208, lengthpcm=32600, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.958832.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 116224
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 12608
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000028394FEF18
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF96F7A3F70
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF96F7A3F30
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF96F7A4050
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF96F7A4110
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001602E7BDC48
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Muffin Barking 4', format=5, channels=2, frequency=48000, lengthbytes=13152, lengthpcm=41377, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.727814.
+[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000016058208FC8, queue head = 0000016161CB0958, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000016058208FC8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 19222624
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 80352
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000016057E8FD30
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Ground Floor', format=5, channels=2, frequency=48000, lengthbytes=784928, lengthpcm=2805371, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.726318.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000016058208FC8
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000015E010B31A8, queue head = 0000016161CB0958, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000015E010B31A8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000015E010B31A8
+[LOG] SoundI::release                          : Basement (00000160A0FA50F8)
+[LOG] SoundI::release                          :     Basement (00000160593EC088)
+[LOG] SoundI::release                          :     Basement (0000016166298248)
+[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000016058208908, queue head = 0000016161CB0958, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000016058208908
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 19222624
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 80352
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000016057E90AF0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Basement', format=5, channels=2, frequency=48000, lengthbytes=1198368, lengthpcm=4975774, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.647064.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000016058208908
+[LOG] AsyncThread::add                         : add sound to async queue : soundi = 000001609F6B67B8, queue head = 0000016161CB0958, queue count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001609F6B67B8
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001609F6B67B8
+[LOG] SoundI::release                          : Ground Floor (0000016058208FC8)
+[LOG] SoundI::release                          :     Ground Floor (00000160593EC708)
+[LOG] SoundI::release                          :     Ground Floor (0000015E010B31A8)
+[LOG] SoundI::release                          : Basement (0000016058208908)
+[LOG] SoundI::release                          :     Basement (0000016161C86FF8)
+[LOG] SoundI::release                          :     Basement (000001609F6B67B8)
+[LOG] SoundI::release                          :  (0000016165D38B18)
+[LOG] SoundI::release                          :     Muffin Barking 7 (0000015E0092F0B8)
+[LOG] SoundI::release                          :  (0000016165D386C8)
+[LOG] SoundI::release                          :     Muffin Barking 6 (0000015E0092ED78)
+[LOG] SoundI::release                          :  (0000016165D37138)
+[LOG] SoundI::release                          :     Muffin Barking 2 (000001611156F038)
+[LOG] SoundI::release                          :  (0000016165D38838)
+[LOG] SoundI::release                          :     Muffin Barking 4 (0000015E0092F598)
+[LOG] SoundI::release                          :  (00000161619D4B78)
+[LOG] SoundI::release                          :     Carpet Footstep 1 (0000016161BC9D88)
+[LOG] SoundI::release                          :  (00000161619D4CE8)
+[LOG] SoundI::release                          :     Carpet Footstep 3 (0000016166326218)
+[LOG] SoundI::release                          :  (00000161619D4E58)
+[LOG] SoundI::release                          :     Carpet Footstep 4 (0000016161BC9568)
+[LOG] SoundI::release                          :  (00000160A273F138)
+[LOG] SoundI::release                          :     Carpet Footstep 5 (0000016166325ED8)
+[LOG] SoundI::release                          :  (00000161619D4FC8)
+[LOG] SoundI::release                          :     Carpet Footstep 6 (0000016161BC9228)
+[LOG] SoundI::release                          :  (0000016161964308)
+[LOG] SoundI::release                          :     type1 (0000016161A3FDF8)
+[LOG] SoundI::release                          :  (00000161619638F8)
+[LOG] SoundI::release                          :     type10 (0000016161A3F5D8)
+[LOG] SoundI::release                          :  (0000016161963EB8)
+[LOG] SoundI::release                          :     type11 (0000016161A59EA8)
+[LOG] SoundI::release                          :  (0000016161963D48)
+[LOG] SoundI::release                          :     type12 (0000016161A402D8)
+[LOG] SoundI::release                          :  (00000161619D4728)
+[LOG] SoundI::release                          :     type13 (0000016161BC9708)
+[LOG] SoundI::release                          :  (0000016161963A68)
+[LOG] SoundI::release                          :     type14 (0000016161A5A388)
+[LOG] SoundI::release                          :  (0000016161964028)
+[LOG] SoundI::release                          :     type15 (0000016161A40138)
+[LOG] SoundI::release                          :  (0000016161964198)
+[LOG] SoundI::release                          :     type16 (0000016161A59828)
+[LOG] SoundI::release                          :  (00000161619D4A08)
+[LOG] SoundI::release                          :     type17 (0000016161A05C58)
+[LOG] SoundI::release                          :  (00000161619D42D8)
+[LOG] SoundI::release                          :     type18 (0000016161BC9BE8)
+[LOG] SoundI::release                          :  (000001600AFF9B68)
+[LOG] SoundI::release                          :     type2 (000001602EA96598)
+[LOG] SoundI::release                          :  (00000161619D45B8)
+[LOG] SoundI::release                          :     type3 (0000016161A05438)
+[LOG] SoundI::release                          :  (0000016161963788)
+[LOG] SoundI::release                          :     type4 (000001602EA96C18)
+[LOG] SoundI::release                          :  (00000161619D4898)
+[LOG] SoundI::release                          :     type5 (0000016161A05DF8)
+[LOG] SoundI::release                          :  (0000016161963BD8)
+[LOG] SoundI::release                          :     type6 (0000016161A59B68)
+[LOG] SoundI::release                          :  (00000161619D4448)
+[LOG] SoundI::release                          :     type7 (0000016161A055D8)
+[LOG] SoundI::release                          :  (000001600AFF9CD8)
+[LOG] SoundI::release                          :     type8 (000001602EA96DB8)
+[LOG] SoundI::release                          :  (0000016161964478)
+[LOG] SoundI::release                          :     type9 (0000016161A3F778)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.

@@ -179,11 +179,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (nearestInteraction.interactSprite == null)
             {
-                MenuEvent.current.ShowInteractUI(nearestInteraction.interactSprite);
+                MenuEvent.current.ShowInteractUI(nearestInteraction);
             }
             else
             {
-                MenuEvent.current.ShowInteractUI(nearestInteraction.interactSprite);
+                MenuEvent.current.ShowInteractUI(nearestInteraction);
             }
         }
     }
@@ -414,9 +414,12 @@ public class PlayerMovement : MonoBehaviour
         idle = true;
         inDialogue = true;
         footstepInstance.UpdateSound(false, 0f);
+
+        rb.useGravity = false;
     }
     private void EndDialogue()
     {
         inDialogue = false;
+        rb.useGravity = true;
     }
 }

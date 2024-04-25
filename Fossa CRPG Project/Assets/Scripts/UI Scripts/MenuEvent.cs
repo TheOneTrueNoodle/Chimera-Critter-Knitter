@@ -65,12 +65,12 @@ public class MenuEvent : MonoBehaviour
         }
     }
 
-    public event Action<Sprite> onShowInteractUI;
-    public void ShowInteractUI(Sprite sprite)
+    public event Action<Interactable> onShowInteractUI;
+    public void ShowInteractUI(Interactable interactable)
     {
         if (onShowInteractUI != null)
         {
-            onShowInteractUI(sprite);
+            onShowInteractUI(interactable);
         }
     }
 

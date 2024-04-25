@@ -10,6 +10,8 @@ public class GameMenuManager : MonoBehaviour
 
     [SerializeField] public Animator characterMenuObj;
 
+    public GameObject journalButton;
+
     public GameObject pauseMenuObj;
     public SettingsManager SettingsMenuObj;
     public GameObject controlsMenuObj;
@@ -191,17 +193,25 @@ public class GameMenuManager : MonoBehaviour
         popup.Setup(text);
     }
 
-    public void ShowInteractUI(Sprite sprite)
+    public void ShowInteractUI(Interactable interactable)
     {
-        if (inDialogue) { return; }
-        if (sprite != null)
+        if (inDialogue || inCombat) { return; }
+        if (interactable != null)
         {
-            interactSpriteImage.sprite = sprite;
-            interactSpriteImage.color = new Color(1, 1, 1, 1);
+            if (interactable.TryGetComponent(out MutationTrigger mutTrig))
+            {
+                interactSpriteImage.color = new Color(0, 0, 0, 1);
+            }
+            else
+            {
+                interactSpriteImage.color = new Color(1, 1, 1, 1);
+            }
+
+            interactSpriteImage.sprite = interactable.interactSprite;
         }
         else
         {
-            interactSpriteImage.sprite = sprite;
+            interactSpriteImage.sprite = null;
             interactSpriteImage.color = new Color(1, 1, 1, 0);
         }
 
@@ -223,11 +233,17 @@ public class GameMenuManager : MonoBehaviour
         {
             CloseCharacterMenu();
         }
+
+        journalButton.SetActive(false);
+
         CombatEvents.current.onEndCombat += EndCombat;
     }
     private void EndCombat(string combatName)
     {
         inCombat = false;
+
+        journalButton.SetActive(true);
+
         CombatEvents.current.onEndCombat -= EndCombat;
     }
 
@@ -235,11 +251,17 @@ public class GameMenuManager : MonoBehaviour
     {
         inDialogue = true;
         HideInteractUI();
+
+        journalButton.SetActive(false);
+
         DialogueEvents.current.onEndDialogue += EndDialogue;
     }
     private void EndDialogue()
     {
         inDialogue = false;
+
+        journalButton.SetActive(true);
+
         DialogueEvents.current.onEndDialogue -= EndDialogue;
     }
 }

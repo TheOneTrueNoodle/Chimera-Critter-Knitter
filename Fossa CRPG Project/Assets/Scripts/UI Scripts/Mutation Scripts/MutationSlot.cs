@@ -13,6 +13,8 @@ public class MutationSlot : MonoBehaviour
     [SerializeField] private TMP_Text nameDisp;
     public Image hasMutationDisp;
 
+    public Image OscarVisualSlot;
+
     public bool hasEquippedMutation;
 
     public void EquipMutation(MutationOption mutation)
@@ -24,6 +26,10 @@ public class MutationSlot : MonoBehaviour
         nameDisp.text = currentSelectedMutation.mutationAbility.Name;
         hasMutationDisp.enabled = true;
         hasEquippedMutation = true;
+
+        OscarVisualSlot.gameObject.SetActive(true);
+        OscarVisualSlot.sprite = currentSelectedMutation.mutationAbility.mutationMenuVisual;
+        OscarVisualSlot.preserveAspect = true;
     }
 
     public void UnequipMutation()
@@ -36,5 +42,8 @@ public class MutationSlot : MonoBehaviour
         nameDisp.text = "";
         hasMutationDisp.enabled = false;
         hasEquippedMutation = false;
+
+        OscarVisualSlot.gameObject.SetActive(false);
+        OscarVisualSlot.sprite = null;
     }
 }

@@ -37,7 +37,7 @@ public class CombatUI : MonoBehaviour
 
     [Header("End Combat UI")]
     [SerializeField] private GameObject endCombatUI;
-    [SerializeField] private GameObject gameOverUI;
+    [SerializeField] private Animator gameOverAnim;
 
     private bool UIOpen;
     private bool abilityUIOpen;
@@ -416,6 +416,11 @@ public class CombatUI : MonoBehaviour
 
     public void GameOver()
     {
-        gameOverUI.SetActive(true);
+        //Animate Game Over UI
+
+
+        //Change to Game Over Music
+
+        gameOverAnim.Play("Game Over");
     }
 }

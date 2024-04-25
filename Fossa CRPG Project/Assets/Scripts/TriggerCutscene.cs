@@ -24,7 +24,6 @@ public class TriggerCutscene : MonoBehaviour
     {
        if (other.tag == "BasementCutscene")
          {
-           
             StartCoroutine(BossCutsceneStart());
         }
     }
