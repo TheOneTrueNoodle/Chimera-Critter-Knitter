@@ -110,6 +110,7 @@ public class CharacterMenuManager : MonoBehaviour
         {
             //Is holding item
             heldItemImage.sprite = heldItem.currentItem.itemSprite;
+            heldItemImage.preserveAspect = true;
             heldItemName.text = heldItem.currentItem.itemName;
             heldItemDescription.text = heldItem.currentItem.itemDescription;
         }

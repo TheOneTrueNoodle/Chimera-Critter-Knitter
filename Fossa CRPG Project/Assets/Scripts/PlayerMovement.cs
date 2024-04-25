@@ -6,8 +6,8 @@ using FMOD.Studio;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool inCombat;
-    private bool inDialogue;
+    public bool inCombat;
+    public bool inDialogue;
 
     [SerializeField] private float runSpeed;
     [SerializeField] private float walkSpeed;
@@ -416,6 +416,7 @@ public class PlayerMovement : MonoBehaviour
         footstepInstance.UpdateSound(false, 0f);
 
         rb.useGravity = false;
+        rb.velocity = Vector3.zero; 
     }
     private void EndDialogue()
     {
