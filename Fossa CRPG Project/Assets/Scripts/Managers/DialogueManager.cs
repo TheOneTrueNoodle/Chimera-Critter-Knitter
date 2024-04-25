@@ -152,7 +152,7 @@ public class DialogueManager : MonoBehaviour
         previousLine = newObject; //set as previous line
 
         index++; //move on <<BE CAREFUL OF THIS!!
-        currentlyPrintingText = false;
+        //currentlyPrintingText = false;
         openLog(isOpen);
 
         Canvas.ForceUpdateCanvases();
@@ -182,6 +182,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             speechEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            currentlyPrintingText = false;
         }
     }
 
