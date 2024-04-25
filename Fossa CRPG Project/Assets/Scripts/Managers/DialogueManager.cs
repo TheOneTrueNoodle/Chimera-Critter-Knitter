@@ -383,6 +383,7 @@ public class DialogueManager : MonoBehaviour
     void showChoice()
     {
         pawButton.SetActive(false);
+        choiceBoxTarget.SetActive(false);
         choicesActive = true;
         //choiceBoxTarget.SetActive(false);
 
