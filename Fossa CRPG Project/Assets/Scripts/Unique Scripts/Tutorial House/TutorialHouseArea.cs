@@ -10,6 +10,8 @@ public class TutorialHouseArea : AreaManager
     public AbilityData armAbility;
     public GameObject muffinByTheDoor;
     public GameObject muffinReleaseScene;
+    public GameObject muffinBasementDialogues;
+
     [SerializeField] public GameObject revealDialogue;
     [SerializeField] public GameObject postFightDialogue;
 
@@ -17,6 +19,8 @@ public class TutorialHouseArea : AreaManager
     [Header("Tutorial Combat")]
     [SerializeField] private GameObject preFrog;
     [SerializeField] private GameObject postFrog;
+    [SerializeField] private GameObject ignoredMuffin;
+
     [SerializeField] private AbilityData FrogTongueAbility;
 
     [Header("Boss fight")]
@@ -28,6 +32,25 @@ public class TutorialHouseArea : AreaManager
         CombatEvents.current.onStartCombatSetup += StartCombat;
 
         DialogueEvents.current.onEndDialogue += EndDialogue;
+    }
+
+    private void Update()
+    {
+        if (areaBools["hasBlanket"])
+        {
+            areaBools["freedMuffin"] = true;
+        }
+        if (areaBools["freedMuffin"])
+        {
+            muffinByTheDoor.SetActive(true);
+            muffinReleaseScene.SetActive(true);
+            muffinBasementDialogues.SetActive(false);
+        }
+        if (areaBools["ignoredMuffin"])
+        {
+            ignoredMuffin.SetActive(true);
+        }
+
     }
 
     private void OscarGetsHitForTheFirstTime(Entity attacker, Entity target)
@@ -72,7 +95,14 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["hasBlanket"] = true;
             areaBools["blanketBribed"] = true;
-            freedMuffin();
+        }
+    }
+
+    public void IgnoredMuffin()
+    {
+        if (areaBools.ContainsKey("ignoredMuffin"))
+        {
+            areaBools["ignoredMuffin"] = true;
         }
     }
 
@@ -81,9 +111,15 @@ public class TutorialHouseArea : AreaManager
         if (areaBools.ContainsKey("freedMuffin"))
         {
             areaBools["freedMuffin"] = true;
-            muffinByTheDoor.SetActive(true);
-            muffinReleaseScene.SetActive(true);
+        }
+    }
 
+
+    public void FlushToilet()
+    {
+        if (areaBools.ContainsKey("flushToilet"))
+        {
+            areaBools["flushToilet"] = true;
         }
     }
 

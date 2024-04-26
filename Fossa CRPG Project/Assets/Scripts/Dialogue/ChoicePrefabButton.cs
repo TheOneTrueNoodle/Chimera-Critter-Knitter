@@ -109,7 +109,7 @@ public class ChoicePrefabButton : MonoBehaviour
         if (relevantAreaManager.areaBools.ContainsKey(ID))
         {
             relevantAreaManager.areaBools[ID] = true;
-            //Debug.Log(relevantAreaManager.areaBools[ID]);
+            Debug.Log("Area Manager Bool for " + textChoiceField.text + "is now " + relevantAreaManager.areaBools[ID]);
 
         }
     }
