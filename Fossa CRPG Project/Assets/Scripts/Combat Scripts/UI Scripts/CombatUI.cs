@@ -201,6 +201,8 @@ public class CombatUI : MonoBehaviour
         {
             abilityButton[i].gameObject.SetActive(true);
             abilityButton[i].SetupButton(Char.activeAbilities[i], i);
+            if(Char.activeStatsDir["MaxSP"].statValue < Char.activeAbilities[i].abilityCost) { abilityButton[i].GetComponent<Button>().interactable = false; }
+            else { abilityButton[i].GetComponent<Button>().interactable = true; }
         }
 
         if (Char.activeAbilities.Count > 0)
