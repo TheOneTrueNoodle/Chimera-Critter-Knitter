@@ -138,6 +138,7 @@ public class GameMenuManager : MonoBehaviour
     {
         pauseMenuObj.SetActive(false);
         SettingsMenuObj.gameObject.SetActive(true);
+        SettingsMenuObj.GetCurrentSettings();
     }
 
     public void SettingsBack()

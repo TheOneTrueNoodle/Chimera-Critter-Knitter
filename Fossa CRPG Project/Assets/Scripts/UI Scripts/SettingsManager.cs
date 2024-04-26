@@ -59,7 +59,7 @@ public class SettingsManager : MonoBehaviour
         GetCurrentSettings();
     }
 
-    private void GetCurrentSettings()
+    public void GetCurrentSettings()
     {
         masterVolumeSlider.value = PlayerPrefs.GetFloat("Master Volume", 1);
         masterVolumePercent.text = (PlayerPrefs.GetFloat("Master Volume", 1) * 100).ToString("F0") + "%";
@@ -78,9 +78,9 @@ public class SettingsManager : MonoBehaviour
         cameraSensitivitySlider.value = PlayerPrefs.GetFloat("Camera Sensitivity", 3);
         camSensitivityValue.text = PlayerPrefs.GetFloat("Camera Sensitivity").ToString("F2");
 
-        changedSettings = false;
-
         GetResolutionOptions();
+
+        changedSettings = false;
     }
 
     public void ResetSettings()
