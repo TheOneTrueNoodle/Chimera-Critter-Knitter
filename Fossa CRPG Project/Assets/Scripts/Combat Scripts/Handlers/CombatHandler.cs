@@ -508,11 +508,10 @@ public class CombatHandler : MonoBehaviour
     private IEnumerator StartCombatDisplay()
     {
         startCombatAnim.gameObject.SetActive(true);
-        startCombatAnim.Play("Start Combat");
 
         if (startCombatAnim != null)
         {
-            startCombatAnim.Play("StartCombat");
+            startCombatAnim.Play("Start Combat");
             yield return new WaitUntil(() => startCombatAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
