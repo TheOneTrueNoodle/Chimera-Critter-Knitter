@@ -126,7 +126,17 @@ public class PlayerMovement : MonoBehaviour
         //Do bark code
         if (anim.GetCurrentAnimatorStateInfo(1).IsName("Bark")) { return; }
         anim.Play("Bark");
-        AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position);
+
+        if (TryGetComponent(out HeldItem heldItem) && heldItem.currentItem != null)
+        {
+            if (heldItem.currentItem.isSqueaky)
+            {
+                AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarSqueakyBark, transform.position);
+            }
+            else { AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position); }
+        }
+        else { AudioManager.instance.PlayOneShot(FMODEvents.instance.oscarBark, transform.position); }
+
         idleTimer = 0;
         anim.SetFloat("Idle Time", 0);
     }

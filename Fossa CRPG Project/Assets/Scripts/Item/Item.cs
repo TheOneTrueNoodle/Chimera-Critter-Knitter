@@ -16,6 +16,9 @@ public class Item : MonoBehaviour
     public Collider physicsCollider;
     public Collider triggerCollider;
 
+    [Header("Sounds")]
+    public bool isSqueaky;
+
     public void enablePhysics()
     {
         rb.useGravity = true;

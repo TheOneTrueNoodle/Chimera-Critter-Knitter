@@ -15,6 +15,7 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Oscar SFX")]
     [field: SerializeField] public EventReference oscarBark { get; private set; }
+    [field: SerializeField] public EventReference oscarSqueakyBark { get; private set; }
     [field: SerializeField] public EventReference oscarSmell { get; private set; }
 
     [field: Header("Unit SFX")]
