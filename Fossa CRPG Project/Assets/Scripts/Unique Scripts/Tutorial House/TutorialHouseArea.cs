@@ -15,6 +15,9 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] public GameObject revealDialogue;
     [SerializeField] public GameObject postFightDialogue;
 
+    [Header("Toilet")]
+    [SerializeField] private GameObject toilet;
+    [SerializeField] private FMODUnity.EventReference flushToilet;
 
     [Header("Tutorial Combat")]
     [SerializeField] private GameObject preFrog;
@@ -123,6 +126,20 @@ public class TutorialHouseArea : AreaManager
         }
     }
 
+    private void EndDialogue()
+    {
+        if (areaBools.ContainsKey("BossFightCutscenePT2") && areaBools["BossFightCutscenePT2"])
+        {
+            //Turn on second cutscene
+            bossCutsceneSecondPart.SetActive(true);
+        }
+        else if (areaBools.ContainsKey("flushToilet") && areaBools["flushToilet"])
+        {
+            areaBools["flushToilet"] = false;
+            AudioManager.instance.PlayOneShot(flushToilet, toilet.transform.position);
+        }
+    }
+
     #region Combat Related Function
     private void StartCombat(string combatName)
     {
@@ -180,15 +197,6 @@ public class TutorialHouseArea : AreaManager
             AudioManager.instance.SetMusicSong(areaFloats["Current Song"]);
 
             return;
-        }
-    }
-
-    private void EndDialogue()
-    {
-        if (areaBools.ContainsKey("BossFightCutscenePT2") && areaBools["BossFightCutscenePT2"])
-        {
-            //Turn on second cutscene
-            bossCutsceneSecondPart.SetActive(true);
         }
     }
 

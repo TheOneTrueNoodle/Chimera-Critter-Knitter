@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8996397244478889053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/UI Button
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/UI Button
+  Guid:
+    Data1: -42436364
+    Data2: 1264119497
+    Data3: 111532731
+    Data4: 1018222829
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 235
 --- !u!114 &-8905982750716916857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638497494246915278
+  lastModified: 638497576778585196
   FileSizes:
   - Name: Desktop
-    Value: 310016
+    Value: 3036128
   Exists: 1
 --- !u!114 &-8637116375802603612
 MonoBehaviour:
@@ -74,6 +101,114 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2769
+--- !u!114 &-8005391335513176734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oscar/Bark with Toy
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oscar/Bark with Toy
+  Guid:
+    Data1: 41472029
+    Data2: 1242223663
+    Data3: 242433456
+    Data4: 1909338045
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 470
+--- !u!114 &-7188596717878949792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Muffin/Muffin Crying
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Muffin/Muffin Crying
+  Guid:
+    Data1: -1064193829
+    Data2: 1257983911
+    Data3: 1234918275
+    Data4: -403875550
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3595
+--- !u!114 &-7000647256721963983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Flush Toilet
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Flush Toilet
+  Guid:
+    Data1: -1636788212
+    Data2: 1218361782
+    Data3: -777833031
+    Data4: 373462201
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22344
+--- !u!114 &-6880984388896632458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Tag Button
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Tag Button
+  Guid:
+    Data1: -1709686752
+    Data2: 1155586470
+    Data3: -298470011
+    Data4: -1805424435
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 451
 --- !u!114 &-6822480876944000968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -224,7 +359,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638497494246885370
+  lastModified: 638497327838030038
   FileSizes:
   - Name: Desktop
     Value: 21316768
@@ -244,11 +379,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638497494246212604
+  lastModified: 638497576747883342
   FileSizes:
   - Name: Desktop
-    Value: 2222
+    Value: 2814
   Exists: 1
+--- !u!114 &-3198610263214029961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Frog/Frog Lick
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Frog/Frog Lick
+  Guid:
+    Data1: 2144028235
+    Data2: 1274130046
+    Data3: -687999316
+    Data4: 272059570
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 731
 --- !u!114 &-2967818218214744826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,11 +538,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Entities/Oscar
-  lastModified: 638496698186440321
+  lastModified: 638497576779616326
   FileSizes:
   - Name: Desktop
-    Value: 128832
+    Value: 156160
   Exists: 1
+--- !u!114 &-2213672172252802119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Toggle Character Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Toggle Character Menu
+  Guid:
+    Data1: -24933698
+    Data2: 1094579234
+    Data3: 505419922
+    Data4: 842698567
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1117
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,7 +614,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Cat Monster.bank
   Name: Cat Monster
   StudioPath: bank:/Entities/Cat Monster
-  lastModified: 638496697041543803
+  lastModified: 638495855213359307
   FileSizes:
   - Name: Desktop
     Value: 228064
@@ -473,7 +662,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638496696994039389
+  lastModified: 638497576747857835
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -518,12 +707,24 @@ MonoBehaviour:
   - {fileID: -2967818218214744826}
   - {fileID: -625371979030063624}
   - {fileID: -6822480876944000968}
+  - {fileID: -7000647256721963983}
+  - {fileID: -8005391335513176734}
+  - {fileID: -6880984388896632458}
+  - {fileID: 1293066521067444558}
+  - {fileID: -3198610263214029961}
+  - {fileID: 6359321777758174465}
+  - {fileID: 4280059684286448402}
+  - {fileID: 3526519617876909815}
+  - {fileID: -2213672172252802119}
+  - {fileID: 3728517636630936273}
+  - {fileID: -7188596717878949792}
+  - {fileID: -8996397244478889053}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638497494246915278
+  cacheTime: 638497576779616326
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -578,7 +779,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 605
+  Length: 1080
 --- !u!114 &706544227737308186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,6 +835,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 605
+--- !u!114 &1293066521067444558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Owner/Owner Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Owner/Owner Attack
+  Guid:
+    Data1: -1320587975
+    Data2: 1115044284
+    Data3: 139274132
+    Data4: -743645923
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2088
 --- !u!114 &2291006595840966275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +943,87 @@ MonoBehaviour:
   - Grass
   - Wood
   Exists: 1
+--- !u!114 &3526519617876909815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Oscar/Eat Food
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Oscar/Eat Food
+  Guid:
+    Data1: -941489479
+    Data2: 1133024818
+    Data3: 2040930472
+    Data4: 261997223
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1600
+--- !u!114 &3728517636630936273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Frog/Frog Croak
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Frog/Frog Croak
+  Guid:
+    Data1: 303297752
+    Data2: 1215007970
+    Data3: -209743460
+    Data4: 952240388
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2179
+--- !u!114 &4280059684286448402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Wind Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Wind Ambience
+  Guid:
+    Data1: 1886802066
+    Data2: 1198065308
+    Data3: -1436370559
+    Data4: -2050694784
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 165288
 --- !u!114 &4898475190465275905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +1112,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6359321777758174465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Muffin/Muffin Bark
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Muffin/Muffin Bark
+  Guid:
+    Data1: -2027398518
+    Data2: 1242536728
+    Data3: 2062688426
+    Data4: -1126223542
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 861
 --- !u!114 &6804102487714707051
 MonoBehaviour:
   m_ObjectHideFlags: 0
