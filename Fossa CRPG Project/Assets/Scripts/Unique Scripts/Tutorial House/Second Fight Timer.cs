@@ -8,7 +8,7 @@ public class SecondFightTimer : MonoBehaviour
 
     private bool playerInRoom;
 
-    private float currentTimer;
+    public float currentTimer;
 
     [SerializeField] private GameObject roomBeforeTimer;
     [SerializeField] private GameObject roomAfterTimer;
@@ -25,7 +25,7 @@ public class SecondFightTimer : MonoBehaviour
             if (timerLength - currentTimer <= 5f)
             {
                 //Within 5 seconds of timer ending
-                currentTimer = 5f;
+                currentTimer = timerLength - 5f;
             }
         }
 
@@ -36,6 +36,8 @@ public class SecondFightTimer : MonoBehaviour
             roomAfterTimer.SetActive(true);
             AudioManager.instance.PlayOneShot(glassBreakSFX, glassBreakSource.position);
             MenuEvent.current.SpawnPopup("Something broke into the study...");
+
+            gameObject.SetActive(false);
         }
     }
 
@@ -53,6 +55,11 @@ public class SecondFightTimer : MonoBehaviour
         {
             playerInRoom = false;
         }
+    }
+
+    public void TriggerTimer()
+    {
+        currentTimer = timerLength;
     }
 
     private void OnEnable()

@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638497670160052595
+  lastModified: 638497683386291818
   FileSizes:
   - Name: Desktop
-    Value: 3036256
+    Value: 3068128
   Exists: 1
 --- !u!114 &-8637116375802603612
 MonoBehaviour:
@@ -364,6 +364,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 21316768
   Exists: 1
+--- !u!114 &-4646019033158962082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Window Breaking
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Window Breaking
+  Guid:
+    Data1: -290008713
+    Data2: 1119594980
+    Data3: 1641977533
+    Data4: 599519267
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2633
 --- !u!114 &-3348362756808868654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,10 +406,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638497576747883342
+  lastModified: 638497674375319156
   FileSizes:
   - Name: Desktop
-    Value: 2814
+    Value: 2868
   Exists: 1
 --- !u!114 &-3198610263214029961
 MonoBehaviour:
@@ -538,10 +565,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Oscar.bank
   Name: Oscar
   StudioPath: bank:/Entities/Oscar
-  lastModified: 638497576779616326
+  lastModified: 638497683387312461
   FileSizes:
   - Name: Desktop
-    Value: 156160
+    Value: 128832
   Exists: 1
 --- !u!114 &-2213672172252802119
 MonoBehaviour:
@@ -662,7 +689,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638497576747857835
+  lastModified: 638497674375269103
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -719,12 +746,13 @@ MonoBehaviour:
   - {fileID: 3728517636630936273}
   - {fileID: -7188596717878949792}
   - {fileID: -8996397244478889053}
+  - {fileID: -4646019033158962082}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638497670160052595
+  cacheTime: 638497683387312461
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:

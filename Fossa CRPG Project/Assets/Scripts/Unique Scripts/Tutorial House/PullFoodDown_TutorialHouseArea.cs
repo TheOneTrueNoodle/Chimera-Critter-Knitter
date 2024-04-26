@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PullFoodDown_TutorialHouseArea : MonoBehaviour
 {
-    [SerializeField] private Animator foodFallingAnim;
     [SerializeField] private GameObject eatFoodInteraction;
-
-    [SerializeField] private GameObject twoFrogsCombatTrigger;
-    [SerializeField] private List<GameObject> frogs;
 
     public void Call()
     {
@@ -16,11 +12,7 @@ public class PullFoodDown_TutorialHouseArea : MonoBehaviour
         {
             eatFoodInteraction.SetActive(true);
 
-            twoFrogsCombatTrigger.SetActive(true);
-            foreach (var obj in frogs)
-            {
-                obj.SetActive(true);
-            }
+            MenuEvent.current.SpawnPopup("Eat some food to heal!");
 
             gameObject.SetActive(false);
         }

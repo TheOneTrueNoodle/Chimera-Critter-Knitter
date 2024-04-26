@@ -210,6 +210,7 @@ public class GameMenuManager : MonoBehaviour
             }
 
             interactSpriteImage.sprite = interactable.interactSprite;
+            interactSpriteImage.preserveAspect = true;
         }
         else
         {
