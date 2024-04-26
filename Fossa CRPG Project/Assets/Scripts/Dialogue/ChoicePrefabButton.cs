@@ -58,18 +58,6 @@ public class ChoicePrefabButton : MonoBehaviour
     {
         dm.choiceBoxTarget.SetActive(true);
 
-        /*
-        int j = 0;
-        GameObject content = GameObject.Find("Content");
-        foreach (Transform child in content.transform)
-        {
-            if (child.tag == "Dialogue")
-            {
-                j++;
-            }
-        }
-        int i = transform.GetSiblingIndex();
-        */
         checkForFlagChanges(this.choice.options[order].progressionID);
 
         dm.changeBackgroundColour(dm.choiceSprites, Color.white);
@@ -116,20 +104,7 @@ public class ChoicePrefabButton : MonoBehaviour
 
     private void initialiseText()
     {
-        /*int x = 0;
-        GameObject content = GameObject.Find("Content");
-        foreach (Transform child in content.transform)
-        {
-            if (child.tag == "Dialogue")
-            {
-                x++;
-            }
-        }
 
-        int y = transform.GetSiblingIndex();
-        //Debug.Log(y);
-        //Debug.Log(x);
-        */
         Debug.Log(order);
         textChoiceField.text = choice.options[order].choiceText; //set text in textbox
         //GetComponentInParent<TextMeshProUGUI>().text = choice.options[(y - x)].choiceText; //set text in textbox
