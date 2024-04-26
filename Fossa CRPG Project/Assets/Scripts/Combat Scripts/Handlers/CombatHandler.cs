@@ -361,6 +361,7 @@ public class CombatHandler : MonoBehaviour
                 //GAME ENDSSSSS!!!!!!
                 CombatEvents.current.GameOver();
                 Time.timeScale = 0;
+                AudioManager.instance.SetMusicSong(9);
             }
         }
 

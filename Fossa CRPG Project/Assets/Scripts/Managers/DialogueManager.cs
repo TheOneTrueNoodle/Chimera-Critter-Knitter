@@ -425,6 +425,7 @@ public class DialogueManager : MonoBehaviour
             newObject.transform.SetParent(textBoxTarget.transform); //make child of
             newObject.transform.localScale = new Vector3(1, 1, 1); //fix scale problems
             newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
+            newObject.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
 
             //newObject.GetComponent<ChoicePrefabButton>().choice = currentConvo.choice; //old system
             newObject.GetComponentInChildren<ChoicePrefabButton>().choice = currentConvo.choice;
