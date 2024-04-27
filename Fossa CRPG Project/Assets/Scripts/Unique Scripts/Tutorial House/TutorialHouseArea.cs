@@ -23,11 +23,26 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] private GameObject preFrog;
     [SerializeField] private GameObject postFrog;
     [SerializeField] private GameObject ignoredMuffin;
+    [SerializeField] private GameObject zzzMuffin;
+    [SerializeField] private GameObject snubbedBlanket;
+    [SerializeField] private GameObject mightyMuffin;
+
 
     [SerializeField] private AbilityData FrogTongueAbility;
 
     [Header("Boss fight")]
     [SerializeField] private GameObject bossCutsceneSecondPart;
+
+    [Header("Endings")]
+    [SerializeField] private GameObject ending1;
+    [SerializeField] private GameObject ending2;
+    [SerializeField] private GameObject ending3;
+    [SerializeField] private GameObject ending4;
+    [SerializeField] private GameObject ending5;
+    [SerializeField] private GameObject endingTrigger1;
+    //[SerializeField] private GameObject endingTrigger3;
+    [SerializeField] private GameObject ending3or4Cutscene;
+
 
     private void Start()
     {
@@ -54,6 +69,47 @@ public class TutorialHouseArea : AreaManager
         {
             ignoredMuffin.SetActive(true);
         }
+        if (areaBools["talkedToMuffin"])
+        {
+            zzzMuffin.SetActive(true);
+        }
+        if (areaBools["deniedBlanket"])
+        {
+            snubbedBlanket.SetActive(true);
+        }
+        if (areaBools["deniedBribe"])
+        {
+            mightyMuffin.SetActive(true);
+        }
+        if (areaBools["madeAChoice"])
+        {
+            areaBools["ignoredMuffin"] = false;
+            ignoredMuffin.SetActive(false);
+            endingTrigger1.SetActive(true);
+            //endingTrigger3.SetActive(true);
+        }
+
+        //ENDINGS
+        if (areaBools["ending1"] && areaBools["hasBlanket"] || areaBools["ending2"])
+        {
+            ending2.SetActive(true);
+        }
+        else if (areaBools["ending1"])
+        {
+            ending1.SetActive(true);
+        }
+        else if (areaBools["ending3"] && areaBools["freedMuffin"] || areaBools["ending4"])
+        {
+            ending4.SetActive(true);
+        }
+        else if (areaBools["ending3"])
+        {
+            ending3.SetActive(true);
+        }
+        else if (areaBools["ending5"])
+        {
+            ending5.SetActive(true);
+        }
 
     }
 
@@ -76,6 +132,22 @@ public class TutorialHouseArea : AreaManager
         }
     }
 
+    public void Ending1()
+    {
+        if (areaBools.ContainsKey("ending1"))
+        {
+            areaBools["ending1"] = true;
+        }
+    }
+
+    public void Ending3()
+    {
+        if (areaBools.ContainsKey("ending3"))
+        {
+            areaBools["ending3"] = true;
+        }
+    }
+
     public void DevelopMutations()
     {
         if (areaBools.ContainsKey("Has mutated"))
@@ -90,6 +162,14 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["hasBlanket"] = true;
             
+        }
+    }
+
+    public void TalkedToMuffin()
+    {
+        if (areaBools.ContainsKey("talkedToMuffin"))
+        {
+            areaBools["talkedToMuffin"] = true;
         }
     }
 

@@ -15,9 +15,13 @@ MonoBehaviour:
   options:
   - choiceText: It does match... Deal!
     startFight: 0
-    continueDialogue: {fileID: 11400000, guid: 72f0f6b9e5789034e93cd40dc268d727, type: 2}
+    continueDialogue: {fileID: 11400000, guid: 82c559fb73729c14cbbf17adebec00f2, type: 2}
     progressionID: blanketBribed
   - choiceText: No.
     startFight: 0
     continueDialogue: {fileID: 11400000, guid: 0beb2b1669d569f4f8463beba5099519, type: 2}
-    progressionID: 
+    progressionID: deniedBribe
+  - choiceText: It's an ugly blanket.
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: ea95278b4e0e87942b02f19e985e7ff7, type: 2}
+    progressionID: deniedBlanket

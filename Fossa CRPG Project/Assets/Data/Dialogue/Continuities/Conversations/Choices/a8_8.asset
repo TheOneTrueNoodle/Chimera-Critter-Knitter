@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63893cc592d4a12409f8022203f74e28, type: 3}
+  m_Name: a8_8
+  m_EditorClassIdentifier: 
+  options:
+  - choiceText: At least you can be free.
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: 3f6b81ed0b2f5044f8b64963c009af82, type: 2}
+    progressionID: hasBlanket
+  - choiceText: No, you stay in there.
+    startFight: 0
+    continueDialogue: {fileID: 11400000, guid: d87ca7d5b6e455a4bb4397d4557b2808, type: 2}
+    progressionID: 
