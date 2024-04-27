@@ -49,9 +49,9 @@ public class MenuManager : MonoBehaviour
     {
         SplashScreen.SetActive(true);
         Debug.Log("StartingSplashScreen");
-        yield return new WaitForSeconds(3.7f);
+        yield return new WaitForSeconds(4.8f);
         Debug.Log("SplashScreenEnding");
-        OpeningScreen.SetActive(true);
+       // OpeningScreen.SetActive(true);
         SplashScreen.SetActive(false);
 
     }
