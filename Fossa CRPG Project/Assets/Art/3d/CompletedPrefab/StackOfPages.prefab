@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.439245, y: 1.269409, z: -44.533463}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.9666245, y: 1.3624, z: 1.8839267}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1840897189294538928}
@@ -44,6 +44,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9054655439380553739}
     m_Modifications:
+    - target: {fileID: 118077933375200745, guid: 81000d15787fa2941810019067451965, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78799d737b073964d9f68ddfa448d0ba, type: 2}
     - target: {fileID: 2128650257505480817, guid: 81000d15787fa2941810019067451965, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.125
@@ -168,6 +172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9054655439380553739}
     m_Modifications:
+    - target: {fileID: 118077933375200745, guid: 81000d15787fa2941810019067451965, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6bf03fcb6b8f69f4088635275ca35167, type: 2}
     - target: {fileID: 2128650257505480817, guid: 81000d15787fa2941810019067451965, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -230,6 +238,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9054655439380553739}
     m_Modifications:
+    - target: {fileID: 118077933375200745, guid: 81000d15787fa2941810019067451965, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0886c9a8000d481449cb90be8858fba2, type: 2}
+    - target: {fileID: 1290373229545514630, guid: 81000d15787fa2941810019067451965, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 2128650257505480817, guid: 81000d15787fa2941810019067451965, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
