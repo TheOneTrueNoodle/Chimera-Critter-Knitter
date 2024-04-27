@@ -39,9 +39,10 @@ public class TutorialHouseArea : AreaManager
 
     private void Update()
     {
-        if (areaBools["hasBlanket"])
+        if (areaBools["hasBlanket"] || areaBools["blanketBribed"])
         {
             areaBools["freedMuffin"] = true;
+            //add blanket to journal here
         }
         if (areaBools["freedMuffin"])
         {
