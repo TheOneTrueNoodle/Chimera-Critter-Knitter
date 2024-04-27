@@ -198,19 +198,19 @@ public class DialogueManager : MonoBehaviour
         switch (letter)
         {
             case '.':
-                yield return new WaitForSeconds(pauseInfo.dotPause);
+                yield return new WaitForSecondsRealtime(pauseInfo.dotPause);
                 TypeWrite(textfield, fullText);
                 yield break;
             case ',':
-                yield return new WaitForSeconds(pauseInfo.commaPause);
+                yield return new WaitForSecondsRealtime(pauseInfo.commaPause);
                 TypeWrite(textfield, fullText);
                 yield break;
             case ' ':
-                yield return new WaitForSeconds(pauseInfo.spacePause);
+                yield return new WaitForSecondsRealtime(pauseInfo.spacePause);
                 TypeWrite(textfield, fullText);
                 yield break;
             default:
-                yield return new WaitForSeconds(pauseInfo.normalPause);
+                yield return new WaitForSecondsRealtime(pauseInfo.normalPause);
                 TypeWrite(textfield, fullText);
                 yield break;
         }

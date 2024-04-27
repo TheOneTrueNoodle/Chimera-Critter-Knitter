@@ -15,6 +15,7 @@ public class GameMenuManager : MonoBehaviour
     public GameObject pauseMenuObj;
     public SettingsManager SettingsMenuObj;
     public GameObject controlsMenuObj;
+    private bool controlsOpen;
 
     private bool menuOpen;
     private bool pauseMenuOpen;
@@ -63,7 +64,7 @@ public class GameMenuManager : MonoBehaviour
 
         if (Input.GetButtonDown("Pause"))
         {
-            if (controlsMenuObj.activeInHierarchy)
+            if (controlsOpen)
             {
                 CloseControlsMenu();
             }
@@ -161,11 +162,13 @@ public class GameMenuManager : MonoBehaviour
     {
         pauseMenuObj.SetActive(false);
         controlsMenuObj.SetActive(true);
+        controlsOpen = true;
     }
     public void CloseControlsMenu()
     {
         pauseMenuObj.SetActive(true);
         controlsMenuObj.SetActive(false);
+        controlsOpen = false;
     }
 
     public void OpenCharacterMenu()

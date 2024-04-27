@@ -20,7 +20,7 @@ public class FirstCombatcutscene : MonoBehaviour
         DialogueEvents.current.StartDialogue();
         FirstCombatCutscene.SetActive(true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(8.5f);
 
         FirstCombatCutscene.SetActive(false);
         DialogueEvents.current.EndDialogue();
