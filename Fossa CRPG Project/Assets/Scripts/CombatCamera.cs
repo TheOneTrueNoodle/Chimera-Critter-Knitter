@@ -7,6 +7,9 @@ public class CombatCamera : MonoBehaviour
     [SerializeField] private Cinemachine.CinemachineFreeLook combatCamera;
     [SerializeField] private float cameraRotationSpeed = 2f;
 
+    [SerializeField] private LayerMask combatLayerMask;
+    private LayerMask defaultLayerMask;
+
     private bool inCombat;
 
     private void Start()
@@ -53,10 +56,15 @@ public class CombatCamera : MonoBehaviour
     {
         combatCamera.Priority = 20;
         inCombat = true;
+
+        defaultLayerMask = Camera.main.cullingMask;
+        Camera.main.cullingMask = combatLayerMask;
     }
     private void EndCombat(string combatName)
     {
         combatCamera.Priority = 9;
         inCombat = false;
+
+        Camera.main.cullingMask = defaultLayerMask;
     }
 }
