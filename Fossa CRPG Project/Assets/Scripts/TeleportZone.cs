@@ -7,6 +7,9 @@ public class TeleportZone : MonoBehaviour
     public Transform targetPosition;
     public Animator anim;
 
+    public GameObject objectToLoad;
+    public GameObject objectToUnload;
+
     public void Call()
     {
         anim.Play("Transition");
@@ -16,5 +19,8 @@ public class TeleportZone : MonoBehaviour
     {
         GameObject Oscar = FindObjectOfType<PlayerMovement>().gameObject;
         Oscar.transform.position = targetPosition.position;
+
+        objectToLoad.SetActive(true);
+        objectToUnload.SetActive(false);
     }
 }
