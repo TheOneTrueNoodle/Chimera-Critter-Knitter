@@ -70,5 +70,7 @@ public class HeldItem : MonoBehaviour
             case ItemType.nonCombat:
                 break;
         }
+
+        currentItem = null;
     }
 }

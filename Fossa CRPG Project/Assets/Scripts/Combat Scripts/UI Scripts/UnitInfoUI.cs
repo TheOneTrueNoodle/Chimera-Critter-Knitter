@@ -66,7 +66,7 @@ public class UnitInfoUI : MonoBehaviour
 
             //Basic Updates
             float percentageHealthMissing = ((Char.activeStatsDir["MaxHP"].baseStatValue - Char.activeStatsDir["MaxHP"].statValue) / Char.activeStatsDir["MaxHP"].baseStatValue) * 100;
-            if (percentageHealthMissing > 50)
+            if (percentageHealthMissing > 50 && PlayerPrefs.GetInt("Remove Gore") != 1)
             {
                 portrait.sprite = Char.CharacterData.injuredPortrait;
             }

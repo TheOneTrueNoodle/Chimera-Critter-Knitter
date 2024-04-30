@@ -44,6 +44,7 @@ public class CombatUI : MonoBehaviour
     private bool gamePaused;
     private bool actionActive;
     private bool hasMoved;
+    private bool mapOpen;
 
     private string currentCombatName;
 
@@ -91,7 +92,12 @@ public class CombatUI : MonoBehaviour
 
         if (Input.GetButtonDown("Cancel"))
         {
-            if (!actionActive && !abilityUIOpen)
+            if (mapOpen)
+            {
+                //Close map
+                CancelInput();
+            }
+            else if (!actionActive && !abilityUIOpen)
             {
                 //Pause Menu Inputs!!!
                 gamePaused = true;
@@ -149,10 +155,6 @@ public class CombatUI : MonoBehaviour
         {
             ItemButtonUI.SetActive(false);
         }
-
-        Vector3 position = Char.gameObject.transform.position;
-        if(Char.UITarget != null) { position = Char.UITarget.position; }
-        else { Debug.LogError("No assigned UITarget"); }
 
         if (ActionUI.TryGetComponent(out Animator anim))
         {
@@ -302,9 +304,14 @@ public class CombatUI : MonoBehaviour
     {
         if (!started) 
         { return; }
-        if (Char != null)
+
+        if(Char == null)
         {
-            if (Char.TeamID == 0)
+            //Char is null so we must find Oscar
+            Char = FindObjectOfType<PlayerMovement>().GetComponent<Entity>();
+        }
+
+        if (Char.TeamID == 0)
             {
                 currentUnitUI.UpdateUI(Char);
             }
@@ -320,24 +327,23 @@ public class CombatUI : MonoBehaviour
 
 
             var selectedTile = cursor.currentTile;
-            if (selectedTile != null && Char.TeamID == 0)
+        if (selectedTile != null && Char.TeamID == 0)
+        {
+            if (selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
             {
-                if (selectedTile.activeCharacter != null && selectedTile.activeCharacter != Char)
+                //Display ui of selected character
+                selectedUnitUI.UpdateUI(selectedTile.activeCharacter);
+                if (!selectedUnitUI.gameObject.activeInHierarchy)
                 {
-                    //Display ui of selected character
-                    selectedUnitUI.UpdateUI(selectedTile.activeCharacter);
-                    if (!selectedUnitUI.gameObject.activeInHierarchy)
-                    {
-                        selectedUnitUI.gameObject.SetActive(true);
-                    }
+                    selectedUnitUI.gameObject.SetActive(true);
                 }
-                else
+            }
+            else
+            {
+                //Hide unit UI
+                if (selectedUnitUI.gameObject.activeInHierarchy)
                 {
-                    //Hide unit UI
-                    if (selectedUnitUI.gameObject.activeInHierarchy)
-                    {
-                        selectedUnitUI.CloseUI();
-                    }
+                    selectedUnitUI.CloseUI();
                 }
             }
         }
@@ -355,6 +361,7 @@ public class CombatUI : MonoBehaviour
             //MAP MODE
             UIOpen = false;
             cancelDisp.SetActive(true);
+            mapOpen = true;
         }
         else { cancelDisp.SetActive(false); }
         CombatEvents.current.SetCursorMode(mode, null, false);
@@ -399,6 +406,7 @@ public class CombatUI : MonoBehaviour
         currentCombatName = combatName;
         started = true;
         UIParent.SetActive(true);
+        endCombatUI.SetActive(false);
         endCombatUI.SetActive(false);
     }
     private void OpenVictoryUI()

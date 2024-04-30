@@ -13,6 +13,7 @@ public class CombatHandler : MonoBehaviour
     [HideInInspector] public TileHandler tileHandler;
 
     [Header("World Text")]
+    public Canvas UICanvas;
     public Transform damageTextParent;
     public GameObject damageTextPrefab;
     public Transform xpTextParent;
@@ -383,7 +384,10 @@ public class CombatHandler : MonoBehaviour
         GameObject dmgDisp = Instantiate(damageTextPrefab, damageTextParent);
 
         var screenPos = Camera.main.WorldToScreenPoint(target.transform.position);
-        dmgDisp.GetComponent<RectTransform>().transform.position = new Vector2(screenPos.x, screenPos.y);
+
+        Vector3 actualScreenPos = new Vector3(screenPos.x / UICanvas.scaleFactor, screenPos.y / UICanvas.scaleFactor, 0);
+
+        dmgDisp.GetComponent<RectTransform>().anchoredPosition3D = actualScreenPos;
 
         dmgDisp.GetComponent<DamageText>().Setup(dmgText, damageType, showImage);
     }

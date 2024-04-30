@@ -308,8 +308,6 @@ public class PlayerMovement : MonoBehaviour
         float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
         if (percentageHealthMissing > 70)
         {
-            dm.isInjured = true;
-
             //YOU ARE INJURED SILLY
             if (anim.GetBool("Injured") == false)
             {
@@ -331,8 +329,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            dm.isInjured = false;
-
             if (anim.GetBool("Injured") == true)
             {
                 anim.SetBool("Injured", false);
@@ -351,6 +347,8 @@ public class PlayerMovement : MonoBehaviour
         DogsTail.GetComponent<Renderer>().material = defaultMat;
         DogsEyes.GetComponent<Renderer>().material = defaultMat;
         goreActive = false;
+
+        dm.isInjured = false;
     }
     private void ApplyInjuredTextures()
     {
@@ -362,6 +360,8 @@ public class PlayerMovement : MonoBehaviour
         DogsTail.GetComponent<Renderer>().material = injuredMat;
         DogsEyes.GetComponent<Renderer>().material = injuredMat;
         goreActive = true;
+
+        dm.isInjured = true;
     }
 
     public IEnumerator resetCameraForward()

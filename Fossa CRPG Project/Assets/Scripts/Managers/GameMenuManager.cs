@@ -56,10 +56,12 @@ public class GameMenuManager : MonoBehaviour
     void Update()
     {
         if (inCombat) { return; }
-
-        if (Input.GetButtonDown("Character Menu") && !pauseMenuOpen)
+        if (!inDialogue)
         {
-            CharacterMenuInput();
+            if (Input.GetButtonDown("Character Menu") && !pauseMenuOpen)
+            {
+                CharacterMenuInput();
+            }
         }
 
         if (Input.GetButtonDown("Pause"))
