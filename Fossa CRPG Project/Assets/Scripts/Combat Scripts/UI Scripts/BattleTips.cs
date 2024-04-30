@@ -8,15 +8,15 @@ using Combat;
 public class BattleTips : MonoBehaviour
 {
     [Header("Oscar")]
+    [SerializeField] private GameObject oscarTipsUI;
     [SerializeField] private TMP_Text oscarHitText;
     [SerializeField] private TMP_Text oscarDmgText;
-    [SerializeField] private Image oscarDmgSymbol;
 
     
     [Header("Enemy")]
+    [SerializeField] private GameObject enemyTipsUI;
     [SerializeField] private TMP_Text enemyHitText;
     [SerializeField] private TMP_Text enemyDmgText;
-    [SerializeField] private Image enemyDmgSymbol;
 
     [Header("Damage Symbols")]
     [SerializeField] private List<Sprite> damageSymbols;
@@ -54,18 +54,11 @@ public class BattleTips : MonoBehaviour
 
         attackHitChanceTimer = 0;
 
-        //Damage Type Displays
-        oscarDmgSymbol.sprite = damageSymbols[(int)attacker.AttackDamageType];
-
         //Oscar displays
-        oscarHitText.gameObject.SetActive(true);
-        oscarDmgText.gameObject.SetActive(true);
-        oscarDmgSymbol.gameObject.SetActive(true);
+        oscarTipsUI.SetActive(true);
 
         //Enemy displays
-        enemyHitText.gameObject.SetActive(true);
-        enemyDmgText.gameObject.SetActive(true);
-        enemyDmgSymbol.gameObject.SetActive(true);
+        enemyTipsUI.SetActive(true);
     }
 
     private int CalculateHitChance(Entity attacker, Entity defender)
@@ -134,13 +127,9 @@ public class BattleTips : MonoBehaviour
         enemyTargetDamage = 0;
 
         //Oscar displays
-        oscarHitText.gameObject.SetActive(false);
-        oscarDmgText.gameObject.SetActive(false);
-        oscarDmgSymbol.gameObject.SetActive(false);
+        oscarTipsUI.SetActive(false);
 
         //Enemy displays
-        enemyHitText.gameObject.SetActive(false);
-        enemyDmgText.gameObject.SetActive(false);
-        enemyDmgSymbol.gameObject.SetActive(false);
+        enemyTipsUI.SetActive(false);
     }
 }
