@@ -4976,7 +4976,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 92c614f9d8d068345a5fdf7d7ee63389, type: 2}
+  - {fileID: 2100000, guid: 9c57e86295445bd4aaa6c8e570d0877f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5139,6 +5139,7 @@ Transform:
   - {fileID: 6963851240369819215}
   - {fileID: 5594109791933682816}
   - {fileID: 7877379031865961126}
+  - {fileID: 3586217720011890485}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 92.04001, y: -61.222992, z: 0}
 --- !u!114 &8082532484428767995
@@ -5169,8 +5170,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   smellParticles: {fileID: 1298448281211579256}
+  interactSprite: {fileID: 0}
   itemData: {fileID: 9219594460165767053}
-  inputUI: {fileID: 8609989193630464241}
+  pMovement: {fileID: 0}
+  held: 0
 --- !u!114 &9219594460165767053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5185,10 +5188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemName: Axe
+  itemDescription: 
+  itemSprite: {fileID: 0}
   holdRotationV3: {x: 92.04001, y: -3.417999, z: 0}
   rb: {fileID: 4915844690999713205}
   physicsCollider: {fileID: 7619045697345714588}
   triggerCollider: {fileID: 4454039800153879840}
+  isSqueaky: 0
   weaponData: {fileID: 11400000, guid: 5b1967a87d9c1b8418946920c9c15ebb, type: 2}
 --- !u!54 &4915844690999713205
 Rigidbody:
@@ -5375,6 +5381,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb515161d5723de40aef8c5e14309de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &3913196489789700318
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7164264584033034399}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5625404309116288890, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e3921372d40d1f44c8f1ec72a494e6d6, type: 2}
+    - target: {fileID: -5625404309116288890, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: c4b8e13460229a149b5c6b125d53e864, type: 2}
+    - target: {fileID: 919132149155446097, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_Name
+      value: Axe2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3296482371335376006, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c57e86295445bd4aaa6c8e570d0877f, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+--- !u!4 &3586217720011890485 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6022f000b1a82c54690b7566cedc3ea4, type: 3}
+  m_PrefabInstance: {fileID: 3913196489789700318}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5343798356793668459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5446,6 +5538,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9579d796518476d4db447c59c7958710, type: 3}
       propertyPath: m_Name
       value: Axe 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9579d796518476d4db447c59c7958710, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
