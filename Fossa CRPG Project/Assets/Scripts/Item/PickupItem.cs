@@ -23,6 +23,16 @@ public class PickupItem : Interactable
             pMovement.nearbyInteractions.Remove(this);
 
             held = true;
+
+            disableSmell();
+        }
+    }
+
+    public override void enableSmell()
+    {
+        if (!smellParticles.isPlaying && !held)
+        {
+            smellParticles.Play();
         }
     }
 

@@ -21,7 +21,7 @@ public class Interactable : MonoBehaviour
     public InteractionEvent enableInteraction;
     public InteractionEvent disableInteraction;
 
-    [SerializeField] private ParticleSystem smellParticles;
+    public ParticleSystem smellParticles;
 
     public Sprite interactSprite;
 
@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour
 
     }
 
-    public void enableSmell()
+    public virtual void enableSmell()
     {
         if (!smellParticles.isPlaying)
         {
