@@ -60,6 +60,10 @@ public class DialogueManager : MonoBehaviour
 
     private EventInstance speechEvent;
 
+    private Coroutine currentTypingSentenceCoroutine;
+    private string currentTypingSentence;
+    private TextMeshProUGUI currentTypingField;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,15 +107,18 @@ public class DialogueManager : MonoBehaviour
                     addText("<uppercase><color=#" + colourHex + ">" + currentConvo.lines[index].speaker.fullName + ":</color></uppercase><br>" + currentConvo.lines[index].text, currentConvo.lines[index].speaker, useTypewriting); //(has to be last here)
                 }
             }
-            else
+            else if(currentTypingSentenceCoroutine != null)
             {
-                midPrintTextBreak();
+                StopCoroutine(currentTypingSentenceCoroutine);
+                finishText(currentTypingSentence, currentTypingField);
+                //midPrintTextBreak();
             }
         }
     }
 
     public void addText(string dialogue, Character character, bool typewrite) //instantiate text game object with dialogue as text childed under textBoxTarget
     {
+        //The beginning of a dialogue entry
         speechEvent.start();
 
         indey = 0;
@@ -132,22 +139,28 @@ public class DialogueManager : MonoBehaviour
         newObject.transform.localRotation = new Quaternion(0f, 0f, 0f, 1); //fix rot problems
         newObject.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
 
+        TextMeshProUGUI textField = newObject.GetComponent<TextMeshProUGUI>();
+        textField.text = actualText;
         if (character.characterFont) 
         {
-            newObject.GetComponent<TextMeshProUGUI>().font = character.characterFont; //set font in textbox
+            textField.font = character.characterFont; //set font in textbox
         }
         if (character.fontSize != 0)
         {
-            newObject.GetComponent<TextMeshProUGUI>().fontSize = character.fontSize; //set font size in textbox
+            textField.fontSize = character.fontSize; //set font size in textbox
         }
         if (typewrite)
         {
             currentlyPrintingText = true;
-            TypeWrite(newObject.GetComponent<TextMeshProUGUI>(), dialogue);
+            //TypeWrite(textField, dialogue);
+            currentTypingSentenceCoroutine = StartCoroutine(newTypeWrite(dialogue, textField));
+            currentTypingSentence = dialogue;
+            currentTypingField = textField;
+
         }
         else
         {
-            newObject.GetComponent<TextMeshProUGUI>().text = dialogue; //set text in textbox DO NOT DELETE
+            textField.text = dialogue; //set text in textbox DO NOT DELETE
         }
 
         previousLine = newObject; //set as previous line
@@ -160,6 +173,85 @@ public class DialogueManager : MonoBehaviour
         dialogueScroll.normalizedPosition = new Vector2(0, 0);//scroll to new text
     }
 
+    private IEnumerator newTypeWrite(string fullText, TextMeshProUGUI textField)
+    {
+        int charsTyped = 0;
+        float totalTime = 0f;
+        float nextDelay = 0f;
+
+        while (charsTyped < fullText.Length)
+        {
+            //Wait till after update calls for this frame finish
+            yield return null;
+
+            //Add total time spent
+            totalTime += Time.deltaTime;
+
+            //Figure out what letters need to be typed
+            while (totalTime >= nextDelay && charsTyped < fullText.Length)
+            {
+                char letter = fullText[charsTyped]; //get letter
+
+                //Check for color codes
+                if (letter == '<')
+                {
+                    while (letter != '>')
+                    {
+                        charsTyped++;
+                        letter = fullText[charsTyped];
+                    }
+                }
+                else
+                {
+                    charsTyped++;
+                    totalTime -= nextDelay;
+                    if (charsTyped < fullText.Length)
+                    {
+                        nextDelay = newTextPause(fullText[charsTyped]);
+                    }
+                }
+            }
+            //All typing for this frame is finished
+            textField.text = fullText.Substring(0, Mathf.Min(fullText.Length, charsTyped));
+            //Play one shot sound for each letter being typed here.
+        }
+
+        //Finished typing
+        speechEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        currentlyPrintingText = false;
+
+        yield return null;
+    }
+
+    private float newTextPause(char nextLetter)
+    {
+        float nextDelay = 0;
+        switch (nextLetter)
+        {
+            case '.':
+                nextDelay = pauseInfo.dotPause;
+                break;
+            case ',':
+                nextDelay = pauseInfo.commaPause;
+                break;
+            case ' ':
+                nextDelay = pauseInfo.spacePause;
+                break;
+            default:
+                nextDelay = pauseInfo.normalPause;
+                break;
+        }
+
+        return nextDelay;
+    }
+
+    private void finishText(string dialogue, TextMeshProUGUI textField)
+    {
+        speechEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        currentlyPrintingText = false;
+        textField.text = dialogue;
+    }
+    /*
     public void TypeWrite(TextMeshProUGUI textfield, string fullText)
     {
         if (indey < fullText.Length)
@@ -218,10 +310,9 @@ public class DialogueManager : MonoBehaviour
 
     private void midPrintTextBreak()
     {
-
         currentlyPrintingText = false;
     }
-
+    */
     public void changeImage(Character character, string emotion) //change the sprite in the UI
     {
         findSide(currentConvo.lines[index].leftSide);
