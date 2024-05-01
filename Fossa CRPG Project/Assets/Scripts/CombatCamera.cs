@@ -5,7 +5,7 @@ using UnityEngine;
 public class CombatCamera : MonoBehaviour
 {
     [SerializeField] private Cinemachine.CinemachineFreeLook combatCamera;
-    [SerializeField] private float cameraRotationSpeed = 2f;
+    [SerializeField] private float cameraRotationSpeed = 1f;
 
     [SerializeField] private LayerMask combatLayerMask;
     private LayerMask defaultLayerMask;
