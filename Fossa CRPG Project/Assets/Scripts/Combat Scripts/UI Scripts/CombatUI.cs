@@ -38,6 +38,9 @@ public class CombatUI : MonoBehaviour
     [Header("End Combat UI")]
     [SerializeField] private GameObject endCombatUI;
     [SerializeField] private Animator gameOverAnim;
+    [SerializeField] private Image gameOverImage;
+    [SerializeField] private Sprite gameOverWithGore;
+    [SerializeField] private Sprite gameOverNoGore;
 
     private bool UIOpen;
     private bool abilityUIOpen;
@@ -429,10 +432,19 @@ public class CombatUI : MonoBehaviour
     public void GameOver()
     {
         //Animate Game Over UI
+        gameOverAnim.Play("Game Over");
 
+        //Remove Gore
+        if (PlayerPrefs.GetInt("Remove Gore") == 1)
+        {
+            gameOverImage.sprite = gameOverNoGore;
+        }
+        else
+        {
+            gameOverImage.sprite = gameOverWithGore;
+        }
 
         //Change to Game Over Music
-
-        gameOverAnim.Play("Game Over");
+        AudioManager.instance.SetMusicSong(9);
     }
 }

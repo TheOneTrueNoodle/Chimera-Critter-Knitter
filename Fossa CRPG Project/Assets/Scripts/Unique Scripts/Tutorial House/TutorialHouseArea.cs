@@ -34,11 +34,11 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] private GameObject bossCutsceneSecondPart;
 
     [Header("Endings")]
-    [SerializeField] private GameObject ending1;
-    [SerializeField] private GameObject ending2;
-    [SerializeField] private GameObject ending3;
-    [SerializeField] private GameObject ending4;
-    [SerializeField] private GameObject ending5;
+    [SerializeField] private TriggerEnding ending1;
+    [SerializeField] private TriggerEnding ending2;
+    [SerializeField] private TriggerEnding ending3;
+    [SerializeField] private TriggerEnding ending4;
+    [SerializeField] private TriggerEnding ending5;
     [SerializeField] private GameObject endingTrigger1;
     //[SerializeField] private GameObject endingTrigger3;
     [SerializeField] private GameObject ending3or4Cutscene;
@@ -90,27 +90,7 @@ public class TutorialHouseArea : AreaManager
         }
 
         //ENDINGS
-        if (areaBools["ending1"] && areaBools["hasBlanket"] || areaBools["ending2"])
-        {
-            ending2.SetActive(true);
-        }
-        else if (areaBools["ending1"])
-        {
-            ending1.SetActive(true);
-        }
-        else if (areaBools["ending3"] && areaBools["freedMuffin"] || areaBools["ending4"])
-        {
-            ending4.SetActive(true);
-        }
-        else if (areaBools["ending3"])
-        {
-            ending3.SetActive(true);
-        }
-        else if (areaBools["ending5"])
-        {
-            ending5.SetActive(true);
-        }
-
+        CallEnding();
     }
 
     private void OscarGetsHitForTheFirstTime(Entity attacker, Entity target)
@@ -218,6 +198,35 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["flushToilet"] = false;
             AudioManager.instance.PlayOneShot(flushToilet, toilet.transform.position);
+        }
+    }
+
+    public void CallEnding()
+    {
+        if (areaBools["ending1"] && areaBools["hasBlanket"] || areaBools["ending2"])
+        {
+            //Stay with blanket
+            ending2.Call();
+        }
+        else if (areaBools["ending1"])
+        {
+            //Stay
+            ending1.Call();
+        }
+        else if (areaBools["ending3"] && areaBools["freedMuffin"] || areaBools["ending4"])
+        {
+            //Leave with Muffin
+            ending4.Call();
+        }
+        else if (areaBools["ending3"])
+        {
+            //Leave
+            ending3.Call();
+        }
+        else if (areaBools["ending5"])
+        {
+            //Stay with Muffin
+            ending5.Call();
         }
     }
 
