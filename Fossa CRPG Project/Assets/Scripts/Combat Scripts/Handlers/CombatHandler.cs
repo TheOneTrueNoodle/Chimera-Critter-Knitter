@@ -147,14 +147,18 @@ public class CombatHandler : MonoBehaviour
             {
                 attacker.anim.Play("Attack");
             }
-            if (attacker.CharacterData.Weapon != null && !attacker.CharacterData.Weapon.weaponAttackSFX.IsNull)
+
+            //Audio for attack
+            if (attacker.heldWeapon != null && !attacker.heldWeapon.weaponAttackSFX.IsNull)
             {
-                AudioManager.instance.PlayOneShot(attacker.CharacterData.Weapon.weaponAttackSFX, attacker.transform.position);
+                AudioManager.instance.PlayOneShot(attacker.heldWeapon.weaponAttackSFX, attacker.transform.position);
             }
             else if(!attacker.CharacterData.defaultAttackSFX.IsNull)
             {
                 AudioManager.instance.PlayOneShot(attacker.CharacterData.defaultAttackSFX, attacker.transform.position);
             }
+
+
             else { Debug.LogError("NO ATTACK AUDIO ASSIGNED"); }
             yield return new WaitUntil(() => attacker.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > attacker.CharacterData.attackAnimationTimer);
         }

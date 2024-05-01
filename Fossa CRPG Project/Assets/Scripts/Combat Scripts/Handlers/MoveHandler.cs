@@ -20,7 +20,6 @@ public class MoveHandler
 
         while (path.Count > 0 && animTime < 7f)
         {
-            Debug.Log(path.Count);
             Look(entity, path[0].transform.position, false);
             Move(entity);
 
@@ -33,7 +32,6 @@ public class MoveHandler
             }
 
             animTime += Time.deltaTime;
-            Debug.Log(animTime);
             yield return new WaitForSeconds(Time.deltaTime);
         }
 
@@ -61,7 +59,6 @@ public class MoveHandler
             }
 
             animTime += Time.deltaTime;
-            Debug.Log("Second anim time: " + animTime.ToString());
             if (animTime > 1.5f)
             {
                 animSpeed = 0;
