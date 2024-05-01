@@ -422,6 +422,7 @@ public class CombatUI : MonoBehaviour
     }
     private void OpenVictoryUI()
     {
+        cancelDisp.SetActive(false);
         endCombatUI.SetActive(true);
         endCombatUI.GetComponent<Animator>().Play("Open");
     }

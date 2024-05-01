@@ -10,6 +10,7 @@ public class TriggerOneShotAudio : MonoBehaviour
     
     public void Call()
     {
+        if(AudioOrigin == null) { AudioOrigin = transform; }
         AudioManager.instance.PlayOneShot(audioEvent, AudioOrigin.position);
     }
 }
