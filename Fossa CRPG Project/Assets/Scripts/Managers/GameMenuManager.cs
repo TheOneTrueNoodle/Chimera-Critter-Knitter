@@ -30,6 +30,8 @@ public class GameMenuManager : MonoBehaviour
     [Header("Interaction UI")]
     [SerializeField] private GameObject interactionUI;
     [SerializeField] private UnityEngine.UI.Image interactSpriteImage;
+    [SerializeField] private UnityEngine.UI.Image interactSpriteShadow;
+
 
     // Start is called before the first frame update
     void Start()
@@ -205,6 +207,7 @@ public class GameMenuManager : MonoBehaviour
         if (interactable != null)
         {
             interactSpriteImage.color = new Color(1, 1, 1, 1);
+            interactSpriteShadow.color = Color.black;
 
             if (interactable.TryGetComponent(out MutationTrigger mutTrig))
             {
@@ -216,11 +219,15 @@ public class GameMenuManager : MonoBehaviour
 
             interactSpriteImage.sprite = interactable.interactSprite;
             interactSpriteImage.preserveAspect = true;
+            interactSpriteShadow.sprite = interactable.interactSprite;
+            interactSpriteShadow.preserveAspect = true;
         }
         else
         {
             interactSpriteImage.sprite = null;
+            interactSpriteShadow.sprite = null;
             interactSpriteImage.color = new Color(1, 1, 1, 0);
+            interactSpriteShadow.color = new Color(1, 1, 1, 0);
         }
 
         interactionUI.SetActive(true);
@@ -229,8 +236,9 @@ public class GameMenuManager : MonoBehaviour
     public void HideInteractUI()
     {
         interactSpriteImage.sprite = null;
+        interactSpriteShadow.sprite = null;
         interactSpriteImage.color = new Color(1, 1, 1, 0);
-
+        interactSpriteShadow.color = new Color(1, 1, 1, 0);
         interactionUI.SetActive(false);
     }
 

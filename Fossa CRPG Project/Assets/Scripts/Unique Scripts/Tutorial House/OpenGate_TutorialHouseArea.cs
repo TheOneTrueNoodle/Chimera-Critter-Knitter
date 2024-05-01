@@ -15,6 +15,7 @@ public class OpenGate_TutorialHouseArea : MonoBehaviour
         {
             //Has the gate key, so open
             anim.enabled = true;
+            Destroy(dontHaveKeyDialogue.gameObject);
             interactionTrigger.SetActive(false);
         }
         else if(AreaManager.current.GetComponent<TutorialHouseArea>().areaBools.ContainsKey("Infected") && AreaManager.current.GetComponent<TutorialHouseArea>().areaBools["Infected"] == true)

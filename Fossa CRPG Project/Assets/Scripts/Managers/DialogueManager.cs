@@ -431,9 +431,9 @@ public class DialogueManager : MonoBehaviour
 
     public void openLog(bool open)
     {
-        GameObject last = new GameObject();
+        //GameObject last = new GameObject();
 
-        if (log.Count != 0) { last = log.Last(); } //save the last printed line
+        //if (log.Count != 0) { last = log.Last(); } //save the last printed line
 
         nodialogue = open; //disallow continuing dialogue via spacebar
 
