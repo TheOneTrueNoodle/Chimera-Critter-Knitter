@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 607910127100106755}
   - component: {fileID: 6830931377966416032}
   - component: {fileID: 684639338928515306}
+  - component: {fileID: 6040591379414042377}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -121,7 +122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 607910127100106755}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6040591379414042377}
+        m_TargetAssemblyTypeName: TriggerOneShotAudio, Assembly-CSharp
+        m_MethodName: Call
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &684639338928515306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +154,26 @@ MonoBehaviour:
   choiceMaker: {fileID: 11400000, guid: 8e0d99d593dbc9a4288322b30ae5d09c, type: 2}
   textChoiceField: {fileID: 570269671215417931}
   relevantAreaManager: {fileID: 0}
+--- !u!114 &6040591379414042377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933380905300791831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2fc40e8214188449710b1f1ba7155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvent:
+    Guid:
+      Data1: -42436364
+      Data2: 1264119497
+      Data3: 111532731
+      Data4: 1018222829
+    Path: event:/SFX/UI/UI Button
+  AudioOrigin: {fileID: 0}
 --- !u!1 &2868745195820681228
 GameObject:
   m_ObjectHideFlags: 0

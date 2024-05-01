@@ -14,6 +14,8 @@ public class MutationOption : MonoBehaviour, IPointerDownHandler
     [SerializeField] private TMP_Text nameDisp;
     [SerializeField] private Image equippedDisp;
 
+    [field: SerializeField] public FMODUnity.EventReference audioEvent;
+
     private MutationSlot currentSlot;
     private bool equipped;
 
@@ -26,7 +28,8 @@ public class MutationOption : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Clicked");
+        AudioManager.instance.PlayOneShot(audioEvent, transform.position);
+
         if (!equipped)
         {
             MutationSlot[] slots = FindObjectsOfType<MutationSlot>();
