@@ -10,14 +10,48 @@ public class CombatActionButtonVisuals : MonoBehaviour, IPointerEnterHandler, IP
     [SerializeField] private GameObject selectedVisuals;
     [SerializeField] private GameObject defaultVisuals;
 
+    [SerializeField] private GameObject disabledVisuals;
+
+    [field: SerializeField] private FMODUnity.EventReference hoverSFX;
+
+    private bool disabled;
+    private bool selected;
+
+    public void enableButton()
+    {
+        disabled = false;
+        disabledVisuals.SetActive(false);
+        shrink();
+    }
+
+    public void disableButton()
+    {
+        disabled = true;
+        disabledVisuals.SetActive(true);
+        shrink();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (disabled) { return; }
+        AudioManager.instance.PlayOneShot(hoverSFX, transform.position);
+        selected = true;
+        expand();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        selected = false;
+        shrink();
+    }
+
+    private void expand()
     {
         gameObject.transform.SetParent(selectedParent);
         selectedVisuals.SetActive(true);
         defaultVisuals.SetActive(false);
     }
-
-    public void OnPointerExit(PointerEventData eventData)
+    private void shrink()
     {
         gameObject.transform.SetParent(defaultParent);
         selectedVisuals.SetActive(false);

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{fe838abe-f422-413d-9218-201e478f3a32}">
 		<property name="name">
-			<value>Toggle Character Menu</value>
+			<value>Open Character Menu</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -60,7 +60,7 @@
 	<object class="MarkerTrack" id="{02a1aab9-8008-44fb-872f-68bd82c8d029}" />
 	<object class="GroupTrack" id="{90017f76-c713-441f-b7fe-de8ca191b234}">
 		<relationship name="modules">
-			<destination>{2ca9a078-343c-4d11-91a9-aff56d39d377}</destination>
+			<destination>{004a3afd-a49f-4ce3-9626-354704727975}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{7c51939e-f38e-4d56-a1b7-ab95d465a9a4}</destination>
@@ -68,7 +68,7 @@
 	</object>
 	<object class="Timeline" id="{2c28261b-90e0-4e5a-af21-03eb9c495a58}">
 		<relationship name="modules">
-			<destination>{2ca9a078-343c-4d11-91a9-aff56d39d377}</destination>
+			<destination>{004a3afd-a49f-4ce3-9626-354704727975}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{86431c47-2bab-4ac3-bbac-575931130990}">
@@ -88,7 +88,7 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b753a18f-ef57-4eb4-bdca-10f0d0e977f0}" />
-	<object class="SingleSound" id="{2ca9a078-343c-4d11-91a9-aff56d39d377}">
+	<object class="SingleSound" id="{004a3afd-a49f-4ce3-9626-354704727975}">
 		<property name="length">
 			<value>1.1179722001161356</value>
 		</property>
@@ -123,9 +123,11 @@
 	<object class="MixerBusEffectChain" id="{ecb7b6a9-f4e0-42fd-b8e7-1a9dd103f0dd}">
 		<relationship name="effects">
 			<destination>{ad142856-4004-4204-83df-683eb52eedf2}</destination>
+			<destination>{646d450c-92a5-4360-b5e8-a95731296477}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{3a03fb6f-309e-49d7-ab29-922a4ee9f25b}" />
 	<object class="MixerBusFader" id="{e61c6212-26d8-4cd0-b6ad-30ca26af8d94}" />
 	<object class="MixerBusFader" id="{ad142856-4004-4204-83df-683eb52eedf2}" />
+	<object class="PitchShifterEffect" id="{646d450c-92a5-4360-b5e8-a95731296477}" />
 </objects>

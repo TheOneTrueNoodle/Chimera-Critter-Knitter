@@ -18,7 +18,8 @@ public class CombatUI : MonoBehaviour
     [Header("Functionality")]
     [SerializeField] private GameObject UIParent;
     [SerializeField] private RectTransform ActionUI;
-    [SerializeField] private Button MoveButton;
+    [SerializeField] private CombatActionButtonVisuals MoveButton;
+    [SerializeField] private CombatActionButtonVisuals abilitiesButton;
     [SerializeField] private GameObject cancelDisp;
 
     [Header("Ability UI")]
@@ -164,6 +165,12 @@ public class CombatUI : MonoBehaviour
             anim.Play("Open");
         }
 
+        if (hasMoved) { MoveButton.disableButton(); }
+        else { MoveButton.enableButton(); }
+
+        if(Char.activeAbilities.Count <= 0) { abilitiesButton.disableButton(); }
+        else { abilitiesButton.enableButton(); }
+
         ChangeCursorMode(5);
     }
     public void CloseUI()
@@ -279,7 +286,7 @@ public class CombatUI : MonoBehaviour
         int cursorMode = 0;
         Char = entity;
         hasMoved = false;
-        MoveButton.interactable = true;
+        MoveButton.enableButton();
         OscarHPDisp.gameObject.SetActive(true);
         abilityUI.gameObject.SetActive(false);
 
@@ -299,6 +306,7 @@ public class CombatUI : MonoBehaviour
             abilityUI.gameObject.SetActive(false);
             ActionUI.gameObject.SetActive(false);
         }
+
 
         ChangeCursorMode(cursorMode);
     }

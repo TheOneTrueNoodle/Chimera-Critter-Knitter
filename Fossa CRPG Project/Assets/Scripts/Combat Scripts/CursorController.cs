@@ -516,7 +516,7 @@ public class CursorController : MonoBehaviour
                 break;
             case 3:
                 //Attack Startup
-                GetInRangeTiles(activeCharacter, activeCharacter.WeaponRange, false, false);
+                GetInRangeTiles(activeCharacter, activeCharacter.WeaponRange, false, false); 
                 CombatEvents.current.TileColor(activeCharacter, Color.red, inRangeTiles, false);
                 break;
             case 2:

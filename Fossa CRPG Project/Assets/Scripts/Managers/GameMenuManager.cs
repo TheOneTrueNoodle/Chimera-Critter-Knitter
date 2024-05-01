@@ -32,6 +32,9 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image interactSpriteImage;
     [SerializeField] private UnityEngine.UI.Image interactSpriteShadow;
 
+    [Header("Audio")]
+    [field: SerializeField] private FMODUnity.EventReference openCharacterMenuSFX;
+    [field: SerializeField] private FMODUnity.EventReference closeCharacterMenuSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -101,10 +104,12 @@ public class GameMenuManager : MonoBehaviour
             //Open or close the character menu
             if (!menuOpen)
             {
+                AudioManager.instance.PlayOneShot(openCharacterMenuSFX, transform.position);
                 OpenCharacterMenu();
             }
             else
             {
+                AudioManager.instance.PlayOneShot(closeCharacterMenuSFX, transform.position);
                 CloseCharacterMenu();
             }
         }

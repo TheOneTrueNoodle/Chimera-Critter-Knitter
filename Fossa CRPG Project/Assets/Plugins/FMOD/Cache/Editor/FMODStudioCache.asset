@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638501808970139645
+  lastModified: 638501854384278409
   FileSizes:
   - Name: Desktop
-    Value: 3071520
+    Value: 3099808
   Exists: 1
 --- !u!114 &-8637116375802603612
 MonoBehaviour:
@@ -406,10 +406,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638501793630794411
+  lastModified: 638501833072315711
   FileSizes:
   - Name: Desktop
-    Value: 2908
+    Value: 2988
   Exists: 1
 --- !u!114 &-3198610263214029961
 MonoBehaviour:
@@ -570,33 +570,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 128832
   Exists: 1
---- !u!114 &-2213672172252802119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/Toggle Character Menu
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/Toggle Character Menu
-  Guid:
-    Data1: -24933698
-    Data2: 1094579234
-    Data3: 505419922
-    Data4: 842698567
-  Banks:
-  - {fileID: -8905982750716916857}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1117
 --- !u!114 &-1178390186597127467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -689,7 +662,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638501793630754394
+  lastModified: 638501833072289418
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -742,18 +715,20 @@ MonoBehaviour:
   - {fileID: 6359321777758174465}
   - {fileID: 4280059684286448402}
   - {fileID: 3526519617876909815}
-  - {fileID: -2213672172252802119}
   - {fileID: 3728517636630936273}
   - {fileID: -7188596717878949792}
   - {fileID: -8996397244478889053}
   - {fileID: -4646019033158962082}
   - {fileID: 3234489846556824143}
+  - {fileID: 4347521580924933783}
+  - {fileID: 6002261836071876692}
+  - {fileID: 4222968610260098407}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638501808970139645
+  cacheTime: 638501854384278409
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -1053,6 +1028,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2179
+--- !u!114 &4222968610260098407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Open Character Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Open Character Menu
+  Guid:
+    Data1: -24933698
+    Data2: 1094579234
+    Data3: 505419922
+    Data4: 842698567
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1117
 --- !u!114 &4280059684286448402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,6 +1082,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 165288
+--- !u!114 &4347521580924933783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Knife Swing
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Knife Swing
+  Guid:
+    Data1: -1291375402
+    Data2: 1082808504
+    Data3: -1902711888
+    Data4: 970220397
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1352
 --- !u!114 &4898475190465275905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,6 +1197,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6002261836071876692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Close Character Menu
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Close Character Menu
+  Guid:
+    Data1: -142659279
+    Data2: 1247856194
+    Data3: 1254700206
+    Data4: -1053377795
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1117
 --- !u!114 &6359321777758174465
 MonoBehaviour:
   m_ObjectHideFlags: 0
