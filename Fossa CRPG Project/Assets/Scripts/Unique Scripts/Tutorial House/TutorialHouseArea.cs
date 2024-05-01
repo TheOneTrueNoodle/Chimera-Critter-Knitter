@@ -206,26 +206,31 @@ public class TutorialHouseArea : AreaManager
         if (areaBools["ending1"] && areaBools["hasBlanket"] || areaBools["ending2"])
         {
             //Stay with blanket
+            ending2.gameObject.SetActive(true);
             ending2.Call();
         }
         else if (areaBools["ending1"])
         {
             //Stay
+            ending1.gameObject.SetActive(true);
             ending1.Call();
         }
         else if (areaBools["ending3"] && areaBools["freedMuffin"] || areaBools["ending4"])
         {
             //Leave with Muffin
+            ending4.gameObject.SetActive(true);
             ending4.Call();
         }
         else if (areaBools["ending3"])
         {
             //Leave
+            ending3.gameObject.SetActive(true);
             ending3.Call();
         }
         else if (areaBools["ending5"])
         {
             //Stay with Muffin
+            ending5.gameObject.SetActive(true);
             ending5.Call();
         }
     }
