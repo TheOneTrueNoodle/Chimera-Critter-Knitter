@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638502511302761378
+  lastModified: 638502569596152022
   FileSizes:
   - Name: Desktop
-    Value: 3526336
+    Value: 3572096
   Exists: 1
 --- !u!114 &-8637116375802603612
 MonoBehaviour:
@@ -406,10 +406,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638502511295301243
+  lastModified: 638502569588519146
   FileSizes:
   - Name: Desktop
-    Value: 3086
+    Value: 3126
   Exists: 1
 --- !u!114 &-3198610263214029961
 MonoBehaviour:
@@ -689,7 +689,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638502511295268460
+  lastModified: 638502569588493163
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -752,12 +752,13 @@ MonoBehaviour:
   - {fileID: 4222968610260098407}
   - {fileID: 725493214407630274}
   - {fileID: -2454693736677359548}
+  - {fileID: 3502709376372721745}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638502511302761378
+  cacheTime: 638502569596152022
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -894,7 +895,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 605
+  Length: 600
 --- !u!114 &1293066521067444558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,6 +1031,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 464
+--- !u!114 &3502709376372721745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Open Gate
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Open Gate
+  Guid:
+    Data1: 1811636422
+    Data2: 1087664274
+    Data3: -347938171
+    Data4: 108141019
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2760
 --- !u!114 &3526519617876909815
 MonoBehaviour:
   m_ObjectHideFlags: 0
