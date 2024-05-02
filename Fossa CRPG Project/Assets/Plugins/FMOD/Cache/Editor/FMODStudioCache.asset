@@ -26,7 +26,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 235
+  Length: 229
 --- !u!114 &-8905982750716916857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638501854384278409
+  lastModified: 638502511302761378
   FileSizes:
   - Name: Desktop
-    Value: 3099808
+    Value: 3526336
   Exists: 1
 --- !u!114 &-8637116375802603612
 MonoBehaviour:
@@ -406,10 +406,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638501833072315711
+  lastModified: 638502511295301243
   FileSizes:
   - Name: Desktop
-    Value: 2988
+    Value: 3086
   Exists: 1
 --- !u!114 &-3198610263214029961
 MonoBehaviour:
@@ -516,6 +516,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-2454693736677359548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Electronic Background Noise
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Electronic Background Noise
+  Guid:
+    Data1: -1059804883
+    Data2: 1096590325
+    Data3: 1372569254
+    Data4: -219584700
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30264
 --- !u!114 &-2408674389419803645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +689,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD Chimera Project/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638501833072289418
+  lastModified: 638502511295268460
   FileSizes:
   - Name: Desktop
     Value: 1486
@@ -723,12 +750,14 @@ MonoBehaviour:
   - {fileID: 4347521580924933783}
   - {fileID: 6002261836071876692}
   - {fileID: 4222968610260098407}
+  - {fileID: 725493214407630274}
+  - {fileID: -2454693736677359548}
   EditorParameters: []
   MasterBanks:
   - {fileID: -474671126756450370}
   StringsBanks:
   - {fileID: -3348362756808868654}
-  cacheTime: 638501854384278409
+  cacheTime: 638502511302761378
   cacheVersion: 131609
 --- !u!114 &39861281747888039
 MonoBehaviour:
@@ -812,6 +841,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 100
+--- !u!114 &725493214407630274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/TV Static
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/TV Static
+  Guid:
+    Data1: -1649377011
+    Data2: 1163713534
+    Data3: 644479142
+    Data4: 1812581206
+  Banks:
+  - {fileID: -8905982750716916857}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5200
 --- !u!114 &1195978792546604789
 MonoBehaviour:
   m_ObjectHideFlags: 0
