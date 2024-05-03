@@ -13,6 +13,10 @@ public class InteractionTrigger : Interactable
         if (oneTimeUse)
         {
             singleInteraction.Invoke();
+
+            //Remove from playerMovement
+            playerMovement.nearbyInteractions.Remove(this);
+
             used = true;
         }
         else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)

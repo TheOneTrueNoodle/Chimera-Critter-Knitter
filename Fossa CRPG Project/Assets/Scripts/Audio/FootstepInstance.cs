@@ -8,6 +8,8 @@ public class FootstepInstance : MonoBehaviour
 {
     public EventInstance playerFootsteps;
 
+    [SerializeField] private float cutsceneVelocity = 0.4f;
+
     private void Start()
     {
         playerFootsteps = AudioManager.instance.CreateInstance(FMODEvents.instance.footsteps);
@@ -29,5 +31,15 @@ public class FootstepInstance : MonoBehaviour
         {
             playerFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         }
+    }
+
+    public void StartSound()
+    {
+        playerFootsteps.start();
+        playerFootsteps.setParameterByName("Velocity", cutsceneVelocity);
+    }
+    public void StopSound()
+    {
+        playerFootsteps.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }
