@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3279190210285644067}
   - component: {fileID: 5692622429714211037}
   - component: {fileID: 3438906007155325211}
+  - component: {fileID: 5024680017441912754}
   m_Layer: 5
   m_Name: Ability Button
   m_TagString: Untagged
@@ -135,6 +136,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5024680017441912754}
+        m_TargetAssemblyTypeName: TriggerOneShotAudio, Assembly-CSharp
+        m_MethodName: Call
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5692622429714211037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,8 +160,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a284cd55c4a639442a4c64238b7faf36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonText: {fileID: 0}
+  textShadow: {fileID: 0}
   abilityID: 0
   ability: {fileID: 0}
+  hoverSFX:
+    Guid:
+      Data1: -1709686752
+      Data2: 1155586470
+      Data3: -298470011
+      Data4: -1805424435
+    Path: event:/SFX/UI/Tag Button
 --- !u!114 &3438906007155325211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +184,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipToShow: 
+--- !u!114 &5024680017441912754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456965119523056132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2fc40e8214188449710b1f1ba7155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvent:
+    Guid:
+      Data1: -42436364
+      Data2: 1264119497
+      Data3: 111532731
+      Data4: 1018222829
+    Path: event:/SFX/UI/UI Button
+  AudioOrigin: {fileID: 0}
 --- !u!1 &2309966327963910339
 GameObject:
   m_ObjectHideFlags: 0

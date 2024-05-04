@@ -12,6 +12,7 @@ public class AbilityButton : MonoBehaviour
     public AbilityData ability;
     private HoverTip hoverTip;
 
+    [SerializeField] private FMODUnity.EventReference hoverSFX;
     private void Start()
     {
         hoverTip = GetComponent<HoverTip>();

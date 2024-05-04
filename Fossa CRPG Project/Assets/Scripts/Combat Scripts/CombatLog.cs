@@ -11,7 +11,7 @@ public class CombatLog : MonoBehaviour
     public Scrollbar logScroll;
     public List<GameObject> logs;
 
-    private bool isExpanded;
+    private bool isExpanded = false;
     private Animator anim;
 
     private void Start()
@@ -19,6 +19,9 @@ public class CombatLog : MonoBehaviour
         CombatEvents.current.onAddLog += NewLog;
         CombatEvents.current.onEndCombat += EndCombat;
         anim = GetComponent<Animator>();
+
+        //Open log at start
+        toggleExpand();
     }
 
     public void NewLog(string Log)

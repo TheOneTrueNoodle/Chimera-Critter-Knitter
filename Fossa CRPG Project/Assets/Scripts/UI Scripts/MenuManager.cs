@@ -8,15 +8,18 @@ public class MenuManager : MonoBehaviour
     public GameObject OpeningScreen;
     public Animator SettingsAnim;
     public GameObject SettingsScreen;
-    public GameObject FirstCutscene;
     public GameObject SplashScreen;
 
     public GameObject buttons;
     public GameObject ControlsScreen;
 
+    public Animator sceneTransition;
+
     void Start()
     {
         StartCoroutine(OpeningGame());
+
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -32,17 +35,35 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        StartCoroutine(StartingCutscene());
+        StartCoroutine(LoadGame());
     }
 
-    IEnumerator StartingCutscene()
+    IEnumerator LoadGame()
     {
-        FirstCutscene.SetActive(true);
-        OpeningScreen.SetActive(false);
-        Debug.Log("StartingCutscene");
-        yield return new WaitForSeconds(3f);
-        Debug.Log("EndingCutscene");
-        SceneManager.LoadScene("Alpha");
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        sceneTransition.gameObject.SetActive(true);
+        sceneTransition.Play("FadeOut");
+
+        Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(sceneTransition.GetCurrentAnimatorStateInfo(0).length);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Alpha", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        SceneManager.UnloadSceneAsync(currentScene);
+
+        sceneTransition.Play("FadeIn");
+        yield return new WaitForSecondsRealtime(sceneTransition.GetCurrentAnimatorStateInfo(0).length);
+
+        Time.timeScale = 1;
+
+        Destroy(this);
     }
 
     IEnumerator OpeningGame()

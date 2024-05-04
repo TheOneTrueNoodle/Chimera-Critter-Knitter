@@ -44,7 +44,7 @@ public class FrogTongue : AbilityVisual
             yield return null;
         }
 
-        Destroy(gameObject);
+        Destroy(this);
     }
 
     private void UpdateTransformForScale()
