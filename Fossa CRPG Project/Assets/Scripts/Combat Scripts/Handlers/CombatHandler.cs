@@ -322,6 +322,9 @@ public class CombatHandler : MonoBehaviour
         {
             var item = attacker.heldConsumableItem;
             attacker.GetComponent<HeldItem>().DropItem();
+
+            InteractionManager.current.interactables.Remove(item.GetComponent<Interactable>());
+
             Destroy(item.gameObject);
         }
 

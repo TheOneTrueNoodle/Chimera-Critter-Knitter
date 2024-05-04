@@ -76,6 +76,7 @@ public class MenuManager : MonoBehaviour
 
         sceneTransition.gameObject.SetActive(true);
         sceneTransition.Play("FadeOut");
+        yield return new WaitForSecondsRealtime(sceneTransition.GetCurrentAnimatorStateInfo(0).length);
 
         Time.timeScale = 0;
 

@@ -53,7 +53,14 @@ public class MutationTrigger : Interactable
         }
         else
         {
-            wrongMutationAnim.Play("MissingMutation");
+            if (mutationMenu.unlockedAbilities.Contains(requiredMutation))
+            {
+                MenuEvent.current.SpawnPopup("You must equip the correct mutation");
+            }
+            else
+            {
+                MenuEvent.current.SpawnPopup("You have not discovered this mutation");
+            }
         }
     }
 

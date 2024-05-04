@@ -16,6 +16,8 @@ public class InteractionManager : MonoBehaviour
 
     public static InteractionManager current;
 
+    [HideInInspector] public bool oscarHasPickedUpItemBefore;
+
     private void Awake()
     {
         current = this;

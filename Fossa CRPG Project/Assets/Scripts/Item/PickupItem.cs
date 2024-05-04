@@ -26,6 +26,15 @@ public class PickupItem : Interactable
 
             disableSmell();
         }
+
+        if (!InteractionManager.current.oscarHasPickedUpItemBefore)
+        {
+            InteractionManager.current.oscarHasPickedUpItemBefore = true;
+            if (AreaManager.current.GetComponent<TutorialHouseArea>() != null)
+            {
+                AreaManager.current.GetComponent<TutorialHouseArea>().HeldItemTutorial();
+            }
+        }
     }
 
     public override void enableSmell()

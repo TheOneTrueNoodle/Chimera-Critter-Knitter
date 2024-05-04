@@ -30,6 +30,6 @@ public class FrisbeeThrow : AbilityVisual
         //Play Frisbee breaking particles
 
 
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

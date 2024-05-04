@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 688489429732552624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2342551653830919428}
@@ -196,17 +196,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4726695963107932357}
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710576, w: 0.70710784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2342551653830919428}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.9437, y: 2.797104}
-  m_SizeDelta: {x: -158.4414, y: -50.7339}
+  m_AnchoredPosition: {x: 20.55, y: 4.524994}
+  m_SizeDelta: {x: -93.299995, y: -99.969986}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &780440291539893184
 CanvasRenderer:
@@ -280,8 +280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21.6569, y: 2.8578}
-  m_SizeDelta: {x: 65.4937, y: 37.0869}
+  m_AnchoredPosition: {x: 35, y: 5}
+  m_SizeDelta: {x: 105, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3616359928683936606
 CanvasRenderer:
@@ -311,8 +311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You unlocked a new mutation!!! So now you can wrap your ass around this
-    bad boy.
+  m_text: You unlocked a new mutation! You can equip it in the menu!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eadd4051cc219424abdcc982fe9659b6, type: 2}
   m_sharedMaterial: {fileID: 6121637226972953236, guid: eadd4051cc219424abdcc982fe9659b6, type: 2}
@@ -339,8 +338,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

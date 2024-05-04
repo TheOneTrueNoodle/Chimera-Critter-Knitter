@@ -8,7 +8,7 @@ public class MutationMenu : MonoBehaviour
 
     private List<MutationOption> createdMutations = new List<MutationOption>();
 
-    private List<AbilityData> unlockedAbilities = new List<AbilityData>();
+    [HideInInspector] public List<AbilityData> unlockedAbilities = new List<AbilityData>();
     private List<AbilityData> setupAbilties = new List<AbilityData>();
 
     public List<AbilityData> equippedMutations;

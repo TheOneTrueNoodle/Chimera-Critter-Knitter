@@ -43,6 +43,13 @@ public class TutorialHouseArea : AreaManager
     //[SerializeField] private GameObject endingTrigger3;
     [SerializeField] private GameObject ending3or4Cutscene;
 
+    [Header("Tutorials")]
+    [SerializeField] private GameObject journalTutorialObj;
+    [SerializeField] private GameObject smellTutorialObj;
+    [SerializeField] private GameObject heldItemTutorialObj;
+    private bool journalTutorialFinished;
+    private bool smellTutorialFinished;
+    private bool heldItemTutorialFinished;
 
     private void Start()
     {
@@ -91,6 +98,38 @@ public class TutorialHouseArea : AreaManager
 
         //ENDINGS
         CallEnding();
+    }
+
+    public void MenuTutorial()
+    {
+        if (journalTutorialFinished) { return; }
+        journalTutorialObj.SetActive(true);
+        journalTutorialFinished = true;
+        DialogueEvents.current.StartDialogue();
+    }
+
+    public void SmellTutorial()
+    {
+        if (smellTutorialFinished) { return; }
+        smellTutorialObj.SetActive(true);
+        smellTutorialFinished = true;
+        DialogueEvents.current.StartDialogue();
+    }
+    public void HeldItemTutorial()
+    {
+        if (heldItemTutorialFinished) { return; }
+        heldItemTutorialObj.SetActive(true);
+        heldItemTutorialFinished = true;
+        DialogueEvents.current.StartDialogue();
+    }
+
+    public void CloseTutorial()
+    {
+        journalTutorialObj.SetActive(false);
+        smellTutorialObj.SetActive(false);
+        heldItemTutorialObj.SetActive(false);
+
+        DialogueEvents.current.EndDialogue();
     }
 
     private void OscarGetsHitForTheFirstTime(Entity attacker, Entity target)
