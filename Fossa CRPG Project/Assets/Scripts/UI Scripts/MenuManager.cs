@@ -13,7 +13,13 @@ public class MenuManager : MonoBehaviour
     public GameObject buttons;
     public GameObject ControlsScreen;
 
+    //Variables for loading main scene
+    private bool loadingGame; 
+
     public Animator sceneTransition;
+    public Animator controlsTransition;
+
+    private bool closeControlsTransition;
 
     void Start()
     {
@@ -30,17 +36,43 @@ public class MenuManager : MonoBehaviour
             {
                 CloseControlsMenu();
             }
+
+            if (loadingGame)
+            {
+                CloseControlsWhileLoading();
+            }
         }
+
     }
 
     public void StartGame()
     {
+        loadingGame = true;
         StartCoroutine(LoadGame());
+    }
+
+    public void CloseControlsWhileLoading()
+    {
+        closeControlsTransition = true;
     }
 
     IEnumerator LoadGame()
     {
         Scene currentScene = SceneManager.GetActiveScene();
+
+        controlsTransition.gameObject.SetActive(true);
+        controlsTransition.Play("ControlsFadeIn");
+
+        float passedTime = 0;
+
+        while(!closeControlsTransition && passedTime < 10)
+        {
+            passedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        controlsTransition.Play("ControlsFadeOut");
+        yield return new WaitForSecondsRealtime(controlsTransition.GetCurrentAnimatorStateInfo(0).length);
 
         sceneTransition.gameObject.SetActive(true);
         sceneTransition.Play("FadeOut");
