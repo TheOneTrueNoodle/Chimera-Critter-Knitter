@@ -124,7 +124,7 @@ public class UnitInfoUI : MonoBehaviour
         }
         HPBar.maxValue = (int)Char.activeStatsDir["MaxHP"].baseStatValue;
         HPBar.value = Char.activeStatsDir["MaxHP"].statValue;
-        HPText.text = HPBar.value.ToString() + " / " + HPBar.maxValue.ToString();
+        HPText.text = HPBar.value.ToString() + "/" + HPBar.maxValue.ToString();
     }
 
     private void UpdateSP(Entity Char)
@@ -151,7 +151,7 @@ public class UnitInfoUI : MonoBehaviour
             }
             SPBar.maxValue = (int)Char.activeStatsDir["MaxSP"].baseStatValue;
             SPBar.value = Char.activeStatsDir["MaxSP"].statValue;
-            SPText.text = SPBar.value.ToString() + " / " + SPBar.maxValue.ToString();
+            SPText.text = SPBar.value.ToString() + "/" + SPBar.maxValue.ToString();
         }
     }
 
