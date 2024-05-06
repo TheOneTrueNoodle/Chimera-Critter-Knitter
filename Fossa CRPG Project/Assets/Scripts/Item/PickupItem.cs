@@ -12,6 +12,11 @@ public class PickupItem : Interactable
 
     public bool held;
 
+    public JournalEntryData journalEntry;
+    [HideInInspector] public bool hasBeenPickedUp;
+
+    [HideInInspector] public Transform areaParent;
+
     public override void CallInteraction()
     {
         //Check if Oscar is holding a weapon first
@@ -27,14 +32,8 @@ public class PickupItem : Interactable
             disableSmell();
         }
 
-        if (!InteractionManager.current.oscarHasPickedUpItemBefore)
-        {
-            InteractionManager.current.oscarHasPickedUpItemBefore = true;
-            if (AreaManager.current.GetComponent<TutorialHouseArea>() != null)
-            {
-                AreaManager.current.GetComponent<TutorialHouseArea>().HeldItemTutorial();
-            }
-        }
+        InteractionManager.current.PickupItem(this);
+        
     }
 
     public override void enableSmell()

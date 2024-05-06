@@ -48,6 +48,24 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
+    public void PickupItem(PickupItem item)
+    {
+        if (!oscarHasPickedUpItemBefore)
+        {
+            oscarHasPickedUpItemBefore = true;
+            if (AreaManager.current.GetComponent<TutorialHouseArea>() != null)
+            {
+                AreaManager.current.GetComponent<TutorialHouseArea>().HeldItemTutorial();
+            }
+        }
+
+        if (item.journalEntry != null && !item.hasBeenPickedUp)
+        {
+            item.hasBeenPickedUp = true;
+            MenuEvent.current.FindEntryObject(item.journalEntry);
+        }
+    }
+
     private void enableSmells()
     {
         smellMode = true;

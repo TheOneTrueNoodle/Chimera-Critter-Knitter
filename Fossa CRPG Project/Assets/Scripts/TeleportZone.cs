@@ -20,6 +20,8 @@ public class TeleportZone : MonoBehaviour
         GameObject Oscar = FindObjectOfType<PlayerMovement>().gameObject;
         Oscar.transform.position = targetPosition.position;
 
+        Oscar.GetComponent<HeldItem>().currentAreaParent = objectToLoad.transform;
+
         objectToLoad.SetActive(true);
         objectToUnload.SetActive(false);
     }

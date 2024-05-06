@@ -7,12 +7,19 @@ public class HeldItem : MonoBehaviour
     [SerializeField] private Transform itemParent;
     public Item currentItem;
 
+    public Transform currentAreaParent;
+
     private void Update()
     {
         if (currentItem != null && Input.GetButtonDown("Drop Item"))
         {
             DropItem();
         }
+    }
+
+    public void AssignAreaParent(Transform parent)
+    {
+        currentAreaParent = parent;
     }
 
     public void HoldNewItem(Item item)
@@ -50,7 +57,7 @@ public class HeldItem : MonoBehaviour
         Debug.Log("Dropping Item");
 
         //Drop Item From parent
-        currentItem.gameObject.transform.parent = null;
+        currentItem.gameObject.transform.parent = currentAreaParent;
         currentItem.GetComponent<PickupItem>().held = false;
 
         //Re enable any object physics
