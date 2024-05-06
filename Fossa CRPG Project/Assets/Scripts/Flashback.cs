@@ -1,18 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Flashback : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private PostProcessVolume ppVolume;
+    [SerializeField] private Animator anim;
+
+    public void Call()
     {
-        
+        StartCoroutine(FadeInVolume());
+        anim.Play("Fade In");
+
+        DialogueEvents.current.onEndDialogue += EndDialogue;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void EndDialogue()
     {
-        
+        StartCoroutine(FadeOutVolume());
+        anim.Play("Fade Out");
+
+        DialogueEvents.current.onEndDialogue -= EndDialogue;
+    }
+
+    private IEnumerator FadeOutVolume()
+    {
+        float lerpTimer = 0;
+        while (lerpTimer < 1)
+        {
+            lerpTimer += Time.deltaTime;
+            float newValue = Mathf.Lerp(1, 0, lerpTimer);
+            ppVolume.weight = newValue;
+            yield return null;
+        }
+
+        ppVolume.weight = 0;
+    }
+    private IEnumerator FadeInVolume()
+    {
+        float lerpTimer = 0;
+        while (lerpTimer < 1)
+        {
+            lerpTimer += Time.deltaTime;
+            float newValue = Mathf.Lerp(0, 1, lerpTimer);
+            ppVolume.weight = newValue;
+            yield return null;
+        }
+
+        ppVolume.weight = 1;
     }
 }
