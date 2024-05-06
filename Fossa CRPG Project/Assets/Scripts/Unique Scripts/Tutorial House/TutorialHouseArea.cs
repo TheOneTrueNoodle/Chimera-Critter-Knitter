@@ -26,6 +26,7 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] private GameObject zzzMuffin;
     [SerializeField] private GameObject snubbedBlanket;
     [SerializeField] private GameObject mightyMuffin;
+    [SerializeField] private GameObject promised2free;
 
 
     [SerializeField] private AbilityData FrogTongueAbility;
@@ -69,7 +70,7 @@ public class TutorialHouseArea : AreaManager
         if (areaBools["freedMuffin"])
         {
             muffinByTheDoor.SetActive(true);
-            muffinReleaseScene.SetActive(true);
+            //muffinReleaseScene.SetActive(true);
             muffinBasementDialogues.SetActive(false);
         }
         if (areaBools["ignoredMuffin"])
@@ -94,6 +95,12 @@ public class TutorialHouseArea : AreaManager
             ignoredMuffin.SetActive(false);
             endingTrigger1.SetActive(true);
             //endingTrigger3.SetActive(true);
+        }
+        if (areaBools["promisedToFreeMuff"])
+        {
+            ignoredMuffin.SetActive(false);
+            promised2free.SetActive(true);
+
         }
 
         //ENDINGS
