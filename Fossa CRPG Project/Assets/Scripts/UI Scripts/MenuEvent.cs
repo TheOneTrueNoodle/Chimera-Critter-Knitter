@@ -38,6 +38,15 @@ public class MenuEvent : MonoBehaviour
         }
     }
 
+    public event Action<MutationOption> onTryEquipMutation;
+    public void TryEquipMutation(MutationOption option)
+    {
+        if (onTryEquipMutation != null)
+        {
+            onTryEquipMutation(option);
+        }
+    }
+
     public event Action<AbilityData> onEquipMutation;
     public void EquipMutation(AbilityData mutation)
     {

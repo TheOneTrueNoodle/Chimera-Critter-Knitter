@@ -17,7 +17,7 @@ public class MutationOption : MonoBehaviour, IPointerDownHandler
     [field: SerializeField] public FMODUnity.EventReference audioEvent;
 
     private MutationSlot currentSlot;
-    private bool equipped;
+    [HideInInspector] public bool equipped;
 
     public void Setup(AbilityData ability)
     {
@@ -30,25 +30,7 @@ public class MutationOption : MonoBehaviour, IPointerDownHandler
     {
         AudioManager.instance.PlayOneShot(audioEvent, transform.position);
 
-        if (!equipped)
-        {
-            MutationSlot[] slots = FindObjectsOfType<MutationSlot>();
-            foreach (MutationSlot slot in slots)
-            {
-                if (!slot.hasEquippedMutation)
-                {
-                    //Equip Mutation
-                    Equip(slot);
-                    return;
-                }
-            }
-            //No available slot code
-        }
-        else
-        {
-            //Unequip code
-            Unequip();
-        }
+        MenuEvent.current.TryEquipMutation(this);
     }
 
     public void Equip(MutationSlot slot)

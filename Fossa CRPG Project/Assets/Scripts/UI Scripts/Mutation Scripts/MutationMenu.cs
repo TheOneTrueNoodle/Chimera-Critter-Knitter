@@ -11,15 +11,19 @@ public class MutationMenu : MonoBehaviour
     [HideInInspector] public List<AbilityData> unlockedAbilities = new List<AbilityData>();
     private List<AbilityData> setupAbilties = new List<AbilityData>();
 
-    public List<AbilityData> equippedMutations;
+    [HideInInspector] public List<AbilityData> equippedMutations;
 
     [Header("Mutation Displays")]
+    public List<MutationSlot> mutationSlots;
     [SerializeField] private Transform mutationParent;
     [SerializeField] private GameObject mutationOptionPrefab;
 
     private void Start()
     {
         MenuEvent.current.onUnlockNewMutation += UnlockNewMutation;
+
+        MenuEvent.current.onTryEquipMutation += TryEquipMutation;
+
         MenuEvent.current.onEquipMutation += EquipMutation;
         MenuEvent.current.onUnequipMutation += UnequipMutation;
 
@@ -64,6 +68,29 @@ public class MutationMenu : MonoBehaviour
         //Assign mutation if we dont have it
         unlockedAbilities.Add(mutation);
         MenuEvent.current.SpawnPopup("You gained a new Mutation!");
+    }
+
+    public void TryEquipMutation(MutationOption optionSelected)
+    {
+        //Lets check all slots if they are free
+        if (!optionSelected.equipped)
+        {
+            foreach (MutationSlot slot in mutationSlots)
+            {
+                if (!slot.hasEquippedMutation)
+                {
+                    //Equip Mutation
+                    optionSelected.Equip(slot);
+                    return;
+                }
+            }
+            //No available slot code
+        }
+        else
+        {
+            //Unequip code
+            optionSelected.Unequip();
+        }
     }
 
     public void EquipMutation(AbilityData mutation)
