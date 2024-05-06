@@ -53,7 +53,7 @@ MonoBehaviour:
     value: 1
   temperature:
     overrideState: 1
-    value: 35
+    value: 78
   tint:
     overrideState: 0
     value: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     value: 0
   saturation:
     overrideState: 1
-    value: 33
+    value: 51
   brightness:
     overrideState: 0
     value: 0
@@ -74,16 +74,16 @@ MonoBehaviour:
     value: 0
   contrast:
     overrideState: 1
-    value: -21
+    value: -6
   mixerRedOutRedIn:
     overrideState: 1
-    value: 100
+    value: 80
   mixerRedOutGreenIn:
     overrideState: 1
-    value: 0
+    value: 52
   mixerRedOutBlueIn:
     overrideState: 1
-    value: 38
+    value: 45
   mixerGreenOutRedIn:
     overrideState: 0
     value: 0
@@ -1311,6 +1311,40 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
+--- !u!114 &-3382112571655646092
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b77c5407dc277943b591ade9e6b18c5, type: 3}
+  m_Name: LensDistortion
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  intensity:
+    overrideState: 1
+    value: -27
+  intensityX:
+    overrideState: 0
+    value: 1
+  intensityY:
+    overrideState: 0
+    value: 1
+  centerX:
+    overrideState: 0
+    value: 0
+  centerY:
+    overrideState: 0
+    value: 0
+  scale:
+    overrideState: 0
+    value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,3 +1359,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
   - {fileID: -8840772597474868997}
+  - {fileID: -3382112571655646092}
