@@ -28,7 +28,7 @@ public class CombatHandler : MonoBehaviour
     public List<CombatObstacle> obstacles;
 
     [Header("Start Combat Animation")]
-    public Animator startCombatAnim;
+    public StartCombatVisuals startCombatVisuals;
 
     //Dropped Loot after combat
     //List of dropped items
@@ -518,15 +518,16 @@ public class CombatHandler : MonoBehaviour
     
     private IEnumerator StartCombatDisplay(string CombatName)
     {
-        startCombatAnim.gameObject.SetActive(true);
+        startCombatVisuals.gameObject.SetActive(true);
 
-        if (startCombatAnim != null)
+        if (startCombatVisuals != null)
         {
-            startCombatAnim.Play(CombatName);
-            yield return new WaitUntil(() => startCombatAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
+            startCombatVisuals.ChangeImages(CombatName);
+            startCombatVisuals.anim.Play("New Start Combat");
+            yield return new WaitUntil(() => startCombatVisuals.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
-        startCombatAnim.gameObject.SetActive(false);
+        startCombatVisuals.gameObject.SetActive(false);
         CombatEvents.current.StartCombatSetup(currentCombatName);
         turnHandler.StartFirstTurn();
     }
