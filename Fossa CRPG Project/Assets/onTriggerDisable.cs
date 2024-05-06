@@ -13,6 +13,7 @@ public class onTriggerDisable : MonoBehaviour
             obej.SetActive(false);
         }
     }
+
     public void OnTriggerExit(Collider col)
     {
         foreach (GameObject obej in obj)
