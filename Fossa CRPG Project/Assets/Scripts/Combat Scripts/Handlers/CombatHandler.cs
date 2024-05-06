@@ -59,7 +59,7 @@ public class CombatHandler : MonoBehaviour
         CombatEvents.current.AddLog("The battle begins!");
 
         //Animate the combat start ui
-        StartCoroutine(StartCombatDisplay());
+        StartCoroutine(StartCombatDisplay(combatName));
 
         //Music Time
         if (AreaManager.current.areaBools.ContainsKey("InCombat"))
@@ -516,13 +516,13 @@ public class CombatHandler : MonoBehaviour
         }
     }
     
-    private IEnumerator StartCombatDisplay()
+    private IEnumerator StartCombatDisplay(string CombatName)
     {
         startCombatAnim.gameObject.SetActive(true);
 
         if (startCombatAnim != null)
         {
-            startCombatAnim.Play("Start Combat");
+            startCombatAnim.Play(CombatName);
             yield return new WaitUntil(() => startCombatAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1);
         }
 
