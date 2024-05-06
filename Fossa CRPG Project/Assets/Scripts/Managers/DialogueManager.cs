@@ -129,7 +129,7 @@ public class DialogueManager : MonoBehaviour
         if (previousLine != null)
         {
             string temp = previousLine.GetComponent<TextMeshProUGUI>().text;
-            previousLine.GetComponent<TextMeshProUGUI>().text = "<color=grey>" + temp;
+            previousLine.GetComponent<TextMeshProUGUI>().text = "<color=grey>" + temp + "</color>";
             log.Add(previousLine);
         }
 
