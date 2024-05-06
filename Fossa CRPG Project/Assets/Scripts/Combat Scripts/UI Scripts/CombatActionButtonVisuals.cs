@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CombatActionButtonVisuals : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class CombatActionButtonVisuals : MonoBehaviour, IPointerExitHandler
 {
     [SerializeField] private Transform selectedParent;
     [SerializeField] private Transform defaultParent;
