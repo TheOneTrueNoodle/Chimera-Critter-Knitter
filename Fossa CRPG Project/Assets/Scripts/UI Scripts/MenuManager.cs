@@ -47,6 +47,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        Destroy(buttons);
         loadingGame = true;
         StartCoroutine(LoadGame());
     }
