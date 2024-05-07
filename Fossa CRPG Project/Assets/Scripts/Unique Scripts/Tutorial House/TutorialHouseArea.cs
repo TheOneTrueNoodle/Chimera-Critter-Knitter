@@ -24,8 +24,10 @@ public class TutorialHouseArea : AreaManager
     [SerializeField] private GameObject postFrog;
     [SerializeField] private GameObject ignoredMuffin;
     [SerializeField] private GameObject zzzMuffin;
+    [SerializeField] private GameObject stayAlone;
     [SerializeField] private GameObject snubbedBlanket;
     [SerializeField] private GameObject mightyMuffin;
+    [SerializeField] private GameObject prettyPlease;
     [SerializeField] private GameObject promised2free;
 
 
@@ -69,6 +71,7 @@ public class TutorialHouseArea : AreaManager
         }
         if (areaBools["freedMuffin"])
         {
+            areaBools["hasBlanket"] = true;
             muffinByTheDoor.SetActive(true);
             //muffinReleaseScene.SetActive(true);
             muffinBasementDialogues.SetActive(false);
@@ -101,6 +104,14 @@ public class TutorialHouseArea : AreaManager
             ignoredMuffin.SetActive(false);
             promised2free.SetActive(true);
 
+        }
+        if (areaBools["stayAlone"])
+        {
+            stayAlone.SetActive(true);
+        }
+        if (areaBools["prettyPlease"])
+        {
+            prettyPlease.SetActive(true);
         }
 
         //ENDINGS
