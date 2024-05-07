@@ -68,6 +68,7 @@ public class TutorialHouseArea : AreaManager
         {
             areaBools["freedMuffin"] = true;
             //add blanket to journal here
+            MenuEvent.current.SpawnPopup("You got Muffin's blanket!");
         }
         if (areaBools["freedMuffin"])
         {
