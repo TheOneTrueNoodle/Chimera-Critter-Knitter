@@ -101,8 +101,10 @@ public class TutorialHouseArea : AreaManager
         }
         if (areaBools["promisedToFreeMuff"])
         {
+            areaBools["prettyPlease"] = false;
             ignoredMuffin.SetActive(false);
             promised2free.SetActive(true);
+            prettyPlease.SetActive(false);
 
         }
         if (areaBools["stayAlone"])
