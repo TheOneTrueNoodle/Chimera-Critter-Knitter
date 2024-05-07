@@ -10,6 +10,8 @@ public class XPBar : MonoBehaviour
     public Slider xpBar;
     public Animator anim;
 
+    public GameObject levelUpEffect;
+
     public Entity unit;
 
     public float speed = 3f;
@@ -27,7 +29,7 @@ public class XPBar : MonoBehaviour
     }
     public void LevelUpEffect()
     {
-        anim.gameObject.SetActive(true);
+        levelUpEffect.SetActive(true);
         anim.Play("Level Up");
     }
 
@@ -42,7 +44,7 @@ public class XPBar : MonoBehaviour
 
     private void OnDisable()
     {
-        anim.gameObject.SetActive(false);
+        levelUpEffect.SetActive(false);
     }
 
     public IEnumerator AnimateXP(int totalXP, Entity newUnit)
