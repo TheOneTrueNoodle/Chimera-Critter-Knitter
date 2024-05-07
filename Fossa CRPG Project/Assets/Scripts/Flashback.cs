@@ -8,6 +8,8 @@ public class Flashback : MonoBehaviour
     [SerializeField] private PostProcessVolume ppVolume;
     [SerializeField] private Animator anim;
 
+    [SerializeField] private bool disableOnFinish;
+
     public void Call()
     {
         StartCoroutine(FadeInVolume());
@@ -22,6 +24,7 @@ public class Flashback : MonoBehaviour
         anim.Play("Fade Out");
 
         DialogueEvents.current.onEndDialogue -= EndDialogue;
+        if (disableOnFinish) { gameObject.SetActive(false); }
     }
 
     private IEnumerator FadeOutVolume()
