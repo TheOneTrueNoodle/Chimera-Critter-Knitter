@@ -306,7 +306,7 @@ public class PlayerMovement : MonoBehaviour
         if (oscarData.activeStatsDir == null) { AssignOscarData(); }
 
         float percentageHealthMissing = ((oscarData.activeStatsDir["MaxHP"].baseStatValue - oscarData.activeStatsDir["MaxHP"].statValue) / oscarData.activeStatsDir["MaxHP"].baseStatValue) * 100;
-        if (percentageHealthMissing > 70)
+        if (percentageHealthMissing > 50)
         {
             //YOU ARE INJURED SILLY
             if (anim.GetBool("Injured") == false)
