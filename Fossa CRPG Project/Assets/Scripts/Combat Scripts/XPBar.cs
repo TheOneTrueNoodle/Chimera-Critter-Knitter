@@ -27,6 +27,7 @@ public class XPBar : MonoBehaviour
     }
     public void LevelUpEffect()
     {
+        anim.gameObject.SetActive(true);
         anim.Play("Level Up");
     }
 
@@ -37,6 +38,11 @@ public class XPBar : MonoBehaviour
             unit = newUnit;
             UpdateBar();
         }
+    }
+
+    private void OnDisable()
+    {
+        anim.gameObject.SetActive(false);
     }
 
     public IEnumerator AnimateXP(int totalXP, Entity newUnit)
