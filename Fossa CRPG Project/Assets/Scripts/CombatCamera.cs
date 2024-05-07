@@ -14,7 +14,7 @@ public class CombatCamera : MonoBehaviour
 
     private bool usedCam;
     private bool fadedIn;
-    private float camHintTimer = 5f;
+    private float camHintTimer = 10f;
     private float currentTimer;
 
     [SerializeField] private Animator camHintAnim;
@@ -31,7 +31,7 @@ public class CombatCamera : MonoBehaviour
     {
         if (!inCombat) { return 0; }
 
-        if (usedCam != true)
+        if (!usedCam)
         {
             currentTimer += Time.deltaTime;
             if (currentTimer > camHintTimer)
@@ -50,10 +50,10 @@ public class CombatCamera : MonoBehaviour
 
                 if (x != 0)
                 {
-                    usedCam = true;
                     if (fadedIn)
                     {
                         camHintAnim.Play("Fade Out");
+                        fadedIn = false;
                     }
                     else
                     {
@@ -81,6 +81,7 @@ public class CombatCamera : MonoBehaviour
                     if (fadedIn)
                     {
                         camHintAnim.Play("Fade Out");
+                        fadedIn = false;
                     }
                     else
                     {

@@ -8,6 +8,7 @@ public class MutationMenu : MonoBehaviour
 
     private List<MutationOption> createdMutations = new List<MutationOption>();
 
+    [HideInInspector] public List<AbilityData> totalUnlockedAbilities = new List<AbilityData>();
     [HideInInspector] public List<AbilityData> unlockedAbilities = new List<AbilityData>();
     private List<AbilityData> setupAbilties = new List<AbilityData>();
 
@@ -59,6 +60,7 @@ public class MutationMenu : MonoBehaviour
                 createdMutations.Add(newMutation);
                 newMutation.Setup(ability);
                 setupAbilties.Add(ability);
+                totalUnlockedAbilities.Add(ability);
             }
         }
         unlockedAbilities.Clear();
