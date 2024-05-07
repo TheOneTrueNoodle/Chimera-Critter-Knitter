@@ -112,7 +112,6 @@ public class CombatHandler : MonoBehaviour
     #region Combat Interactions
     public void MoveAttempt(Entity entity, List<OverlayTile> path)
     {
-        Debug.Log("Moving");
         StartCoroutine(moveHandler.MoveAlongPath(entity, path));
     }
 

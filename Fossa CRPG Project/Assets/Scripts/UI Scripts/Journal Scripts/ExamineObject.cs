@@ -14,6 +14,9 @@ public class ExamineObject : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
 
     private bool mouseOver;
 
+    private Vector3 prevMousePos = Vector3.zero;
+    private Vector3 posDelta = Vector3.zero;
+
     private void Start()
     {
         MenuEvent.current.onEntrySelect += OnEntrySelect;
@@ -37,7 +40,7 @@ public class ExamineObject : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
         }
         if (!discovered) { return; }
 
-        dataPrefab = Instantiate(Data.prefab, objectSpawnLocation.position, Quaternion.identity, objectSpawnLocation);
+        dataPrefab = Instantiate(Data.prefab, objectSpawnLocation.position, Data.prefab.transform.localRotation, objectSpawnLocation);
         dataPrefab.layer = dataPrefab.transform.parent.gameObject.layer;
 
         var children = dataPrefab.GetComponentsInChildren<Transform>(includeInactive: true);
@@ -63,7 +66,14 @@ public class ExamineObject : MonoBehaviour, IDragHandler, IPointerEnterHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        dataPrefab.transform.eulerAngles += new Vector3(-eventData.delta.y, -eventData.delta.x);
+        //Vector3 newRotation = new Vector3(dataPrefab.transform.localRotation.x + eventData.delta.y, dataPrefab.transform.localRotation.y - eventData.delta.x, dataPrefab.transform.localRotation.z);
+        //dataPrefab.transform.eulerAngles += new Vector3(-eventData.delta.y, -eventData.delta.x);
+        //dataPrefab.transform.localRotation = Quaternion.Euler(newRotation);
+
+        float rotationVelocityX = eventData.delta.x * 1;
+        float rotationVelocityY = eventData.delta.y * 1;
+        dataPrefab.transform.Rotate(Vector3.right, -rotationVelocityY, Space.Self);
+        dataPrefab.transform.Rotate(Vector3.up, -rotationVelocityX, Space.Self);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

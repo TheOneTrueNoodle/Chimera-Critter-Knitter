@@ -29,7 +29,7 @@ public class CombatUI : MonoBehaviour
 
     [Header("Use Item UI")]
     [SerializeField] private GameObject ItemButtonUI;
-    [SerializeField] private TMP_Text itemNameText;
+    [SerializeField] private Image ItemImage;
 
     [Header("Turn Order Display")]
     [SerializeField] private GameObject turnIconPrefab;
@@ -153,7 +153,7 @@ public class CombatUI : MonoBehaviour
         if (Char.heldConsumableItem != null)
         {
             ItemButtonUI.SetActive(true);
-            itemNameText.text = Char.heldConsumableItem.itemName;
+            ItemImage.sprite = Char.heldConsumableItem.itemSprite;
         }
         else
         {
