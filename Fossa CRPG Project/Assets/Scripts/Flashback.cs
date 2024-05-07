@@ -9,6 +9,7 @@ public class Flashback : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [SerializeField] private bool disableOnFinish;
+    [SerializeField] private GameObject setActiveAfterFlashback;
 
     public void Call()
     {
@@ -22,6 +23,11 @@ public class Flashback : MonoBehaviour
     {
         StartCoroutine(FadeOutVolume());
         anim.Play("Fade Out");
+
+        if (setActiveAfterFlashback != null)
+        {
+            setActiveAfterFlashback.SetActive(true);
+        }
 
         DialogueEvents.current.onEndDialogue -= EndDialogue;
     }
