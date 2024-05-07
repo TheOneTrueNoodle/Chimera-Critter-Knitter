@@ -75,6 +75,9 @@ public class SettingsManager : MonoBehaviour
 
         invertCamYToggle.isOn = PlayerPrefs.GetInt("Invert Camera Y", 0) == 1;
         invertCamXToggle.isOn = PlayerPrefs.GetInt("Invert Camera X", 0) == 1;
+
+        if (PlayerPrefs.GetFloat("Camera Sensitivity", 3) < 0.1f) { PlayerPrefs.SetFloat("Camera Sensitivity", 0.1f); }
+
         cameraSensitivitySlider.value = PlayerPrefs.GetFloat("Camera Sensitivity", 3);
         camSensitivityValue.text = PlayerPrefs.GetFloat("Camera Sensitivity").ToString("F2");
 
@@ -134,6 +137,7 @@ public class SettingsManager : MonoBehaviour
         PlayerPrefs.SetInt("Infection Effect", newInfectionEffect ? 1 : 0);
         PlayerPrefs.SetInt("Invert Camera Y", newInvertCamY ? 1 : 0);
         PlayerPrefs.SetInt("Invert Camera X", newInvertCamX ? 1 : 0);
+        if (newCamSens < 0.1f) { newCamSens = 0.1f; }
         PlayerPrefs.SetFloat("Camera Sensitivity", newCamSens);
         PlayerPrefs.SetInt("Remove Gore", newRemoveGore ? 1 : 0);
         PlayerPrefs.SetInt("Remove Grain", newRemoveGrain ? 1 : 0);
