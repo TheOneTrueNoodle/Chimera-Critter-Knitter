@@ -499,10 +499,12 @@ public class CursorController : MonoBehaviour
             case 6:
                 //Examine Mode
                 actionActive = true;
+                GFX.SetActive(false);
                 break;
             case 5:
                 //UI Startup
                 actionActive = false;
+                GFX.SetActive(false);
                 break;
             case 4:
                 //Ability Startup
@@ -512,28 +514,33 @@ public class CursorController : MonoBehaviour
                     isItemAbility = isItem;
                     GetInRangeTiles(activeCharacter, currentAbility.range, false, currentAbility.includeCenter);
                     CombatEvents.current.TileColor(activeCharacter, Color.white, inRangeTiles, false);
+                    GFX.SetActive(true);
                 }
                 break;
             case 3:
                 //Attack Startup
                 GetInRangeTiles(activeCharacter, activeCharacter.WeaponRange, false, false); 
                 CombatEvents.current.TileColor(activeCharacter, Color.red, inRangeTiles, false);
+                GFX.SetActive(true);
                 break;
             case 2:
                 //Move Startup
                 if (hasMoved) { return; }
                 GetInRangeTiles(activeCharacter, activeCharacter.CharacterData.characterClass.MovementSpeed, true, false);
                 CombatEvents.current.TileColor(activeCharacter, Color.white, inRangeTiles, false);
+                GFX.SetActive(true);
                 break;
             case 1:
                 //View Map Startup
                 actionActive = false;
                 UIMode = false;
+                GFX.SetActive(true);
                 break;
             default:
                 //Enemy Turn
                 actionActive = false;
                 UIMode = false;
+                GFX.SetActive(false);
                 break;
         }
     }
