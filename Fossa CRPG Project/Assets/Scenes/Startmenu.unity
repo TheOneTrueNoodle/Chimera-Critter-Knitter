@@ -9498,6 +9498,7 @@ GameObject:
   - component: {fileID: 915236444}
   - component: {fileID: 915236443}
   - component: {fileID: 915236442}
+  - component: {fileID: 915236445}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -9593,6 +9594,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 915236445}
+        m_TargetAssemblyTypeName: TriggerOneShotAudio, Assembly-CSharp
+        m_MethodName: Call
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &915236443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9631,6 +9644,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915236440}
   m_CullTransparentMesh: 1
+--- !u!114 &915236445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915236440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae2fc40e8214188449710b1f1ba7155a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioEvent:
+    Guid:
+      Data1: -42436364
+      Data2: 1264119497
+      Data3: 111532731
+      Data4: 1018222829
+    Path: event:/SFX/UI/UI Button
+  AudioOrigin: {fileID: 0}
 --- !u!1 &924109602
 GameObject:
   m_ObjectHideFlags: 0
