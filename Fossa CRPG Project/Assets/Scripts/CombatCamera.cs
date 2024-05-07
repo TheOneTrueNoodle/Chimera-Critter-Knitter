@@ -12,6 +12,13 @@ public class CombatCamera : MonoBehaviour
 
     private bool inCombat;
 
+    private bool usedCam;
+    private bool fadedIn;
+    private float camHintTimer = 5f;
+    private float currentTimer;
+
+    [SerializeField] private Animator camHintAnim;
+
     private void Start()
     {
         CombatEvents.current.onStartCombatSetup += StartCombat;
@@ -22,12 +29,37 @@ public class CombatCamera : MonoBehaviour
 
     private float GetAxisCustom(string axisName)
     {
+        if (!inCombat) { return 0; }
+
+        if (usedCam != true)
+        {
+            currentTimer += Time.deltaTime;
+            if (currentTimer > camHintTimer)
+            {
+                fadedIn = true;
+                camHintAnim.Play("Fade In");
+            }
+        }
+
         if (axisName == "Mouse X")
         {
             if (Input.GetButton("Control Camera"))
             {
                 float x = Input.GetAxis("Mouse X") * PlayerPrefs.GetFloat("Camera Sensitivity", 3);
                 x = PlayerPrefs.GetInt("Invert Camera X", 0) == 1 ? x * -1 : x;
+
+                if (x != 0)
+                {
+                    usedCam = true;
+                    if (fadedIn)
+                    {
+                        camHintAnim.Play("Fade Out");
+                    }
+                    else
+                    {
+                        camHintAnim.gameObject.SetActive(false);
+                    }
+                }
 
                 return x;
             }
@@ -43,6 +75,19 @@ public class CombatCamera : MonoBehaviour
                 float y = Input.GetAxis("Mouse Y") * PlayerPrefs.GetFloat("Camera Sensitivity", 3);
                 y = PlayerPrefs.GetInt("Invert Camera Y", 0) == 1 ? y * -1 : y;
 
+                if (y != 0) 
+                { 
+                    usedCam = true; 
+                    if (fadedIn)
+                    {
+                        camHintAnim.Play("Fade Out");
+                    }
+                    else
+                    {
+                        camHintAnim.gameObject.SetActive(false);
+                    }
+                }
+
                 return y;
             }
             else
@@ -54,6 +99,8 @@ public class CombatCamera : MonoBehaviour
     }
     private void StartCombat(string combatName)
     {
+        if (!usedCam) { currentTimer = 0; }
+
         combatCamera.Priority = 20;
         inCombat = true;
 
