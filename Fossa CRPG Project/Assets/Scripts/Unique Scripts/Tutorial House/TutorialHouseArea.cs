@@ -22,6 +22,7 @@ public class TutorialHouseArea : AreaManager
     [Header("Tutorial Combat")]
     [SerializeField] private GameObject preFrog;
     [SerializeField] private GameObject postFrog;
+    [SerializeField] private GameObject needKey;
     [SerializeField] private GameObject ignoredMuffin;
     [SerializeField] private GameObject zzzMuffin;
     [SerializeField] private GameObject stayAlone;
@@ -168,6 +169,7 @@ public class TutorialHouseArea : AreaManager
         if (areaBools.ContainsKey("Has gate key"))
         {
             areaBools["Has gate key"] = true;
+            needKey.SetActive(false);
             Debug.Log("Has house key? " + areaBools["Has gate key"]);
         }
     }
