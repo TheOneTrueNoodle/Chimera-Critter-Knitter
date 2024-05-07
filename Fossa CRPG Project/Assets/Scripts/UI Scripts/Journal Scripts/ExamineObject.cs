@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ExamineObject : MonoBehaviour, IDragHandler
+public class ExamineObject : MonoBehaviour, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Transform objectSpawnLocation;
 
@@ -12,6 +12,8 @@ public class ExamineObject : MonoBehaviour, IDragHandler
     [SerializeField] private Camera inspectCam;
     [Range(0.5f, 7f)] public float zoom = 4f;
 
+    private bool mouseOver;
+
     private void Start()
     {
         MenuEvent.current.onEntrySelect += OnEntrySelect;
@@ -19,7 +21,7 @@ public class ExamineObject : MonoBehaviour, IDragHandler
 
     private void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") != 0)
+        if (Input.GetAxis("Mouse ScrollWheel") != 0 && mouseOver)
         {
             zoom -= Input.GetAxis("Mouse ScrollWheel");
             zoom = Mathf.Clamp(zoom, 0.5f, 7f);
@@ -62,5 +64,15 @@ public class ExamineObject : MonoBehaviour, IDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         dataPrefab.transform.eulerAngles += new Vector3(-eventData.delta.y, -eventData.delta.x);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        mouseOver = true;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        mouseOver = false;
     }
 }
