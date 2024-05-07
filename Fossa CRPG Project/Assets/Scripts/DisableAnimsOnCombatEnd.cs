@@ -17,6 +17,6 @@ public class DisableAnimsOnCombatEnd : MonoBehaviour
         if(name == combatName)
         {
             anim.enabled = false;
-        }    
+        }
     }
 }
