@@ -56,7 +56,7 @@ public class MutationTrigger : Interactable
         }
         else
         {
-            if (mutationMenu.totalUnlockedAbilities.Contains(requiredMutation))
+            if (mutationMenu.totalUnlockedAbilities.Contains(requiredMutation) || mutationMenu.unlockedAbilities.Contains(requiredMutation))
             {
                 MenuEvent.current.SpawnPopup("You must equip the correct mutation");
             }
