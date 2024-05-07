@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
 
     public GameObject buttons;
     public GameObject ControlsScreen;
+    public GameObject CreditsScreen;
 
     //Variables for loading main scene
     private bool loadingGame; 
@@ -121,7 +122,17 @@ public class MenuManager : MonoBehaviour
         ControlsScreen.SetActive(false);
         buttons.SetActive(true);
     }
-
+    
+    public void OpenCreditsMenu()
+    {
+        CreditsScreen.SetActive(true);
+        buttons.SetActive(false);
+    }
+    public void CloseCreditsMenu()
+    {
+        CreditsScreen.SetActive(false);
+        buttons.SetActive(true);
+    }
 
     public void Settings()
     {
