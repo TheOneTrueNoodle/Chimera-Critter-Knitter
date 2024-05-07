@@ -16,32 +16,14 @@ public class SetCorrectScreenSize : MonoBehaviour
 
     private void GetResolutionOptions()
     {
-        resolutions = Screen.resolutions;
-        filteredResolutions = new List<Resolution>();
+        Resolution currentMonitorResolution;
 
-        currentRefreshRate = Screen.currentResolution.refreshRateRatio.value;
+        currentMonitorResolution = Screen.currentResolution;
+        int width = currentMonitorResolution.width;
+        int height = currentMonitorResolution.height;
 
-        for (int i = 0; i < resolutions.Length; i++)
-        {
-            if (resolutions[i].refreshRateRatio.value == currentRefreshRate)
-            {
-                filteredResolutions.Add(resolutions[i]);
-            }
-        }
-
-        List<string> options = new List<string>();
-        for (int i = 0; i < filteredResolutions.Count; i++)
-        {
-            string resolutionOption = filteredResolutions[i].width + "x" + filteredResolutions[i].height + " " + (int)filteredResolutions[i].refreshRateRatio.value + " Hz";
-            options.Add(resolutionOption);
-            if (filteredResolutions[i].width == Screen.width && filteredResolutions[i].height == Screen.height)
-            {
-                PlayerPrefs.GetInt("Resolution ID", i);
-            }
-        }
-
+        Screen.SetResolution(width, height, PlayerPrefs.GetInt("Fullscreen", 1) == 1);
         ToggleFullscreen(PlayerPrefs.GetInt("Fullscreen") == 1);
-        SetResolution(PlayerPrefs.GetInt("Resolution ID"));
     }
 
     public void SetResolution(int resolutionIndex)
