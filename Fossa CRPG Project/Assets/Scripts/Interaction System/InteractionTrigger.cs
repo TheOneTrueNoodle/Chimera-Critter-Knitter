@@ -16,6 +16,7 @@ public class InteractionTrigger : Interactable
 
             //Remove from playerMovement
             playerMovement.nearbyInteractions.Remove(this);
+            InteractionManager.current.interactables.Remove(this);
 
             used = true;
         }

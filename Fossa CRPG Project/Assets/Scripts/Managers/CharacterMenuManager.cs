@@ -122,6 +122,7 @@ public class CharacterMenuManager : MonoBehaviour
             heldItemImage.sprite = null;
             heldItemName.text = "";
             heldItemDescription.text = "";
+            heldItemCombatEffect.text = "";
         }
     }
 

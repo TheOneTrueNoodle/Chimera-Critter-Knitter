@@ -32,6 +32,9 @@ public class MutationTrigger : Interactable
             {
                 singleInteraction.Invoke();
                 used = true;
+
+                playerMovement.nearbyInteractions.Remove(this);
+                InteractionManager.current.interactables.Remove(this);
             }
             else if (enableInteraction.GetPersistentEventCount() > 0 && disableInteraction.GetPersistentEventCount() > 0)
             {
