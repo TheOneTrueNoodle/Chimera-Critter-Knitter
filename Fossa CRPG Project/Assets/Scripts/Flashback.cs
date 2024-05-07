@@ -24,7 +24,6 @@ public class Flashback : MonoBehaviour
         anim.Play("Fade Out");
 
         DialogueEvents.current.onEndDialogue -= EndDialogue;
-        if (disableOnFinish) { gameObject.SetActive(false); }
     }
 
     private IEnumerator FadeOutVolume()
@@ -39,6 +38,11 @@ public class Flashback : MonoBehaviour
         }
 
         ppVolume.weight = 0;
+
+        if (disableOnFinish)
+        {
+            gameObject.SetActive(false);
+        }
     }
     private IEnumerator FadeInVolume()
     {
