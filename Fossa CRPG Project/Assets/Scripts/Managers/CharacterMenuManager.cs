@@ -32,6 +32,7 @@ public class CharacterMenuManager : MonoBehaviour
     [SerializeField] private Image heldItemImage;
     [SerializeField] private TMP_Text heldItemName;
     [SerializeField] private TMP_Text heldItemDescription;
+    [SerializeField] private TMP_Text heldItemCombatEffect;
 
     [Header("Prefabs")]
     [SerializeField] private ElementalDisp ElementDisp;
@@ -113,6 +114,7 @@ public class CharacterMenuManager : MonoBehaviour
             heldItemImage.preserveAspect = true;
             heldItemName.text = heldItem.currentItem.itemName;
             heldItemDescription.text = heldItem.currentItem.itemDescription;
+            heldItemCombatEffect.text = heldItem.currentItem.combatEffect;
         }
         else
         {

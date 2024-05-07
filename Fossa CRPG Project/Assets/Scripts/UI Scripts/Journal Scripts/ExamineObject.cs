@@ -45,6 +45,20 @@ public class ExamineObject : MonoBehaviour, IDragHandler
         }
     }
 
+    public void ZoomIn()
+    {
+        zoom -= 0.1f;
+        zoom = Mathf.Clamp(zoom, 0.5f, 7f);
+        inspectCam.orthographicSize = zoom;
+    }
+
+    public void ZoomOut()
+    {
+        zoom += 0.1f;
+        zoom = Mathf.Clamp(zoom, 0.5f, 7f);
+        inspectCam.orthographicSize = zoom;
+    }
+
     public void OnDrag(PointerEventData eventData)
     {
         dataPrefab.transform.eulerAngles += new Vector3(-eventData.delta.y, -eventData.delta.x);

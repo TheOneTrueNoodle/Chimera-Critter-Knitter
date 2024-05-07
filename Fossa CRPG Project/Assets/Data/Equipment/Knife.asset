@@ -15,16 +15,22 @@ MonoBehaviour:
   weaponName: Knife
   characterSpecific: 0
   characterName: 
-  StatChanges: []
+  StatChanges:
+  - statKey: 4
+    op: 2
+    value: 0.9
+  - statKey: 8
+    op: 2
+    value: 1.5
   AdditionalEffects: []
   weaponType: 0
   damageType: 2
   attackRange: 1
-  weaponDamage: -10
+  weaponDamage: 0
   weaponAttackSFX:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -1291375402
+      Data2: 1082808504
+      Data3: -1902711888
+      Data4: 970220397
+    Path: event:/SFX/Knife Swing

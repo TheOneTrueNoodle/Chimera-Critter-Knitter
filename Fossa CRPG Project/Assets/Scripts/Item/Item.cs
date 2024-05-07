@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     [HideInInspector] public ItemType itemType;
     public string itemName;
     public string itemDescription;
+    public string combatEffect;
     public Sprite itemSprite;
 
     [Header("Visuals")]
