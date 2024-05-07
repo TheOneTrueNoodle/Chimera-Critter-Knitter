@@ -105,6 +105,7 @@ public class GameMenuManager : MonoBehaviour
             if (!menuOpen)
             {
                 AudioManager.instance.PlayOneShot(openCharacterMenuSFX, transform.position);
+                mutationMenuManager.exclamation.SetActive(false);
                 OpenCharacterMenu();
             }
             else

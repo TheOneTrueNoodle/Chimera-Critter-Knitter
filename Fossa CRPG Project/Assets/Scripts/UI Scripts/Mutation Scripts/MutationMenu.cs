@@ -18,7 +18,7 @@ public class MutationMenu : MonoBehaviour
     public List<MutationSlot> mutationSlots;
     [SerializeField] private Transform mutationParent;
     [SerializeField] private GameObject mutationOptionPrefab;
-    [SerializeField] private GameObject exclamation;
+    public GameObject exclamation;
     [SerializeField] private GameObject exclamation2;
 
 
