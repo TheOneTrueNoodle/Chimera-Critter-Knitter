@@ -17,6 +17,10 @@ public class MutationMenu : MonoBehaviour
     public List<MutationSlot> mutationSlots;
     [SerializeField] private Transform mutationParent;
     [SerializeField] private GameObject mutationOptionPrefab;
+    [SerializeField] private GameObject exclamation;
+    [SerializeField] private GameObject exclamation2;
+
+
 
     private void Start()
     {
@@ -68,6 +72,9 @@ public class MutationMenu : MonoBehaviour
         //Assign mutation if we dont have it
         unlockedAbilities.Add(mutation);
         MenuEvent.current.SpawnPopup("You gained a new Mutation!");
+        exclamation.SetActive(true);
+        exclamation2.SetActive(true);
+
     }
 
     public void TryEquipMutation(MutationOption optionSelected)
